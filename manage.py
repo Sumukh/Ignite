@@ -1,39 +1,70 @@
 #!/usr/bin/env python
 
 import os
+import binascii
 
-from flask_script import Manager, Server
-from flask_script.commands import ShowUrls, Clean
+import click
+from flask_migrate import Migrate
+
 from appname import create_app
-from appname.models import db, User
+from appname.models import db
+from appname.models.user import User
+from appname.extensions import cache
 
 # default to dev config because no one should use this in
 # production anyway
 env = os.environ.get('APPNAME_ENV', 'dev')
 app = create_app('appname.settings.%sConfig' % env.capitalize())
 
-manager = Manager(app)
-manager.add_command("server", Server())
-manager.add_command("show-urls", ShowUrls())
-manager.add_command("clean", Clean())
+migrate = Migrate(app, db)
 
+@app.cli.command()
+def server():
+    """ Run a debug server. """
+    return app.run(debug=True)
 
-@manager.shell
-def make_shell_context():
-    """ Creates a python REPL with several default imports
-        in the context of the app
-    """
-
-    return dict(app=app, db=db, User=User)
-
-
-@manager.command
-def createdb():
+@app.cli.command()
+def initdb():
     """ Creates a database with all of the tables defined in
         your SQLAlchemy models
     """
-
+    click.echo('Initalizing the db')
     db.create_all()
 
+@app.cli.command()
+def resetdb():
+    """ Drops the tables. """
+    if env != 'dev':
+        confirm = input("Are you sure you want to run this on {}?".format(env))
+        if confirm.lower().strip() != 'yes':
+            return
+    click.echo('Resets the db')
+    db.drop_all()
+    db.create_all()
+
+@app.cli.command()
+def clear_cache():
+    """ Flush the cache."""
+    cache.clear()
+    click.echo("Cache Flushed")
+
+@app.cli.command()
+def generate_session_key():
+    """ Helper for admins to generate random 26 character string. Used as the
+        secret key for sessions. Must be consistent (and secret) per environment.
+        Output: b'random2323db3....1abna'
+        Copy the value in between the quotation marks to the settings file
+    """
+    click.echo(binascii.hexlify(os.urandom(26)))
+
+@app.cli.command()
+def add_default_user():
+    """ Create a single user
+    """
+    default_user = User("user@example.com", "supersafepassword")
+    db.session.add(default_user)
+    db.session.commit()
+    click.echo("Added admin@example.com")
+
 if __name__ == "__main__":
-    manager.run()
+    app.cli()

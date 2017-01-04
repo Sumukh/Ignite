@@ -40,7 +40,7 @@ class TestURLs:
         """
 
         testapp.post('/login', data=dict(
-            username='admin',
+            email='admin@example.com',
             password="supersafepassword"
         ), follow_redirects=True)
 

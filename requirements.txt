@@ -16,6 +16,7 @@ Flask-RQ==0.2
 # Database
 pymysql==0.7.9
 sqlalchemy==1.1.4
+sqlalchemy-utils # Provides extra datatypes
 
 # Timezones
 pytz

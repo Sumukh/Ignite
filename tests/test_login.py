@@ -12,19 +12,30 @@ class TestLogin:
         """ Tests if the login form functions """
 
         rv = testapp.post('/login', data=dict(
-            username='admin',
+            email='admin@example.com',
             password="supersafepassword"
         ), follow_redirects=True)
 
         assert rv.status_code == 200
         assert 'Logged in successfully.' in str(rv.data)
 
-    def test_login_fail(self, testapp):
+    def test_login_bad_email(self, testapp):
+        """ Tests if the login form rejects invalid email """
+
+        rv = testapp.post('/login', data=dict(
+            email='admin',
+            password=""
+        ), follow_redirects=True)
+
+        assert rv.status_code == 200
+        assert 'Invalid email address' in str(rv.data)
+
+    def test_login_bad_password(self, testapp):
         """ Tests if the login form fails correctly """
 
         rv = testapp.post('/login', data=dict(
-            username='admin',
-            password=""
+            email='admin@example.com',
+            password="notsafepassword"
         ), follow_redirects=True)
 
         assert rv.status_code == 200

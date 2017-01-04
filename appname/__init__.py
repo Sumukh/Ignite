@@ -15,7 +15,6 @@ from appname.extensions import (
     login_manager
 )
 
-
 def create_app(object_name):
     """
     An flask application factory, as explained here:

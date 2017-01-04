@@ -1,17 +1,17 @@
+import os
+
 import tempfile
 db_file = tempfile.NamedTemporaryFile()
 
-
 class Config(object):
-    SECRET_KEY = 'REPLACE ME'
-
+    SECRET_KEY = 'REPLACE ME'  # run ./manage.py generate_secret_key
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class ProdConfig(Config):
     ENV = 'prod'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///../database.db'
-
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL',
+                                        'sqlite:///../database.db')
     CACHE_TYPE = 'simple'
-
 
 class DevConfig(Config):
     ENV = 'dev'
@@ -20,7 +20,7 @@ class DevConfig(Config):
 
     SQLALCHEMY_DATABASE_URI = 'sqlite:///../database.db'
 
-    CACHE_TYPE = 'null'
+    CACHE_TYPE = 'simple'
     ASSETS_DEBUG = True
 
 

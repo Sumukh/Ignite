@@ -12,13 +12,13 @@
                 {{ form.hidden_tag() }}
 
                 <div class="form-group">
-                    {{ form.username.label }}
-                    {% if form.username.errors %}
-                        {% for e in form.username.errors %}
+                    {{ form.email.label }}
+                    {% if form.email.errors %}
+                        {% for e in form.email.errors %}
                             <p class="help-block">{{ e }}</p>
                         {% endfor %}
                     {% endif %}
-                    {{ form.username(class_="form-control") }}
+                    {{ form.email(class_="form-control") }}
                 </div>
                 <div class="form-group">
                     {{ form.password.label }}

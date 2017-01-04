@@ -11,7 +11,7 @@ class TestConfig:
 
         assert app.config['DEBUG'] is True
         assert app.config['SQLALCHEMY_DATABASE_URI'] == 'sqlite:///../database.db'
-        assert app.config['CACHE_TYPE'] == 'null'
+        assert app.config['CACHE_TYPE'] == 'simple'
 
     def test_test_config(self):
         """ Tests if the test config loads correctly """
