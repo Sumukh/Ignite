@@ -9,11 +9,14 @@ logger = logging.getLogger(__name__)
 
 class User(Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True)
-    email = db.Column(db.String())
+    email = db.Column(db.String(), nullable=False)
     password = db.Column(db.String())
     admin = db.Column(db.Boolean(), default=False)
 
-    def __init__(self, email, password, admin=False):
+    def __init__(self, email=None, password=None, admin=False):
+        if not email:
+            raise ValueError('No Email Provided')
+
         self.email = email.lower().strip()
         self.admin = admin
         self.set_password(password)
