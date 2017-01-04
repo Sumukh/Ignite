@@ -18,7 +18,7 @@ deps:
 	pip install -r requirements.txt
 
 clean:
-	python manage.py clean
+	find . | grep -E "(__pycache__|\.pyc|\.DS_Store|\.db|\.pyo$\)" | xargs rm -rf
 
 lint:
 	flake8 --exclude=env .
