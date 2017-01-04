@@ -5,9 +5,9 @@ from webassets.loaders import PythonLoader as PythonAssetsLoader
 
 from appname import assets
 from appname.models import db
+from appname.api.resources import api_blueprint
 from appname.controllers.main import main
 from appname.controllers.auth import auth
-from appname.controllers.api.resources import api_blueprint
 
 from appname.extensions import (
     admin,

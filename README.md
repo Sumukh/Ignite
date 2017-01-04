@@ -1,4 +1,4 @@
-#Flask Foundation
+# Flask Ignite
 
 Built off of [Flask Foundation](https://jackstouffer.github.io/Flask-Foundation/) and the [bootstrapy project](https://github.com/kirang89/bootstrapy)
 

@@ -1,5 +1,5 @@
-from appname.controllers.api import api, api_blueprint
-from appname.controllers.api.info import APIInfo
+from appname.api import api, api_blueprint, API_VERSION
+from appname.api.info import APIInfo
 
 @api_blueprint.record
 def record_params(setup_state):
@@ -9,4 +9,5 @@ def record_params(setup_state):
     api_blueprint.config['tz'] = app.config.get('TIMEZONE', 'utc')  # sample config
     api_blueprint.config['debug'] = app.debug
 
-api.add_resource(APIInfo, '/')
+API_BASE = '/'  # API_BLUEPRINT prefix is 'api'
+api.add_resource(APIInfo, API_BASE, '/{0}/'.format(API_VERSION))
