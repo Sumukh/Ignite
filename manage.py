@@ -61,10 +61,13 @@ def generate_session_key():
 def add_default_user():
     """ Create a single user
     """
-    default_user = User("user@example.com", "supersafepassword")
+    default_user = User("user@example.com", "test", admin=False)
     db.session.add(default_user)
-    db.session.commit()
+    click.echo("Added user@example.com")
+    admin = User("admin@example.com", "admin", admin=True)
+    db.session.add(admin)
     click.echo("Added admin@example.com")
+    db.session.commit()
 
 if __name__ == "__main__":
     app.cli()

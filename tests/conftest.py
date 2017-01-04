@@ -14,8 +14,9 @@ def testapp(request):
     db.create_all()
 
     if getattr(request.module, "create_user", True):
-        admin = User('admin@example.com', 'supersafepassword')
-        db.session.add(admin)
+        admin = User('admin@example.com', 'supersafepassword', admin=True)
+        user = User('user@example.com', 'safepassword')
+        db.session.add_all([admin, user])
         db.session.commit()
 
     def teardown():

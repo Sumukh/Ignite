@@ -14,17 +14,20 @@ class TestModels:
     def test_user_save(self, testapp):
         """ Test Saving the user model to the database """
 
-        admin = User('admin@example.com', 'supersafepassword')
-        db.session.add(admin)
+        user = User('user@example.com', 'supersafepassword')
+        db.session.add(user)
         db.session.commit()
 
-        user = User.query.filter_by(email="admin@example.com").first()
-        assert user is not None
+        user_obj = User.query.filter_by(email="user@example.com").first()
+        assert user_obj is not None
+        assert not user_obj.admin
 
     def test_user_password(self, testapp):
         """ Test password hashing and checking """
 
-        admin = User('admin@example.com', 'supersafepassword')
+        admin = User('admin@example.com', 'supersafepassword', admin=True)
 
         assert admin.email == 'admin@example.com'
+        assert admin.email == 'admin@example.com'
         assert admin.check_password('supersafepassword')
+        assert admin.admin

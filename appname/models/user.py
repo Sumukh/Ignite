@@ -11,9 +11,11 @@ class User(Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True)
     email = db.Column(db.String())
     password = db.Column(db.String())
+    admin = db.Column(db.Boolean(), default=False)
 
-    def __init__(self, email, password):
+    def __init__(self, email, password, admin=False):
         self.email = email.lower().strip()
+        self.admin = admin
         self.set_password(password)
 
     def set_password(self, password):
