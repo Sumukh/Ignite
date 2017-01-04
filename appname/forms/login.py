@@ -1,11 +1,9 @@
-from flask_wtf import Form
-from wtforms import TextField, PasswordField
-from wtforms import validators
+from appname.forms import BaseForm
+from wtforms import validators, TextField, PasswordField
 
-from .models import User
+from appname.models import User
 
-
-class LoginForm(Form):
+class LoginForm(BaseForm):
     username = TextField(u'Username', validators=[validators.required()])
     password = PasswordField(u'Password', validators=[validators.optional()])
 

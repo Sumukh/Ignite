@@ -36,15 +36,15 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('.home') }}">Home</a></li>
+                    <li><a href="{{ url_for('main.home') }}">Home</a></li>
 
                     {% if not current_user.is_authenticated %}
-                        <li><a href="{{ url_for('.login') }}">Login</a></li>
+                        <li><a href="{{ url_for('auth.login') }}">Login</a></li>
                     {% else %}
-                        <li><a href="{{ url_for('.logout') }}">Logout</a></li>
+                        <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                     {% endif %}
 
-                    <li><a href="{{ url_for('.restricted') }}">Login Restricted Page</a></li>
+                    <li><a href="{{ url_for('main.restricted') }}">Login Restricted Page</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -68,7 +68,7 @@
         {% assets "common_js" %}
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}
-        
+
         {% block js %}
         {% endblock %}
     </body>

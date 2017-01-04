@@ -6,6 +6,7 @@ from webassets.loaders import PythonLoader as PythonAssetsLoader
 from appname import assets
 from appname.models import db
 from appname.controllers.main import main
+from appname.controllers.auth import auth
 
 from appname.extensions import (
     cache,
@@ -48,5 +49,6 @@ def create_app(object_name):
 
     # register our blueprints
     app.register_blueprint(main)
+    app.register_blueprint(auth)
 
     return app
