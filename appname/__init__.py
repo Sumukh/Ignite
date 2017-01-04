@@ -10,6 +10,7 @@ from appname.controllers.auth import auth
 from appname.controllers.api.resources import api_blueprint
 
 from appname.extensions import (
+    admin,
     cache,
     assets_env,
     debug_toolbar,
@@ -51,5 +52,7 @@ def create_app(object_name):
     app.register_blueprint(main)
     app.register_blueprint(auth)
     app.register_blueprint(api_blueprint, url_prefix='/api')
+
+    admin.init_app(app)
 
     return app

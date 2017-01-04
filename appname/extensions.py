@@ -7,6 +7,7 @@ from flask_cache import Cache
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_login import LoginManager
 from flask_assets import Environment
+from appname.admin import AdminDashboard
 
 # Setup flask cache
 cache = Cache()
@@ -20,3 +21,5 @@ login_manager = LoginManager()
 login_manager.login_view = "auth.login"
 login_manager.login_message_category = "warning"
 # login_manager.user_loader is registered in controllers/auth.py
+
+admin = AdminDashboard()

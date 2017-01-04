@@ -45,3 +45,9 @@ class SignupForm(BaseForm):
             return False
 
         return True
+
+# class ChangePasswordForm(BaseForm):
+#     password = PasswordField('Password', validators=[validators.required()])
+
+# class ResetPasswordForm(BaseForm):
+#     email = TextField('Email', validators=[validators.email(), validators.required()])

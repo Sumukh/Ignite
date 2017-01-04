@@ -13,6 +13,9 @@ Flask-RESTful==0.3.5
 Flask-Testing>=0.5.0,<1.0
 Flask-RQ==0.2
 
+# Admin
+Flask-Admin
+
 # Database
 pymysql==0.7.9
 sqlalchemy==1.1.4
