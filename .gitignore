@@ -36,6 +36,7 @@ env
 env*
 
 .webassets-cache
+*.cache
 .DS_Store
 *.sublime-*
 
