@@ -7,6 +7,7 @@ from appname import assets
 from appname.models import db
 from appname.controllers.main import main
 from appname.controllers.auth import auth
+from appname.controllers.api.resources import api_blueprint
 
 from appname.extensions import (
     cache,
@@ -49,5 +50,6 @@ def create_app(object_name):
     # register our blueprints
     app.register_blueprint(main)
     app.register_blueprint(auth)
+    app.register_blueprint(api_blueprint, url_prefix='/api')
 
     return app
