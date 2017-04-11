@@ -7,6 +7,8 @@ from flask_caching import Cache
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_login import LoginManager
 from flask_assets import Environment
+from flask_socketio import SocketIO
+
 from appname.admin import AdminDashboard
 
 # Setup flask cache
@@ -23,3 +25,5 @@ login_manager.login_message_category = "warning"
 # login_manager.user_loader is registered in controllers/auth.py
 
 admin = AdminDashboard()
+
+socketio = SocketIO()

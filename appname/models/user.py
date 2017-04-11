@@ -19,7 +19,9 @@ class User(Model, UserMixin):
 
         self.email = email.lower().strip()
         self.admin = admin
-        self.set_password(password)
+
+        if password:
+            self.set_password(password)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -42,3 +44,17 @@ class User(Model, UserMixin):
 
     def __repr__(self):
         return '<User {0}>'.format(self.email)
+
+    @classmethod
+    def lookup(cls, email):
+        return cls.query.filter_by(email=email).first()
+
+    @classmethod
+    def lookup_or_create(cls, email, **kwargs):
+        existing = cls.query.filter_by(email=email).first()
+        if existing:
+            return existing
+        new_user = User(email=email, **kwargs)
+        db.session.add(new_user)
+        db.session.commit()
+        return new_user

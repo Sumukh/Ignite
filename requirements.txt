@@ -1,4 +1,5 @@
 Flask==0.12
+jinja2==2.9.5
 
 requests==2.12
 gunicorn
@@ -7,12 +8,13 @@ gunicorn
 Flask-Assets>=0.12,<0.12.99
 Flask-Caching>=1.1.1
 Flask-Login==0.3.2
-Flask-DebugToolbar==0.10.0
+Flask-DebugToolbar==0.10.1
 Flask-Script==2.0.5
-Flask-WTF==0.13.1
+Flask-WTF==0.14.2
 Flask-RESTful==0.3.5
 Flask-Testing>=0.5.0,<1.0
 Flask-RQ==0.2
+Flask-SocketIO # Realtime Websockets
 
 # Admin
 Flask-Admin
@@ -26,8 +28,12 @@ sqlalchemy-utils # Provides extra datatypes
 pytz
 arrow
 
+# Email
+pynliner<1.0
+
 # Flask DB Extensions
-Flask-SQLAlchemy==2.1
+Flask-SQLAlchemy==2.2
+Flask-SQLAlchemy-Cache==0.1.5
 Flask-Migrate==2.0.0
 
 # Caching
@@ -36,8 +42,10 @@ rq==0.7.1
 rq-dashboard==0.3.7
 
 # OAuth
+oauthlib==2.0.2
+# Flask-OAuthlib==0.9.3
+# OAuthlib version that logs errors - use until Flask-OAuthlib > 0.9.3 is published
 https://github.com/lepture/flask-oauthlib/archive/d62bf665fa2a4ab71327cd665334fdec25ade116.zip
-oauthlib==2.0.1
 
 # Other
 itsdangerous==0.24
@@ -49,6 +57,6 @@ humanize==0.5.1
 # Testing
 pytest==2.9.2
 pytest-cov==2.3.1
-mccabe==0.5.2
+mccabe==0.6.1
 flake8==2.5.4
 

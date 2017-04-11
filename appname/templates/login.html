@@ -6,8 +6,12 @@
     <h1 class="text-center">Flask Login Example</h1>
 
     <div class="row">
-        <div class="col-md-4"></div>
         <div class="col-md-4">
+            <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary">Login with OAuth</a>
+
+        </div>
+        <div class="col-md-4">
+
             <form role="form" action="{{ url_for('auth.login') }}" method="post">
                 {{ form.hidden_tag() }}
 

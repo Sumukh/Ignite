@@ -8,13 +8,15 @@ from appname.models import db
 from appname.api.resources import api_blueprint
 from appname.controllers.main import main
 from appname.controllers.auth import auth
+from appname.controllers.oauth.client import oauth_client
 
 from appname.extensions import (
     admin,
     cache,
     assets_env,
     debug_toolbar,
-    login_manager
+    login_manager,
+    socketio
 )
 
 def create_app(object_name):
@@ -52,7 +54,11 @@ def create_app(object_name):
     app.register_blueprint(main)
     app.register_blueprint(auth)
     app.register_blueprint(api_blueprint, url_prefix='/api')
+    app.register_blueprint(oauth_client, url_prefix='/oauth')
 
     admin.init_app(app)
+
+    # If you use websockets/realtime features
+    # socketio.init_app(app)
 
     return app

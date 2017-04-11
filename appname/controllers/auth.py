@@ -7,10 +7,15 @@ from appname.extensions import login_manager
 
 auth = Blueprint('auth', __name__)
 
-
 @login_manager.user_loader
 def load_user(userid):
     return User.query.get(userid)
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    session['after_login'] = request.url
+    login_hint = request.args.get('login_hint')
+    return redirect(url_for('.login', login_hint=login_hint))
 
 @auth.route("/login", methods=["GET", "POST"])
 def login():
@@ -31,3 +36,4 @@ def logout():
     session.clear()
     flash("You have been logged out.", "success")
     return redirect(url_for("main.home"))
+
