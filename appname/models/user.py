@@ -11,6 +11,7 @@ class User(Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True)
     email = db.Column(db.String(), nullable=False)
     password = db.Column(db.String())
+    role = db.Column(db.String())
     admin = db.Column(db.Boolean(), default=False)
 
     def __init__(self, email=None, password=None, admin=False):

@@ -15,7 +15,7 @@ def load_user(userid):
 def unauthorized():
     session['after_login'] = request.url
     login_hint = request.args.get('login_hint')
-    return redirect(url_for('.login', login_hint=login_hint))
+    return redirect(url_for('auth.login', login_hint=login_hint))
 
 @auth.route("/login", methods=["GET", "POST"])
 def login():

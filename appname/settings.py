@@ -4,8 +4,11 @@ import tempfile
 db_file = tempfile.NamedTemporaryFile()
 
 class Config(object):
-    SECRET_KEY = 'REPLACE ME'  # run ./manage.py generate_secret_key
+    SECRET_KEY = 'REPLACE ME'  # run flask generate_secret_key
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    TWITTER_CONSUMER_KEY = 'xBeXxg9lyElUgwZT6AZ0A'
+    TWITTER_CONSUMER_SECRET = 'aawnSpNTOVuDCjx7HMh6uSXetjNN8zWLpZwCEU4LBrk'
 
 class ProdConfig(Config):
     ENV = 'prod'

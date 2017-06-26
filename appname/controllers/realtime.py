@@ -2,7 +2,7 @@ from flask import render_template, url_for
 from flask_login import current_user, login_required
 
 from flask_socketio import send, emit, join_room, leave_room
-
+from appname.extensions import socketio
 
 @socketio.on('connect')
 def connect():
