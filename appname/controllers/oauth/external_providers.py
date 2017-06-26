@@ -3,7 +3,9 @@
 import datetime as dt
 
 from werkzeug import security
-from flask import session
+from flask import session, flash, redirect, request
+from flask_oauthlib.client import OAuthException
+
 
 from appname.models.user import User
 
@@ -44,7 +46,6 @@ class BaseProvider:
         expires_in = resp.get('expires_in', 0)
         session['token_expiry'] = dt.datetime.now() + dt.timedelta(seconds=expires_in)
         session['provider_token'] = (access_token, '')  # (access_token, secret)
-
 
     def authorized_repsonse(self):
         try:

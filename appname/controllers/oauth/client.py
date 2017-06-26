@@ -2,7 +2,7 @@
 """
 from flask import Blueprint, flash, request, redirect, url_for, session
 from flask_login import login_user
-from flask_oauthlib.client import OAuth, OAuthException
+from flask_oauthlib.client import OAuth
 
 from appname.controllers.oauth import external_providers
 
