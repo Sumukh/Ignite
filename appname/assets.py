@@ -1,7 +1,7 @@
 from flask_assets import Bundle
 
 common_css = Bundle(
-    'css/vendor/bootstrap.min.css',
+    'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css',
     'css/vendor/helper.css',
     'css/main.css',
     filters='cssmin',
@@ -9,8 +9,9 @@ common_css = Bundle(
 )
 
 common_js = Bundle(
-    'js/vendor/jquery.min.js',
-    'js/vendor/bootstrap.min.js',
+    'https://code.jquery.com/jquery-3.2.1.slim.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js',
+    'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js',
     Bundle(
         'js/main.js',
         filters='jsmin'

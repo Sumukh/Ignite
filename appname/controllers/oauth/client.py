@@ -25,9 +25,7 @@ def record_params(setup_state):
 
 @oauth_client.route("/login/")
 def login():
-    """
-    Authenticates a user with an access token from the service
-    """
+    """ Authenticates a user with an access token from the service. """
     return external_provider.client.authorize(
         callback=url_for('.authorized', _external=True),
         login_hint=request.args.get('login_hint'))

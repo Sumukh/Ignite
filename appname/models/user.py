@@ -11,15 +11,17 @@ class User(Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True)
     email = db.Column(db.String(), nullable=False)
     password = db.Column(db.String())
-    role = db.Column(db.String())
-    admin = db.Column(db.Boolean(), default=False)
+    admin = db.Column(db.Boolean())
+    role = db.Column(db.String(), default='user')
 
     def __init__(self, email=None, password=None, admin=False):
         if not email:
             raise ValueError('No Email Provided')
 
         self.email = email.lower().strip()
-        self.admin = admin
+        if admin:
+            self.admin = True
+            self.role = 'admin' # TODO: Clean this up
 
         if password:
             self.set_password(password)
@@ -34,6 +36,11 @@ class User(Model, UserMixin):
     def is_authenticated(self):
         return not isinstance(self, AnonymousUserMixin)
 
+    @property
+    def is_admin(self):
+        return self.role == 'admin'
+
+    @property
     def is_anonymous(self):
         return isinstance(self, AnonymousUserMixin)
 

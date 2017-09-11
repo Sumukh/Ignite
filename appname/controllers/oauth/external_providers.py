@@ -17,7 +17,7 @@ class BaseProvider:
 
     @property
     def name(self):
-        # Convert Twitters -> TWITTER
+        """ Convert Twitters to TWITTER """
         return self.__class__.__name__.upper()
 
     @staticmethod

@@ -10,7 +10,7 @@ from appname.models.user import User
 
 class AdminHomeView(admin.AdminIndexView):
     def is_accessible(self):
-        return current_user.is_authenticated and current_user.admin
+        return current_user.is_authenticated and current_user.is_admin
 
     def inaccessible_callback(self, name, **kwargs):
         # redirect to login page if user doesn't have access
@@ -21,7 +21,7 @@ class AdminModelView(sqla.ModelView):
     form_excluded_columns = ['password', 'created']
 
     def is_accessible(self):
-        return current_user.is_authenticated and current_user.admin
+        return current_user.is_authenticated and current_user.is_admin
 
     def inaccessible_callback(self, name, **kwargs):
         # redirect to login page if user doesn't have access

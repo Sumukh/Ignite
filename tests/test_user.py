@@ -20,7 +20,7 @@ class TestModels:
 
         user_obj = User.query.filter_by(email="user@example.com").first()
         assert user_obj is not None
-        assert not user_obj.admin
+        assert not user_obj.is_admin
 
     def test_user_password(self, testapp):
         """ Test password hashing and checking """
@@ -30,4 +30,4 @@ class TestModels:
         assert admin.email == 'admin@example.com'
         assert admin.email == 'admin@example.com'
         assert admin.check_password('supersafepassword')
-        assert admin.admin
+        assert admin.is_admin

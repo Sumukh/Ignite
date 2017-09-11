@@ -58,9 +58,8 @@ def generate_session_key():
     click.echo(binascii.hexlify(os.urandom(26)))
 
 @app.cli.command()
-def add_default_user():
-    """ Create a single user
-    """
+def add_default_users():
+    """ Create test users. """
     default_user = User("user@example.com", "test", admin=False)
     db.session.add(default_user)
     click.echo("Added user@example.com")
@@ -70,4 +69,8 @@ def add_default_user():
     db.session.commit()
 
 if __name__ == "__main__":
+    # For flask scripts to work, an application needs to be discovered.
+    # We can do that by setting the FLASK_APP environment variable to point to this file
+    # Read more: http://flask.pocoo.org/docs/0.12/cli/
+    os.environ['FLASK_APP'] = __file__
     app.cli()
