@@ -34,10 +34,10 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-            <li class="nav-item {{ 'active' if request.endpoint == 'main.home' }}">
-                <a class="nav-link" href="{{ url_for('main.home') }}">Home</a>
-            </li>
             {% if current_user.is_authenticated %}
+                <li class="nav-item {{ 'active' if request.endpoint == 'dashboard.home' }}">
+                    <a class="nav-link" href="{{ url_for('dashboard.home') }}">Home</a>
+                </li>
                 <li class="nav-item {{ 'active' if request.endpoint == 'dashboard.settings' }}">
                     <a class="nav-link" href="{{ url_for('dashboard.settings') }}">Settings</a>
                 </li>
@@ -45,6 +45,10 @@
                     <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
                 </li>
             {% else %}
+                <li class="nav-item {{ 'active' if request.endpoint == 'main.home' }}">
+                    <a class="nav-link" href="{{ url_for('main.home') }}">Home</a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
                 </li>
