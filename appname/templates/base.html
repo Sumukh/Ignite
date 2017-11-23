@@ -37,15 +37,21 @@
             <li class="nav-item {{ 'active' if request.endpoint == 'main.home' }}">
                 <a class="nav-link" href="{{ url_for('main.home') }}">Home</a>
             </li>
-            <li class="nav-item {{ 'active' if request.endpoint == 'main.restricted' }}">
-                <a class="nav-link" href="{{ url_for('main.restricted') }}">Login Restricted Page</a>
-            </li>
-            <li class="nav-item">
-                {% if not current_user.is_authenticated %}
-                    <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-                {% else %}
+            {% if current_user.is_authenticated %}
+                <li class="nav-item {{ 'active' if request.endpoint == 'dashboard.settings' }}">
+                    <a class="nav-link" href="{{ url_for('dashboard.settings') }}">Settings</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
-                {% endif %}
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.signup') }}">Signup</a>
+                </li>
+            {% endif %}
             </li>
 
             </ul>

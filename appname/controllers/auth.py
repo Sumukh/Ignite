@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, flash, request, redirect, url_for, session
 from flask_login import login_user, logout_user
 
-from appname.forms.login import LoginForm
+from appname.forms.login import LoginForm, SignupForm
+from appname.models import db
 from appname.models.user import User
 from appname.extensions import login_manager
 
@@ -36,4 +37,19 @@ def logout():
     session.clear()
     flash("You have been logged out.", "success")
     return redirect(url_for("main.home"))
+
+@auth.route("/signup", methods=["GET", "POST"])
+def signup():
+    form = SignupForm()
+
+    if form.validate_on_submit():
+        user = User(form.email.data, form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        login_user(user)
+
+        flash("Welcome to appname.", "success")
+        return redirect(request.args.get("next") or url_for("dashboard.home"))
+
+    return render_template("signup.html", form=form)
 

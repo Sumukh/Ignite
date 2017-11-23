@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% from "helpers/_formhelpers.html" import render_field %}
 
-{% block title %}Flask Login Example{% endblock %}
+{% block title %}appname Signup{% endblock %}
 
 {% block body %}
     <h1 class="text-center">Flask Login Example</h1>
@@ -11,18 +11,18 @@
         </div>
 
         <div class="col-md-4">
-            <form role="form" action="{{ url_for('auth.login') }}" method="post">
+            <form role="form" action="{{ url_for('auth.signup') }}" method="post">
                 {{ form.hidden_tag() }}
+
                 {{ render_field(form.email) }}
                 {{ render_field(form.password) }}
-                <button type="submit" class="btn btn-primary">Submit</button>
+                {{ render_field(form.confirm) }}
+
+                <button type="submit" class="btn btn-primary">Sign Up</button>
             </form>
-            <hr />
-            <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary">Login with OAuth</a>
-            &nbsp;
-            <a href="{{ url_for('auth.signup') }}" class="btn btn-primary">Sign Up</a>
 
         </div>
+
         <div class="col-md-4"></div>
     </div>
 {% endblock %}

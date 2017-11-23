@@ -1,8 +1,8 @@
 Must have:
 
 - [x] API
-- [ ] User View
-- [ ] User Sign Up
+- [x] User View
+- [x] User Sign Up
 - [ ] Change Password
 - [ ] Reset Password (Requires Email?)
 

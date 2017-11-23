@@ -5,7 +5,7 @@ from appname.models.user import User
 
 class LoginForm(BaseForm):
     email = TextField('Email', validators=[validators.email(), validators.required()])
-    password = PasswordField('Password', validators=[validators.optional()])
+    password = PasswordField('Password', validators=[validators.required()])
 
     def validate(self):
         check_validate = super(LoginForm, self).validate()
@@ -29,25 +29,29 @@ class LoginForm(BaseForm):
 
 class SignupForm(BaseForm):
     email = TextField('Email', validators=[validators.email(), validators.required()])
-    password = PasswordField('Password', validators=[validators.optional()])
+    password = PasswordField('Password', validators=[validators.required(), validators.length(min=4),
+                                                     validators.EqualTo('confirm', message='Passwords must match')])
+    confirm = PasswordField('Confirm Password', validators=[validators.required()])
 
     def validate(self):
-        check_validate = super(LoginForm, self).validate()
+        check_validate = super(SignupForm, self).validate()
 
         # if our validators do not pass
         if not check_validate:
             return False
 
-        # Does our the exist
+        # Does the user exist already?
         user = User.query.filter_by(email=self.email.data).first()
         if user:
-            self.email.errors.append('That Email Is Already Registered')
+            self.email.errors.append('That email already has an account')
             return False
 
         return True
 
-# class ChangePasswordForm(BaseForm):
-#     password = PasswordField('Password', validators=[validators.required()])
+class ChangePasswordForm(BaseForm):
+    password = PasswordField('Password', validators=[validators.required(), validators.length(min=4),
+                                                     validators.EqualTo('confirm', message='Passwords must match')])
+    confirm  = PasswordField('Repeat Password')
 
-# class ResetPasswordForm(BaseForm):
-#     email = TextField('Email', validators=[validators.email(), validators.required()])
+class ResetPasswordForm(BaseForm):
+    email = TextField('Email', validators=[validators.email(), validators.required()])
