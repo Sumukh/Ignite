@@ -48,11 +48,10 @@
                 <li class="nav-item {{ 'active' if request.endpoint == 'main.home' }}">
                     <a class="nav-link" href="{{ url_for('main.home') }}">Home</a>
                 </li>
-
-                <li class="nav-item">
+                <li class="nav-item {{ 'active' if request.endpoint == 'auth.login' }}">
                     <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ 'active' if request.endpoint == 'auth.signup' }}">
                     <a class="nav-link" href="{{ url_for('auth.signup') }}">Signup</a>
                 </li>
             {% endif %}

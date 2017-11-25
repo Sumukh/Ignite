@@ -11,6 +11,8 @@ convention = {
 metadata = MetaData(naming_convention=convention)
 db = SQLAlchemy(metadata=metadata)
 
+# Want to keep track of changes to your models? SQLAlchemy-Continuum will help! 
+
 class QueryWithSoftDelete(BaseQuery):
     """ By default, use soft deletes. See this blog post for usage details:
     https://blog.miguelgrinberg.com/post/implementing-the-soft-delete-pattern-with-flask-and-sqlalchemy

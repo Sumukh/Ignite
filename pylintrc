@@ -1,0 +1,4 @@
+# C0111 Missing docstring 
+# I0011 Warning locally suppressed using disable-msg
+# I0012 Warning locally suppressed using disable-msg
+disable=C0111,I0011,I0012

@@ -3,17 +3,22 @@ Must have:
 - [x] API
 - [x] User View
 - [x] User Sign Up
-- [ ] Change Password
-- [ ] Reset Password (Requires Email?)
+- [x] Change Password
+- [x] Email Sending
+- [-] User Email Confirmations (Almost done)
+- [ ] Reset Password Email
 
 Should Have:
 
-- [ ] Jobs (Not Like OK Jobs)
-- [ ] OAuth Provider
+- [x] Jobs (Not Like OK Jobs)
 
 Later:
 
 - [ ] Payments via Stripe
+- [ ] Two Factor Auth
+
+Maybe: 
+- [ ] OAuth Provider
 
 App Features:
 

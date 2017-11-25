@@ -27,6 +27,7 @@ violations.flake8.txt
 nosetests.xml
 __pycache__
 database.db
+.vscode
 
 # Sphinx
 docs/_build

@@ -84,7 +84,7 @@ class Twitter(BaseProvider):
         if response.status == 200:
             user_data = response.data
             email = user_data['data']['email']
-            return User.lookup_or_create(email)
+            return User.lookup_or_create(email, email_confirmed=True)
 
     def parse_repsonse(self, resp):
         access_token = resp['oauth_token']
@@ -118,7 +118,7 @@ class Google(BaseProvider):
             user_data = response.data
             if 'error' not in user_data and user_data.get('emails'):
                 email = user_data['emails'][0]['value']
-                return User.lookup_or_create(email)
+                return User.lookup_or_create(email, email_confirmed=True)
 
 class Okpy(BaseProvider):
 
@@ -137,5 +137,5 @@ class Okpy(BaseProvider):
         if response.status == 200:
             user_data = response.data
             email = user_data['data']['email']
-            return User.lookup_or_create(email)
+            return User.lookup_or_create(email, email_confirmed=True)
 

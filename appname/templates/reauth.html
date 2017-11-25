@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% from "helpers/_formhelpers.html" import render_field %} {% block title %}Flask Login Example{%
+endblock %} {% block body %}
+<h1 class="text-center">appname Login</h1>
+
+<div class="row">
+    <div class="col-md-4">
+    </div>
+
+    <div class="col-md-4">
+        <p> Please confirm your login in order to procceed: </p>
+        <form role="form" action="{{ url_for('auth.login') }}" method="post">
+            {{ form.hidden_tag() }} {{ render_field(form.email) }} {{ render_field(form.password) }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+{% endblock %}

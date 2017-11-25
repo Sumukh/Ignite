@@ -13,6 +13,7 @@ class User(Model, UserMixin):
     password = db.Column(db.String())
     admin = db.Column(db.Boolean())
     role = db.Column(db.String(), default='user')
+    email_confirmed = db.Column(db.Boolean())
 
     def __init__(self, email=None, password=None, admin=False):
         if not email:

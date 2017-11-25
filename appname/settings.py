@@ -1,7 +1,5 @@
 import os
-
 import tempfile
-db_file = tempfile.NamedTemporaryFile()
 
 class Config(object):
     SECRET_KEY = 'REPLACE ME'  # run flask generate_secret_key
@@ -14,7 +12,12 @@ class ProdConfig(Config):
     ENV = 'prod'
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL',
                                         'sqlite:///../database.db')
-    CACHE_TYPE = 'simple'
+    REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
+    # Make libraries that use redis use the same url (probably uneccesary)
+    CACHE_REDIS_URL = RQ_REDIS_URL = REDIS_URL
+
+    CACHE_TYPE = 'redis'
+    CACHE_KEY_PREFIX = 'appname-'
 
 class DevConfig(Config):
     ENV = 'dev'
@@ -22,9 +25,14 @@ class DevConfig(Config):
     DEBUG_TB_INTERCEPT_REDIRECTS = False
 
     SQLALCHEMY_DATABASE_URI = 'sqlite:///../database.db'
+    REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
+    RQ_REDIS_URL = REDIS_URL
 
     CACHE_TYPE = 'simple'
+    # Don't do anything fancy with the assets pipeline (faster + easier to debug)
     ASSETS_DEBUG = True
+    # Run jobs instantly, without needing to spin up a worker
+    RQ_ASYNC = True 
 
 
 class TestConfig(Config):
@@ -32,8 +40,10 @@ class TestConfig(Config):
     DEBUG = True
     DEBUG_TB_INTERCEPT_REDIRECTS = False
 
+    db_file = tempfile.NamedTemporaryFile()
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + db_file.name
     SQLALCHEMY_ECHO = True
 
     CACHE_TYPE = 'null'
     WTF_CSRF_ENABLED = False
+    RQ_ASYNC = True

@@ -40,8 +40,8 @@ class SignupForm(BaseForm):
         if not check_validate:
             return False
 
-        # Does the user exist already?
-        user = User.query.filter_by(email=self.email.data).first()
+        # Does the user exist already? Must return false if so, otherwise we'll allow anyone to sign in
+        user = User.lookup(self.email.data)
         if user:
             self.email.errors.append('That email already has an account')
             return False

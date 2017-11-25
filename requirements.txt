@@ -16,8 +16,8 @@ Flask-Script==2.0.6
 Flask-WTF==0.14.2
 Flask-RESTful==0.3.6
 Flask-Testing>=0.6.2,<1.0
-Flask-RQ==0.2
 Flask-SocketIO # Realtime Websockets
+Flask-Mail
 
 # Admin
 Flask-Admin
@@ -41,6 +41,9 @@ Flask-Migrate==2.1.1
 
 # Caching
 redis==2.10.6
+
+# Job Queue
+Flask-RQ2==17.0
 rq==0.9.2
 rq-dashboard==0.3.10
 

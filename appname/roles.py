@@ -6,7 +6,7 @@ class Roles(Enum):
     GUEST = 'guest'
     USER = 'user'
     ADMIN = 'admin'
-
+    
 def requires_roles(*roles):
     def wrapper(f):
         def get_user_role():

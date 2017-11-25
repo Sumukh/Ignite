@@ -10,14 +10,18 @@ from appname.controllers.main import main
 from appname.controllers.auth import auth
 from appname.controllers.dashboard import dashboard
 from appname.controllers.oauth.client import oauth_client
+from appname.controllers.admin.jobs import jobs
 
 from appname.extensions import (
     admin,
-    cache,
     assets_env,
+    cache,
     debug_toolbar,
     login_manager,
-    socketio
+    mail,
+    rq2,
+    socketio,
+    token
 )
 
 def create_app(object_name):
@@ -43,7 +47,14 @@ def create_app(object_name):
     # initialize SQLAlchemy
     db.init_app(app)
 
+    # initalize Flask Login 
     login_manager.init_app(app)
+
+    # initialize Flask-RQ2 (job queue)
+    rq2.init_app(app)
+
+    token.init_app(app)
+    mail.init_app(app)
 
     # Import and register the different asset bundles
     assets_env.init_app(app)
@@ -58,6 +69,8 @@ def create_app(object_name):
     app.register_blueprint(api_blueprint, url_prefix='/api')
     app.register_blueprint(oauth_client, url_prefix='/oauth')
 
+    # Admin Tools 
+    app.register_blueprint(jobs, url_prefix='/admin/rq')
     admin.init_app(app)
 
     # If you use websockets/realtime features

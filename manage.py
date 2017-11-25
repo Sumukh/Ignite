@@ -11,8 +11,7 @@ from appname.models import db
 from appname.models.user import User
 from appname.extensions import cache
 
-# default to dev config because no one should use this in
-# production anyway
+# default to dev config because this should not be run in production
 env = os.environ.get('APPNAME_ENV', 'dev')
 app = create_app('appname.settings.%sConfig' % env.capitalize())
 
@@ -67,6 +66,11 @@ def add_default_users():
     db.session.add(admin)
     click.echo("Added admin@example.com")
     db.session.commit()
+
+
+@app.shell_context_processor
+def make_shell_context():
+    return dict(app=app, db=db, User=User)
 
 if __name__ == "__main__":
     # For flask scripts to work, an application needs to be discovered.
