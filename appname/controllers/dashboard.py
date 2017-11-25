@@ -11,8 +11,10 @@ dashboard = Blueprint('dashboard', __name__)
 @dashboard.before_request
 def check_for_confirmation(*args, **kwargs):
     if REQUIRE_EMAIL_CONFIRMATION and not current_user.email_confirmed:
+        resend_confirm_link = url_for('auth.resend_confirmation')
         text = Markup(
-            'Please confirm your email. <a href="/auth/resend-confirmation" class="alert-link">Click here to resend</a>')
+            'Please confirm your email. '
+            '<a href="{}" class="alert-link">Click here to resend</a>'.format(resend_confirm_link))
         flash(text, 'warning')
 
 @dashboard.route('/dashboard')

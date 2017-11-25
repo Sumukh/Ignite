@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% from "helpers/_formhelpers.html" import render_field %}
+
+{% block title %}Flask Login Example {% endblock %}
+
+{% block body %}
+<h3 class="text-center">Resend Confirmation Email</h1>
+
+<div class="row">
+    <div class="col-md-4">
+    </div>
+
+    <div class="col-md-4">
+        <small></small>It may have ended up in your spam inbox</small>
+        <hr />
+        <form role="form" action="{{ url_for('auth.resend_confirmation') }}" method="post">
+            {{ form.hidden_tag() }}
+            <button type="submit" class="btn btn-primary btn-block">Resend</button>
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+{% endblock %}

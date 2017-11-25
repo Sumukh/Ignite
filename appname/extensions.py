@@ -25,9 +25,9 @@ debug_toolbar = DebugToolbarExtension()
 login_manager = LoginManager()
 login_manager.login_view = "auth.login"
 login_manager.login_message_category = "warning"
-# login_manager.user_loader is registered in controllers/auth.py
+# login_manager.user_loader is registered in controllers/auth.
 
-# TODO: 
+# TODO:
 login_manager.refresh_view = "auth.reauth"
 login_manager.needs_refresh_message = (
     u"To protect your account, please reauthenticate to access this page."

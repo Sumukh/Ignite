@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, flash, request, redirect, url_for,
 from flask_login import login_user, logout_user, login_required, current_user
 
 from appname.constants import REQUIRE_EMAIL_CONFIRMATION, EMAIL_CONFIRMATION_SALT
-from appname.forms.login import LoginForm, SignupForm
+from appname.forms.login import LoginForm, SignupForm, SimpleForm
 from appname.models import db
 from appname.models.user import User
 from appname.mailers.auth import ConfirmEmail
@@ -33,14 +33,6 @@ def login():
 
     return render_template("login.html", form=form)
 
-
-@auth.route("/logout")
-def logout():
-    logout_user()
-    session.clear()
-    flash("You have been logged out.", "success")
-    return redirect(url_for("main.home"))
-
 @auth.route("/signup", methods=["GET", "POST"])
 def signup():
     form = SignupForm()
@@ -53,27 +45,19 @@ def signup():
 
         if REQUIRE_EMAIL_CONFIRMATION:
             # Send confirm email
-            ConfirmEmail(user).send() 
+            ConfirmEmail(user).send()
 
         flash("Welcome to appname.", "success")
         return redirect(request.args.get("next") or url_for("dashboard.home"))
 
     return render_template("signup.html", form=form)
 
-
-@auth.route("/auth/resend-confirm", methods=["GET", "POST"])
-@login_required
-def resend_confirmation():
-    if not REQUIRE_EMAIL_CONFIRMATION or current_user.email_confirmed:
-        abort(404)
-
-    if request.method == 'POST':
-        ConfirmEmail(current_user).send()
-        flash("Sent confirmation to {}".format(current_user.email), 'success')
-        return redirect(url_for("dashboard.home"))
-
-    return render_template('auth/resend_confirmation.html')
-
+@auth.route("/auth/logout")
+def logout():
+    logout_user()
+    session.clear()
+    flash("You have been logged out.", "success")
+    return redirect(url_for("main.home"))
 
 @auth.route("/confirm/<string:code>")
 def confirm(code):
@@ -85,7 +69,7 @@ def confirm(code):
         print("Return: {}".format(email))
     except Exception as e:
         email = None
-    
+
     if not email:
         # TODO: Render a nice error page here.
         return abort(404)
@@ -97,11 +81,29 @@ def confirm(code):
     db.session.commit()
 
     if current_user == user:
-        flash('Succesfully confirmed your email', 'success')      
+        flash('Succesfully confirmed your email', 'success')
         return redirect(url_for("dashboard.home"))
     else:
         flash('Confirmed your email. Please login to continue', 'success')
         return redirect(url_for("auth.login"))
+
+
+@auth.route("/auth/resend-confirmation", methods=["GET", "POST"])
+@login_required
+def resend_confirmation():
+    if not REQUIRE_EMAIL_CONFIRMATION:
+        abort(404)
+    if current_user.email_confirmed:
+        return redirect(url_for("dashboard.home"))
+
+    form = SimpleForm()
+    if form.validate_on_submit():
+        if ConfirmEmail(current_user).send():
+            flash("Sent confirmation to {}".format(current_user.email), 'success')
+        return redirect(url_for("dashboard.home"))
+
+    return render_template('auth/resend_confirmation.html', form=form)
+
 
 
 @auth.route("/reauth", methods=["GET", "POST"])

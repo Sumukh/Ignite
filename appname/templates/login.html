@@ -15,12 +15,12 @@
                 {{ form.hidden_tag() }}
                 {{ render_field(form.email) }}
                 {{ render_field(form.password) }}
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
             </form>
             <hr />
-            <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary">Login with OAuth</a>
+            <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary btn-block">Login with OAuth</a>
             &nbsp;
-            <a href="{{ url_for('auth.signup') }}" class="btn btn-primary">Sign Up</a>
+            <a href="{{ url_for('auth.signup') }}" class="btn btn-primary btn-block">Sign Up</a>
 
         </div>
         <div class="col-md-4"></div>

@@ -5,7 +5,7 @@ Must have:
 - [x] User Sign Up
 - [x] Change Password
 - [x] Email Sending
-- [-] User Email Confirmations (Almost done)
+- [x] User Email Confirmations (Almost done)
 - [ ] Reset Password Email
 
 Should Have:
@@ -17,7 +17,7 @@ Later:
 - [ ] Payments via Stripe
 - [ ] Two Factor Auth
 
-Maybe: 
+Maybe:
 - [ ] OAuth Provider
 
 App Features:

@@ -55,3 +55,6 @@ class ChangePasswordForm(BaseForm):
 
 class ResetPasswordForm(BaseForm):
     email = TextField('Email', validators=[validators.email(), validators.required()])
+
+class SimpleForm(BaseForm):
+    pass  # Used for forms that have no input (other than a CSRF check)

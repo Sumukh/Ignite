@@ -47,7 +47,7 @@ def create_app(object_name):
     # initialize SQLAlchemy
     db.init_app(app)
 
-    # initalize Flask Login 
+    # initalize Flask Login
     login_manager.init_app(app)
 
     # initialize Flask-RQ2 (job queue)
@@ -69,7 +69,7 @@ def create_app(object_name):
     app.register_blueprint(api_blueprint, url_prefix='/api')
     app.register_blueprint(oauth_client, url_prefix='/oauth')
 
-    # Admin Tools 
+    # Admin Tools
     app.register_blueprint(jobs, url_prefix='/admin/rq')
     admin.init_app(app)
 
