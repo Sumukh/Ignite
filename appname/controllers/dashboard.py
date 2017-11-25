@@ -3,7 +3,6 @@ from flask_login import login_required, current_user
 from flask import Blueprint, render_template, flash, redirect, url_for, Markup
 
 from appname.constants import REQUIRE_EMAIL_CONFIRMATION
-
 from appname.forms.login import ChangePasswordForm
 from appname.extensions import cache
 

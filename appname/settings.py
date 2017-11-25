@@ -2,11 +2,18 @@ import os
 import tempfile
 
 class Config(object):
-    SECRET_KEY = 'REPLACE ME'  # run flask generate_secret_key
+    SECRET_KEY = 'REPLACE MEasdaappnamesdas#!3de*o0alas'  # run flask generate_secret_key
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     TWITTER_CONSUMER_KEY = 'xBeXxg9lyElUgwZT6AZ0A'
     TWITTER_CONSUMER_SECRET = 'aawnSpNTOVuDCjx7HMh6uSXetjNN8zWLpZwCEU4LBrk'
+
+    MAIL_SERVER = os.getenv('MAIL_SERVER', 'smtp.mailgun.org')
+    MAIL_PORT = os.getenv('MAIL_SERVER_PORT', 2525)
+    MAIL_USERNAME = os.getenv('MAIL_USERNAME', 'postmaster@email.sumukh.me')
+    MAIL_USE_TLS = os.getenv('MAIL_USE_TLS', True)
+    MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
+    MAIL_DEFAULT_SENDER = 'appname <admin@appname.com>'
 
 class ProdConfig(Config):
     ENV = 'prod'
@@ -32,7 +39,7 @@ class DevConfig(Config):
     # Don't do anything fancy with the assets pipeline (faster + easier to debug)
     ASSETS_DEBUG = True
     # Run jobs instantly, without needing to spin up a worker
-    RQ_ASYNC = True 
+    RQ_ASYNC = False
 
 
 class TestConfig(Config):

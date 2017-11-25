@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, flash, request, redirect, url_for, session
-from flask_login import login_user, logout_user
+from flask import Blueprint, render_template, flash, request, redirect, url_for, session, abort
+from flask_login import login_user, logout_user, login_required, current_user
 
-from appname.constants import REQUIRE_EMAIL_CONFIRMATION
+from appname.constants import REQUIRE_EMAIL_CONFIRMATION, EMAIL_CONFIRMATION_SALT
 from appname.forms.login import LoginForm, SignupForm
 from appname.models import db
 from appname.models.user import User
@@ -59,6 +59,49 @@ def signup():
         return redirect(request.args.get("next") or url_for("dashboard.home"))
 
     return render_template("signup.html", form=form)
+
+
+@auth.route("/auth/resend-confirm", methods=["GET", "POST"])
+@login_required
+def resend_confirmation():
+    if not REQUIRE_EMAIL_CONFIRMATION or current_user.email_confirmed:
+        abort(404)
+
+    if request.method == 'POST':
+        ConfirmEmail(current_user).send()
+        flash("Sent confirmation to {}".format(current_user.email), 'success')
+        return redirect(url_for("dashboard.home"))
+
+    return render_template('auth/resend_confirmation.html')
+
+
+@auth.route("/confirm/<string:code>")
+def confirm(code):
+    if not REQUIRE_EMAIL_CONFIRMATION:
+        abort(404)
+
+    try:
+        email = token.decode(code, salt=EMAIL_CONFIRMATION_SALT)
+        print("Return: {}".format(email))
+    except Exception as e:
+        email = None
+    
+    if not email:
+        # TODO: Render a nice error page here.
+        return abort(404)
+
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return abort(404)
+    user.email_confirmed = True
+    db.session.commit()
+
+    if current_user == user:
+        flash('Succesfully confirmed your email', 'success')      
+        return redirect(url_for("dashboard.home"))
+    else:
+        flash('Confirmed your email. Please login to continue', 'success')
+        return redirect(url_for("auth.login"))
 
 
 @auth.route("/reauth", methods=["GET", "POST"])
