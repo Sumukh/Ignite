@@ -15,6 +15,7 @@ from flask_limiter.util import get_remote_address
 
 from appname.admin import AdminDashboard
 from appname.security import Token
+from appname.stripe_extension import Stripe
 
 # Setup flask cache
 cache = Cache()
@@ -43,4 +44,4 @@ rq2 = RQ()
 admin = AdminDashboard()
 mail = Mail()
 limiter = Limiter(key_func=get_remote_address)
-
+stripe = Stripe()

@@ -52,6 +52,9 @@ rq-dashboard==0.3.10
 oauthlib==2.0.6
 Flask-OAuthlib==0.9.4
 
+# Billing
+stripe
+
 # Other
 itsdangerous==0.24
 cssmin==0.2.0

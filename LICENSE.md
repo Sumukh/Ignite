@@ -1,6 +1,6 @@
 Copyright (c) Sumukh Sridhara. All rights reserved. No warranty of any form is provided.
 
-
+You may use this in commericial projects only with explicit permission of the creator (Sumukh Sridhara).
 
 Underlying Libraries
 -------------------

@@ -9,6 +9,7 @@ from appname.api.resources import api_blueprint
 from appname.controllers.main import main
 from appname.controllers.auth import auth
 from appname.controllers.dashboard import dashboard
+from appname.controllers.store import store
 from appname.controllers.oauth.client import oauth_client
 from appname.controllers.admin.jobs import jobs
 
@@ -22,6 +23,7 @@ from appname.extensions import (
     mail,
     rq2,
     socketio,
+    stripe,
     token
 )
 
@@ -57,6 +59,7 @@ def create_app(object_name):
     token.init_app(app)
     mail.init_app(app)
     limiter.init_app(app)
+    stripe.init_app(app)
 
     # Import and register the different asset bundles
     assets_env.init_app(app)
@@ -68,6 +71,7 @@ def create_app(object_name):
     app.register_blueprint(main)
     app.register_blueprint(auth)
     app.register_blueprint(dashboard)
+    app.register_blueprint(store)
     app.register_blueprint(api_blueprint, url_prefix='/api')
     app.register_blueprint(oauth_client, url_prefix='/oauth')
 

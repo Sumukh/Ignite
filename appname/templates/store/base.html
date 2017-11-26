@@ -1,10 +1,10 @@
-{% from "helpers/_flashes.html" import render_flashes %}
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
     <head>
         <title>{% block title %}{% endblock %}</title>
         <meta charset="utf-8">
@@ -20,6 +20,10 @@
             <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
         {% endassets %}
 
+        {% assets "store_css" %}
+            <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+        {% endassets %}
+
         {% block css %}
         {% endblock %}
 
@@ -29,17 +33,18 @@
 
     </head>
 
-    <body>
+<body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="{{ url_for('main.home') }}">My App</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-            {% if current_user.is_authenticated %}
+                {% if current_user.is_authenticated %}
                 <li class="nav-item {{ 'active' if request.endpoint == 'dashboard.home' }}">
                     <a class="nav-link" href="{{ url_for('dashboard.home') }}">Home</a>
                 </li>
@@ -49,7 +54,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
                 </li>
-            {% else %}
+                {% else %}
                 <li class="nav-item {{ 'active' if request.endpoint == 'main.home' }}">
                     <a class="nav-link" href="{{ url_for('main.home') }}">Home</a>
                 </li>
@@ -59,8 +64,8 @@
                 <li class="nav-item {{ 'active' if request.endpoint == 'auth.signup' }}">
                     <a class="nav-link" href="{{ url_for('auth.signup') }}">Signup</a>
                 </li>
-            {% endif %}
-            </li>
+                {% endif %}
+                </li>
 
             </ul>
 
@@ -72,17 +77,11 @@
     </nav>
 
 
-        <div class="container root-container">
-            {{ render_flashes() }}
-            {% block body %}
-            {% endblock %}
-        </div>
+    {% block body %}
+    {% endblock %}
 
-        {% assets "common_js" %}
-            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-        {% endassets %}
+    {% assets "common_js" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script> {% endassets %} {% block js %} {% endblock %}
+</body>
 
-        {% block js %}
-        {% endblock %}
-    </body>
 </html>

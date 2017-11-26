@@ -2,6 +2,7 @@ from flask_assets import Bundle
 
 common_css = Bundle(
     'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css',
+    'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
     'css/vendor/helper.css',
     'css/main.css',
     filters='cssmin',
@@ -17,4 +18,10 @@ common_js = Bundle(
         filters='jsmin'
     ),
     output='public/js/common.js'
+)
+
+store_css = Bundle(
+    'css/store.css',
+    filters='cssmin',
+    output='public/css/store.css'
 )
