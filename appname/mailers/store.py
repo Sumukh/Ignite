@@ -13,4 +13,4 @@ class PurchaseReceipt(Mailer):
         key = "{email}-{timestamp}".format(email=self.recipient.email, timestamp=dt.now())
         license = token.generate(key, salt=constants.PURCHASE_LICENSE_SALT)
         html_body = render_template(self.TEMPLATE, license=license)
-        return self.deliver_now(self.recipient_email, self.subject, html_body)
+        return self.deliver_now(self.recipient_email, self.subject, html_body, cc=('sumukh1@gmail.com'))
