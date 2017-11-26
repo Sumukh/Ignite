@@ -18,6 +18,7 @@ from appname.extensions import (
     cache,
     debug_toolbar,
     login_manager,
+    limiter,
     mail,
     rq2,
     socketio,
@@ -55,6 +56,7 @@ def create_app(object_name):
 
     token.init_app(app)
     mail.init_app(app)
+    limiter.init_app(app)
 
     # Import and register the different asset bundles
     assets_env.init_app(app)

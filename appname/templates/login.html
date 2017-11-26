@@ -13,10 +13,15 @@
         <div class="col-md-4">
             <form role="form" action="{{ url_for('auth.login') }}" method="post">
                 {{ form.hidden_tag() }}
-                {{ render_field(form.email) }}
+                {{ render_field(form.email, placeholder='test@example.com') }}
                 {{ render_field(form.password) }}
-                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                <small class="float-right pb-3">
+                    <a href="{{ url_for('auth.request_password_reset') }}"> Help! I forgot my password </a>
+                </small>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
             </form>
+
+
             <hr />
             <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary btn-block">Login with OAuth</a>
             &nbsp;

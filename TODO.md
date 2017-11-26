@@ -6,11 +6,11 @@ Must have:
 - [x] Change Password
 - [x] Email Sending
 - [x] User Email Confirmations (Almost done)
-- [ ] Reset Password Email
+- [-] Reset Password Email
 
 Should Have:
 
-- [x] Jobs (Not Like OK Jobs)
+- [x] Delayed Jobs
 
 Later:
 

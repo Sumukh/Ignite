@@ -10,6 +10,8 @@ from flask_assets import Environment
 from flask_socketio import SocketIO
 from flask_rq2 import RQ
 from flask_mail import Mail
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 from appname.admin import AdminDashboard
 from appname.security import Token
@@ -40,4 +42,5 @@ socketio = SocketIO()
 rq2 = RQ()
 admin = AdminDashboard()
 mail = Mail()
+limiter = Limiter(key_func=get_remote_address)
 

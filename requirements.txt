@@ -18,6 +18,7 @@ Flask-RESTful==0.3.6
 Flask-Testing>=0.6.2,<1.0
 Flask-SocketIO # Realtime Websockets
 Flask-Mail
+Flask-Limiter
 
 # Admin
 Flask-Admin

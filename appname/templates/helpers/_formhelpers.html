@@ -6,6 +6,6 @@
                 <p class="help-block text-danger">{{ e }}</p>
             {% endfor %}
         {% endif %}
-        {{ field(class_=class) | safe }}
+        {{ field(class_=class, **kwargs) | safe }}
     </div>
 {% endmacro %}

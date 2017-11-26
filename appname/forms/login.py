@@ -53,7 +53,7 @@ class ChangePasswordForm(BaseForm):
                                                      validators.EqualTo('confirm', message='Passwords must match')])
     confirm  = PasswordField('Repeat Password')
 
-class ResetPasswordForm(BaseForm):
+class RequestPasswordResetForm(BaseForm):
     email = TextField('Email', validators=[validators.email(), validators.required()])
 
 class SimpleForm(BaseForm):
