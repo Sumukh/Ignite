@@ -10,7 +10,7 @@ Flask-Assets>=0.12,<0.12.99
 https://github.com/okpy/webassets/archive/978b8063ce80c7f91c6bf080872dafe4eecf2454.zip
 
 Flask-Caching>=1.3.3
-Flask-Login==0.4.0
+Flask-Login==0.4.1
 Flask-DebugToolbar==0.10.1
 Flask-Script==2.0.6
 Flask-WTF==0.14.2
