@@ -1,0 +1,22 @@
+{% extends "email/base.html" %}
+
+{% block body %}
+<h3> Confirm your email address on appname </h3>
+
+<p>Click the button below to confirm your email address</p>
+
+<!-- button -->
+<a href="{{link}}">
+    <table class="btn-primary" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td>
+                <a>Confirm your email</a>
+            </td>
+        </tr>
+    </table>
+</a>
+<!-- /button -->
+
+<p class="small">Or copy and paste this address into your browser: {{link}}</p>
+
+{% endblock %}

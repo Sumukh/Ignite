@@ -1,0 +1,33 @@
+.root-container {
+    margin-top: 20px;
+}
+
+
+header.masthead {
+  position: relative;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+header.masthead h1 {
+    font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+    header.masthead {
+      padding-top: 8rem;
+      padding-bottom: 8rem;
+    }
+      header.masthead h1 {
+        font-size: 3rem;
+    }
+}
+
+
+.footer {
+    bottom: 0px;
+}

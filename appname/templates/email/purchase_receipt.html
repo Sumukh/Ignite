@@ -1,0 +1,23 @@
+{% extends "email/base.html" %} {% block body %}
+<h3> Ignite Premium </h3>
+
+<p> Thanks for your purchase of Ignite. We will follow up within 3 days with a link to the souce code</p>
+
+<p> Your license code is <pre>{{ license }}</pre> </p>
+
+<p>The terms of the license are included below</p>
+
+<p> A license grants you a non-exclusive and non-transferable right to use and incorporate the item in your commercial
+projects.</p>
+
+<ol>
+    <li>Your use of the item is restricted to a single application.</li>
+    <li>You may use the item in work which you are creating for your own purposes or for your client.</li>
+    <li>You must not incorporate the item in a work which is created for redistribution or resale by you or your client.</li>
+    <li>The item may not be redistributed or resold.</li>
+    <li>You are subject to the licenses for sub-components (such as Bootstrap) used within the project.</li>
+</ol>
+
+<p>Thanks again</p>
+
+{% endblock %}

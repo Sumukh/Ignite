@@ -1,0 +1,14 @@
+{
+    "python.pythonPath": "${workspaceRoot}/env/bin/python",
+    "python.unitTest.pyTestArgs": [
+        "."
+    ],
+    "python.unitTest.pyTestEnabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.formatting.formatOnSave": true,
+    "python.formatting.autopep8Args": [
+        "--ignore=E302,E123,E133,E226,E241,E242",
+        "--aggressive"
+    ]
+}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <h3> Welcome {{ current_user.email }}</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p> Your app's content goes here </p>
+        </div>
+    </div>
+{% endblock %}

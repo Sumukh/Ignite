@@ -1,0 +1,89 @@
+{% extends "store/base.html" %}
+{% from "helpers/_flashes.html" import render_flashes %}
+
+{% block title %}Purchase Ignite{% endblock %}
+
+{% block head_js %}
+    <script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+
+{% block body %}
+<header class="bg-primary text-white hero-header">
+    <div class="container text-center hero-text">
+        <h4>Purchase Ignite Starter Code</h4>
+        <p>Limited time only: 50% off sale</p>
+    </div>
+</header>
+
+
+<div class="root-container container">
+     {{ render_flashes() }}
+
+    <div class="row">
+    <div class="col-md-5">
+        <div class="card" style="width: 20rem;">
+            <div class="card-header">
+                Ignite Starter Code
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">
+                    <span class="old-sale-text">$100.00</span>
+                    <span class="new-sale-text">$49.99</span>
+                </h4>
+                <p class="card-text text-green">Includes the following features:</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <i class="fa fa-check icon-green" aria-hidden="true"></i>
+                    User Registration Features
+                </li>
+                <li class="list-group-item">
+                    <i class="fa fa-check icon-green" aria-hidden="true"></i>
+                    Social OAuth Login
+                </li>
+                <li class="list-group-item">
+                    <i class="fa fa-check icon-green" aria-hidden="true"></i>
+                    Send Email, Job Queues
+                </li>
+                <li class="list-group-item">
+                    <i class="fa fa-check icon-green" aria-hidden="true"></i>
+                    Purchase Products with Stripe
+                </li>
+                <li class="list-group-item">
+                    <i class="fa fa-check icon-green" aria-hidden="true"></i>
+                    Single Use Commercial License
+                </li>
+            </ul>
+            <div class="card-body">
+                Money Back Guarantee
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-7">
+        <h2> Starter Pack </h2>
+
+        <p> Save days of writing boilerplate code by letting Ignite take care of the basics. </p>
+
+        <form action="/store/payment" method="POST" class="stripe-checkout">
+            <script src="https://checkout.stripe.com/checkout.js"
+                class="stripe-button"
+                data-key="{{ stripe_publishable_key }}" data-amount="4999"
+                data-name="Ignite"
+                data-description="Ignite Starter Code"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-locale="auto"
+                data-currency="usd"
+                data-bitcoin="true"
+                data-zip-code="true">
+                </script>
+                <button type="submit" class="btn btn-primary btn-block"> Purchase with Credit Card ($49.99) </button>
+        </form>
+
+    </div>
+</div>
+</div>
+
+
+{% endblock %}

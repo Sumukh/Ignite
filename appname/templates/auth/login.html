@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% from "helpers/_formhelpers.html" import render_field %}
+
+{% block title %}appname Login Example{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">appname Login Example</h1>
+
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+
+        <div class="col-md-4">
+            <form role="form" action="{{ url_for('auth.login') }}" method="post">
+                {{ form.hidden_tag() }}
+                {{ render_field(form.email, placeholder='test@example.com') }}
+                {{ render_field(form.password, placeholder='Password') }}
+                <small class="float-right pb-3">
+                    <a href="{{ url_for('auth.request_password_reset') }}"> Help! I forgot my password </a>
+                </small>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+
+            <hr />
+            <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary btn-block">Login with OAuth</a>
+            &nbsp;
+            <a href="{{ url_for('auth.signup') }}" class="btn btn-primary btn-block">Sign Up</a>
+
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+{% endblock %}
