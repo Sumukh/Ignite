@@ -4,6 +4,7 @@ from flask import Flask, render_template, request
 from webassets.loaders import PythonLoader as PythonAssetsLoader
 
 from appname import assets
+from appname import constants
 from appname.models import db
 from appname.api.resources import api_blueprint
 from appname.controllers.main import main
@@ -86,7 +87,8 @@ def create_app(object_name):
     # Set some globals for Jinja templating
     app.jinja_env.globals.update({
         'utils': utils,
-        'debug': app.debug
+        'debug': app.debug,
+        'constants': constants,
     })
 
     # register our blueprints

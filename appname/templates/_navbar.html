@@ -32,12 +32,14 @@
                 <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
             </li>
             {% else %}
-            <li class="nav-item {{ 'active' if request.endpoint == 'auth.login' }}">
-                <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-            </li>
-            <li class="nav-item {{ 'active' if request.endpoint == 'auth.signup' }}">
-                <a class="nav-link" href="{{ url_for('auth.signup') }}">Signup</a>
-            </li>
+                <li class="nav-item {{ 'active' if request.endpoint == 'auth.login' }}">
+                    <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                </li>
+                {% if constants.ALLOW_SIGNUPS %}
+                    <li class="nav-item {{ 'active' if request.endpoint == 'auth.signup' }}">
+                        <a class="nav-link" href="{{ url_for('auth.signup') }}">Signup</a>
+                    </li>
+                {% endif %}
             {% endif %}
         </ul>
     </div>
