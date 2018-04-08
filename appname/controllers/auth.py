@@ -38,6 +38,9 @@ def login():
 
 @auth.route("/signup", methods=["GET", "POST"])
 def signup():
+    if not constants.ALLOW_SIGNUPS:
+        return abort(404)
+
     form = SignupForm()
 
     if form.validate_on_submit():
