@@ -47,7 +47,7 @@ redis==2.10.6
 # Job Queue
 Flask-RQ2==18.0
 rq==0.10.0
-rq-dashboard==0.3.10
+rq-dashboard==0.3.11
 
 # OAuth
 oauthlib==2.0.7
