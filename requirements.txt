@@ -1,4 +1,4 @@
-Flask==0.12.2
+Flask==1.0.2
 jinja2==2.10
 
 requests==2.18.4
