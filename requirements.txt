@@ -50,7 +50,7 @@ rq==0.11.0
 rq-dashboard==0.3.11
 
 # OAuth
-oauthlib==2.0.7
+oauthlib==2.1.0
 Flask-OAuthlib==0.9.4
 
 # Billing
