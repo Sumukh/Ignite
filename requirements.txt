@@ -51,7 +51,7 @@ rq-dashboard==0.3.11
 
 # OAuth
 oauthlib==2.1.0
-Flask-OAuthlib==0.9.4
+Flask-OAuthlib==0.9.5
 
 # Billing
 stripe
