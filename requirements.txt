@@ -67,7 +67,7 @@ hashids==1.2.0
 humanize==0.5.1
 
 # Testing
-pytest==3.6.0
+pytest==3.6.1
 pytest-cov==2.5.1
 mccabe==0.6.1
 flake8==3.5.0
