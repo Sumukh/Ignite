@@ -15,3 +15,8 @@ def home():
 @cache.cached(timeout=1000, unless=lambda: current_user.is_authenticated)
 def beta():
     return "Coming Soon", 200
+
+
+@main.route('/tabler')
+def tabler():
+    return render_template('tabler/sample.html')

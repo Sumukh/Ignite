@@ -24,3 +24,17 @@ store_css = Bundle(
     filters='cssmin',
     output='public/css/store.css'
 )
+
+tabler_css = Bundle(
+    'css/vendor/tabler/tabler.css',
+    'css/vendor/tabler/dashboard.css',
+    filters='cssmin',
+    output='public/css/tabler.css'
+)
+
+# We don't use Flask Assets for Tabler Js
+
+tabler_js = Bundle(
+    'public/tabler/js/require.min.js',
+    output='public/js/tabler.js'
+)
