@@ -24,7 +24,7 @@ Flask-Limiter
 Flask-Admin
 
 # Database
-pymysql==0.8.1
+pymysql==0.9.2
 psycopg2
 sqlalchemy==1.2.8
 sqlalchemy-utils # Provides extra datatypes
