@@ -7,7 +7,7 @@ gunicorn
 # Flask Extensions
 Flask-Assets>=0.12,<0.12.99
 # Branch that contains a Unicode bug fix - use until https://github.com/miracle2k/webassets/pull/482 is published
-https://github.com/sumukh/webassets/archive/master.zip
+https://github.com/miracle2k/webassets/archive/master.zip
 
 Flask-Caching>=1.3.3
 Flask-Login==0.4.1
