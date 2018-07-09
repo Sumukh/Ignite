@@ -26,15 +26,30 @@ store_css = Bundle(
 )
 
 tabler_css = Bundle(
-    'css/vendor/tabler/tabler.css',
-    'css/vendor/tabler/dashboard.css',
+    'tabler/css/tabler.css',
+    'tabler/css/dashboard.css',
     filters='cssmin',
     output='public/css/tabler.css'
 )
 
-# We don't use Flask Assets for Tabler Js
-
 tabler_js = Bundle(
-    'public/tabler/js/require.min.js',
+    Bundle(
+        'tabler/js/vendors/jquery-3.2.1.min.js',
+        'tabler/js/vendors/bootstrap.bundle.min.js',
+        'tabler/js/vendors/circle-progress.min.js',
+        'tabler/js/vendors/selectize.min.js',
+        'tabler/js/vendors/jquery.tablesorter.min.js',
+    ),
+    'tabler/js/core.js',
     output='public/js/tabler.js'
+)
+
+tabler_plugins_js = Bundle(
+    'tabler/js/vendors/chart.bundle.min.js',
+    'tabler/js/vendors/jquery.sparkline.min.js',
+    'tabler/js/vendors/jquery.jvector-map-2.0.3.min.js',
+    'tabler/js/vendors/jquery.jvector-map-de-merc.min.js',
+    'tabler/js/vendors/jquery.jvector-map-world-mill.min.js',
+    # Other Plugins as needed.
+    output='public/js/tabler-plugins.js'
 )

@@ -28,12 +28,6 @@
         {% assets "tabler_js" %}
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}
-        <script>
-            requirejs.config({
-                baseUrl: '..'
-            });
-        </script>
-        <script src="/static/public/tabler/js/dashboard.js"></script>
 
         {% block head_js %}
             <!-- Pageblocking scripts should go here. Other scripts should go in the `js` block. -->
