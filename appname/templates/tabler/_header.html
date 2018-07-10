@@ -1,0 +1,44 @@
+<div class="header py-4">
+    <div class="container">
+        <div class="d-flex">
+        <a class="header-brand" href="{{ url_for('main.home') }}">
+            <img src="https://tabler.github.io/tabler/demo/brand/tabler.svg" class="header-brand-img" alt="tabler logo">
+        </a>
+        <div class="d-flex order-lg-2 ml-auto">
+            <div class="nav-item d-none d-md-flex">
+                <a href="#" class="btn btn-sm btn-outline-primary" target="_blank">Get help</a>
+            </div>
+            <div class="dropdown">
+                {% if current_user.is_authenticated %}
+                    <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
+                        <span class="avatar avatar-placeholder"></span>
+                        <span class="ml-2 d-none d-lg-block">
+                        <span class="text-default">{{ current_user.email }}</span>
+                        <small class="text-muted d-block mt-1">Administrator</small>
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                        <a href="{{ url_for('dashboard.settings') }}" class="dropdown-item  {{ 'active' if request.endpoint == 'dashboard.settings' }}">
+                            <i class="dropdown-icon fe fe-settings"></i> Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">
+                            <i class="dropdown-icon fe fe-help-circle"></i> Need help?
+                        </a>
+                        <a class="dropdown-item" href="{{ url_for('auth.logout') }}">
+                            <i class="dropdown-icon fe fe-log-out"></i> Sign out
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="nav-item d-none d-md-flex">
+                        <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
+            <span class="header-toggler-icon"></span>
+        </a>
+        </div>
+    </div>
+</div>

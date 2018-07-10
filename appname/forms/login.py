@@ -57,7 +57,8 @@ class ChangePasswordForm(BaseForm):
     confirm = PasswordField('Repeat Password')
 
 class RequestPasswordResetForm(BaseForm):
-    email = TextField('Email', validators=[validators.email(), validators.required()])
+    email = TextField('Email', validators=[validators.email(), validators.required()],
+                               description="Enter the email you used")
 
 class SimpleForm(BaseForm):
     pass  # Used for forms that have no input (other than a CSRF check)
