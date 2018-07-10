@@ -1,32 +1,42 @@
-{% extends "base.html" %}
+{% extends "tabler/base.html" %}
 {% from "helpers/_formhelpers.html" import render_field %}
 
 {% block title %}appname Login Example{% endblock %}
 
 {% block body %}
-    <h1 class="text-center">appname Login Example</h1>
+<div class="page-single">
+    <div class="container">
+        <div class="row">
+            <div class="col col-login mx-auto">
+                <div class="text-center mb-6">
+                    <img src="{{ url_for('static', filename='public/images/flags/us.svg') }}" class="h-6" alt="Tabler">
+                    <h2> appname </h2>
+                </div>
+                <form role="form" class="card" action="{{ url_for('auth.login') }}" method="post">
 
-    <div class="row">
-        <div class="col-md-4">
+                    <div class="card-body p-6">
+                        <div class="card-title">Login to your account</div>
+                        {{ form.hidden_tag() }}
+                        {{ render_field(form.email, placeholder='test@example.com') }}
+                        {{ render_field(form.password, placeholder='Password') }}
+                        <small class="float-right mb-2">
+                            <a href="{{ url_for('auth.request_password_reset') }}"> Help! I forgot my password </a>
+                        </small>
+                        <div class="form-footer">
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-4">
+                        <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary btn-block">Login with OAuth</a>
+                    </div>
+                    <div class="text-center text-muted mt-3">
+                        Don't have account yet? <a href="{{ url_for('auth.signup') }}" class="btn btn-primary btn-block">Sign Up</a>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="col-md-4">
-            <form role="form" action="{{ url_for('auth.login') }}" method="post">
-                {{ form.hidden_tag() }}
-                {{ render_field(form.email, placeholder='test@example.com') }}
-                {{ render_field(form.password, placeholder='Password') }}
-                <small class="float-right pb-3">
-                    <a href="{{ url_for('auth.request_password_reset') }}"> Help! I forgot my password </a>
-                </small>
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
-            </form>
-
-            <hr />
-            <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary btn-block">Login with OAuth</a>
-            &nbsp;
-            <a href="{{ url_for('auth.signup') }}" class="btn btn-primary btn-block">Sign Up</a>
-
-        </div>
-        <div class="col-md-4"></div>
     </div>
+</div>
+{% include 'tabler/_footer.html' with context %}
+
 {% endblock %}

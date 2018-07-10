@@ -1,28 +1,40 @@
-{% extends "base.html" %}
+{% extends "tabler/base.html" %}
 {% from "helpers/_formhelpers.html" import render_field %}
 
-{% block title %}Settings{% endblock %}
+{% block title %}appname settings{% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                 Change Password
+<div class="page-main">
+    {% include 'tabler/_header.html' with context %}
+    {% include 'tabler/_navbar.html' with context %}
+
+    <div class="my-3 my-md-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Change Password</h3>
+                        </div>
+                        <form role="form" action="{{ url_for('dashboard.change_password') }}" method="post">
+                            <div class="card-body">
+                                {{ form.hidden_tag() }}
+                                {{ render_field(form.password) }}
+                                {{ render_field(form.confirm) }}
+                            </div>
+                            <div class="card-footer text-left">
+                                <div class="d-flex">
+                                    <button type="submit" class="btn btn-primary">Change</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <h4 class="card-title">Change your account password</h4>
-                <form role="form" action="{{ url_for('dashboard.change_password') }}" method="post">
-                    {{ form.hidden_tag() }}
-                    {{ render_field(form.password) }}
-                    {{ render_field(form.confirm) }}
-                    <button type="submit" class="btn btn-primary">Change</button>
-                </form>
-
-            </div>
-        </div>
-
-
         </div>
     </div>
+</div>
+
+{% include 'tabler/_footer.html' with context %}
+
 {% endblock %}

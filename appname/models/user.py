@@ -15,11 +15,13 @@ class User(Model, UserMixin):
     role = db.Column(db.String(), default='user')
     email_confirmed = db.Column(db.Boolean())
 
-    def __init__(self, email=None, password=None, admin=False):
+    def __init__(self, email=None, password=None, admin=False, email_confirmed=False):
         if not email:
             raise ValueError('No Email Provided')
 
         self.email = email.lower().strip()
+        self.email_confirmed = email_confirmed
+
         if admin:
             self.admin = True
             self.role = 'admin'  # TODO: Clean this up
