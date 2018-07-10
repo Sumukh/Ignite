@@ -1,28 +1,35 @@
-{% extends "base.html" %}
+{% extends "tabler/base.html" %}
 {% from "helpers/_formhelpers.html" import render_field %}
 
 {% block title %}appname Signup{% endblock %}
 
 {% block body %}
-    <h1 class="text-center">Signup for appname</h1>
+<div class="page-single">
+    <div class="container">
+        <div class="row">
+            <div class="col col-login mx-auto">
+                <div class="text-center mb-6">
+                    <img src="{{ url_for('static', filename='public/images/flags/us.svg') }}" class="h-6" alt="Tabler">
+                    <h2> appname </h2>
+                </div>
+                <form role="form" class="card" action="{{ url_for('auth.signup') }}" method="post">
 
-    <div class="row">
-        <div class="col-md-4">
+                    <div class="card-body p-6">
+                        <div class="card-title">Sign up for appname</div>
+                        {{ form.hidden_tag() }}
+                        {{ render_field(form.email) }}
+                        {{ render_field(form.password) }}
+                        {{ render_field(form.confirm) }}
+
+                        <div class="form-footer">
+                            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div class="col-md-4">
-            <form role="form" action="{{ url_for('auth.signup') }}" method="post">
-                {{ form.hidden_tag() }}
-
-                {{ render_field(form.email) }}
-                {{ render_field(form.password) }}
-                {{ render_field(form.confirm) }}
-
-                <button type="submit" class="btn btn-primary">Sign Up</button>
-            </form>
-
-        </div>
-
-        <div class="col-md-4"></div>
     </div>
+</div>
+{% include 'tabler/_footer.html' with context %}
+
 {% endblock %}

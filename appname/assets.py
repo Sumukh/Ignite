@@ -44,12 +44,20 @@ tabler_js = Bundle(
     output='public/js/tabler.js'
 )
 
+tabler_plugins_css = Bundle(
+    'tabler/js/plugins/charts-c3/plugin.css',
+    output='public/css/tabler-plugins.css'
+)
+
 tabler_plugins_js = Bundle(
     'tabler/js/vendors/chart.bundle.min.js',
     'tabler/js/vendors/jquery.sparkline.min.js',
     'tabler/js/vendors/jquery.jvector-map-2.0.3.min.js',
     'tabler/js/vendors/jquery.jvector-map-de-merc.min.js',
     'tabler/js/vendors/jquery.jvector-map-world-mill.min.js',
+    'tabler/js/plugins/charts-c3/js/d3.v3.min.js',
+    'tabler/js/plugins/charts-c3/js/c3.min.js',
+    'tabler/js/plugins/input-mask/js/jquery.mask.min.js',
     # Other Plugins as needed.
     output='public/js/tabler-plugins.js'
 )
