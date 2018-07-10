@@ -75,32 +75,28 @@ $(document).ready(function () {
             });
         };
 
-        require(['sparkline'], function () {
-            $('[data-sparkline]').each(function () {
-                let $chart = $(this);
+        $('[data-sparkline]').each(function () {
+            let $chart = $(this);
 
-                generateSparkline($chart, JSON.parse($chart.attr('data-sparkline')), {
-                    color: $chart.attr('data-sparkline-color')
-                });
+            generateSparkline($chart, JSON.parse($chart.attr('data-sparkline')), {
+                color: $chart.attr('data-sparkline-color')
             });
         });
     }
 
     /**  */
     if ($('.chart-circle').length) {
-        require(['circle-progress'], function () {
-            $('.chart-circle').each(function () {
-                let $this = $(this);
+        $('.chart-circle').each(function () {
+            let $this = $(this);
 
-                $this.circleProgress({
-                    fill: {
-                        color: tabler.colors[$this.attr('data-color')] || tabler.colors.blue
-                    },
-                    size: $this.height(),
-                    startAngle: -Math.PI / 4 * 2,
-                    emptyFill: '#F4F4F4',
-                    lineCap: 'round'
-                });
+            $this.circleProgress({
+                fill: {
+                    color: tabler.colors[$this.attr('data-color')] || tabler.colors.blue
+                },
+                size: $this.height(),
+                startAngle: -Math.PI / 4 * 2,
+                emptyFill: '#F4F4F4',
+                lineCap: 'round'
             });
         });
     }

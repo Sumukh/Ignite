@@ -17,6 +17,6 @@ def beta():
     return "Coming Soon", 200
 
 
-@main.route('/tabler')
-def tabler():
+@main.route('/demo')
+def demo():
     return render_template('tabler/sample.html')

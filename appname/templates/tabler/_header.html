@@ -8,8 +8,8 @@
             <div class="nav-item d-none d-md-flex">
                 <a href="#" class="btn btn-sm btn-outline-primary" target="_blank">Get help</a>
             </div>
-            <div class="dropdown">
-                {% if current_user.is_authenticated %}
+            {% if current_user.is_authenticated %}
+                <div class="dropdown">
                     <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
                         <span class="avatar avatar-placeholder"></span>
                         <span class="ml-2 d-none d-lg-block">
@@ -29,12 +29,12 @@
                             <i class="dropdown-icon fe fe-log-out"></i> Sign out
                         </a>
                     </div>
-                {% else %}
-                    <div class="nav-item d-none d-md-flex">
-                        <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-                    </div>
-                {% endif %}
+                </div>
+            {% else %}
+            <div class="nav-item d-none d-md-flex">
+                <a class="btn btn-sm btn-outline-primary" href="{{ url_for('auth.login') }}">Login</a>
             </div>
+            {% endif %}
         </div>
         <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
             <span class="header-toggler-icon"></span>
