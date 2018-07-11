@@ -6,7 +6,7 @@
             "type": "python",
             "request": "launch",
             "stopOnEntry": false,
-            "pythonPath": "${config:python.pythonPath}",
+            "pythonPath": "${workspaceFolder}/env/bin/python",
             "module": "flask.cli",
             "cwd": "${workspaceRoot}",
             "env": {

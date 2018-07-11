@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "${workspaceRoot}/env/bin/python",
+    "python.pythonPath": "${workspaceFolder}/env/bin/python",
     "python.unitTest.pyTestArgs": [
         "."
     ],

@@ -3,7 +3,7 @@ import pytest
 from appname.models import db
 from appname.models.user import User
 
-create_user = False
+create_user = True
 
 @pytest.mark.usefixtures("testapp")
 class TestModels:
@@ -26,3 +26,10 @@ class TestModels:
         assert admin.email == 'admin@example.com'
         assert admin.check_password('supersafepassword')
         assert admin.is_admin
+
+    def test_user_group_creation (self, testapp):
+        """ Test that creating a user, creates a group & a membership """
+        user = User('user@example.com', 'supersafepassword')
+        db.session.add(user)
+        db.session.commit()
+        assert len(user.memberships) == 1
