@@ -1,3 +1,5 @@
+import functools
+
 from flask_sqlalchemy import SQLAlchemy, BaseQuery
 from sqlalchemy import MetaData
 
@@ -96,3 +98,16 @@ class ModelProxy:
 
 
 ModelProxy = ModelProxy()
+
+def transaction(f):
+    """ Decorator for database (session) transactions."""
+    @functools.wraps(f)
+    def wrapper(*args, **kwds):
+        try:
+            value = f(*args, **kwds)
+            db.session.commit()
+            return value
+        except:
+            db.session.rollback()
+            raise
+    return wrapper

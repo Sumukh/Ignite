@@ -4,6 +4,7 @@ from flask_login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from appname.models import db, Model
+from appname.models.teams import Team
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +16,8 @@ class User(Model, UserMixin):
     role = db.Column(db.String(), default='user')
     email_confirmed = db.Column(db.Boolean())
 
-    def __init__(self, email=None, password=None, admin=False, email_confirmed=False):
+    def __init__(self, email=None, password=None, admin=False,
+                 email_confirmed=False, team=None):
         if not email:
             raise ValueError('No Email Provided')
 
@@ -28,6 +30,10 @@ class User(Model, UserMixin):
 
         if password:
             self.set_password(password)
+
+        if not team:
+            team_name = "{0}'s team".format(email)
+            Team.create(team_name, self)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -52,6 +58,10 @@ class User(Model, UserMixin):
 
     def get_id(self):
         return self.id
+
+    @property
+    def team_memberships(self):
+        return [member for member in self.memberships if member.activated == True]
 
     def __repr__(self):
         return '<User {0}>'.format(self.email)

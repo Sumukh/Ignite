@@ -33,7 +33,9 @@ def initdb():
 
 @app.cli.command()
 def resetdb():
-    """ Drops the tables. """
+    """ Drops the tables.
+        In dev: loads seed data
+    """
     if env != 'dev':
         confirm = input("Are you sure you want to run this on {}?".format(env))
         if confirm.lower().strip() != 'yes':
@@ -41,6 +43,15 @@ def resetdb():
     click.echo('Resets the db')
     db.drop_all()
     db.create_all()
+    if env == 'dev':
+        # TODO: Better seed function
+        default_user = User("user@example.com", "test", admin=False)
+        db.session.add(default_user)
+        click.echo("Added user@example.com")
+        admin = User("admin@example.com", "admin", admin=True, email_confirmed=True)
+        db.session.add(admin)
+        click.echo("Added admin@example.com")
+        db.session.commit()
 
 @app.cli.command()
 def clear_cache():
@@ -58,15 +69,9 @@ def generate_session_key():
     click.echo(binascii.hexlify(os.urandom(26)))
 
 @app.cli.command()
-def add_default_users():
+def seed_data():
     """ Create test users. """
-    default_user = User("user@example.com", "test", admin=False)
-    db.session.add(default_user)
-    click.echo("Added user@example.com")
-    admin = User("admin@example.com", "admin", admin=True, email_confirmed=True)
-    db.session.add(admin)
-    click.echo("Added admin@example.com")
-    db.session.commit()
+    print("TODO")
 
 @app.cli.command()
 @click.option('--coverage/--no-coverage', default=False, help='Enable code coverage')
