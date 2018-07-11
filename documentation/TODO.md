@@ -1,27 +1,30 @@
-Must have:
+Core Functionality:
 
 - [x] API
-- [x] User View
 - [x] User Sign Up
 - [x] Login via OAuth (Google|Facebook|Etc)
 - [x] Change Password
 - [x] Email Sending
 - [x] User Email Confirmations
 - [x] Reset Password Email
+- [x] User Dashboard
 - [x] Admin View
-
-Should Have:
-
-- [x] Delayed Jobs
+- [x] Good UI Template
+- [x] Basic Test Suite
+- [x] Delayed Jobs/Work Queue
 - [x] Migrations
-- [-] Documentation
+- [x] Team Memberships
 
-Later:
+Currently Working On
+- [-] Team Membership Invites/Management
+- [-] Recurring SaaS Billing
+- [-] Better Documentation
+- [-] GDPR Features
 
-- [x] Payments via Stripe
-- [ ] Repeating Subscriptions (SaaS)
+Nice to haves:
+- [x] VSCode Debugger Integration
+- [x] One off payments via Stripe
+- [ ] Two Factor Auth
 
 Maybe:
-
-- [ ] OAuth Provider
-- [ ] Two Factor Auth
+- [ ] OAuth Provider (easy to add, if there is demand)

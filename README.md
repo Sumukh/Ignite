@@ -6,14 +6,15 @@ Ignite is a scaffold for starting new Flask applications. It takes care of the b
 | Features  |   Status |
 | ------------- | -------------
 | Authentication  | ✅  |
+| Teams/Groups | ✅  |
 | Email Confirmation/Password Resets  | ✅  |
 | OAuth Login (Login via Twitter etc...)  | ✅ |
 | API  | ✅  |
 | Stripe Product Checkout  | ✅  |
 | Heroku/Docker Deployment  | ✅  |
-| Migrations | ✅  |
+| DB Migrations | ✅  |
 | Send Emails | ✅  |
-| Admin View | ✅  |
+| Admin Dashboard | ✅  |
 | Basic Test Suite | ✅  |
 | Customizable | ✅  |
 | Commercial Usage  | ❌  (available in Ignite Premium)  |
