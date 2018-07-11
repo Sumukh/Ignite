@@ -1,6 +1,6 @@
 #! ../env/bin/python
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, g
 from webassets.loaders import PythonLoader as PythonAssetsLoader
 
 from appname import assets

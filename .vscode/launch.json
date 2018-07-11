@@ -21,8 +21,6 @@
             ],
             "envFile": "${workspaceRoot}/.env",
             "debugOptions": [
-                "WaitOnAbnormalExit",
-                "WaitOnNormalExit",
                 "RedirectOutput"
             ]
         }

@@ -89,6 +89,7 @@ def test(coverage):
 def make_shell_context():
     return dict(app=app, db=db, User=User)
 
+
 if __name__ == "__main__":
     # For flask scripts to work, an application needs to be discovered.
     # We can do that by setting the FLASK_APP environment variable to point to this file
