@@ -28,6 +28,7 @@ nosetests.xml
 __pycache__
 database.db
 .vscode
+.pytest_cache
 
 # Sphinx
 docs/_build
