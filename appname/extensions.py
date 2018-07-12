@@ -30,6 +30,7 @@ debug_toolbar = DebugToolbarExtension()
 login_manager = LoginManager()
 login_manager.login_view = "auth.login"
 login_manager.login_message_category = "warning"
+login_manager.session_protection = "strong"
 # login_manager.user_loader is registered in controllers/auth.
 
 # TODO:

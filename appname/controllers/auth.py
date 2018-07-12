@@ -27,6 +27,7 @@ def login():
 
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).one()
+        session['current_team_membership_id'] = user.primary_membership_id
         login_user(user)
 
         flash("Logged in successfully.", "success")
@@ -47,6 +48,7 @@ def signup():
         user = User(form.email.data, form.password.data)
         db.session.add(user)
         db.session.commit()
+        session['current_team_membership_id'] = user.primary_membership_id
         login_user(user)
 
         if constants.REQUIRE_EMAIL_CONFIRMATION:

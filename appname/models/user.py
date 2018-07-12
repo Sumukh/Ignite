@@ -60,8 +60,19 @@ class User(Model, UserMixin):
         return self.id
 
     @property
-    def team_memberships(self):
-        return [member for member in self.memberships if member.activated == True]
+    def active_memberships(self):
+        return [member for member in self.memberships if member.activated]
+
+    @property
+    def active_teams(self):
+        return [member.teams for member in self.active_memberships]
+
+    # TODO: Cache
+    @property
+    def primary_membership_id(self):
+        if len(self.active_memberships) == 0:
+            return None
+        return self.active_memberships[0].id
 
     def __repr__(self):
         return '<User {0}>'.format(self.email)
