@@ -1,6 +1,5 @@
 import logging
-from appname.models import db, Model, transaction
-from appname.models.teams import TeamMember
+from appname.models import db, Model, ModelProxy, transaction
 
 logger = logging.getLogger(__name__)
 
@@ -24,6 +23,9 @@ class Team(Model):
 
     creator = db.relationship("User")
 
+    def has_member(self, user):
+        return user in [member.user for member in self.active_memberships]
+
     @property
     def active_memberships(self):
         return [membership for membership in self.memberships if membership.activated]
@@ -36,7 +38,7 @@ class Team(Model):
     @transaction
     def create(cls, name, creator):
         new_team = cls(name=name, creator=creator)
-        new_team_member = TeamMember(team=new_team, user=creator, role='administrator', activated=True)
+        new_team_member = ModelProxy.teams.TeamMember(team=new_team, user=creator, role='administrator', activated=True)
 
         db.session.add(new_team)
         db.session.add(new_team_member)

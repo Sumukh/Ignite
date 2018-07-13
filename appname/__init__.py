@@ -15,11 +15,13 @@ from appname.controllers.admin.jobs import jobs
 import appname.controllers.dashboard
 
 from appname import utils
+from appname.converter import custom_converters
 from appname.extensions import (
     admin,
     assets_env,
     cache,
     debug_toolbar,
+    hashids,
     login_manager,
     limiter,
     mail,
@@ -57,10 +59,14 @@ def create_app(object_name):
     # initialize Flask-RQ2 (job queue)
     rq2.init_app(app)
 
+    # Special URL converters
+    custom_converters.init_app(app)
+
     token.init_app(app)
     mail.init_app(app)
     limiter.init_app(app)
     stripe.init_app(app)
+    hashids.init_app(app)
 
     if app.config.get('SENTRY_DSN') and not app.debug:
         sentry.init_app(app, dsn=app.config.get('SENTRY_DSN'))

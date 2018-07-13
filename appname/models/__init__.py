@@ -1,7 +1,6 @@
 import functools
 
 from flask_sqlalchemy import SQLAlchemy, BaseQuery
-
 from sqlalchemy import MetaData
 
 convention = {
@@ -87,6 +86,11 @@ class Model(db.Model):
             if c.name in dict:
                 setattr(self, c.name, dict[c.name])
         return self
+
+    @property
+    def hashid(self):
+        from appname.extensions import hashids
+        return hashids.encode_id(self.id)
 
 class ModelProxy:
     """ A singleton that lazily imports models to handle

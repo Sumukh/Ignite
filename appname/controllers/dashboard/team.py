@@ -1,9 +1,11 @@
 from flask_login import login_required, current_user
 
-from flask import Blueprint, render_template, flash, redirect, url_for, session, Markup
+from flask import (Blueprint, render_template, flash, abort,
+                   redirect, url_for, session, Markup)
 
 from appname.constants import REQUIRE_EMAIL_CONFIRMATION
 from appname.models import db
+from appname.models.teams.team_member import TeamMember
 from appname.forms.teams import InviteMemberForm
 from appname.utils.session import current_membership
 
@@ -23,3 +25,18 @@ def index():
     membership = current_membership()
     team = membership.team
     return render_template('dashboard/team.html', form=form, team=team)
+
+@blueprint.route('/team/<hashid:team_id>/add_member', methods=['POST'])
+@login_required
+def add_member(team_id):
+    team = Team.query.get(team_id)
+    if not team or not team.has_member(current_user):
+        abort(404)
+    form = InviteMemberForm()
+    if form.validate_on_submit():
+        TeamMember.invite(team, form.email.data, form.role.data, current_user)
+        flash('Submission time saved', 'success')
+        return redirect(url_for('.index'))
+    else:
+        pass
+

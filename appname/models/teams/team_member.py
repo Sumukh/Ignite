@@ -2,7 +2,9 @@ import logging
 
 from sqlalchemy.orm import backref
 
-from appname.models import db, Model
+from appname.models import db, Model, ModelProxy
+from appname.models.user import User
+
 from appname.utils.token import url_safe_token
 
 logger = logging.getLogger(__name__)
@@ -26,3 +28,14 @@ class TeamMember(Model):
     user = db.relationship("User", foreign_keys=[user_id], backref='memberships')
 
     inviter = db.relationship("User", foreign_keys=[inviter_id])
+
+    @classmethod
+    def invite(cls, team, email, role, inviter):
+        invitee = User.lookup(email)
+        if (not invitee):
+            member = ModelProxy.teams.TeamMember(team=team, invite_email=email, role=role, inviter=inviter)
+        else:
+            member = ModelProxy.teams.TeamMember(team=team, user=invitee, role=role, inviter=inviter)
+
+        db.session.add(member)
+        db.session.commit()

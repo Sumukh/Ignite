@@ -3,8 +3,7 @@ import logging
 from flask_login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from appname.models import db, Model
-from appname.models.teams import Team
+from appname.models import db, Model, ModelProxy
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +32,7 @@ class User(Model, UserMixin):
 
         if not team:
             team_name = "{0}'s team".format(email)
-            Team.create(team_name, self)
+            ModelProxy.teams.Team.create(team_name, self)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)

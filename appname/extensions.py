@@ -16,8 +16,7 @@ from raven.contrib.flask import Sentry
 from appname.admin import AdminDashboard
 from services.security import Token
 from services.stripe import Stripe
-
-
+from services.hash_ids import HashIds
 
 # Setup flask cache
 cache = Cache()
@@ -49,3 +48,4 @@ mail = Mail()
 limiter = Limiter(key_func=get_remote_address)
 stripe = Stripe()
 sentry = Sentry()
+hashids = HashIds()
