@@ -8,15 +8,10 @@ main = Blueprint('main', __name__)
 @main.route('/')
 def home():
     if current_user.is_authenticated:
-        return redirect(url_for('dashboard.home'))
+        return redirect(url_for('dashboard_home.index'))
     return render_template('index.html')
 
 @main.route('/beta')
 @cache.cached(timeout=1000, unless=lambda: current_user.is_authenticated)
 def beta():
     return "Coming Soon", 200
-
-
-@main.route('/demo')
-def demo():
-    return render_template('tabler/sample.html')

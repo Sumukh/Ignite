@@ -9,10 +9,11 @@ from appname.models import db
 from appname.api.resources import api_blueprint
 from appname.controllers.main import main
 from appname.controllers.auth import auth
-from appname.controllers.dashboard import dashboard
 from appname.controllers.store import store
 from appname.controllers.oauth.client import oauth_client
 from appname.controllers.admin.jobs import jobs
+import appname.controllers.dashboard
+
 from appname import utils
 from appname.extensions import (
     admin,
@@ -78,6 +79,21 @@ def create_app(object_name):
             return api_blueprint.handle_error(error)
         return render_template('errors/404.html'), 404
 
+    @app.before_request
+    def check_for_confirmation(*args, **kwargs):
+        pass
+        # TODO: Check later.
+        # if REQUIRE_EMAIL_CONFIRMATION:
+        #     # If we have a logged in user, we can check if they have confirmed their email or not.
+        #     if not current_user.is_authenticated or current_user.email_confirmed:
+        #         return
+        #     resend_confirm_link = url_for('auth.resend_confirmation')
+        #     text = Markup(
+        #         'Please confirm your email. '
+        #         '<a href="{}" class="alert-link">Click here to resend</a>'.format(resend_confirm_link))
+        #     flash(text, 'warning')
+
+
     # Import and register the different asset bundles
     assets_env.init_app(app)
     assets_loader = PythonAssetsLoader(assets)
@@ -94,8 +110,13 @@ def create_app(object_name):
     # register our blueprints
     app.register_blueprint(main)
     app.register_blueprint(auth)
-    app.register_blueprint(dashboard)
     app.register_blueprint(store)
+
+    # Register user dashboard blueprints
+    for blueprint in appname.controllers.dashboard.dashboard_blueprints:
+        app.register_blueprint(blueprint, url_prefix='/dashboard')
+
+    # API
     app.register_blueprint(api_blueprint, url_prefix='/api')
     app.register_blueprint(oauth_client, url_prefix='/oauth')
 

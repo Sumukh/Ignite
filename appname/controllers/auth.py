@@ -56,7 +56,7 @@ def signup():
             ConfirmEmail(user).send()
 
         flash("Welcome to appname.", "success")
-        return redirect(request.args.get("next") or url_for("dashboard.home"))
+        return redirect(request.args.get("next") or url_for("dashboard_home\.index"))
 
     return render_template("auth/signup.html", form=form)
 
@@ -89,7 +89,7 @@ def confirm(code):
 
     if current_user == user:
         flash('Succesfully confirmed your email', 'success')
-        return redirect(url_for("dashboard.home"))
+        return redirect(url_for("dashboard_home\.index"))
     else:
         flash('Confirmed your email. Please login to continue', 'success')
         return redirect(url_for("auth.login"))
@@ -102,7 +102,7 @@ def resend_confirmation():
     if not constants.REQUIRE_EMAIL_CONFIRMATION:
         abort(404)
     if current_user.email_confirmed:
-        return redirect(url_for("dashboard.home"))
+        return redirect(url_for("dashboard_home.index"))
 
     form = SimpleForm()
     if form.validate_on_submit():
@@ -111,7 +111,7 @@ def resend_confirmation():
                 "Sent confirmation to {}".format(
                     current_user.email),
                 'success')
-        return redirect(url_for("dashboard.home"))
+        return redirect(url_for("dashboard_home.index"))
 
     return render_template('auth/resend_confirmation.html', form=form)
 
@@ -120,7 +120,7 @@ def resend_confirmation():
 def request_password_reset():
     if not current_user.is_anonymous:
         flash('You must be logged out to reset your password', 'warning')
-        return redirect(url_for("dashboard.home"))
+        return redirect(url_for("dashboard_home.index"))
     form = RequestPasswordResetForm()
 
     if form.validate_on_submit():
@@ -137,7 +137,7 @@ def request_password_reset():
 def reset_password(code):
     if not current_user.is_anonymous:
         flash('You must be logged out to reset your password', 'warning')
-        return redirect(url_for("dashboard.home"))
+        return redirect(url_for("dashboard_home.index"))
 
     try:
         email = token.decode(code, salt=constants.PASSWORD_RESET_SALT)
@@ -155,7 +155,7 @@ def reset_password(code):
         login_user(user)
 
         flash("Changed your password succesfully", "success")
-        return redirect(request.args.get("next") or url_for("dashboard.home"))
+        return redirect(request.args.get("next") or url_for("dashboard_home.index"))
 
     return render_template("auth/reset_password.html", form=form)
 
@@ -170,6 +170,6 @@ def reauth():
 
         flash("Re-authenticated successfully.", "success")
         return redirect(request.args.get("next")
-                        or url_for("dashboard.settings"))
+                        or url_for("dashboard_settings.index"))
 
     return render_template("reauth.html", form=form)

@@ -72,4 +72,4 @@ def change_password():
     else:
         flash("The password was invalid", "warning")
 
-    return redirect(url_for("dashboard.settings"))
+    return redirect(url_for("dashboard_settings.index"))

@@ -8,11 +8,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             {% if current_user.is_authenticated %}
-            <li class="nav-item {{ 'active' if request.endpoint == 'dashboard.home' }}">
-                <a class="nav-link" href="{{ url_for('dashboard.home') }}">Home</a>
+            <li class="nav-item {{ 'active' if request.endpoint == 'dashboard_home.index' }}">
+                <a class="nav-link" href="{{ url_for('dashboard_home.index') }}">Home</a>
             </li>
-            <li class="nav-item {{ 'active' if request.endpoint == 'dashboard.settings' }}">
-                <a class="nav-link" href="{{ url_for('dashboard.settings') }}">Settings</a>
+            <li class="nav-item {{ 'active' if request.endpoint == 'dashboard_settings.index' }}">
+                <a class="nav-link" href="{{ url_for('dashboard_settings.index') }}">Settings</a>
             </li>
             {% else %}
             <li class="nav-item {{ 'active' if request.endpoint == 'main.home' }}">
@@ -26,7 +26,7 @@
         <ul class="navbar-nav my-2 my-lg-0">
             {% if current_user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('dashboard.home') }}">{{current_user.email}}</a>
+                <a class="nav-link" href="{{ url_for('dashboard_home.index') }}">{{current_user.email}}</a>
             </li>
 
             <li class="nav-item">

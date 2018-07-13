@@ -1,0 +1,85 @@
+{% extends "tabler/dashboard_base.html" %}
+{% from "helpers/_formhelpers.html" import render_field %}
+
+{% block title %}appname team settings{% endblock %}
+
+{% block body %}
+<div class="my-3 my-md-5">
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">
+                {{ team.name }}
+            </h1>
+        </div>
+        <div class="row">
+            <div class="col-9">
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+                            <thead>
+                                <tr>
+                                <th class="text-center w-1"><i class="icon-people"></i></th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Role</th>
+                                <th class="text-center">Date Invited</th>
+                                <th class="text-center">Active</th>
+                                <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for member in team.members %}
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="avatar d-block"></div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div>{{ member.user.email }}</div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="small text-muted">
+                                        {{ member.created }}
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        {{ member.role | title }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ 'Yes' if member.activated else 'No' }}
+                                    </td>
+                                    <td class="text-center">
+                                        {% if member.user != current_user %}
+                                            <a href="javascript:void(0)" class="btn btn-secondary btn-sm">Delete</a>
+                                        {% else %}
+                                        —
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-header">
+                            <h3 class="card-title">Invite New Member</h3>
+                    </div>
+                    <form role="form" action="{{ url_for('dashboard_settings.change_password') }}" method="post">
+                        <div class="card-body">
+                            {{ form.hidden_tag() }}
+                            {{ render_field(form.password) }}
+                            {{ render_field(form.confirm) }}
+                        </div>
+                        <div class="card-footer text-left">
+                            <div class="d-flex">
+                                <button type="submit" class="btn btn-primary">Change</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

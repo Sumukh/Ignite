@@ -12,14 +12,19 @@
             <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                     {% if current_user.is_authenticated %}
-                    <li class="nav-item {{ 'active' if request.endpoint == 'dashboard.home' }}">
-                        <a href="{{ url_for('dashboard.home') }}" class="nav-link {{ 'active' if request.endpoint == 'dashboard.home' }}">
+                    <li class="nav-item {{ 'active' if request.endpoint == 'dashboard_home.index' }}">
+                        <a href="{{ url_for('dashboard_home.index') }}" class="nav-link {{ 'active' if request.endpoint == 'dashboard_home.index' }}">
                             <i class="fe fe-home"></i> Home
                         </a>
                     </li>
-                    <li class="nav-item {{ 'active' if request.endpoint == 'dashboard.settings' }}">
-                        <a href="{{ url_for('dashboard.settings') }}" class="nav-link  {{ 'active' if request.endpoint == 'dashboard.settings' }}">
-                            <i class="fe fe-settings"></i> Settings
+                    <li class="nav-item {{ 'active' if request.endpoint == 'dashboard_team.index' }}">
+                        <a href="{{ url_for('dashboard_team.index') }}" class="nav-link  {{ 'active' if request.endpoint == 'dashboard_team.index' }}">
+                            <i class="fe fe-users"></i> Team Settings
+                        </a>
+                    </li>
+                    <li class="nav-item {{ 'active' if request.endpoint == 'dashboard_settings.index' }}">
+                        <a href="{{ url_for('dashboard_settings.index') }}" class="nav-link  {{ 'active' if request.endpoint == 'dashboard_settings.index' }}">
+                            <i class="fe fe-settings"></i> Account Settings
                         </a>
                     </li>
                     <li class="nav-item">
@@ -41,3 +46,5 @@
         </div>
     </div>
 </div>
+
+{{ render_flashes() }}

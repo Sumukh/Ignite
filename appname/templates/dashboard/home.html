@@ -1,7 +1,7 @@
-{% extends "tabler/base.html" %}
+{% extends "tabler/dashboard_base.html" %}
 {% block title %}appname Home{% endblock %}
 
-{% block head_js %}
+{% block js %}
     {% assets "tabler_plugins_css" %}
         <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
     {% endassets %}
@@ -12,10 +12,6 @@
 {% endblock %}
 
 {% block body %}
-<div class="page-main">
-    {% include 'tabler/_header.html' with context %}
-    {% include 'tabler/_navbar.html' with context %}
-
     <div class="my-3 my-md-5">
         <div class="container">
             <div class="page-header">
@@ -1563,9 +1559,4 @@
             </div>
         </div>
     </div>
-
-</div>
-
-{% include 'tabler/_footer.html' with context %}
-
 {% endblock %}
