@@ -32,7 +32,7 @@
                                         <div class="avatar avatar-placeholder d-block"></div>
                                     </td>
                                     <td>
-                                        <div>{{ member.user.email }}</div>
+                                        <div>{{ member.user.email or member.invite_email }}</div>
                                         <div class="small text-muted">
                                             Invited: {{ member.created }}
                                         </div>

@@ -5,7 +5,7 @@ from flask import (Blueprint, render_template, flash, abort,
 
 from appname.constants import REQUIRE_EMAIL_CONFIRMATION
 from appname.models import db
-from appname.models.teams.team_member import TeamMember
+from appname.models.teams import Team, TeamMember
 from appname.forms.teams import InviteMemberForm
 from appname.utils.session import current_membership
 
@@ -35,8 +35,9 @@ def add_member(team_id):
     form = InviteMemberForm()
     if form.validate_on_submit():
         TeamMember.invite(team, form.email.data, form.role.data, current_user)
-        flash('Submission time saved', 'success')
+        flash('Invited {}'.format(form.email.data), 'success')
         return redirect(url_for('.index'))
     else:
-        pass
+        flash('There was an error', 'warning')
+        return redirect(url_for('.index'))
 

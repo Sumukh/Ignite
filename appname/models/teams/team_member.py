@@ -14,7 +14,7 @@ class TeamMember(Model):
     team_id = db.Column(db.ForeignKey("team.id"), index=True,
                         nullable=False)
     user_id = db.Column(db.ForeignKey("user.id"), index=True,
-                        nullable=False)
+                        nullable=True)
 
     invite_email = db.Column(db.String(255))
     role = db.Column(db.String(), default='member')

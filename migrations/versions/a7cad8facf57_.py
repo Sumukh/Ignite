@@ -34,7 +34,7 @@ def upgrade():
     sa.Column('deleted', sa.Boolean(), nullable=True),
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('team_id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('invite_email', sa.String(length=255), nullable=True),
     sa.Column('role', sa.String(), nullable=True),
     sa.Column('inviter_id', sa.Integer(), nullable=True),

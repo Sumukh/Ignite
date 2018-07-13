@@ -24,15 +24,15 @@ class Team(Model):
     creator = db.relationship("User")
 
     def has_member(self, user):
-        return user in [member.user for member in self.active_memberships]
+        return user in [member.user for member in self.active_members]
 
     @property
-    def active_memberships(self):
-        return [membership for membership in self.memberships if membership.activated]
+    def active_members(self):
+        return [membership for membership in self.members if membership.activated]
 
     @property
     def active_teams(self):
-        return [membership.team for membership in self.memberships if membership.activated]
+        return [membership.team for membership in self.members if membership.activated]
 
     @classmethod
     @transaction
