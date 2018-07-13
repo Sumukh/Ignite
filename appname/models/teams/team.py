@@ -36,7 +36,7 @@ class Team(Model):
     @transaction
     def create(cls, name, creator):
         new_team = cls(name=name, creator=creator)
-        new_team_member = TeamMember(team=new_team, user=creator, role='owner', activated=True)
+        new_team_member = TeamMember(team=new_team, user=creator, role='administrator', activated=True)
 
         db.session.add(new_team)
         db.session.add(new_team_member)

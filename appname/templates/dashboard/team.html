@@ -12,16 +12,15 @@
             </h1>
         </div>
         <div class="row">
-            <div class="col-9">
+            <div class="col-8">
                 <div class="card">
                     <div class="table-responsive">
                         <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
                             <thead>
                                 <tr>
                                 <th class="text-center w-1"><i class="icon-people"></i></th>
-                                <th class="text-center">Email</th>
+                                <th>Email</th>
                                 <th class="text-center">Role</th>
-                                <th class="text-center">Date Invited</th>
                                 <th class="text-center">Active</th>
                                 <th class="text-center">Actions</th>
                                 </tr>
@@ -30,14 +29,12 @@
                             {% for member in team.members %}
                                 <tr>
                                     <td class="text-center">
-                                        <div class="avatar d-block"></div>
+                                        <div class="avatar avatar-placeholder d-block"></div>
                                     </td>
-                                    <td class="text-center">
+                                    <td>
                                         <div>{{ member.user.email }}</div>
-                                    </td>
-                                    <td class="text-center">
                                         <div class="small text-muted">
-                                        {{ member.created }}
+                                            Invited: {{ member.created }}
                                         </div>
                                     </td>
                                     <td class="text-center">
@@ -60,7 +57,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <div class="card">
                     <div class="card-header">
                             <h3 class="card-title">Invite New Member</h3>
@@ -68,8 +65,8 @@
                     <form role="form" action="{{ url_for('dashboard_settings.change_password') }}" method="post">
                         <div class="card-body">
                             {{ form.hidden_tag() }}
-                            {{ render_field(form.password) }}
-                            {{ render_field(form.confirm) }}
+                            {{ render_field(form.email) }}
+                            {{ render_field(form.role) }}
                         </div>
                         <div class="card-footer text-left">
                             <div class="d-flex">

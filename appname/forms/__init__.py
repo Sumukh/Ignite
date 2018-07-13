@@ -17,3 +17,7 @@ class BaseForm(FlaskForm):
             if field_type == StringField or field_type == TextField:
                 filters.append(strip_whitespace)
             return unbound_field.bind(form=form, filters=filters, **options)
+
+
+class SimpleForm(BaseForm):
+    pass  # Used for forms that have no input (other than a CSRF check)

@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, flash, redirect, url_for, session,
 
 from appname.constants import REQUIRE_EMAIL_CONFIRMATION
 from appname.models import db
-from appname.forms.login import ChangePasswordForm
+from appname.forms.teams import InviteMemberForm
 from appname.utils.session import current_membership
 
 blueprint = Blueprint('dashboard_team', __name__)
@@ -19,7 +19,7 @@ def check_for_membership(*args, **kwargs):
 @blueprint.route('/team')
 @login_required
 def index():
-    form = ChangePasswordForm()
+    form = InviteMemberForm()
     membership = current_membership()
     team = membership.team
     return render_template('dashboard/team.html', form=form, team=team)

@@ -16,4 +16,5 @@ class TestTeam:
         assert len(user.memberships) == 1
         membership = user.memberships[0]
         assert membership.activated
+        assert membership.role == 'administrator'
         assert membership.team.creator == user

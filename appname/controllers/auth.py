@@ -3,7 +3,8 @@ from flask_login import login_user, logout_user, login_required, current_user
 
 import appname.constants as constants
 
-from appname.forms.login import LoginForm, SignupForm, SimpleForm, RequestPasswordResetForm, ChangePasswordForm
+from appname.forms import SimpleForm
+from appname.forms.login import LoginForm, SignupForm, RequestPasswordResetForm, ChangePasswordForm
 from appname.models import db
 from appname.models.user import User
 from appname.mailers.auth import ConfirmEmail, ResetPassword

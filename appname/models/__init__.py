@@ -1,6 +1,7 @@
 import functools
 
 from flask_sqlalchemy import SQLAlchemy, BaseQuery
+
 from sqlalchemy import MetaData
 
 convention = {
