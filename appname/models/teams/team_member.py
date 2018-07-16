@@ -2,8 +2,9 @@ import logging
 
 from sqlalchemy.orm import backref
 
-from appname.models import db, Model, ModelProxy
+from appname.models import db, Model
 from appname.models.user import User
+from appname.mailers.teams import InviteEmail
 
 from appname.utils.token import url_safe_token
 
@@ -17,7 +18,7 @@ class TeamMember(Model):
                         nullable=True)
 
     invite_email = db.Column(db.String(255))
-    role = db.Column(db.String(), default='member')
+    role = db.Column(db.String(), default='team_member')
 
     inviter_id = db.Column(db.ForeignKey("user.id"))
     invite_secret = db.Column(db.String(255), default=url_safe_token)
@@ -33,9 +34,10 @@ class TeamMember(Model):
     def invite(cls, team, email, role, inviter):
         invitee = User.lookup(email)
         if (not invitee):
-            member = ModelProxy.teams.TeamMember(team=team, invite_email=email, role=role, inviter=inviter)
+            member = cls(team=team, invite_email=email, role=role, inviter=inviter)
         else:
-            member = ModelProxy.teams.TeamMember(team=team, user=invitee, role=role, inviter=inviter)
+            member = cls(team=team, user=invitee, role=role, inviter=inviter)
 
         db.session.add(member)
         db.session.commit()
+        InviteEmail(member).send()

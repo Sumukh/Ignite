@@ -174,3 +174,9 @@ def reauth():
                         or url_for("dashboard_settings.index"))
 
     return render_template("reauth.html", form=form)
+
+
+@auth.route("/signup/invite/<string:code>")
+def invite_signup():
+    form = SignupForm()
+    return render_template("auth/signup.html", form=form)
