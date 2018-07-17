@@ -12,14 +12,16 @@
                     <img src="{{ url_for('static', filename='public/images/flags/us.svg') }}" class="h-6" alt="Tabler">
                     <h2> appname </h2>
                 </div>
-                <form role="form" class="card" action="{{ url_for('auth.signup', invite_secret=invite_secret) }}" method="post">
+                <form role="form" class="card" action="{{ url_for('auth.signup', invite_secret=invite.invite_secret) }}" method="post">
 
                     <div class="card-body p-6">
-                        <div class="card-title">Sign up for appname</div>
+                        <div class="card-title">Join {{ invite.team.name }} on appname </div>
+                        <p>You've been invited to appname. Complete the signup below to join {{ invite.team.name }}.</p>
                         {{ form.hidden_tag() }}
-                        {{ render_field(form.email) }}
+                        {{ render_field(form.email, value=invite.invite_email) }}
                         {{ render_field(form.password) }}
                         {{ render_field(form.confirm) }}
+                        {{ render_field(form.invite_secret, value=invite.invite_secret, label_hidden=true) }}
 
                         <div class="form-footer">
                             <button type="submit" class="btn btn-primary btn-block">Sign Up</button>

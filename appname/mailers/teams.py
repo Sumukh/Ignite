@@ -1,6 +1,5 @@
 from flask import render_template, url_for
 
-import appname.constants as constants
 from appname.mailers import Mailer
 
 class InviteEmail(Mailer):
@@ -17,6 +16,7 @@ class InviteEmail(Mailer):
                 .format(self.invite.inviter.email))
 
     def send(self):
-        link = url_for('auth.invite_signup', code=self.invite.invite_secret, _external=True)
+        link = url_for('auth.invite_page', invite_id=self.invite.id,
+                       secret=self.invite.invite_secret, _external=True)
         html_body = render_template(self.TEMPLATE, link=link, invite=self.invite)
         return self.deliver_now(self.recipient_email, self.subject, html_body)

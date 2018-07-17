@@ -17,6 +17,8 @@ Core Functionality:
 
 Currently Working On
 - [-] Team Membership Invites/Management
+    - [-] Invite Emails
+    - [-]
 - [-] Recurring SaaS Billing
 - [-] Better Documentation
 - [-] GDPR Features

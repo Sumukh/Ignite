@@ -7,6 +7,7 @@ from appname.forms import SimpleForm
 from appname.forms.login import LoginForm, SignupForm, RequestPasswordResetForm, ChangePasswordForm
 from appname.models import db
 from appname.models.user import User
+from appname.models.teams import TeamMember
 from appname.mailers.auth import ConfirmEmail, ResetPassword
 from appname.extensions import login_manager, token, limiter
 
@@ -23,6 +24,7 @@ def unauthorized():
     return redirect(url_for('auth.login', login_hint=login_hint))
 
 @auth.route("/login", methods=["GET", "POST"])
+@limiter.limit("10/minute")
 def login():
     form = LoginForm()
 
@@ -39,14 +41,23 @@ def login():
     return render_template("auth/login.html", form=form)
 
 @auth.route("/signup", methods=["GET", "POST"])
+@limiter.limit("10/minute")
 def signup():
     if not constants.ALLOW_SIGNUPS:
         return abort(404)
 
-    form = SignupForm()
+    form = SignupForm(invite_secret=request.args.get('invite_secret'))
 
     if form.validate_on_submit():
-        user = User(form.email.data, form.password.data)
+        team_secret = form.invite_secret.data
+        invite = (TeamMember.query.filter_by(invite_secret=team_secret, activated=False)
+                            .one_or_none())
+
+        if invite:
+            user = User(form.email.data, form.password.data,
+                        email_confirmed=True, team=invite.team)
+        else:
+            user = User(form.email.data, form.password.data)
         db.session.add(user)
         db.session.commit()
         session['current_team_membership_id'] = user.primary_membership_id
@@ -57,9 +68,9 @@ def signup():
             ConfirmEmail(user).send()
 
         flash("Welcome to appname.", "success")
-        return redirect(request.args.get("next") or url_for("dashboard_home\.index"))
+        return redirect(request.args.get("next") or url_for("dashboard_home.index"))
 
-    return render_template("auth/signup.html", form=form)
+    return render_template("auth/signup.html", form=form, invite_secret=request.args.get('invite_secret'))
 
 @auth.route("/auth/logout")
 def logout():
@@ -90,7 +101,7 @@ def confirm(code):
 
     if current_user == user:
         flash('Succesfully confirmed your email', 'success')
-        return redirect(url_for("dashboard_home\.index"))
+        return redirect(url_for("dashboard_home.index"))
     else:
         flash('Confirmed your email. Please login to continue', 'success')
         return redirect(url_for("auth.login"))
@@ -117,7 +128,7 @@ def resend_confirmation():
     return render_template('auth/resend_confirmation.html', form=form)
 
 @auth.route("/auth/reset_password", methods=["GET", "POST"])
-@limiter.limit("10/minute;20/hour")
+@limiter.limit("20/hour")
 def request_password_reset():
     if not current_user.is_anonymous:
         flash('You must be logged out to reset your password', 'warning')
@@ -135,6 +146,7 @@ def request_password_reset():
     return render_template("auth/request_password_reset.html", form=form)
 
 @auth.route("/auth/reset_password/<string:code>", methods=["GET", "POST"])
+@limiter.limit("20/hour")
 def reset_password(code):
     if not current_user.is_anonymous:
         flash('You must be logged out to reset your password', 'warning')
@@ -175,8 +187,27 @@ def reauth():
 
     return render_template("reauth.html", form=form)
 
+@auth.route('/invite/<hashid:invite_id>/join')
+@login_required
+def join_team(invite_id):
+    invite = TeamMember.query.get(invite_id)
+    if not invite or invite.user != current_user:
+        return abort(404)
 
-@auth.route("/signup/invite/<string:code>")
-def invite_signup():
-    form = SignupForm()
-    return render_template("auth/signup.html", form=form)
+    invite.activated = True
+    db.session.add(invite)
+    db.session.commit()
+    return redirect(url_for("dashboard_home.index"))
+
+@auth.route('/join/<hashid:invite_id>/<string:secret>')
+@limiter.limit("20/minute")
+def invite_page(invite_id, secret):
+    invite = TeamMember.query.get(invite_id)
+    if not invite.invite_secret or invite.invite_secret != secret or invite.activated:
+        return abort(404)
+
+    if current_user.is_authenticated and invite.user == current_user:
+        return redirect(url_for("auth.add_member", invite_id=invite.id))
+
+    form = SignupForm(invite_secret=invite.invite_secret)
+    return render_template("auth/invite.html", form=form, invite=invite)

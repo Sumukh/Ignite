@@ -1,7 +1,5 @@
 import logging
 
-from sqlalchemy.orm import backref
-
 from appname.models import db, Model
 from appname.models.user import User
 from appname.mailers.teams import InviteEmail

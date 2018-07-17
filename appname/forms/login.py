@@ -1,5 +1,5 @@
 from appname.forms import BaseForm
-from wtforms import validators, TextField, PasswordField
+from wtforms import validators, TextField, PasswordField, HiddenField
 
 from appname.models.user import User
 
@@ -32,6 +32,8 @@ class SignupForm(BaseForm):
     password = PasswordField('Password', validators=[validators.required(), validators.length(min=4),
                                                      validators.EqualTo('confirm', message='Passwords must match')])
     confirm = PasswordField('Confirm Password', validators=[validators.required()])
+    email = TextField('Email', validators=[validators.email(), validators.required()])
+    invite_secret = HiddenField('Invite ID')
 
     def validate(self):
         check_validate = super(SignupForm, self).validate()

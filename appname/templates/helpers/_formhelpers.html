@@ -1,13 +1,15 @@
-{% macro render_field(field, class="form-control") %}
+{% macro render_field(field, class="form-control", label_hidden=false) %}
     <div class="form-group">
-        {{ field.label }}
-        {% if field.errors %}
-            {% for e in field.errors %}
-                <p class="help-block text-danger">{{ e }}</p>
-            {% endfor %}
-        {% endif %}
-        {% if field.description %}
-            <p class="small"> {{ field.description }} </small>
+        {% if not label_hidden %}
+            {{ field.label }}
+            {% if field.errors %}
+                {% for e in field.errors %}
+                    <p class="help-block text-danger">{{ e }}</p>
+                {% endfor %}
+            {% endif %}
+            {% if field.description %}
+                <p class="small"> {{ field.description }} </small>
+            {% endif %}
         {% endif %}
         {{ field(class_=class, **kwargs) | safe }}
     </div>
