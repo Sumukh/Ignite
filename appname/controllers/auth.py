@@ -56,6 +56,8 @@ def signup():
         if invite:
             user = User(form.email.data, form.password.data,
                         email_confirmed=True, team=invite.team)
+            invite.user = user
+            db.session.add(invite)
         else:
             user = User(form.email.data, form.password.data)
         db.session.add(user)
@@ -194,6 +196,7 @@ def join_team(invite_id):
     if not invite or invite.user != current_user:
         return abort(404)
 
+    invite.user_id = current_user.id
     invite.activated = True
     db.session.add(invite)
     db.session.commit()
@@ -207,7 +210,7 @@ def invite_page(invite_id, secret):
         return abort(404)
 
     if current_user.is_authenticated and invite.user == current_user:
-        return redirect(url_for("auth.add_member", invite_id=invite.id))
+        return redirect(url_for(".join_team", invite_id=invite.id))
 
     form = SignupForm(invite_secret=invite.invite_secret)
     return render_template("auth/invite.html", form=form, invite=invite)

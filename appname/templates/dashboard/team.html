@@ -45,7 +45,11 @@
                                     </td>
                                     <td class="text-center">
                                         {% if member.user != current_user %}
-                                            <a href="javascript:void(0)" class="btn btn-secondary btn-sm">Delete</a>
+                                            <form role="form" action="{{ url_for('dashboard_team.remove_member', team_id=team.id, invite_id=member.id) }}" method="post">
+                                                {{ simple_form.hidden_tag() }}
+
+                                                <button type="submit" class="btn btn-secondary btn-sm">Remove</button>
+                                            </form>
                                         {% else %}
                                         —
                                         {% endif %}
@@ -70,7 +74,7 @@
                         </div>
                         <div class="card-footer text-left">
                             <div class="d-flex">
-                                <button type="submit" class="btn btn-primary">Change</button>
+                                <button type="submit" class="btn btn-primary">Invite</button>
                             </div>
                         </div>
                     </form>
