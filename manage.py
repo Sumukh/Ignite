@@ -10,6 +10,9 @@ import pytest
 from appname import create_app
 from appname.models import db
 from appname.models.user import User
+
+# Explictly import models here to to get Flask Migrate to pick them up
+from appname.models import (teams, billing)
 from appname.extensions import cache
 
 # default to dev config because this should not be run in production
@@ -31,17 +34,27 @@ def initdb():
     click.echo('Initalizing the db')
     db.create_all()
 
-@app.cli.command()
-def resetdb():
-    """ Drops the tables.
-        In dev: loads seed data
-    """
+def actually_drop_tables():
     if env != 'dev':
         confirm = input("Are you sure you want to run this on {}?".format(env))
         if confirm.lower().strip() != 'yes':
             return
     click.echo('Resets the db')
     db.drop_all()
+
+
+@app.cli.command()
+def dropdb():
+    """ Drops the tables.
+        In dev: loads seed data
+    """
+    actually_drop_tables()
+
+@app.cli.command()
+def resetdb():
+    """ Drops the tables & loads seed data
+    """
+    actually_drop_tables()
     db.create_all()
     if env == 'dev':
         # TODO: Better seed function
@@ -51,7 +64,11 @@ def resetdb():
         admin = User("admin@example.com", "admin", admin=True, email_confirmed=True)
         db.session.add(admin)
         click.echo("Added admin@example.com")
+        plan = billing.ProductPlan(name="Free Plan", description="Starter version")
+        db.session.add(plan)
         db.session.commit()
+        click.echo("Added Free Plan")
+
 
 @app.cli.command()
 def clear_cache():

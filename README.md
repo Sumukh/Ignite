@@ -1,3 +1,5 @@
+[![Ignite](https://raw.githubusercontent.com/Sumukh/Ignite/master/appname/static/public/ignite/ignite-logo.svg)](https://github.com/sumukh/ignite)
+
 # Ignite for Flask [![CircleCI](https://circleci.com/gh/Sumukh/Ignite.svg?style=svg&circle-token=21024628f8356bc070f27aede670fc676a8e4446)](https://circleci.com/gh/Sumukh/Ignite)
 
 Ignite is a scaffold for starting new Flask applications. It takes care of the boilerplate code (like User Registration), allowing you to focus on building your application. Ignite is built upon best practices for modern Flask applications.

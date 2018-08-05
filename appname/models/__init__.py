@@ -87,6 +87,11 @@ class Model(db.Model):
                 setattr(self, c.name, dict[c.name])
         return self
 
+    @classmethod
+    def get_by_hashid(self, hashid):
+        from appname.extensions import hashids
+        return self.get(hashids.decode_id(hashid))
+
     @property
     def hashid(self):
         from appname.extensions import hashids
