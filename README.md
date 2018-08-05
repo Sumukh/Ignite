@@ -1,4 +1,4 @@
-[![Ignite](https://raw.githubusercontent.com/Sumukh/Ignite/master/appname/static/public/ignite/ignite-logo.svg)](https://github.com/sumukh/ignite)
+[![Ignite](https://github.com/Sumukh/Ignite/raw/master/appname/static/public/ignite/ignite-logo%402x.png)](https://github.com/sumukh/ignite)
 
 # Ignite for Flask [![CircleCI](https://circleci.com/gh/Sumukh/Ignite.svg?style=svg&circle-token=21024628f8356bc070f27aede670fc676a8e4446)](https://circleci.com/gh/Sumukh/Ignite)
 
