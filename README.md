@@ -1,3 +1,5 @@
+[![Ignite](https://github.com/Sumukh/Ignite/raw/master/appname/static/public/ignite/ignite-logo%402x.png)](https://github.com/sumukh/ignite)
+
 # Ignite for Flask [![CircleCI](https://circleci.com/gh/Sumukh/Ignite.svg?style=svg&circle-token=21024628f8356bc070f27aede670fc676a8e4446)](https://circleci.com/gh/Sumukh/Ignite)
 
 Ignite is a scaffold for starting new Flask applications. It takes care of the boilerplate code (like User Registration), allowing you to focus on building your application. Ignite is built upon best practices for modern Flask applications.
@@ -17,19 +19,20 @@ Ignite is a scaffold for starting new Flask applications. It takes care of the b
 | Admin Dashboard | ✅  |
 | Basic Test Suite | ✅  |
 | Customizable | ✅  |
+| SaaS Recurring billing with Stripe | (available in Ignite Premium)  |
 | Commercial Usage  | ❌  (available in Ignite Premium)  |
 
 
 ## Ignite Premium
 
-A license to premium allows you to use all the features in Ignite Basic
+A license to premium allows you to use all the features in Ignite Basic in addition to:
 
 | Features | Ignite Basic | Ignite Premium |
 | ------------- | ------------- | ---------- |
 | License for Commercial Use  | No  |  ✅  |
 | Remove "Powered by Ignite" badge  | Must be included  |  ✅  |
 | Video Tutorials  | No |  🔜 Coming Soon  |
-| Recurring Subscription Support (via Stripe)  | No  | Contact Us (Starting from $999 extra) |
+| Recurring Subscription Support (via Stripe)  | No  | Contact Us (Starting at $499) |
 
 You can purchase a license on [ignite.sumukh.me](https://ignite.server.sumukh.me/store)
 
@@ -109,4 +112,3 @@ Best practices List:
 * [Creating Websites With Flask](http://maximebf.com/blog/2012/10/building-websites-in-python-with-flask/)
 * [Getting Bigger With Flask](http://maximebf.com/blog/2012/11/getting-bigger-with-flask/)
 * [Miguel Grinberg's Blog](https://blog.miguelgrinberg.com/category/Python)
-
