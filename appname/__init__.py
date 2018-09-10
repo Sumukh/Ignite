@@ -85,6 +85,12 @@ def create_app(object_name):
             return api_blueprint.handle_error(error)
         return render_template('errors/404.html'), 404
 
+    @app.errorhandler(401)
+    def permission_denied_error(error):
+        if request.path.startswith("/api"):
+            return api_blueprint.handle_error(error)
+        return render_template('tabler/401.html'), 401
+
     @app.before_request
     def check_for_confirmation(*args, **kwargs):
         pass
