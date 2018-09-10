@@ -17,9 +17,70 @@
                         <h3 class="card-title">Legal Compliance</h3>
                     </div>
                     <div class="card-body">
-                        Here's a copy of our standard terms & privacy policies.
+                        Here's a copy of our standard terms & privacy policies. Questions about our policies, as well info about
+                        our GDPR policies can be directed over email to {{ constants.SUPPORT_EMAIL }}
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-list text-center">
+                            <a href="#" class="btn btn-secondary">Privacy Policy</a>
+                            <a href="#" class="btn btn-secondary">Terms and Conditions</a>
+                            <a href="#" class="btn btn-secondary">Data Processing Amendment</a>
+                        </div>
+
                     </div>
                 </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">User Data Export</h3>
+                    </div>
+                    <div class="card-body">
+                        appname provides a way for users to export their personal data. The fields below will provide
+                        a way to access the data.
+                    </div>
+                    <div class="card-footer">
+                        <div class="container">
+                            <div class="row">
+                                  <div class="col">
+                                        <form role="form" action="{{ url_for('dashboard_settings.pii_download') }}" method="post">
+                                            {{ form.hidden_tag() }}
+                                            <button type="submit" class="btn btn-primary btn-block"><i class="fe fe-file"></i> Download Data Export</button>
+                                        </form>
+                                    </div>
+
+                                  <div class="col">
+                                    <form role="form" action="{{ url_for('dashboard_settings.pii_notification') }}" method="post">
+                                        {{ form.hidden_tag() }}
+                                        <button type="submit" class="btn btn-primary btn-block"><i class="fe fe-mail"></i>Send Data Export</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Data Deletion</h3>
+                    </div>
+                    <div class="card-body">
+                        appname provides a way for users to delete their personal data. Teams will only be deleted when you are the only member
+                        of the team.
+                    </div>
+                    <div class="card-footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <form role="form" action="{{ url_for('dashboard_settings.account_deletion') }}" method="post">
+                                        {{ form.hidden_tag() }}
+                                        <button type="submit" class="btn btn-danger"><i class="fe fe-trash"></i> Delete Account</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

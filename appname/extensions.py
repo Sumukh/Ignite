@@ -14,9 +14,9 @@ from flask_limiter.util import get_remote_address
 from raven.contrib.flask import Sentry
 
 from appname.admin import AdminDashboard
-from services.security import Token
-from services.stripe import Stripe
-from services.hash_ids import HashIds
+from appname.services.security import Token
+from appname.services.stripe import Stripe
+from appname.services.hash_ids import HashIds
 
 # Setup flask cache
 cache = Cache()

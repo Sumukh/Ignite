@@ -8,7 +8,7 @@ from appname.models import db
 from appname.models.teams import Team, TeamMember
 from appname.forms import SimpleForm
 from appname.forms.teams import InviteMemberForm
-from appname.utils.session import current_membership
+from appname.helpers.session import current_membership
 
 blueprint = Blueprint('dashboard_team', __name__)
 

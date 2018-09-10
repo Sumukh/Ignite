@@ -23,6 +23,12 @@ class Team(Model):
 
     creator = db.relationship("User")
 
+    GDPR_EXPORT_COLUMNS = {
+        "name": "Name of the time",
+        "plan": "What plan was",
+        "created": "When the team was created"
+    }
+
     def has_member(self, user):
         return user in [member.user for member in self.active_members]
 

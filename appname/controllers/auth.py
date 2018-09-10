@@ -35,8 +35,6 @@ def login():
 
         flash("Logged in successfully.", "success")
         return redirect(request.args.get("next") or url_for("main.home"))
-    elif request.method == 'POST':
-        flash("That login did not work", "warning")
 
     return render_template("auth/login.html", form=form)
 

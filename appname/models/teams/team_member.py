@@ -28,6 +28,14 @@ class TeamMember(Model):
 
     inviter = db.relationship("User", foreign_keys=[inviter_id])
 
+    GDPR_EXPORT_COLUMNS = {
+        "invite_email": "Email the invite was sent to",
+        "activated": "Was the invite activated?",
+        "created": "When the invite was created",
+        "team_id": "What team was the invite for",
+        "role": "Role on team"
+    }
+
     @classmethod
     def invite(cls, team, email, role, inviter):
         invitee = User.lookup(email)

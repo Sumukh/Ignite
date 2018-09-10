@@ -1,4 +1,6 @@
 import functools
+import json
+import logging
 
 from flask_sqlalchemy import SQLAlchemy, BaseQuery
 from sqlalchemy import MetaData
@@ -12,6 +14,7 @@ convention = {
 
 metadata = MetaData(naming_convention=convention)
 db = SQLAlchemy(metadata=metadata)
+logger = logging.getLogger(__name__)
 
 # Want to keep track of changes to your models? SQLAlchemy-Continuum will help!
 
@@ -57,6 +60,8 @@ class Model(db.Model):
 
     query_class = QueryWithSoftDelete
 
+    GDPR_EXPORT_COLUMNS = {}
+
     def __repr__(self):
         if hasattr(self, 'id'):
             key_val = self.id
@@ -72,11 +77,14 @@ class Model(db.Model):
         """ if force is called - it removes it from the database.
         Otherwise - performs a soft delete.
         """
-        if force:
+        if force and self.can_be_destroyed:
             db.session.delete(self)
-        else:
-            self.deleted = True
-        db.session.commit()
+            return db.session.commit()
+        if force and not self.can_be_destroyed:
+            logger.warning('Model {0} is not able to be force deleted'.format(self))
+            raise Exception('Cannot force destroy {0}'.format(self))
+        self.deleted = True
+        return db.session.commit()
 
     def as_dict(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -86,6 +94,24 @@ class Model(db.Model):
             if c.name in dict:
                 setattr(self, c.name, dict[c.name])
         return self
+
+    def gdpr_export_pii_data(self):
+        export = {}
+        for key in self.GDPR_EXPORT_COLUMNS:
+            value = getattr(self, key)
+            try:
+                json.dumps(value)
+            except TypeError:
+                # The object is not json serializable
+                value = str(value)
+            export[key] = value
+
+        return export
+
+    @property
+    def can_be_destroyed(self):
+        # Is it ok to truly delete this model (for GDPR deletion requests)
+        return True
 
     @classmethod
     def get_by_hashid(self, hashid):

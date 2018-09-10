@@ -1,4 +1,6 @@
-{% extends "email/base.html" %} {% block body %}
+{% extends "email/base.html" %}
+
+{% block body %}
 <h3> appname </h3>
 
 <p>{{ body}}</p>
@@ -14,7 +16,7 @@
         </tr>
     </table>
 </a>
-{% endif %}
 <!-- /button -->
+{% endif %}
 
 {% endblock %}

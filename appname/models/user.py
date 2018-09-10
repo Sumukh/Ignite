@@ -15,6 +15,13 @@ class User(Model, UserMixin):
     role = db.Column(db.String(), default='user')
     email_confirmed = db.Column(db.Boolean())
 
+    GDPR_EXPORT_COLUMNS = {
+        "hashid": "ID of User",
+        "email": "User Email",
+        "created": "When the user was created",
+        "email_confirmed": "Whether the email was confirmation"
+    }
+
     def __init__(self, email=None, password=None, admin=False,
                  email_confirmed=False, team=None):
         if not email:
@@ -64,7 +71,7 @@ class User(Model, UserMixin):
 
     @property
     def active_teams(self):
-        return [member.teams for member in self.active_memberships]
+        return [member.team for member in self.active_memberships]
 
     # TODO: Cache
     @property

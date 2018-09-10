@@ -6,7 +6,7 @@ from appname.constants import REQUIRE_EMAIL_CONFIRMATION
 from appname.models import db
 from appname.models.teams import Team
 from appname.forms.login import ChangePasswordForm
-from appname.utils.session import current_membership
+from appname.helpers.session import current_membership
 
 blueprint = Blueprint('dashboard_home', __name__)
 

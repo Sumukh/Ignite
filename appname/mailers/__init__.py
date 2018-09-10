@@ -24,6 +24,7 @@ def send_email_raw(to_emails, subject, html_body,
     if not isinstance(to_emails, list):
         to_emails = [to_emails]
     conn = conn or mail
+
     message = Message(subject, recipients=to_emails, **kwargs)
 
     message.body = text_body or html_body

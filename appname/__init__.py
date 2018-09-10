@@ -15,6 +15,7 @@ from appname.controllers.admin.jobs import jobs
 import appname.controllers.dashboard
 
 from appname import utils
+from appname.helpers import view as view_helpers
 from appname.converter import custom_converters
 from appname.extensions import (
     admin,
@@ -115,6 +116,7 @@ def create_app(object_name):
     # Set some globals for Jinja templating
     app.jinja_env.globals.update({
         'utils': utils,
+        'view_helpers': view_helpers,
         'debug': app.debug,
         'constants': constants,
     })
