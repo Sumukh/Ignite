@@ -11,8 +11,7 @@
             <div class="col col-login mx-auto">
                 <div class="text-center mb-6">
                     {{ render_flashes() }}
-                    <img src="{{ url_for('static', filename='public/images/flags/us.svg') }}" class="h-6" alt="Tabler">
-                    <h2> appname </h2>
+                    <img src="{{ url_for('static', filename='public/ignite/ignite-logo.svg') }}" class="h-6" alt="Tabler">
                 </div>
                 <form role="form" class="card" action="{{ url_for('auth.login') }}" method="post">
 
