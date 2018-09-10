@@ -5,23 +5,20 @@
 Ignite is a scaffold for starting new Flask applications. It takes care of the boilerplate code (like User Registration), allowing you to focus on building your application. Ignite is built upon best practices for modern Flask applications.
 
 ## Features
-| Features  |   Status |
-| ------------- | -------------
-| User Authentication  | ✅  |
-| Teams/Groups | ✅  |
-| Email Confirmation/Password Resets  | ✅  |
-| OAuth Login (Login via Twitter etc...)  | ✅ |
-| User Export & Deletion (for GDPR)  | ✅ |
-| API  | ✅  |
-| Stripe Product Checkout  | ✅  |
-| Heroku/Docker Deployment  | ✅  |
-| DB Migrations | ✅  |
-| Send Emails | ✅  |
-| Admin Dashboard | ✅  |
-| Basic Test Suite | ✅  |
-| Customizable | ✅  |
-| SaaS Recurring billing with Stripe | (available in Ignite Premium)  |
-| Commercial Usage  | ❌  (available in Ignite Premium)  |
+| Features  |   Status | Details
+| ------------- | ------------- | -------- |
+| User Authentication  | ✅  | User Login, Signup, Forgot Password, Email Confirmation|
+| OAuth Login  | ✅ | Login & Signup with Google, Twitter, Facebook, etc.
+| Teams/Groups | ✅  | Multi user teams & groups
+| User Export & Deletion  | ✅ | Allows users to export or delete their data  (for GDPR compliance)
+| API  | ✅  | API for users to access data
+| Stripe Product Checkout  | ✅  | One time item purchases with credit cards and receipts (using Stripe)
+| Heroku/Docker Deployment  | ✅  | Deployment instructions for some platforms. Works on AWS & Google Cloud
+| Send Emails | ✅  | Send email notifications from the application
+| Admin Dashboard | ✅  | Admin dashboard to edit data
+| Basic Test Suite | ✅  | Starting point for you to build out tests
+| Commercial Usage  | ❌  | Requires a purchased license (included with a purchase of Ignite Premium)
+| SaaS Recurring billing with Stripe | ❌ | (available in Ignite Premium)
 
 
 ## Ignite Premium
