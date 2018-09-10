@@ -19,12 +19,12 @@
                     </li>
                     <li class="nav-item {{ 'active' if request.endpoint == 'dashboard_team.index' }}">
                         <a href="{{ url_for('dashboard_team.index') }}" class="nav-link  {{ 'active' if request.endpoint == 'dashboard_team.index' }}">
-                            <i class="fe fe-users"></i> Team Settings
+                            <i class="fe fe-users"></i> Your Team
                         </a>
                     </li>
-                    <li class="nav-item {{ 'active' if request.endpoint == 'dashboard_settings.index' }}">
-                        <a href="{{ url_for('dashboard_settings.index') }}" class="nav-link  {{ 'active' if request.endpoint == 'dashboard_settings.index' }}">
-                            <i class="fe fe-settings"></i> Account Settings
+                    <li class="nav-item {{ 'active' if request.endpoint.startswith('dashboard_settings') }}">
+                        <a href="{{ url_for('dashboard_settings.index') }}" class="nav-link  {{ 'active' if request.endpoint.startswith('dashboard_settings') }}">
+                            <i class="fe fe-settings"></i> Settings
                         </a>
                     </li>
                     <li class="nav-item">

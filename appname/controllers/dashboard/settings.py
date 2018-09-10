@@ -5,6 +5,7 @@ from flask import Blueprint, render_template, flash, redirect, url_for, session,
 from appname.constants import REQUIRE_EMAIL_CONFIRMATION
 from appname.models import db
 from appname.forms.login import ChangePasswordForm
+from appname.forms.account import ChangeProfileForm
 from appname.utils.session import current_membership
 
 blueprint = Blueprint('dashboard_settings', __name__)
@@ -19,11 +20,15 @@ def check_for_membership(*args, **kwargs):
 @blueprint.route('/settings')
 @login_required
 def index():
-    # TODO: Implement @fresh_login_required for non-oauthed users (users with a password)
-    form = ChangePasswordForm()
-    return render_template('dashboard/settings.html', form=form)
+    return redirect(url_for("dashboard_settings.account"))
 
-@blueprint.route('/change_password', methods=['POST'])
+@blueprint.route('/settings/account', methods=['GET', 'POST'])
+@login_required
+def account():
+    form = ChangeProfileForm()
+    return render_template('dashboard/settings/account.html', form=form)
+
+@blueprint.route('/settings/password', methods=['GET', 'POST'])
 @login_required
 def change_password():
     form = ChangePasswordForm()
@@ -33,6 +38,16 @@ def change_password():
         db.session.commit()
         flash("Changed password", "success")
     else:
-        flash("The password was invalid", "warning")
+        form = ChangePasswordForm()
+        return render_template('dashboard/settings/change_password.html', form=form)
 
-    return redirect(url_for("dashboard_settings.index"))
+@blueprint.route('/settings/legal')
+@login_required
+def legal_compliance():
+    return render_template('dashboard/settings/legal_compliance.html')
+
+@blueprint.route('/settings/notifications')
+@login_required
+def notifications():
+    return render_template('dashboard/settings/legal_compliance.html')
+

@@ -8,16 +8,18 @@
 <div class="my-3 my-md-5">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-3">
+                {% include 'dashboard/settings/sidebar.html' %}
+            </div>
+            <div class="col-9">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Change Password</h3>
+                        <h3 class="card-title">Profile Information</h3>
                     </div>
-                    <form role="form" action="{{ url_for('dashboard_settings.change_password') }}" method="post">
+                    <form role="form" action="{{ url_for('dashboard_settings.account') }}" method="post">
                         <div class="card-body">
                             {{ form.hidden_tag() }}
-                            {{ render_field(form.password) }}
-                            {{ render_field(form.confirm) }}
+                            {{ render_field(form.name) }}
                         </div>
                         <div class="card-footer text-left">
                             <div class="d-flex">
