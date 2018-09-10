@@ -49,5 +49,5 @@ def legal_compliance():
 @blueprint.route('/settings/notifications')
 @login_required
 def notifications():
-    return render_template('dashboard/settings/legal_compliance.html')
+    return render_template('dashboard/settings/notifications.html')
 
