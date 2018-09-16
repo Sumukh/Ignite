@@ -9,7 +9,7 @@ main = Blueprint('main', __name__)
 def home():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard_home.index'))
-    return render_template('index.html')
+    return render_template('lander/index.html')
 
 @main.route('/beta')
 @cache.cached(timeout=1000, unless=lambda: current_user.is_authenticated)

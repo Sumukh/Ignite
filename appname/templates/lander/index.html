@@ -1,0 +1,81 @@
+{% extends "lander/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+<section class="hero">
+	<div class="hero-bg "></div>
+	<header class="header">
+		<div class="container nav-header">
+			<a href="https://github.com/sumukh/ignite" class="logo">
+				<img src="{{ url_for('static', filename='public/ignite/ignite-icon.svg') }}" class="logo-icon h-6" alt="Ignite">
+				ignite
+			</a>
+			<div class="links">
+				<a href="https://github.com/sumukh/ignite">Demo</a>
+				<a href="#pricing">Pricing</a>
+			</div>
+		</div>
+	</header>
+
+
+	<div class="container">
+		<div class="row hero-content">
+			<div class="col-sm">
+				<div class="hero-header">
+					<h1 class="hero-title">Batteries Included</h1>
+					<p class="hero-description">Ignite is a starting point for Flask web applications that handles the
+					basics of SaaS products (like user login and recurring billing) for you.
+					</p>
+
+					<div class="hero-cta">
+						<a href="https://github.com/sumukh/ignite" class="btn btn-outline-light btn-white" target="_blank">Source code</a>
+						<a href="https://github.com/sumukh/ignite" class="btn btn-outline-light btn-outline">Demo</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm">
+				<div class="hero-browser">
+					<img src="https://github.com/Sumukh/Ignite/raw/master/documentation/screenshots/dashboard.png" x="0" y="0" height="400" />
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="section features">
+	<div class="container">
+		<h2 class="section-title">Section Heading</h2>
+		<p class="section-description mb-6">
+			Header content
+		</p>
+	</div>
+</section>
+
+<section class="section pricing-table" id="pricing">
+	<div class="container">
+		<h2 class="section-title">Pricing</h2>
+		<p class="section-description">
+			Find the right tier for you</p>
+	</div>
+</section>
+
+
+<footer class="footer">
+	<div class="container">
+		<div class="row align-items-center text-center">
+			<div class="col-md-auto">
+				<a href="https://github.com/sumukh/ignite">License & Credits</a>
+				・
+				<a href="https://github.com/sumukh/ignite">Privacy</a>
+			</div>
+			<div class="col-md-auto mt-2 mt-sm-0 ml-sm-auto">
+				Powered by <a href="https://github.com/sumukh/ignite">Ignite</a> for Flask
+				<!-- You must purchase a license of Ignite to remove the above disclaimer -->
+			</div>
+		</div>
+	</div>
+</footer>
+
+{% endblock %}

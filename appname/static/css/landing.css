@@ -1,0 +1,115 @@
+.header {
+    padding: 1.5rem 0;
+    color: #fff;
+}
+
+.logo {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    color: inherit;
+    transition: .3s opacity;
+}
+
+.nav-header a:hover {
+    color: #fff;
+    opacity: .75;
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 2rem;
+    height: 2rem;
+    margin-right: .75rem;
+}
+
+.nav-header .links {
+    margin-left: auto !important;
+    color: inherit;
+    display: flex;
+    font-size: 1rem;
+}
+
+.links a {
+    color: #fff;
+    margin-left: 1.5rem;
+    font-weight: 500;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.hero {
+    position: relative;
+    color: #fff;
+    z-index: 1;
+}
+
+.hero-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-transform: skewY(-5deg);
+    transform: skewY(-5deg);
+    -webkit-transform-origin: 0;
+    transform-origin: 0;
+    background-color: #414c5c;
+    background-image: linear-gradient(45deg,#303842 25%, #495c72);
+
+}
+
+.bg-orange {
+    background-image: linear-gradient(35deg,#fea760 25%, #ffc760);
+}
+
+.bg-dark-orange {
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(254,158,45,1) 0%, rgba(215,78,32,1) 100.2% );
+}
+
+.bg-blue {
+    background-image: linear-gradient(120deg,rgba(75,153,245,1) 15%, rgba(177,226,254,1));
+}
+
+.bg-purple {
+    background-image: linear-gradient(45deg,#6085ff,#775afa);;
+}
+
+.bg-dark-purple {
+    background: linear-gradient(65deg,#1a1829 15%,#1a2c7a);
+}
+
+.bg-grey {
+    background-image: linear-gradient( 181deg,  rgba(70,69,69,1) -1.7%, rgba(46,46,46,1) 85.6% );
+}
+
+
+.hero-header {
+    padding-top: 100px;
+}
+
+.nav-header {
+    position: relative;
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    z-index: 1;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+}
+
+.features {
+    padding-top: 50px;
+}
+
+.footer {
+    border-top: 1px solid #eee;
+    padding: 2rem 0;
+    font-size: 0.875rem;
+    color: #888;
+}
