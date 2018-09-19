@@ -19,6 +19,8 @@ class Config(object):
     SEGMENT_ANALYTICS_KEY = os.getenv('SEGMENT_ANALYTICS_KEY')
     STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
     STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
+    SENTRY_DSN = os.getenv('SENTRY_DSN')
+    SENTRY_PUBLIC_DSN = os.getenv('SENTRY_PUBLIC_DSN')
 
     # Make libraries that use redis use the same url (probably uneccesary)
     CACHE_REDIS_URL = RQ_REDIS_URL = REDIS_URL = os.getenv(
