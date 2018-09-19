@@ -1,0 +1,287 @@
+.header {
+    padding: 1.5rem 0;
+    color: #fff;
+}
+
+.logo {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    color: inherit;
+    transition: .3s opacity;
+}
+
+.nav-header a:hover {
+    color: #fff;
+    opacity: .75;
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 2rem;
+    height: 2rem;
+    margin-right: .75rem;
+}
+
+.nav-header .links {
+    margin-left: auto !important;
+    color: inherit;
+    display: flex;
+    font-size: 1rem;
+}
+
+.links a {
+    color: #fff;
+    margin-left: 1.5rem;
+    font-weight: 500;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.hero {
+    position: relative;
+    color: #fff;
+    z-index: 1;
+}
+
+.hero-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-transform: skewY(-5deg);
+    transform: skewY(-5deg);
+    -webkit-transform-origin: 0;
+    transform-origin: 0;
+    background-color: #414c5c;
+    background-image: linear-gradient(45deg,#303842 25%, #495c72);
+
+}
+
+.pricing-bg {
+    position: absolute;
+    z-index: -20;
+    width: 100%;
+    height: 100%;
+    -webkit-transform: skewY(3deg);
+    transform: skewY(3deg);
+    -webkit-transform-origin: 0;
+    transform-origin: 0;
+    background-color: #414c5c;
+    background-image: linear-gradient(45deg,#303842 25%, #495c72);
+
+}
+
+.bg-orange {
+    background-image: linear-gradient(35deg,#fea760 25%, #ffc760);
+}
+
+.bg-dark-orange {
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(254,158,45,1) 0%, rgba(215,78,32,1) 100.2% );
+}
+
+.bg-blue {
+    background-image: linear-gradient(120deg,rgba(75,153,245,1) 15%, rgba(177,226,254,1));
+}
+.bg-dark-blue {
+    background-image: linear-gradient(120deg,rgb(30, 118, 201) 15%, #2c4f8f);
+}
+
+.bg-purple {
+    background-image: linear-gradient(45deg,#6085ff,#775afa);;
+}
+
+.bg-dark-purple {
+    background: linear-gradient(65deg,#433d6c 15%,#16235c);
+}
+
+.bg-grey {
+    background-image: linear-gradient( 181deg,  rgba(70,69,69,1) -1.7%, rgba(46,46,46,1) 85.6% );
+}
+
+
+.hero-header {
+    padding-top: 100px;
+}
+
+.nav-header {
+    position: relative;
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    z-index: 1;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+}
+
+.hero-cta-btn {
+    border-radius: 25px;
+    margin-right: 5px;
+}
+
+.icon-offset {
+    margin-left: 50px;
+}
+
+.features {
+    padding-top: 25px;
+}
+
+.footer {
+    border-top: 1px solid #eee;
+    padding: 2rem 0;
+    font-size: 0.875rem;
+    color: #888;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    font-weight: 300;
+}
+
+.feature-block {
+    margin-bottom: 30px;
+}
+
+.feature-icon {
+    font-size: 32px !important;
+    line-height: 52px !important;
+    color: #414c5c;
+    float: left;
+}
+
+.feature-text-block {
+    margin-left: 50px;
+    margin-top: 5px;
+}
+
+.feature-heading {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.feature-description {
+    margin-top: 15px;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.image-animate-container {
+    perspective: 400px;
+    perspective-origin: 30%;
+    animation: screenshot-hover 5s infinite ease-in-out;
+}
+
+.image-animate-img {
+    transform: translateY(-1%) rotateY(-4deg) rotate(0deg);
+}
+
+@keyframes screenshot-hover {
+    0% {
+        transform: translateX(-1px) translateY(10px)
+    }
+
+    50% {
+        transform: translateX(-1px) translateY(-6px);
+    }
+
+    100% {
+        transform: translateX(-1px) translateY(10px)
+    }
+}
+
+/* Pricing Table: From https://startbootstrap.com/snippets/pricing-table/ */
+
+.pricing {
+    overflow: hidden;
+    position: relative;
+}
+.pricing-body {
+    margin-top: 100px;
+}
+
+.pricing .section-title {
+    color: white;
+}
+
+.pricing .card {
+  border: none;
+  border-radius: 1rem;
+  transition: all 0.2s;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.pricing hr {
+  margin: 1.5rem 0;
+}
+
+.pricing .card-title {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+}
+
+.pricing .card-price {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.pricing .card-price .period {
+  font-size: 0.8rem;
+}
+
+.pricing ul li {
+  margin-bottom: 1rem;
+}
+
+.pricing .text-muted {
+  opacity: 0.7;
+}
+
+.pricing .btn {
+  font-size: 80%;
+  border-radius: 5rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  padding: 1rem;
+  opacity: 0.7;
+  transition: all 0.2s;
+}
+
+/* Hover Effects on Card */
+
+.pricing .card-highlighted {
+    margin-top: -.25rem;
+    margin-bottom: .25rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+}
+
+@media (min-width: 992px) {
+  .pricing .card:hover {
+    margin-top: -.25rem;
+    margin-bottom: .25rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.3);
+  }
+  .pricing .card:hover .btn {
+    opacity: 1;
+  }
+}
+
+.red-check {
+    color: red;
+}
+.green-check {
+    color: green;
+}

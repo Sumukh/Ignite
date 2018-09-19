@@ -25,6 +25,12 @@ store_css = Bundle(
     output='public/css/store.css'
 )
 
+landing_css = Bundle(
+    'css/landing.css',
+    filters='cssmin',
+    output='public/css/landing.css'
+)
+
 tabler_css = Bundle(
     'tabler/css/tabler.css',
     'tabler/css/dashboard.css',

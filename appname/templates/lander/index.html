@@ -1,0 +1,273 @@
+{% extends "lander/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+{% set bg_color_class = ['bg-dark-orange', '', 'bg-blue', 'bg-dark-purple', 'bg-grey', 'bg-dark-blue']|random %}
+<section class="hero">
+	<div class="hero-bg {{bg_color_class}}"></div>
+	<header class="header">
+		<div class="container nav-header">
+			<a href="https://github.com/sumukh/ignite" target="_blank" class="logo">
+				<img src="{{ url_for('static', filename='public/ignite/ignite-icon.svg') }}" class="logo-icon h-6" alt="Ignite">
+				ignite
+			</a>
+			<div class="links">
+				<a href="#pricing">Pricing</a>
+				<a href="{{ url_for('auth.signup') }}">Demo</a>
+			</div>
+		</div>
+	</header>
+
+
+	<div class="container">
+		<div class="row hero-content">
+			<div class="col-sm">
+				<div class="hero-header">
+					<h1 class="hero-title">Batteries Included</h1>
+					<p class="hero-description">Ignite is a starting point for Flask web applications that handles the
+					basics of SaaS products (like user login and subscription billing) for you.
+					</p>
+
+					<div class="hero-cta">
+						<a href="{{ url_for('auth.signup') }}" class="btn btn-outline-light btn-outline hero-cta-btn">Demo</a>
+						<a href="#pricing" class="btn btn-light hero-cta-btn">Download</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm">
+				<div class="hero-browser image-animate-container">
+					<img class="hero-screenshot image-animate-img" src="{{ url_for('static', filename='public/ignite/demo-1.png') }}" x="0" y="0" height="400" />
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="section features">
+	<div class="container">
+		<h2 class="section-title">Get a headstart on your web app</h2>
+		<div class="section-description mb-6">
+			<div class="row">
+				<div class="col-md-4 feature-block">
+					<i class="fa fa-code feature-icon"></i>
+					<div class="feature-text-block">
+						<div class="feature-heading">Based on Flask & Python 3</div>
+						<div class="features-text-block">
+							Ignite builds upon Flask, a popular framework for Python used by many web applications (including Pinterest).
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 feature-block">
+						<i class="fa fa-cc-stripe feature-icon"></i>
+						<div class="feature-text-block">
+							<div class="feature-heading">Subscription & One Off Billing</div>
+							<div class="features-text-block">
+								Accept credit card payments and issue receipts through Stripe. Ignite Pro supports recurring billing.
+							</div>
+						</div>
+				</div>
+				<div class="col-md-4 feature-block">
+						<i class="fa fa-users feature-icon"></i>
+						<div class="feature-text-block">
+							<div class="feature-heading">Users & Teams</div>
+							<div class="features-text-block">
+								Ignite handles account registration, login, OAuth login (like login with Google), password resets, teams, and email confirmation.
+							</div>
+						</div>
+				</div>
+
+			</div>
+			<div class="row">
+
+				<div class="col-md-4 feature-block">
+					<i class="fa fa-building feature-icon"></i>
+					<div class="feature-text-block">
+						<div class="feature-heading">GDPR Features</div>
+						<div class="features-text-block">
+							User Data Export & PII Data Deletion framework is built in along with a variety of resources for GDPR.
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-4 feature-block">
+					<i class="fa fa-html5 feature-icon"></i>
+					<div class="feature-text-block">
+						<div class="feature-heading">Bootstrap 4 & HTML 5</div>
+						<div class="features-text-block">
+							Ignite uses Bootstrap, the most popular frontend HTML & CSS framework. The prebuilt UIs
+							serves as a good starting point for your app.
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 feature-block">
+					<i class="fa fa-cloud feature-icon"></i>
+					<div class="feature-text-block">
+						<div class="feature-heading">Scalable</div>
+						<div class="features-text-block">
+							Ignite supports deployment on cloud providers and builds upon modern best practices for Flask applications.
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+				<div class="col">
+				   <ul class="list-unstyled icon-offset">
+					  <li><strong>User Authentication</strong></li>
+					  <li><a href="#">User Login</a></li>
+					  <li><a href="#">Login with Google/OAuth</a></li>
+					  <li><a href="#">Email Confirmation</a></li>
+					  <li><a href="#">Forgot/Change Password</a></li>
+					  <li><a href="#">Teams Invitations</a></li>
+					  <li><a href="#">Teams Permission Levels</a></li>
+					  <li><a href="#">Email Notifications</a></li>
+					  <li><a href="#">Admin User Impersonation</a></li>
+					  <li><a href="#">Two Factor Authentication</a>
+						<a href="#pricing" class="badge badge-warning" data-toggle="tooltip" data-placement="right" title="Coming soon to Ignite Pro"> Coming Soon</a>
+					  </li>
+					  <li><a href="#">Data Export</a> <a href="#pricing" class="badge badge-danger" data-toggle="tooltip" data-placement="right" title="Available in Ignite PRO Version"> PRO</a></li>
+					  <li><a href="#">Data Deletion</a> <a href="#pricing" class="badge badge-danger" data-toggle="tooltip" data-placement="right" title="Available in Ignite PRO Version"> PRO</a></li>
+				   </ul>
+				</div>
+				<div class="col">
+					<ul class="list-unstyled icon-offset">
+						<li><strong>Server</strong></li>
+						<li><a href="#">User Facing API</a></li>
+						<li><a href="#">Caching</a></li>
+						<li><a href="#">Rate Limiting</a></li>
+						<li><a href="#">Error Tracking</a></li>
+						<li><a href="#">Super Admin Dashboard</a></li>
+						<li><a href="#">Job Queue</a></li>
+						<li><a href="#">Realtime Socket.io</a></li>
+						<li><a href="#">Stripe Webhooks</a> <a href="#pricing" class="badge badge-danger" data-toggle="tooltip" data-placement="right" title="Available in Ignite SaaS PRO Version">SaaS PRO</a></li>
+					</ul>
+				   <ul class="list-unstyled icon-offset">
+					  <li><strong>Developer Tools</strong></li>
+					  <li><a href="#">Basic Test Suite</a></li>
+					  <li><a href="#">Continous Integration Setup</a></li>
+					  <li><a href="#">Local Development Utilities</a></li>
+					  <li><a href="#">Editor Integration (VSCode - Run/Debug)</a></li>
+				   </ul>
+				</div>
+				<div class="col">
+				   <ul class="list-unstyled icon-offset">
+					  <li><strong>Design</strong></li>
+					  <li><a href="#">Admin Dashboard UI </a></li>
+					  <li><a href="#"> UI Sketch Templates </a></li>
+					  <li><a href="#">Charts</a></li>
+					  <li><a href="#">Email Templates</a></li>
+					  <li><a href="#">Login & Error Page</a></li>
+					  <li><a href="#">Font Icons</a></li>
+					  <li><a href="#">Asset Bundling System</a></li>
+					  <li><a href="#">Landing Page Design</a> <a href="#pricing" class="badge badge-danger" data-toggle="tooltip" data-placement="right" title="Available in Ignite PRO Version"> PRO</a></li>
+				   </ul>
+				   <ul class="list-unstyled icon-offset">
+						<li><strong>Infrastructure</strong></li>
+						<li><a href="#">Database Migrations</a></li>
+						<li><a href="#">Heroku/Dokku Deployment</a></li>
+						<li><a href="#">AWS/Google Cloud Deployment</a></li>
+						<li><a href="#">Docker Container Support</a></li>
+					</ul>
+
+				</div>
+
+
+
+
+		</div>
+	</div>
+</section>
+
+<section class="section pricing py-5" id="pricing">
+	<div class="pricing-bg {{bg_color_class}}"> </div>
+	<div class="container pricing-body">
+		<h2 class="section-title">Pricing</h2>
+		<div class="container">
+				<div class="row">
+						<!-- Free Tier -->
+						<div class="col-lg-4">
+						  <div class="card mb-5 mb-lg-0">
+							<div class="card-body">
+							  <h5 class="card-title text-muted text-uppercase text-center">Non Commerical</h5>
+							  <h6 class="card-price text-center">Free<span class="period"></span></h6>
+							  <hr>
+							  <ul class="fa-ul">
+								<li><span class="fa-li"><i class="fa green-check fa-check"></i></span>User Authentication</li>
+								<li><span class="fa-li"><i class="fa green-check fa-check"></i></span>Source Code Available</li>
+								<li class="text-muted">
+									<span class="fa-li"><i class="fa red-check fa-times"></i></span>
+									<strong>No Commerical Usage</strong>
+								</li>
+								<li class="text-muted"><span class="fa-li"><i class="fa red-check fa-times"></i></span>Must include Ignite link/credit</li>
+							  </ul>
+							  <hr>
+
+							  <a href="https://github.com/sumukh/ignite" target="_blank" class="btn btn-block btn-outline-dark text-uppercase">View Source Code</a>
+							</div>
+						  </div>
+						</div>
+						<!-- Plus Tier -->
+						<div class="col-lg-4">
+						  <div class="card card-highlighted mb-5 mb-lg-0">
+							<div class="card-body">
+							  <h5 class="card-title text-muted text-uppercase text-center">PRO</h5>
+							  <h6 class="card-price text-center">$199<span class="period">/site</span></h6>
+							  <hr>
+							  <ul class="fa-ul">
+								<li><span class="fa-li"><i class="fa green-check fa-check"></i></span><strong>Commercial Usage</strong></li>
+								<li><span class="fa-li"><i class="fa green-check fa-check"></i></span>Purchases with Stripe</li>
+								<li><span class="fa-li"><i class="fa green-check fa-check"></i></span>GDPR Features</li>
+								<li class="text-muted"><span class="fa-li"><i class="fa red-check fa-times"></i></span>Subscription Billing</li>
+							  </ul>
+							  <hr>
+
+							  <a href="{{ url_for('store.home') }}" class="btn btn-block btn-primary text-uppercase">Purchase</a>
+							</div>
+						  </div>
+						</div>
+						<!-- Pro Tier -->
+						<div class="col-lg-4">
+						  <div class="card">
+							<div class="card-body">
+							  <h5 class="card-title text-muted text-uppercase text-center">SaaS Pro</h5>
+							  <h6 class="card-price text-center">$499<span class="period">/license</span></h6>
+							  <hr>
+							  <ul class="fa-ul">
+								<li><span class="fa-li"><i class="fa green-check fa-check"></i></span><strong>Commercial Usage</strong></li>
+								<li><span class="fa-li"><i class="fa green-check fa-check"></i></span>
+									<strong>Subscription Billing</strong> (with Stripe)
+								</li>
+								<li><span class="fa-li"><i class="fa green-check fa-check"></i></span>GDPR Features</li>
+								<li><span class="fa-li"><i class="fa green-check fa-check"></i></span>Updates</li>
+							  </ul>
+							  <hr>
+
+							  <a href="#" class="btn btn-block btn-secondary text-uppercase">Contact Us</a>
+							</div>
+						  </div>
+						</div>
+				</div>
+
+		</div>
+	</div>
+</section>
+
+
+<footer class="footer">
+	<div class="container">
+		<div class="row align-items-center text-center">
+			<div class="col-md-auto">
+				<a href="https://github.com/sumukh/ignite">License & Credits</a>
+				・
+				<a href="https://github.com/sumukh/ignite">Privacy</a>
+			</div>
+			<div class="col-md-auto mt-2 mt-sm-0 ml-sm-auto">
+				Powered by <a href="https://github.com/sumukh/ignite">Ignite</a> for Flask
+				<!-- You must purchase a license of Ignite to remove the above disclaimer -->
+			</div>
+		</div>
+	</div>
+</footer>
+
+{% endblock %}
