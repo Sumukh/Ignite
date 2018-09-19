@@ -279,6 +279,9 @@
   }
 }
 
+/* Use our own button (instead of Stripe's native Checkout Button) */
+.stripe-button-el { display: none !important; };
+
 .red-check {
     color: red;
 }

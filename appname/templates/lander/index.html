@@ -2,6 +2,11 @@
 
 {% block title %}Home{% endblock %}
 
+{% block head_js %}
+    <script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+
+
 {% block body %}
 {% set bg_color_class = ['bg-dark-orange', '', 'bg-blue', 'bg-dark-purple', 'bg-grey', 'bg-dark-blue']|random %}
 <section class="hero">
@@ -213,13 +218,25 @@
 							  <hr>
 							  <ul class="fa-ul">
 								<li><span class="fa-li"><i class="fa green-check fa-check"></i></span><strong>Commercial Usage</strong></li>
-								<li><span class="fa-li"><i class="fa green-check fa-check"></i></span>Purchases with Stripe</li>
+								<li><span class="fa-li"><i class="fa green-check fa-check"></i></span>Stripe Checkout Integration</li>
 								<li><span class="fa-li"><i class="fa green-check fa-check"></i></span>GDPR Features</li>
 								<li class="text-muted"><span class="fa-li"><i class="fa red-check fa-times"></i></span>Subscription Billing</li>
 							  </ul>
 							  <hr>
 
-							  <a href="{{ url_for('store.home') }}" class="btn btn-block btn-primary text-uppercase">Purchase</a>
+								<form action="/store/payment" method="POST" class="stripe-checkout">
+									<script src="https://checkout.stripe.com/checkout.js"
+										class="stripe-button"
+										data-key="{{ stripe_publishable_key }}" data-amount="14900"
+										data-name="Ignite"
+										data-description="Ignite Starter Code"
+										data-image="{{ url_for('static', filename='public/ignite/ignite-icon.svg')  }}"
+										data-locale="auto"
+										data-currency="usd"
+										data-zip-code="true">
+									</script>
+									<button type="submit" class="btn btn-block btn-primary text-uppercase"> Purchase </button>
+							</form>
 							</div>
 						  </div>
 						</div>
@@ -240,7 +257,7 @@
 							  </ul>
 							  <hr>
 
-							  <a href="#" class="btn btn-block btn-secondary text-uppercase">Contact Us</a>
+							  <a href="mailto://{{ constants.SUPPORT_EMAIL }}" class="btn btn-block btn-secondary text-uppercase">Contact Us</a>
 							</div>
 						  </div>
 						</div>
