@@ -223,7 +223,7 @@
 								<li class="text-muted"><span class="fa-li"><i class="fa red-check fa-times"></i></span>Subscription Billing</li>
 							  </ul>
 							  <hr>
-
+							{% if stripe_publishable_key %}
 								<form action="/store/payment" method="POST" class="stripe-checkout">
 									<script src="https://checkout.stripe.com/checkout.js"
 										class="stripe-button"
@@ -236,6 +236,11 @@
 										data-zip-code="true">
 									</script>
 									<button type="submit" class="btn btn-block btn-primary text-uppercase"> Purchase </button>
+							{% else %}
+							  <a href="mailto://{{ constants.SUPPORT_EMAIL }}" class="btn btn-block btn-primary text-uppercase">Purchase</a>
+
+							{% endif %}
+
 							</form>
 							</div>
 						  </div>
