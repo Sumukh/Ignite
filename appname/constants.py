@@ -1,12 +1,15 @@
 # Constants
+import os 
+
 REQUIRE_EMAIL_CONFIRMATION = True
 ALLOW_SIGNUPS = True
 
-EMAIL_CONFIRMATION_SALT = 'email-confirmation-key'
-PASSWORD_RESET_SALT = 'pass-reset-key'
-PURCHASE_LICENSE_SALT = 'license-purchase-key'
+# TODO: These shouldn't be in constants (should be in settings)
+EMAIL_CONFIRMATION_SALT = os.getenv('EMAIL_CONFIRMATION_KEY', 'email-confirmation-key')
+PASSWORD_RESET_SALT = os.getenv('PASSWORD_RESET_KEY', 'pass-reset-key')
+PURCHASE_LICENSE_SALT = os.getenv('PASSWORD_RESET_KEY', 'license-purchase-key')
 
 PASSWORD_RESET_VALIDITY_SECONDS = 86400
 
 TEAM_MEMBER_ROLES = ['team member', 'administrator']
-SUPPORT_EMAIL = 'help@appname.com'
+SUPPORT_EMAIL = os.getenv('PASSWORD_RESET_KEY', 'help@appname.com')
