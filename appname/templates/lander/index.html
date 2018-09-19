@@ -3,9 +3,9 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-
+{% set bg_color_class = ['bg-dark-orange', '', 'bg-blue', 'bg-dark-purple', 'bg-grey', 'bg-dark-blue']|random %}
 <section class="hero">
-	<div class="hero-bg "></div>
+	<div class="hero-bg {{bg_color_class}}"></div>
 	<header class="header">
 		<div class="container nav-header">
 			<a href="https://github.com/sumukh/ignite" target="_blank" class="logo">
@@ -179,10 +179,8 @@
 	</div>
 </section>
 
-
-
 <section class="section pricing py-5" id="pricing">
-	<div class="pricing-bg"> </div>
+	<div class="pricing-bg {{bg_color_class}}"> </div>
 	<div class="container pricing-body">
 		<h2 class="section-title">Pricing</h2>
 		<div class="container">
