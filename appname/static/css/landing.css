@@ -103,8 +103,17 @@
     display: flex;
 }
 
+.hero-cta-btn {
+    border-radius: 25px;
+    margin-right: 5px;
+}
+
+.icon-offset {
+    margin-left: 50px;
+}
+
 .features {
-    padding-top: 50px;
+    padding-top: 25px;
 }
 
 .footer {
@@ -112,4 +121,142 @@
     padding: 2rem 0;
     font-size: 0.875rem;
     color: #888;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    font-weight: 300;
+}
+
+.feature-block {
+    margin-bottom: 30px;
+}
+
+.feature-icon {
+    font-size: 32px !important;
+    line-height: 52px !important;
+    color: #414c5c;
+    float: left;
+}
+
+.feature-text-block {
+    margin-left: 50px;
+    margin-top: 5px;
+}
+
+.feature-heading {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.feature-description {
+    margin-top: 15px;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.image-animate-container:hover {
+    perspective: 300px;
+    perspective-origin: 30%;
+    animation: screenshot-hover 5s infinite ease-in-out;
+
+}
+
+.image-animate-img:hover {
+    transform: translateY(1%) rotateY(-5deg) rotate(0deg);
+}
+
+@keyframes screenshot-hover {
+    0% {
+        transform: translateX(-1px) translateY(10px)
+    }
+
+    50% {
+        transform: translateX(-1px) translateY(-6px);
+    }
+
+    100% {
+        transform: translateX(-1px) translateY(10px)
+    }
+}
+
+/* Pricing Table: From https://startbootstrap.com/snippets/pricing-table/ */
+
+section.pricing {
+}
+
+.pricing .card {
+  border: none;
+  border-radius: 1rem;
+  transition: all 0.2s;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.pricing hr {
+  margin: 1.5rem 0;
+}
+
+.pricing .card-title {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+}
+
+.pricing .card-price {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.pricing .card-price .period {
+  font-size: 0.8rem;
+}
+
+.pricing ul li {
+  margin-bottom: 1rem;
+}
+
+.pricing .text-muted {
+  opacity: 0.7;
+}
+
+.pricing .btn {
+  font-size: 80%;
+  border-radius: 5rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  padding: 1rem;
+  opacity: 0.7;
+  transition: all 0.2s;
+}
+
+/* Hover Effects on Card */
+
+.pricing .card-highlighted {
+    margin-top: -.25rem;
+    margin-bottom: .25rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+}
+
+@media (min-width: 992px) {
+  .pricing .card:hover {
+    margin-top: -.25rem;
+    margin-bottom: .25rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.3);
+  }
+  .pricing .card:hover .btn {
+    opacity: 1;
+  }
+}
+
+.red-check {
+    color: red;
+}
+.green-check {
+    color: green;
 }

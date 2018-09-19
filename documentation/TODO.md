@@ -13,20 +13,20 @@ Core Functionality:
 - [x] Basic Test Suite
 - [x] Delayed Jobs/Work Queue
 - [x] Migrations
-- [x] Team Memberships
+- [x] Team Memberships & Invite Managment
+- [x] GDPR Export Features
 
 Currently Working On
-- [-] Team Membership Invites/Management
-    - [-] Invite Emails
-    - [-]
 - [-] Recurring SaaS Billing
 - [-] Better Documentation
-- [-] GDPR Features
+- [-] Landing Page
 
 Nice to haves:
 - [x] VSCode Debugger Integration
 - [x] One off payments via Stripe
+- [-] Generate API tokens for user
 - [ ] Two Factor Auth
+- [ ] Example of JS Framework Integration
 
 Maybe:
-- [ ] OAuth Provider (easy to add, if there is demand)
+- [ ] OAuth Provider Code (easy to add, if there is demand)

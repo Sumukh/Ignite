@@ -27,8 +27,8 @@
             </div>
             <div class="card-body">
                 <h4 class="card-title">
-                    <span class="old-sale-text">$100.00</span>
-                    <span class="new-sale-text">$49.99</span>
+                    <span class="old-sale-text">$200.00</span>
+                    <span class="new-sale-text">$99.99</span>
                 </h4>
                 <p class="card-text text-green">Includes the following features:</p>
             </div>
@@ -69,7 +69,7 @@
         <form action="/store/payment" method="POST" class="stripe-checkout">
             <script src="https://checkout.stripe.com/checkout.js"
                 class="stripe-button"
-                data-key="{{ stripe_publishable_key }}" data-amount="4999"
+                data-key="{{ stripe_publishable_key }}" data-amount="9999"
                 data-name="Ignite"
                 data-description="Ignite Starter Code"
                 data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
@@ -78,7 +78,7 @@
                 data-bitcoin="true"
                 data-zip-code="true">
                 </script>
-                <button type="submit" class="btn btn-primary btn-block"> Purchase with Credit Card ($49.99) </button>
+                <button type="submit" class="btn btn-primary btn-block"> Purchase with Credit Card ($99.99) </button>
         </form>
 
     </div>
