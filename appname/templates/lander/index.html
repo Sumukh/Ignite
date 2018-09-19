@@ -26,7 +26,7 @@
 				<div class="hero-header">
 					<h1 class="hero-title">Batteries Included</h1>
 					<p class="hero-description">Ignite is a starting point for Flask web applications that handles the
-					basics of SaaS products (like user login and recurring billing) for you.
+					basics of SaaS products (like user login and subscription billing) for you.
 					</p>
 
 					<div class="hero-cta">
@@ -36,8 +36,8 @@
 				</div>
 			</div>
 			<div class="col-sm">
-				<div class="hero-browser">
-					<img class="hero-screenshot" src="https://github.com/Sumukh/Ignite/raw/master/documentation/screenshots/dashboard.png" x="0" y="0" height="400" />
+				<div class="hero-browser image-animate-container">
+					<img class="hero-screenshot image-animate-img" src="{{ url_for('static', filename='public/ignite/demo-1.png') }}" x="0" y="0" height="400" />
 				</div>
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 
 <section class="section features">
 	<div class="container">
-		<h2 class="section-title">All of the features you don't want to build</h2>
+		<h2 class="section-title">Get a headstart on your web app</h2>
 		<div class="section-description mb-6">
 			<div class="row">
 				<div class="col-md-4 feature-block">
@@ -61,9 +61,9 @@
 				<div class="col-md-4 feature-block">
 						<i class="fa fa-cc-stripe feature-icon"></i>
 						<div class="feature-text-block">
-							<div class="feature-heading">Recurring & One Off Billing</div>
+							<div class="feature-heading">Subscription & One Off Billing</div>
 							<div class="features-text-block">
-								Accept credit card payments and issue receipts through Stripe. Ignite Pro supports subscription billing.
+								Accept credit card payments and issue receipts through Stripe. Ignite Pro supports recurring billing.
 							</div>
 						</div>
 				</div>
@@ -182,7 +182,8 @@
 
 
 <section class="section pricing py-5" id="pricing">
-	<div class="container">
+	<div class="pricing-bg"> </div>
+	<div class="container pricing-body">
 		<h2 class="section-title">Pricing</h2>
 		<div class="container">
 				<div class="row">
