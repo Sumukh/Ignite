@@ -1,5 +1,5 @@
 # Constants
-import os 
+import os
 
 REQUIRE_EMAIL_CONFIRMATION = True
 ALLOW_SIGNUPS = True

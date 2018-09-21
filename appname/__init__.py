@@ -106,7 +106,6 @@ def create_app(object_name):
         #         '<a href="{}" class="alert-link">Click here to resend</a>'.format(resend_confirm_link))
         #     flash(text, 'warning')
 
-
     # Import and register the different asset bundles
     assets_env.init_app(app)
     assets_loader = PythonAssetsLoader(assets)
