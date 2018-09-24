@@ -288,3 +288,36 @@
 .green-check {
     color: green;
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+    .hero-screenshot {
+        height: 300px;
+    }
+    .image-animate-container {
+        animation: none
+    }
+    .hero-header {
+        padding-top: 25px;
+    }
+    .hero-content {
+        padding-bottom: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-img-column {
+        display: none;
+    }
+    .hero-header {
+        padding-top: 25px;
+    }
+    .hero-content {
+        padding-bottom: 50px;
+    }
+}
+@media (max-width: 720px) {
+    .pricing-body {
+        margin-top: 50px;
+    }
+}
