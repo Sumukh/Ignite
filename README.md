@@ -1,4 +1,4 @@
-[![Ignite](https://github.com/Sumukh/Ignite/raw/master/appname/static/public/ignite/ignite-logo%402x.png)](https://github.com/sumukh/ignite)
+[![Ignite](https://user-images.githubusercontent.com/882381/45938197-49cfb880-bf7c-11e8-91ea-94fffd9d054a.png)](https://github.com/sumukh/ignite)
 
 # Ignite for Flask [![CircleCI](https://circleci.com/gh/Sumukh/Ignite.svg?style=svg&circle-token=21024628f8356bc070f27aede670fc676a8e4446)](https://circleci.com/gh/Sumukh/Ignite)
 
@@ -17,20 +17,20 @@ Ignite is a scaffold for starting new Flask applications. It takes care of the b
 | Send Emails | ✅  | Send email notifications from the application
 | Admin Dashboard | ✅  | Admin dashboard to edit data
 | Basic Test Suite | ✅  | Starting point for you to build out tests
-| Commercial Usage  | ❌  | Requires a purchased license (included with a purchase of Ignite Premium)
-| SaaS Recurring billing with Stripe | ❌ | (available in Ignite Premium)
+| Commercial Usage  | ❌  | Requires a purchased license (included with a purchase of Ignite Pro)
+| SaaS Recurring billing with Stripe | ❌ | (available in Ignite Pro)
 
 
 ## Ignite Premium
 
 A license to premium allows you to use all the features in Ignite Basic in addition to:
 
-| Features | Ignite Basic | Ignite Premium |
+| Features | Ignite Basic | Ignite Pro |
 | ------------- | ------------- | ---------- |
 | License for Commercial Use  | No  |  ✅  |
 | Remove "Powered by Ignite" badge  | Must be included  |  ✅  |
 | Video Tutorials  | No |  🔜 Coming Soon  |
-| Recurring Subscription Support (via Stripe)  | No  | Contact Us (Starting at $1999) |
+| Recurring Subscription Support (via Stripe)  | No  | Contact Us (Starting at $799) |
 
 You can purchase a license by emailing the author.
 
