@@ -184,6 +184,7 @@
 
 .image-animate-img {
     transform: translateY(-1%) rotateY(-4deg) rotate(0deg);
+    filter: drop-shadow(1px 2px 2px #444444);
 }
 
 @keyframes screenshot-hover {
