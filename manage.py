@@ -4,8 +4,9 @@ import os
 import binascii
 
 import click
-from flask_migrate import Migrate
 import pytest
+
+from flask_migrate import Migrate
 
 from appname import create_app
 from appname.models import db
