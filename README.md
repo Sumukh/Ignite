@@ -102,7 +102,7 @@ Admin Console:
 ![admin](https://user-images.githubusercontent.com/882381/33539038-326c31cc-d879-11e7-981a-1834f15cf718.png)
 
 Basic Landing Page:
-![homepage](https://user-images.githubusercontent.com/882381/33538945-ca50c3f0-d878-11e7-9b6e-8aba804dd227.png)
+![homepage](https://user-images.githubusercontent.com/882381/45938241-d4b0b300-bf7c-11e8-93dd-b40e3ad07e98.png)
 
 
 ## Credits
