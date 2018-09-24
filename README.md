@@ -19,6 +19,7 @@ Ignite is a scaffold for starting new Flask applications. It takes care of the b
 | Basic Test Suite | ✅  | Starting point for you to build out tests
 | Commercial Usage  | ❌  | Requires a purchased license (included with a purchase of Ignite Pro)
 | SaaS Recurring billing with Stripe | ❌ | (available in Ignite Pro)
+| Landing Page Design Usage | ❌ | (available in Ignite Pro)
 
 
 ## Ignite Premium
@@ -99,10 +100,6 @@ Dashboard:
 
 Admin Console:
 ![admin](https://user-images.githubusercontent.com/882381/33539038-326c31cc-d879-11e7-981a-1834f15cf718.png)
-
-[Landing Page](https://ignite.server.sumukh.me):
-![homepage](https://user-images.githubusercontent.com/882381/45938241-d4b0b300-bf7c-11e8-93dd-b40e3ad07e98.png)
-
 
 ## Credits
 
