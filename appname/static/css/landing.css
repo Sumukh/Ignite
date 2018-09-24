@@ -8,7 +8,7 @@
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 1.5rem;
     line-height: 2rem;
     color: inherit;
@@ -106,7 +106,7 @@
 
 
 .hero-header {
-    padding-top: 100px;
+    padding-top: 85px;
 }
 
 .nav-header {
