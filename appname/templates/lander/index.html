@@ -2,7 +2,7 @@
 
 {% block title %}Ignite{% endblock %}
 
-{% block head_js %}
+{% block js %}
     <script src="https://js.stripe.com/v3/"></script>
 {% endblock %}
 
@@ -230,7 +230,7 @@
 										data-key="{{ stripe_publishable_key }}" data-amount="14900"
 										data-name="Ignite"
 										data-description="Ignite Starter Code"
-										data-image="{{ url_for('static', filename='public/ignite/ignite-icon.svg')  }}"
+										data-image="{{ url_for('static', filename='public/ignite/ignite-icon.png')  }}"
 										data-locale="auto"
 										data-currency="usd"
 										data-zip-code="true">
