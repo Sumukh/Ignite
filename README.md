@@ -55,7 +55,7 @@ pip install -r requirements.txt
 
 ## License
 
-This is a commercial product. You may purchase a license for commercial use at [ignite.sumukh.me](ignite.sumukh.me)
+This is a commercial product. You may purchase a license for commercial use at [Ignite Website](https://ignite.server.sumukh.me)
 
 Here's a summary:
 
@@ -70,8 +70,7 @@ Here's a summary:
 | Warranty  | No  |  No | Provided As-is
 | Refunds  | N/A  |  30 Day |
 
-You can purchase a license at the [Ignite demo store](https://ignite.server.sumukh.me/store)
-
+You can purchase a license at the [Ignite Website](https://ignite.server.sumukh.me)
 
 For more detailed license information see LICENSE.md
 
@@ -101,7 +100,7 @@ Dashboard:
 Admin Console:
 ![admin](https://user-images.githubusercontent.com/882381/33539038-326c31cc-d879-11e7-981a-1834f15cf718.png)
 
-Basic Landing Page:
+[Landing Page](https://ignite.server.sumukh.me):
 ![homepage](https://user-images.githubusercontent.com/882381/45938241-d4b0b300-bf7c-11e8-93dd-b40e3ad07e98.png)
 
 
