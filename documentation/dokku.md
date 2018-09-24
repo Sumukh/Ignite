@@ -61,6 +61,11 @@ dokku run flask shell
 
 `dokku domains:add appname appname.com`
 
+## Disable checks for non-web containers
+
+`dokku checks:skip appname work,scheduler`
+
+
 ## HTTPS
 
 Install the letsencrypt plugin for dokku [dokku-letencrypt](https://github.com/dokku/dokku-letsencrypt)
