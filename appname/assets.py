@@ -4,6 +4,7 @@ common_css = Bundle(
     'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
     'css/vendor/helper.css',
     'css/main.css',
+    'css/overrides.css',
     filters='cssmin',
     output='public/css/common-1.css'
 )
@@ -34,6 +35,7 @@ landing_css = Bundle(
 tabler_css = Bundle(
     'tabler/css/tabler.css',
     'tabler/css/dashboard.css',
+    'css/overrides.css',
     filters='cssmin',
     output='public/css/tabler.css'
 )

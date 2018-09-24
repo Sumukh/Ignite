@@ -27,11 +27,16 @@
                             <button type="submit" class="btn btn-primary btn-block">Login</button>
                         </div>
                     </form>
-                    <div class="text-center mt-4">
-                        <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary btn-block">Login with OAuth</a>
+                    <div class="text-center text-muted">
+                        <hr class="thin" />
                     </div>
+                    {% if features.oauth %}
+                        <div class="text-center mt-4">
+                            <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary btn-block">Login with OAuth</a>
+                        </div>
+                    {% endif %}
                     <div class="text-center text-muted mt-3">
-                        Don't have account yet? <a href="{{ url_for('auth.signup') }}" class="btn btn-primary btn-block">Sign Up</a>
+                        Don't have an account yet? <a href="{{ url_for('auth.signup') }}" class="btn btn-primary btn-block">Sign Up</a>
                     </div>
                 </div>
             </div>

@@ -118,6 +118,10 @@ def create_app(object_name):
         'view_helpers': view_helpers,
         'debug': app.debug,
         'constants': constants,
+        'features': {
+            'oauth':  app.config["GOOGLE_CONSUMER_KEY"] != 'bad_key',
+            'segment':  app.config["SEGMENT_ANALYTICS_KEY"],
+        },
     })
 
     # register our blueprints
