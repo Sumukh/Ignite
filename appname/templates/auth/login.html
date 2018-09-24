@@ -32,7 +32,9 @@
                     </div>
                     {% if features.oauth %}
                         <div class="text-center mt-4">
-                            <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary btn-block">Login with OAuth</a>
+                            <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary btn-block">
+                                <i class="fa fa-google"></i> Login with Google
+                            </a>
                         </div>
                     {% endif %}
                     <div class="text-center text-muted mt-3">
