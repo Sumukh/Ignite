@@ -40,7 +40,7 @@ pynliner<1.0
 # Flask DB Extensions
 Flask-SQLAlchemy==2.3.2
 Flask-SQLAlchemy-Cache==0.1.5
-Flask-Migrate==2.2.1
+Flask-Migrate==2.3.0
 
 # Caching
 redis==2.10.6
