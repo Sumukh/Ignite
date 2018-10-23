@@ -61,7 +61,7 @@ stripe
 raven[flask]
 
 # Other
-itsdangerous==0.24
+itsdangerous==1.0.0
 cssmin==0.2.0
 jsmin==2.2.2
 hashids==1.2.0
