@@ -6,7 +6,7 @@ from flask_caching import Cache
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_login import LoginManager
 from flask_assets import Environment
-from flask_socketio import SocketIO
+# from flask_socketio import SocketIO
 from flask_rq2 import RQ
 from flask_mail import Mail
 from flask_limiter import Limiter
@@ -41,7 +41,7 @@ login_manager.needs_refresh_message_category = "info"
 
 token = Token()
 
-socketio = SocketIO()
+# socketio = SocketIO()
 rq2 = RQ()
 admin = AdminDashboard()
 mail = Mail()

@@ -1,0 +1,39 @@
+{% extends "tabler/minimal_base.html" %}
+{% from "helpers/_flashes.html" import render_flashes %}
+{% from "helpers/_formhelpers.html" import render_field %}
+
+{% block title %}appname Login Example{% endblock %}
+
+{% block body %}
+<div class="page-single">
+    <div class="container">
+        <div class="row">
+            <div class="col col-login mx-auto">
+                <div class="text-center mb-6">
+                    {{ render_flashes() }}
+                    <img src="{{ url_for('static', filename='public/ignite/ignite-logo.svg') }}" class="h-6" alt="Tabler">
+                </div>
+                <div class="card">
+                    <div class="text-center mt-4 mb-4">
+                        {% if features.oauth %}
+                            <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary btn-block">
+                                <i class="fa fa-google"></i> Login with Google
+                            </a>
+                        {% else %}
+                            It is not possible to login to appname right now because OAuth Login has not been configured.
+                        {% endif %}
+                    </div>
+                </div>
+                {% if constants.ALLOW_SIGNUPS %}
+                    <div class="text-center text-muted mt-3">
+                        Don't have an account yet? <a href="{{ url_for('auth.signup') }}" class="btn btn-primary btn-block">Sign Up</a>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'tabler/_footer.html' with context %}
+
+{% endblock %}

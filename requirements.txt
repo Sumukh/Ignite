@@ -17,7 +17,10 @@ Flask-Script==2.0.6
 Flask-WTF==0.14.2
 Flask-RESTful==0.3.6
 Flask-Testing>=0.6.2,<1.0
-Flask-SocketIO # Realtime Websockets
+
+Flask-SocketIO>=3.1.0 # Realtime Websockets
+python-engineio>=3.0.0 # Needed to fix startup error
+
 Flask-Mail
 Flask-Limiter
 

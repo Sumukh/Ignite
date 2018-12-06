@@ -11,34 +11,44 @@
                 <div class="text-center mb-6">
                     <img src="{{ url_for('static', filename='public/ignite/ignite-logo.svg') }}" class="h-6" alt="Tabler">
                 </div>
-                <form role="form" class="card" action="{{ url_for('auth.signup', invite_secret=invite_secret) }}" method="post">
+                <div class="card">
+                    <div class="card-body">
+                        {% if constants.ALLOW_PASSWORD_LOGIN %}
 
-                    <div class="card-body p-6">
-                        <div class="card-title">Sign up for appname</div>
-                        {{ form.hidden_tag() }}
-                        {{ render_field(form.email) }}
-                        {{ render_field(form.password) }}
-                        {{ render_field(form.confirm) }}
+                            <form role="form" action="{{ url_for('auth.signup', invite_secret=invite_secret) }}" method="post">
+                                <div class="card-title">Sign up for appname</div>
+                                {{ form.hidden_tag() }}
+                                {{ render_field(form.email) }}
+                                {{ render_field(form.password) }}
+                                {{ render_field(form.confirm) }}
 
-                        <div class="form-footer">
-                            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                                <div class="form-footer">
+                                    <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                                </div>
+                            </form>
+                            <div class="text-center text-muted">
+                                <hr class="thin" />
+                            </div>
+
+                        {% endif %}
+
+                        {% if features.oauth %}
+                            <div class="text-center mt-4">
+                                <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary btn-block">
+                                    <i class="fa fa-google"></i> Signup with Google
+                                </a>
+                            </div>
+                        {% elif not features.oauth and not constants.ALLOW_PASSWORD_LOGIN %}
+                            <div class="text-center mt-2 mb-4">
+                                OAuth Signup is not configured
+                            </div>
+                        {% endif %}
+
+                        <div class="text-center text-muted">
+                            <a href="{{ url_for('auth.login') }}">Already have an account? </a>
                         </div>
-                    </form>
-                    <div class="text-center text-muted">
-                        <hr class="thin" />
-                    </div>
-                    {% if features.oauth %}
-                        <div class="text-center mt-4">
-                            <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary btn-block">
-                                <i class="fa fa-google"></i> Signup with Google
-                            </a>
-                        </div>
-                    {% endif %}
 
-                    <div class="text-center text-muted">
-                        <a href="{{ url_for('auth.login') }}">Already have an account? </a>
                     </div>
-
                 </div>
             </div>
         </div>

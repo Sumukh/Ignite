@@ -24,8 +24,11 @@ def unauthorized():
     return redirect(url_for('auth.login', login_hint=login_hint))
 
 @auth.route("/login", methods=["GET", "POST"])
-@limiter.limit("10/minute")
+@limiter.limit("20/minute")
 def login():
+    if not constants.ALLOW_PASSWORD_LOGIN:
+        return render_template("auth/oauth_only_login.html")
+
     form = LoginForm()
 
     if form.validate_on_submit():

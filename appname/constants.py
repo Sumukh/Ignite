@@ -3,6 +3,7 @@ import os
 
 REQUIRE_EMAIL_CONFIRMATION = True
 ALLOW_SIGNUPS = True
+ALLOW_PASSWORD_LOGIN = True
 
 # TODO: These shouldn't be in constants (should be in settings)
 EMAIL_CONFIRMATION_SALT = os.getenv('EMAIL_CONFIRMATION_KEY', 'email-confirmation-key')
