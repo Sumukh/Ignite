@@ -1,3 +1,4 @@
+# In case you want to use Travis: move this file to the top level folder
 language: python
 python:
   - "2.7"
