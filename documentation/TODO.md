@@ -13,7 +13,7 @@ Core Functionality:
 - [x] Basic Test Suite
 - [x] Delayed Jobs/Work Queue
 - [x] Migrations
-- [x] Team Memberships & Invite Managment
+- [x] Team Memberships & Invite Management
 - [x] GDPR Export Features
 
 Currently Working On
