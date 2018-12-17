@@ -1,7 +1,7 @@
 Flask==1.0.2
 jinja2==2.10
 
-requests==2.20.1
+requests==2.21.0
 gunicorn
 
 # Flask Extensions
