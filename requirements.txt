@@ -49,7 +49,7 @@ Flask-Migrate==2.3.1
 redis==3.0.1
 
 # Job Queue
-Flask-RQ2==18.2.1
+Flask-RQ2==18.3
 rq==0.13.0
 rq-dashboard==0.3.12
 
