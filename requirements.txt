@@ -15,7 +15,7 @@ Flask-Login==0.4.1
 Flask-DebugToolbar==0.10.1
 Flask-Script==2.0.6
 Flask-WTF==0.14.2
-Flask-RESTful==0.3.6
+Flask-RESTful==0.3.7
 Flask-Testing>=0.6.2,<1.0
 
 Flask-SocketIO>=3.1.0 # Realtime Websockets
