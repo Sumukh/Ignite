@@ -4,14 +4,14 @@ from flask import Blueprint, flash, request, redirect, url_for, session
 from flask_login import login_user
 from flask_oauthlib.client import OAuth
 
-from appname.controllers.oauth import external_providers
+from appname.helpers import oauth_external_providers
 
 oauth_client = Blueprint('oauth_client', __name__)
 
 oauth = OAuth()
 
 # Change this value to change providers
-external_provider = external_providers.Google()
+external_provider = oauth_external_providers.Google()
 
 @oauth_client.record
 def record_params(setup_state):

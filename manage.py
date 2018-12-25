@@ -12,7 +12,7 @@ from appname import create_app
 from appname.models import db
 from appname.extensions import cache
 # Explictly import models here to to get Flask Migrate to pick them up
-from appname.models import (teams)  # noqa
+from appname.models import *  # noqa
 from appname.models.user import User
 
 # default to dev config because this should not be run in production
