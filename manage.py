@@ -56,6 +56,8 @@ def resetdb():
     actually_drop_tables()
     db.create_all()
     if env == 'dev':
+        # If you get a bunch of models, it might make sense to specify these as
+        # fixtures or maintain a development DB sqllite file.
         default_user = User("user@example.com", "test", admin=False)
         db.session.add(default_user)
         click.echo("Added user@example.com")
