@@ -8,9 +8,7 @@ def strip_whitespace(value):
         return value
 
 class BaseForm(FlaskForm):
-
     class Meta:
-
         def bind_field(self, form, unbound_field, options):
             filters = unbound_field.kwargs.get('filters', [])
             field_type = type(unbound_field)

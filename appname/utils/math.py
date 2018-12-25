@@ -20,4 +20,3 @@ def chunks(l, n):
         index = ceildiv(i * length, n)
         yield l[prev_index:index]
         prev_index = index
-

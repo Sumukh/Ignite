@@ -88,7 +88,7 @@ def confirm(code):
 
     try:
         email = token.decode(code, salt=constants.EMAIL_CONFIRMATION_SALT)
-    except Exception as e:
+    except Exception:
         email = None
 
     if not email:
@@ -156,7 +156,7 @@ def reset_password(code):
 
     try:
         email = token.decode(code, salt=constants.PASSWORD_RESET_SALT)
-    except Exception as e:
+    except Exception:
         email = None
 
     if not email:
@@ -184,9 +184,7 @@ def reauth():
         login_user(user)
 
         flash("Re-authenticated successfully.", "success")
-        return redirect(request.args.get("next")
-                        or url_for("dashboard_settings.index"))
-
+        return redirect(request.args.get("next", url_for("dashboard_settings.index")))
     return render_template("reauth.html", form=form)
 
 @auth.route('/invite/<hashid:invite_id>/join')

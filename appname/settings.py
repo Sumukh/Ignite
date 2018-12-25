@@ -11,7 +11,9 @@ class Config(object):
 
     MAIL_SERVER = os.getenv('MAIL_SERVER', 'smtp.mailgun.org')
     MAIL_PORT = os.getenv('MAIL_SERVER_PORT', 2525)
-    MAIL_USERNAME = os.getenv('MAIL_USERNAME')  # mailers/__init__.py checks to see if this is Truthy before sending emails
+
+    # mailers/__init__.py checks to see if this is Truthy before sending emails
+    MAIL_USERNAME = os.getenv('MAIL_USERNAME')
     MAIL_USE_TLS = os.getenv('MAIL_USE_TLS', True)
     MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
     MAIL_DEFAULT_SENDER = 'appname <admin@appname.com>'
@@ -59,7 +61,7 @@ class TestConfig(Config):
 
     db_file = tempfile.NamedTemporaryFile()
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + db_file.name
-    SQLALCHEMY_ECHO = False # Optionally enable if you want to see database actions
+    SQLALCHEMY_ECHO = False  # Optionally enable if you want to see database actions
     ASSETS_DEBUG = True
 
     CACHE_TYPE = 'null'

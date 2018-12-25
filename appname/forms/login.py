@@ -1,6 +1,6 @@
-from appname.forms import BaseForm
 from wtforms import validators, TextField, PasswordField, HiddenField
 
+from appname.forms import BaseForm
 from appname.models.user import User
 
 class LoginForm(BaseForm):
@@ -60,5 +60,4 @@ class ChangePasswordForm(BaseForm):
 
 class RequestPasswordResetForm(BaseForm):
     email = TextField('Email', validators=[validators.email(), validators.required()],
-                               description="Enter the email you used")
-
+                      description="Enter the email you used")

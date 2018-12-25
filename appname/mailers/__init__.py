@@ -78,4 +78,3 @@ class Mailer:
     def send(self, body, text=None):
         html_body = render_template(self.TEMPLATE, body=body)
         return self.deliver_later(self.recipient_email, self.subject, html_body)
-

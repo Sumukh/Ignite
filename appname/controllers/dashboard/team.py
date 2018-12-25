@@ -1,10 +1,6 @@
+from flask import Blueprint, render_template, flash, abort, redirect, url_for
 from flask_login import login_required, current_user
 
-from flask import (Blueprint, render_template, flash, abort,
-                   redirect, url_for, session, Markup)
-
-from appname.constants import REQUIRE_EMAIL_CONFIRMATION
-from appname.models import db
 from appname.models.teams import Team, TeamMember
 from appname.forms import SimpleForm
 from appname.forms.teams import InviteMemberForm
@@ -54,10 +50,9 @@ def remove_member(team_id, invite_id):
     form = SimpleForm()
     if form.validate_on_submit():
         removed_user = team_member.user or team_member.invite_email
-        team_member.delete(force=True) # Actually delete the model
+        team_member.delete(force=True)  # Actually delete the model
         flash('Removed {}'.format(removed_user), 'success')
         return redirect(url_for('.index'))
     else:
         flash('There was an error', 'warning')
         return redirect(url_for('.index'))
-

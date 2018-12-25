@@ -18,8 +18,8 @@ class AdminHomeView(admin.AdminIndexView):
 
     @admin.expose('/')
     def index(self):
-         self._template_args['user_count'] = User.query.count()
-         return super(AdminHomeView, self).index()
+        self._template_args['user_count'] = User.query.count()
+        return super(AdminHomeView, self).index()
 
 
 class AdminModelView(sqla.ModelView):

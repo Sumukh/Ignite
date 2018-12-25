@@ -1,14 +1,13 @@
 from flask_login import login_required, current_user
 
-from flask import Blueprint, render_template, flash, redirect, url_for, session, Markup, Response
+from flask import Blueprint, render_template, flash, redirect, url_for, Response
 
-from appname.constants import REQUIRE_EMAIL_CONFIRMATION, SUPPORT_EMAIL
+from appname.constants import SUPPORT_EMAIL
 from appname.models import db
 from appname.forms import SimpleForm
 from appname.forms.login import ChangePasswordForm
 from appname.forms.account import ChangeProfileForm
 from appname.helpers.gdpr import GDPRExport
-from appname.helpers.session import current_membership
 
 blueprint = Blueprint('dashboard_settings', __name__)
 
@@ -91,4 +90,3 @@ def account_deletion():
 @login_required
 def notifications():
     return render_template('dashboard/settings/notifications.html')
-

@@ -1,4 +1,4 @@
-from flask import render_template, url_for
+from flask import render_template
 
 from appname.mailers import Mailer
 

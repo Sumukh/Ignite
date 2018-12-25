@@ -39,4 +39,3 @@ class GDPRExport:
         export['User'] = self.user.gdpr_export_pii_data()
 
         return json.dumps(export, indent=4)
-

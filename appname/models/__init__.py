@@ -67,7 +67,7 @@ class Model(db.Model):
             key_val = self.id
         else:
             pk = self.__mapper__.primary_key
-            if type(pk) == tuple:
+            if isinstance(pk, tuple):
                 key_val = pk[0].name
             else:
                 key_val = self.__mapper__.primary_key._list[0].name
@@ -128,6 +128,7 @@ class ModelProxy:
     circular import dependencies.
     Usage: ModelProxy.Model.query
     """
+
     def __getattribute__(self, key):
         import appname.models
         return appname.models.__getattribute__(key)
@@ -143,7 +144,7 @@ def transaction(f):
             value = f(*args, **kwds)
             db.session.commit()
             return value
-        except:
+        except:  # noqa; This is intentional to ensure we rollback
             db.session.rollback()
             raise
     return wrapper

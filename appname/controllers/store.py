@@ -20,7 +20,7 @@ def payment():
         source=request.form['stripeToken']
     )
 
-    charge = stripe.Charge.create(
+    stripe.Charge.create(
         customer=customer.id,
         amount=4999,
         currency='usd',
