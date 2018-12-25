@@ -26,24 +26,24 @@
                         <div class="form-footer">
                             <button type="submit" class="btn btn-primary btn-block">Login</button>
                         </div>
-                    </form>
-                    <div class="text-center text-muted">
-                        <hr class="thin" />
+                </form>
+                <div class="text-center text-muted">
+                    <hr class="thin" />
+                </div>
+                {% if features.oauth %}
+                    <div class="text-center mt-4 mb-4">
+                        <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary btn-block">
+                            <i class="fa fa-google"></i> Login with Google
+                        </a>
                     </div>
-                    {% if features.oauth %}
-                        <div class="text-center mt-4">
-                            <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary btn-block">
-                                <i class="fa fa-google"></i> Login with Google
-                            </a>
-                        </div>
-                    {% endif %}
-                    <div class="text-center text-muted mt-3">
-                        Don't have an account yet? <a href="{{ url_for('auth.signup') }}" class="btn btn-primary btn-block">Sign Up</a>
-                    </div>
+                {% endif %}
+                <div class="text-center text-muted mt-3">
+                    Don't have an account yet? <a href="{{ url_for('auth.signup') }}" class="btn btn-primary btn-block">Sign Up</a>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 {% include 'tabler/_footer.html' with context %}
 

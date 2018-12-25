@@ -14,7 +14,6 @@
                 <div class="card">
                     <div class="card-body">
                         {% if constants.ALLOW_PASSWORD_LOGIN %}
-
                             <form role="form" action="{{ url_for('auth.signup', invite_secret=invite_secret) }}" method="post">
                                 <div class="card-title">Sign up for appname</div>
                                 {{ form.hidden_tag() }}
@@ -29,11 +28,10 @@
                             <div class="text-center text-muted">
                                 <hr class="thin" />
                             </div>
-
                         {% endif %}
 
                         {% if features.oauth %}
-                            <div class="text-center mt-4">
+                            <div class="text-center mt-4 mb-4">
                                 <a href="{{ url_for('oauth_client.login') }}" class="btn btn-primary btn-block">
                                     <i class="fa fa-google"></i> Signup with Google
                                 </a>
