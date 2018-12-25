@@ -84,9 +84,11 @@ class Twitter(BaseProvider):
     def get_user(self, token):
         response = self.client.get('user', token=token)
         # You need special access to get a users email from Twitter...
+        # See: https://stackoverflow.com/a/32852370
         if response.status == 200:
             user_data = response.data
             email = user_data['data']['email']
+            # If you can't rely on Twitter's email confirmation, set this to false
             return User.lookup_or_create(email, email_confirmed=True)
         else:
             logger.warning("Error {}".format(response.data))
@@ -103,7 +105,6 @@ class Twitter(BaseProvider):
         return session['provider_token']
 
 class Google(BaseProvider):
-
     base_config = {
         'request_token_params': {
             'scope': 'email',
