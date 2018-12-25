@@ -7,9 +7,13 @@ from werkzeug import security
 from flask import session, flash, redirect, request
 from flask_oauthlib.client import OAuthException
 
+from appname.models import db
 from appname.models.user import User
 
 logger = logging.getLogger(__name__)
+
+class ExternalProviderException(Exception):
+    pass
 
 class BaseProvider:
     base_config = {}
@@ -19,7 +23,7 @@ class BaseProvider:
 
     @property
     def name(self):
-        """ Convert Twitters to TWITTER """
+        """ Convert Twitter to TWITTER """
         return self.__class__.__name__.upper()
 
     @staticmethod
@@ -67,9 +71,25 @@ class BaseProvider:
             flash(error, "danger")
             # TODO Error Page
             return redirect("/")
-
         return self.parse_repsonse(resp)
 
+    def find_user_by_email(self, email, email_confirmed_by_provider=False):
+        if not email:
+            raise ExternalProviderException("We were unable to associate that login with an account")
+
+        # Allowing an unverified email to log on is a security risk since someone else may
+        # have setup an "unconfirmed" account on the external provider for one of our users
+        if not email_confirmed_by_provider:
+            raise ExternalProviderException(
+                "Please verify your email on {} first".format(
+                    self.__class__.__name__))
+
+        user = User.lookup_or_create_by_email(email, email_confirmed=True)
+        if not user.email_confirmed:
+            user.email_confirmed = True
+            db.session.add(user)
+            db.session.commit()
+        return user
 
 class Twitter(BaseProvider):
 
@@ -85,13 +105,13 @@ class Twitter(BaseProvider):
         response = self.client.get('user', token=token)
         # You need special access to get a users email from Twitter...
         # See: https://stackoverflow.com/a/32852370
-        if response.status == 200:
-            user_data = response.data
-            email = user_data['data']['email']
-            # If you can't rely on Twitter's email confirmation, set this to false
-            return User.lookup_or_create(email, email_confirmed=True)
-        else:
+        if response.status != 200:
             logger.warning("Error {}".format(response.data))
+            raise ExternalProviderException("Unknown Twitter Error when logging in")
+        user_data = response.data
+        email = user_data['data']['email']
+        # Twitter should return null if their email is not confirmed
+        return self.find_user_by_email(email, email_confirmed_by_provider=True)
 
     def parse_repsonse(self, resp):
         access_token = resp['oauth_token']
@@ -109,24 +129,23 @@ class Google(BaseProvider):
         'request_token_params': {
             'scope': 'email',
             'state': lambda: security.gen_salt(10),
-            'prompt': 'select_account'
+            'prompt': 'select_account'  # (optional) forces google to show the account selector
         },
-        'base_url': 'https://www.googleapis.com/plus/v1/',
+        'base_url': 'https://www.googleapis.com/',
         'request_token_url': None,
         'access_token_method': 'POST',
         'access_token_url': 'https://accounts.google.com/o/oauth2/token',
-        'authorize_url': 'https://accounts.google.com/o/oauth2/auth'
+        'authorize_url': 'https://accounts.google.com/o/oauth2/v2/auth'
     }
 
     def get_user(self, token):
-        response = self.client.get('people/me')
-        if response.status == 200:
-            user_data = response.data
-            if 'error' not in user_data and user_data.get('emails'):
-                email = user_data['emails'][0]['value']
-                return User.lookup_or_create(email, email_confirmed=True)
-        else:
-            logger.warning("Error {}".format(response.data))
+        response = self.client.get('oauth2/v3/userinfo')
+        user_data = response.data or {}
+        if response.status != 200 or 'error' in user_data:
+            logger.warning("Error {} {}".format(response.status, user_data))
+            raise ExternalProviderException("There was an unexpected error when logging you in")
+        email_confirmed = user_data.get('email_verified') or user_data.get('verified_email')
+        return self.find_user_by_email(user_data.get("email"), email_confirmed)
 
 class Okpy(BaseProvider):
 
@@ -142,9 +161,9 @@ class Okpy(BaseProvider):
 
     def get_user(self, token):
         response = self.client.get('user', token=token)
-        if response.status == 200:
-            user_data = response.data
-            email = user_data['data']['email']
-            return User.lookup_or_create(email, email_confirmed=True)
-        else:
-            logger.warning("Error {}".format(response.data))
+        if response.status != 200:
+            raise ExternalProviderException("There was an unexpected error when logging you in")
+        user_data = response.data
+        email = user_data['data']['email']
+        # We trust okpy's authentication/confirmation since they only use OAuth
+        return self.find_user_by_email(email, True)

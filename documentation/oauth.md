@@ -27,7 +27,7 @@ def user_from_token(token):
 
         if 'error' not in data and user_data.get('emails'):
             email = user_data['emails'][0]['value']
-            return  User.lookup_or_create(email, email_confirmed=True)
+            return  User.lookup_or_create_by_email_by_email_by_email(email, email_confirmed=True)
     flash("We could not log you in. Try again soon", 'warning')
     return redirect('/')
 
@@ -54,7 +54,7 @@ def user_from_token(token):
     if response.status == 200:
         user_data = response.data
         email = user_data['data']['email']
-        return User.lookup_or_create(email, email_confirmed=True)
+        return User.lookup_or_create_by_email_by_email(email, email_confirmed=True)
     else:
         flash("We could not log you in. Try again soon", 'warning')
         return redirect('/')

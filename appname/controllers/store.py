@@ -27,7 +27,7 @@ def payment():
         description='Ingite Flask App Code'
     )
 
-    user = User.lookup_or_create(request.form['stripeEmail'])
+    user = User.lookup_or_create_by_email(request.form['stripeEmail'])
     PurchaseReceipt(user).send()
 
     flash("Payment processed. You'll get an email shortly", 'success')
