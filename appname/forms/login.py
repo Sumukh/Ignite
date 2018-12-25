@@ -1,10 +1,10 @@
-from wtforms import validators, TextField, PasswordField, HiddenField
+from wtforms import validators, StringField, PasswordField, HiddenField
 
 from appname.forms import BaseForm
 from appname.models.user import User
 
 class LoginForm(BaseForm):
-    email = TextField('Email', validators=[validators.email(), validators.required()])
+    email = StringField('Email', validators=[validators.email(), validators.required()])
     password = PasswordField('Password', validators=[validators.required()])
 
     def validate(self):
@@ -28,11 +28,11 @@ class LoginForm(BaseForm):
         return True
 
 class SignupForm(BaseForm):
-    email = TextField('Email', validators=[validators.email(), validators.required()])
+    email = StringField('Email', validators=[validators.email(), validators.required()])
     password = PasswordField('Password', validators=[validators.required(), validators.length(min=4),
                                                      validators.EqualTo('confirm', message='Passwords must match')])
     confirm = PasswordField('Confirm Password', validators=[validators.required()])
-    email = TextField('Email', validators=[validators.email(), validators.required()])
+    email = StringField('Email', validators=[validators.email(), validators.required()])
     invite_secret = HiddenField('Invite ID')
 
     def validate(self):
@@ -59,5 +59,5 @@ class ChangePasswordForm(BaseForm):
     confirm = PasswordField('Repeat Password')
 
 class RequestPasswordResetForm(BaseForm):
-    email = TextField('Email', validators=[validators.email(), validators.required()],
-                      description="Enter the email you used")
+    email = StringField('Email', validators=[validators.email(), validators.required()],
+                        description="Enter the email you used")
