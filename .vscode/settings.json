@@ -10,5 +10,7 @@
         "--ignore=E302,E123,E133,E226,E241,E242",
         "--aggressive"
     ],
-    "python.linting.enabled": true
+    "python.linting.enabled": true,
+    // Jinja formatting is not great
+    "html.format.enable": false
 }
