@@ -33,10 +33,13 @@ def login():
 @oauth_client.route('/login/authorized/')
 def authorized():
     # Set session variables from response
-    token = external_provider.authorized_repsonse()
-    user = external_provider.get_user(token)
-    if not user:
-        flash("We could not log you in. Try again soon", 'warning')
+    try:
+        token = external_provider.authorized_repsonse()
+        user = external_provider.get_user(token)
+        if not user:
+            raise oauth_external_providers.ExternalProviderException("Unknown Error")
+    except oauth_external_providers.ExternalProviderException as e:
+        flash(e.message, 'warning')
         return redirect('/')
 
     login_user(user)

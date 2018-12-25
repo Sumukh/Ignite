@@ -88,7 +88,7 @@ class User(Model, UserMixin):
         return cls.query.filter_by(email=email).first()
 
     @classmethod
-    def lookup_or_create(cls, email, **kwargs):
+    def lookup_or_create_by_email(cls, email, **kwargs):
         existing = cls.query.filter_by(email=email).first()
         if existing:
             return existing
