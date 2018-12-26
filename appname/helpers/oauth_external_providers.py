@@ -4,7 +4,7 @@ import datetime as dt
 import logging
 
 from werkzeug import security
-from flask import session, flash, redirect, request
+from flask import has_request_context, session, flash, redirect, request
 from flask_oauthlib.client import OAuthException
 
 from appname.models import db
@@ -16,15 +16,23 @@ class ExternalProviderException(Exception):
     pass
 
 class BaseProvider:
+    """ Provides us with an abstraction so we can define custom behavior if
+    needed for specific implementations
+    """
     base_config = {}
 
     def __init__(self):
-        self.config = self.base_config.copy()
+        self.raw_config = self.base_config.copy()
 
     @property
     def name(self):
         """ Convert Twitter to TWITTER """
         return self.__class__.__name__.upper()
+
+    @property
+    def config(self):
+        # Some providers require a config that is dynamic (Shopify), but most do not
+        return self.raw_config
 
     @staticmethod
     def get_token():
@@ -36,13 +44,13 @@ class BaseProvider:
                              'example')
         secret = app.config.get('{}_CONSUMER_SECRET'.format(self.name),
                                 'example')
-
-        self.config['consumer_key'] = key
-        self.config['consumer_secret'] = secret
+        final_config = self.config.copy()
+        final_config['consumer_key'] = key
+        final_config['consumer_secret'] = secret
 
         self.client = oauth.remote_app(
             self.name,
-            **self.config
+            **final_config
         )
         self.client.tokengetter(self.get_token)
 
@@ -52,6 +60,9 @@ class BaseProvider:
         expires_in = resp.get('expires_in', 0)
         session['token_expiry'] = dt.datetime.now() + dt.timedelta(seconds=expires_in)
         session['provider_token'] = (access_token, '')  # (access_token, secret)
+
+    def authorize(self, callback_url, login_hint=None):
+        return self.client.authorize(callback=callback_url, login_hint=login_hint)
 
     def authorized_repsonse(self):
         try:
@@ -92,7 +103,6 @@ class BaseProvider:
         return user
 
 class Twitter(BaseProvider):
-
     base_config = {
         'base_url': 'https://api.twitter.com/1.1/',
         'request_token_url': 'https://api.twitter.com/oauth/request_token',
@@ -148,7 +158,6 @@ class Google(BaseProvider):
         return self.find_user_by_email(user_data.get("email"), email_confirmed)
 
 class Okpy(BaseProvider):
-
     base_config = {
         'request_token_params': {'scope': 'email',
                                  'state': lambda: security.gen_salt(10)},

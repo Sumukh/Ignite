@@ -6,12 +6,13 @@ class Config(object):
     SECRET_KEY = os.getenv('SECRET_KEY', 'REPLACE MEasdaappnamesdas#!3de*o0alas')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # Oauth config
     GOOGLE_CONSUMER_KEY = os.getenv('GOOGLE_CONSUMER_KEY', 'bad_key')
     GOOGLE_CONSUMER_SECRET = os.getenv('GOOGLE_CONSUMER_SECRET', 'bad_secret_replace_me')
 
+    # Email Config
     MAIL_SERVER = os.getenv('MAIL_SERVER', 'smtp.mailgun.org')
     MAIL_PORT = os.getenv('MAIL_SERVER_PORT', 2525)
-
     # mailers/__init__.py checks to see if this is Truthy before sending emails
     MAIL_USERNAME = os.getenv('MAIL_USERNAME')
     MAIL_USE_TLS = os.getenv('MAIL_USE_TLS', True)
