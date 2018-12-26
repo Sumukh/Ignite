@@ -3,7 +3,7 @@ import logging
 from flask_login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy_utils.types import EncryptedType
-from sqlalchemy_utils.types.encrypted import FernetEngine
+sqlalchemy_utils.types.encrypted.encrypted_type import FernetEngine
 
 from appname.models import db, Model, ModelProxy, global_encryption_key_iv
 
