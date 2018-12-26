@@ -4,7 +4,7 @@ import datetime as dt
 import logging
 
 from werkzeug import security
-from flask import has_request_context, session, flash, redirect, request
+from flask import session, flash, redirect, request
 from flask_oauthlib.client import OAuthException
 
 from appname.models import db
@@ -61,8 +61,8 @@ class BaseProvider:
         session['token_expiry'] = dt.datetime.now() + dt.timedelta(seconds=expires_in)
         session['provider_token'] = (access_token, '')  # (access_token, secret)
 
-    def authorize(self, callback_url, login_hint=None):
-        return self.client.authorize(callback=callback_url, login_hint=login_hint)
+    def authorize(self, callback=None, login_hint=None):
+        return self.client.authorize(callback=callback, login_hint=login_hint)
 
     def authorized_repsonse(self):
         try:
