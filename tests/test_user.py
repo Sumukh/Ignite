@@ -27,9 +27,19 @@ class TestModels:
         assert admin.check_password('supersafepassword')
         assert admin.is_admin
 
-    def test_user_group_creation (self, testapp):
+    def test_user_group_creation(self, testapp):
         """ Test that creating a user, creates a group & a membership """
         user = User('user@example.com', 'supersafepassword')
         db.session.add(user)
         db.session.commit()
         assert len(user.memberships) == 1
+
+    def test_user_encryption(self, testapp):
+        """ Test that encryption works """
+        user = User('user2@example.com', 'supersafepassword')
+        secret = "baasdasdas"
+        user.encrypted_totp_secret = secret
+        db.session.add(user)
+        db.session.commit()
+        assert len(user.memberships) == 1
+        assert User.query.all()[-1].encrypted_totp_secret == secret

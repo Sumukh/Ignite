@@ -2,18 +2,26 @@ import logging
 
 from flask_login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy_utils.types import EncryptedType
+from sqlalchemy_utils.types.encrypted import FernetEngine
 
-from appname.models import db, Model, ModelProxy
+from appname.models import db, Model, ModelProxy, global_encryption_key_iv
 
 logger = logging.getLogger(__name__)
 
 class User(Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True)
+    full_name = db.Column(db.String())
     email = db.Column(db.String(), nullable=False)
     password = db.Column(db.String())
     admin = db.Column(db.Boolean())
     role = db.Column(db.String(), default='user')
     email_confirmed = db.Column(db.Boolean())
+
+    # Encrypted Secret (used for Two Factor Authentication)
+    encrypted_totp_secret = db.Column(EncryptedType(db.String,
+                                                    key=global_encryption_key_iv,
+                                                    engine=FernetEngine))
 
     GDPR_EXPORT_COLUMNS = {
         "hashid": "ID of User",

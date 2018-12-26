@@ -25,6 +25,9 @@ class Config(object):
     SENTRY_DSN = os.getenv('SENTRY_DSN')
     SENTRY_PUBLIC_DSN = os.getenv('SENTRY_PUBLIC_DSN')
 
+    # Optional distinct DB value encryption key
+    DB_SECRET_KEY = os.getenv('DB_ENCRYTPION_SECRET_KEY', SECRET_KEY)
+
     # Make libraries that use redis use the same url (probably uneccesary)
     CACHE_REDIS_URL = RQ_REDIS_URL = REDIS_URL = os.getenv(
         'REDIS_URL', 'redis://localhost:6379/0')

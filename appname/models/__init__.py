@@ -1,8 +1,11 @@
+import base64
 import functools
 import json
 import logging
+import os
 
 from flask_sqlalchemy import SQLAlchemy, BaseQuery
+from sqlalchemy_utils import force_auto_coercion, force_instant_defaults
 from sqlalchemy import MetaData
 
 convention = {
@@ -15,6 +18,18 @@ convention = {
 metadata = MetaData(naming_convention=convention)
 db = SQLAlchemy(metadata=metadata)
 logger = logging.getLogger(__name__)
+
+# SQLAlchemy Utillity methods
+force_auto_coercion()
+force_instant_defaults()
+
+def global_encryption_key_iv():
+    """ Must be a URL-safe base64-encoded 32-byte key.
+    NEVER reveal the value of this.
+    """
+    flask_secret = os.getenv('DB_ENCRYTPION_SECRET_KEY', 'REPLACE MEasdaappnamesdas#!3de*o0alas')
+    padded_secret = "{:<32}".format(flask_secret)[0:32]
+    return base64.urlsafe_b64encode(padded_secret.encode())
 
 # Want to keep track of changes to your models? SQLAlchemy-Continuum will help!
 
@@ -48,7 +63,6 @@ class QueryWithSoftDelete(BaseQuery):
         # pre-loaded, so we need to implement it using a workaround
         obj = self.with_deleted()._get(*args, **kwargs)
         return obj if obj is not None and not obj.deleted else None
-
 
 class Model(db.Model):
     """ Add a timestamp to all models and allow for serialization."""
