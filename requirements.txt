@@ -33,7 +33,7 @@ Flask-Admin
 pymysql==0.9.3
 psycopg2-binary
 sqlalchemy==1.2.16
-sqlalchemy-utils==0.33.10 # Provides extra datatypes
+sqlalchemy-utils==0.33.11 # Provides extra datatypes
 
 # Timezones
 pytz
