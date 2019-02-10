@@ -27,8 +27,8 @@ class HashidConverter(BaseConverter):
 
 class CustomConverters:
     def init_app(self, app):
-        app.url_map.converters['bool'] = BoolConverter
         app.url_map.converters['hashid'] = HashidConverter
+        app.url_map.converters['bool'] = BoolConverter
 
 
 custom_converters = CustomConverters()
