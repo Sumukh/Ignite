@@ -1,9 +1,9 @@
 {
     "python.pythonPath": "${workspaceFolder}/env/bin/python",
-    "python.unitTest.pyTestArgs": [
+    "python.testing.pyTestArgs": [
         "."
     ],
-    "python.unitTest.pyTestEnabled": true,
+    "python.testing.pyTestEnabled": true,
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.formatting.autopep8Args": [
