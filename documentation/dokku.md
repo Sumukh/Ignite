@@ -16,7 +16,8 @@ git push dokku master # (from the master branch)
 Now we'll create the database & redis
 
 ```
-dokku postgres:create ignite ignite
+dokku config:set ignite APPNAME_ENV=prod FLASK_APP=manage.py
+dokku postgres:create ignite
 dokku postgres:link ignite ignite
 dokku redis:create ignite
 dokku redis:link ignite ignite
