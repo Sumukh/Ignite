@@ -1,7 +1,7 @@
 Flask==1.0.3
 jinja2==2.10.1
 
-requests==2.21.0
+requests==2.22.0
 gunicorn
 
 cryptography==2.6.1
