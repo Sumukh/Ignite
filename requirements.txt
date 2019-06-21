@@ -4,7 +4,7 @@ jinja2==2.10.1
 requests==2.22.0
 gunicorn
 
-cryptography==2.6.1
+cryptography==2.7
 
 # Flask Extensions
 Flask-Assets>=0.12,<0.12.99
@@ -32,8 +32,8 @@ Flask-Admin
 # Database
 pymysql==0.9.3
 psycopg2-binary
-sqlalchemy==1.3.3
-sqlalchemy-utils==0.33.10 # Provides extra datatypes
+sqlalchemy==1.3.4
+sqlalchemy-utils==0.34.0 # Provides extra datatypes
 
 # Timezones
 pytz
@@ -45,7 +45,7 @@ pynliner<1.0
 # Flask DB Extensions
 Flask-SQLAlchemy==2.4.0
 Flask-SQLAlchemy-Cache==0.1.5
-Flask-Migrate==2.5.1
+Flask-Migrate==2.5.2
 
 # Caching
 redis==3.2.1
@@ -73,7 +73,7 @@ hashids==1.2.0
 humanize==0.5.1
 
 # Testing
-pytest==4.5.0
+pytest==4.6.3
 pytest-cov==2.7.1
 mccabe==0.6.1
 flake8==3.7.7
