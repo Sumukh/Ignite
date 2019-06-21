@@ -21,6 +21,28 @@ Ignite is a scaffold for starting new Flask applications. It takes care of the b
 | SaaS Recurring billing with Stripe | ❌ | (available in Ignite Pro)
 | Landing Page Design Usage | ❌ | (available in Ignite Pro)
 
+## Setup
+Usage of Python 3 is recommended. It can be installed [on Python.org](https://www.python.org/downloads/)
+```
+# Optional but recommended:
+python3 -m venv env; source env/bin/activate
+
+pip install -r requirements.txt
+./manage.py server
+```
+## Running
+
+```
+# Development
+# If using a virtual env: source env/bin/activate
+./manage.py resetdb # to seed data
+./manage.py server
+
+# Login with the following credentials "user@example.com", "test
+
+# Production documentation in the repository.
+```
+
 
 ## Ignite Premium
 
@@ -35,24 +57,6 @@ A license to premium allows you to use all the features in Ignite Basic in addit
 
 You can purchase a license by emailing the author.
 
-## Setup
-Usage of Python 3 is recommended. It can be installed [on Python.org](https://www.python.org/downloads/)
-```
-# Optional but recommended: python3 -m venv env; source env/bin/activate
-
-pip install -r requirements.txt
-./manage.py server
-```
-
-## Running
-
-```
-# Development
-# If using a virtual env: source env/bin/activate
-./manage.py server
-
-# Production instructions below
-```
 
 ## License
 
@@ -63,7 +67,7 @@ Here's a summary:
 
 | Features | Ignite | (License) Ignite Premium | Comments |
 | ------------- | ------------- | ---------- | ------- |
-| Cost | Free | $150 per site | Currently on sale  |
+| Cost | Free | $199 per site | Currently on sale  |
 | Private Non Commercial Use | ✅ | ✅ |
 | Commercial Use  | No  |  ✅  |
 | Ability to remove "Powered by Ignite" footer | No  |  ✅  |
