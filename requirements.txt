@@ -73,7 +73,7 @@ hashids==1.2.0
 humanize==0.5.1
 
 # Testing
-pytest==5.0.1
+pytest==5.1.0
 pytest-cov==2.7.1
 mccabe==0.6.1
 flake8==3.7.8
