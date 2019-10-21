@@ -4,7 +4,7 @@ jinja2==2.10.3
 requests==2.22.0
 gunicorn
 
-cryptography==2.7
+cryptography==2.8
 
 # Flask Extensions
 Flask-Assets>=0.12,<0.12.99
