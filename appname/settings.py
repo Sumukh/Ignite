@@ -29,7 +29,7 @@ class Config(object):
     DB_SECRET_KEY = os.getenv('DB_ENCRYTPION_SECRET_KEY', SECRET_KEY)
 
     # Make libraries that use redis use the same url (probably uneccesary)
-    CACHE_REDIS_URL = RQ_REDIS_URL = REDIS_URL = os.getenv(
+    CACHE_REDIS_URL = RQ_DASHBOARD_REDIS_URL = RQ_REDIS_URL = REDIS_URL = os.getenv(
         'REDIS_URL', 'redis://localhost:6379/0')
 
 class ProdConfig(Config):
