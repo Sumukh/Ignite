@@ -60,7 +60,7 @@ You can purchase a license by emailing the author.
 
 ## License
 
-This is a commercial product. You may purchase a license for commercial use at [Ignite Website](https://ignite.server.sumukh.me)
+This is a commercial product. You may purchase a license for commercial use at [Ignite Website](https://ignite.sumukh.me)
 
 Here's a summary:
 
@@ -75,7 +75,7 @@ Here's a summary:
 | Warranty  | No  |  No | Provided As-is
 | Refunds  | N/A  |  30 Day |
 
-You can purchase a license at the [Ignite Website](https://ignite.server.sumukh.me)
+You can purchase a license at the [Ignite Website](https://ignite.sumukh.me)
 
 For more detailed license information see LICENSE.md
 
