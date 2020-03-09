@@ -71,7 +71,7 @@ itsdangerous==1.1.0
 cssmin==0.2.0
 jsmin==2.2.2
 hashids==1.2.0
-humanize==0.5.1
+humanize==2.0.0
 
 # Testing
 pytest==5.3.5
