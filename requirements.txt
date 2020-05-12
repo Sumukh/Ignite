@@ -19,6 +19,8 @@ Flask-Login==0.5.0
 Flask-DebugToolbar==0.11.0
 Flask-Script==2.0.6
 Flask-WTF==0.14.3
+wtforms[email]
+
 Flask-RESTful==0.3.8
 Flask-Testing>=0.6.2,<1.0
 
