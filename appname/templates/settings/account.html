@@ -1,7 +1,7 @@
 {% extends "tabler/dashboard_base.html" %}
 {% from "helpers/_formhelpers.html" import render_field %}
 
-{% block title %}appname settings{% endblock %}
+{% block title %}appname account settings{% endblock %}
 
 {% block body %}
 
@@ -9,17 +9,17 @@
     <div class="container">
         <div class="row">
             <div class="col-3">
-                {% include 'dashboard/settings/sidebar.html' %}
+                {% include 'settings/sidebar.html' %}
             </div>
             <div class="col-9">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Profile Information</h3>
                     </div>
-                    <form role="form" action="{{ url_for('dashboard_settings.account') }}" method="post">
+                    <form role="form" action="{{ url_for('user_settings.account') }}" method="post">
                         <div class="card-body">
                             {{ form.hidden_tag() }}
-                            {{ render_field(form.name) }}
+                            {{ render_field(form.name, value=(current_user.full_name or ''), placeholder='Your Name') }}
                         </div>
                         <div class="card-footer text-left">
                             <div class="d-flex">

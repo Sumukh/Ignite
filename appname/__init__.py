@@ -10,9 +10,10 @@ from appname.api.resources import api_blueprint
 from appname.controllers.main import main
 from appname.controllers.auth import auth
 from appname.controllers.store import store
+from appname.controllers.settings import settings_blueprint
 from appname.controllers.oauth.client import oauth_client
 from appname.controllers.admin.jobs import jobs
-import appname.controllers.dashboard
+from appname.controllers.dashboard import dashboard_blueprints
 
 from appname import utils
 from appname.helpers import view as view_helpers
@@ -31,6 +32,8 @@ from appname.extensions import (
     stripe,
     token
 )
+from appname.forms import SimpleForm
+
 
 def create_app(object_name):
     """
@@ -118,6 +121,7 @@ def create_app(object_name):
         'view_helpers': view_helpers,
         'debug': app.debug,
         'constants': constants,
+        'simple_form': SimpleForm,
         'features': {
             'oauth':  app.config["GOOGLE_CONSUMER_KEY"] != 'bad_key',
             'segment':  app.config["SEGMENT_ANALYTICS_KEY"],
@@ -128,9 +132,10 @@ def create_app(object_name):
     app.register_blueprint(main)
     app.register_blueprint(auth)
     app.register_blueprint(store)
+    app.register_blueprint(settings_blueprint)
 
     # Register user dashboard blueprints
-    for blueprint in appname.controllers.dashboard.dashboard_blueprints:
+    for blueprint in dashboard_blueprints:
         app.register_blueprint(blueprint, url_prefix='/dashboard')
 
     # API

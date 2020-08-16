@@ -33,7 +33,6 @@ landing_css = Bundle(
 )
 
 tabler_css = Bundle(
-    'tabler/css/tabler.css',
     'tabler/css/dashboard.css',
     'css/overrides.css',
     filters='cssmin',

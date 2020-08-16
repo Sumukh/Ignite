@@ -184,7 +184,7 @@ def reauth():
         login_user(user)
 
         flash("Re-authenticated successfully.", "success")
-        return redirect(request.args.get("next", url_for("dashboard_settings.index")))
+        return redirect(request.args.get("next", url_for("user_settings.index")))
     return render_template("reauth.html", form=form)
 
 @auth.route('/invite/<hashid:invite_id>/join')
@@ -212,3 +212,4 @@ def invite_page(invite_id, secret):
 
     form = SignupForm(invite_secret=invite.invite_secret)
     return render_template("auth/invite.html", form=form, invite=invite)
+

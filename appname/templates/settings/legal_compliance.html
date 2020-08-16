@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-3">
-                {% include 'dashboard/settings/sidebar.html' %}
+                {% include 'settings/sidebar.html' %}
             </div>
             <div class="col-9">
                 <div class="card">
@@ -42,14 +42,14 @@
                         <div class="container">
                             <div class="row">
                                   <div class="col">
-                                        <form role="form" action="{{ url_for('dashboard_settings.pii_download') }}" method="post">
+                                        <form role="form" action="{{ url_for('user_settings.pii_download') }}" method="post">
                                             {{ form.hidden_tag() }}
                                             <button type="submit" class="btn btn-primary btn-block"><i class="fe fe-file"></i> Download Data Export</button>
                                         </form>
                                     </div>
 
                                   <div class="col">
-                                    <form role="form" action="{{ url_for('dashboard_settings.pii_notification') }}" method="post">
+                                    <form role="form" action="{{ url_for('user_settings.pii_notification') }}" method="post">
                                         {{ form.hidden_tag() }}
                                         <button type="submit" class="btn btn-primary btn-block"><i class="fe fe-mail"></i>Send Data Export</button>
                                     </form>
@@ -71,7 +71,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col">
-                                    <form role="form" action="{{ url_for('dashboard_settings.account_deletion') }}" method="post">
+                                    <form role="form" action="{{ url_for('user_settings.account_deletion') }}" method="post">
                                         {{ form.hidden_tag() }}
                                         <button type="submit" class="btn btn-danger"><i class="fe fe-trash"></i> Delete Account</button>
                                     </form>

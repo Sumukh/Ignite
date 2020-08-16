@@ -18,12 +18,15 @@
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                        {% for membership in current_user.team_memberships %}
-                            <a href="{{ url_for('dashboard_settings.index') }}" class="dropdown-item">
+                        {% for membership in current_user.memberships %}
+                            <a href="{{ url_for('dashboard_home.home', team_id=membership.team.id) }}" class="dropdown-item">
                                 <i class="dropdown-icon fe fe-log-in"></i>  {{ membership.team.name }} Dashboard
                             </a>
                             <div class="dropdown-divider"></div>
                         {% endfor %}
+                        <a class="dropdown-item" href="{{ url_for('user_settings.account') }}">
+                            <i class="dropdown-icon fe fe-settings"></i> Account Settings
+                        </a>
 
                         <a class="dropdown-item" href="mailto://{{ constants.SUPPORT_EMAIL }}">
                             <i class="dropdown-icon fe fe-help-circle"></i> Need help?

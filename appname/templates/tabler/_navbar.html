@@ -17,14 +17,10 @@
                             <i class="fe fe-home"></i> Home
                         </a>
                     </li>
+                    {% if team %}
                     <li class="nav-item {{ 'active' if request.endpoint == 'dashboard_team.index' }}">
-                        <a href="{{ url_for('dashboard_team.index') }}" class="nav-link  {{ 'active' if request.endpoint == 'dashboard_team.index' }}">
+                        <a href="{{ url_for('dashboard_team.index', team_id=team.id) }}" class="nav-link  {{ 'active' if request.endpoint == 'dashboard_team.index' }}">
                             <i class="fe fe-users"></i> Your Team
-                        </a>
-                    </li>
-                    <li class="nav-item {{ 'active' if request.endpoint.startswith('dashboard_settings') }}">
-                        <a href="{{ url_for('dashboard_settings.index') }}" class="nav-link  {{ 'active' if request.endpoint.startswith('dashboard_settings') }}">
-                            <i class="fe fe-settings"></i> Settings
                         </a>
                     </li>
                     <li class="nav-item">
@@ -35,6 +31,13 @@
                             <a href="#" class="dropdown-item ">Menu Item 2</a>
                             <a href="#" class="dropdown-item ">Menu Item 3</a>
                         </div>
+                    </li>
+
+                    {% endif %}
+                    <li class="nav-item {{ 'active' if request.endpoint.startswith('user_settings') }}">
+                        <a href="{{ url_for('user_settings.index') }}" class="nav-link  {{ 'active' if request.endpoint.startswith('user_settings') }}">
+                            <i class="fe fe-settings"></i> User Settings
+                        </a>
                     </li>
                     {% else %}
                     <li class="nav-item {{ 'active' if request.endpoint == 'main.home' }}">

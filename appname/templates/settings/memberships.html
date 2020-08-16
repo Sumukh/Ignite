@@ -1,0 +1,71 @@
+{% extends "tabler/dashboard_base.html" %}
+{% from "helpers/_formhelpers.html" import render_field %}
+
+{% block title %}appname settings{% endblock %}
+
+{% block body %}
+
+<div class="my-3 my-md-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                {% include 'settings/sidebar.html' %}
+            </div>
+            <div class="col-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Memberships</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+                                <thead>
+                                    <tr>
+                                    <th>Team</th>
+                                    <th class="text-center">Role</th>
+                                    <th class="text-center">Active</th>
+                                    <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for member in memberships %}
+                                    <tr>
+                                        <td>
+                                            <div>{{ member.team.name }}</div>
+                                            <div class="small text-muted">
+                                                Invited: {{ member.created }}
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            {{ member.role | title }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ 'Yes' if member.activated else 'Invite Pending' }}
+                                        </td>
+                                        <td class="text-center">
+                                            {% if member.activated and member.user != None %}
+                                                <form role="form" action="{{ url_for('dashboard_team.remove_member', team_id=member.team.id, invite_id=member.id) }}" method="post">
+                                                    {{ form.hidden_tag() }}
+    
+                                                    <button type="submit" class="btn btn-secondary btn-sm">Remove</button>
+                                                </form>
+                                            {% elif not member.activated %}
+                                             <a class="btn btn-secondary btn-sm" href="{{ url_for('auth.invite_page', invite_id=member.id, secret=member.invite_secret) }}">
+                                                 Join
+                                              </a>
+                                            {% endif %}
+
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

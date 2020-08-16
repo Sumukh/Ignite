@@ -9,47 +9,47 @@ from appname.forms.login import ChangePasswordForm
 from appname.forms.account import ChangeProfileForm
 from appname.helpers.gdpr import GDPRExport
 
-blueprint = Blueprint('dashboard_settings', __name__)
+settings_blueprint = Blueprint('user_settings', __name__)
 
-@blueprint.before_request
-def check_for_membership(*args, **kwargs):
-    # Ensure that anyone that attempts to pull up the dashboard is currently an active member
-    if current_user.primary_membership_id is None:
-        flash('You currently do not have accesss to appname', 'warning')
-        return redirect(url_for("main.home"))
-
-@blueprint.route('/settings')
+@settings_blueprint.route('/settings')
 @login_required
 def index():
-    return redirect(url_for("dashboard_settings.account"))
+    return redirect(url_for("user_settings.account"))
 
-@blueprint.route('/settings/account', methods=['GET', 'POST'])
+@settings_blueprint.route('/settings/account', methods=['GET', 'POST'])
 @login_required
 def account():
     form = ChangeProfileForm()
-    return render_template('dashboard/settings/account.html', form=form)
+    return render_template('/settings/account.html', form=form)
 
-@blueprint.route('/settings/password', methods=['GET', 'POST'])
+@settings_blueprint.route('/settings/password', methods=['GET', 'POST'])
 @login_required
 def change_password():
     form = ChangePasswordForm()
 
-    if form.validate_on_submit():
+    if form.validate_on_submit(): 
         current_user.password = form.password.data
         db.session.commit()
         flash("Changed password", "success")
     else:
         form = ChangePasswordForm()
-        return render_template('dashboard/settings/change_password.html', form=form)
+        return render_template('/settings/change_password.html', form=form)
 
-@blueprint.route('/settings/legal')
+@settings_blueprint.route('/settings/legal')
 @login_required
 def legal_compliance():
     form = SimpleForm()
 
-    return render_template('dashboard/settings/legal_compliance.html', form=form)
+    return render_template('/settings/legal_compliance.html', form=form)
 
-@blueprint.route('/settings/legal/pii_download', methods=['POST'])
+@settings_blueprint.route('/settings/memberships')
+@login_required
+def memberships():
+    form = SimpleForm()
+    memberships = current_user.memberships
+    return render_template('/settings/memberships.html', form=form, memberships=memberships)
+
+@settings_blueprint.route('/settings/legal/pii_download', methods=['POST'])
 @login_required
 def pii_download():
     form = SimpleForm()
@@ -61,9 +61,9 @@ def pii_download():
     else:
         flash('Please try submitting the form again', 'warning')
 
-    return redirect(url_for("dashboard_settings.legal_compliance"))
+    return redirect(url_for("user_settings.legal_compliance"))
 
-@blueprint.route('/settings/legal/pii_send_export', methods=['POST'])
+@settings_blueprint.route('/settings/legal/pii_send_export', methods=['POST'])
 @login_required
 def pii_notification():
     # Should be queued as a job
@@ -73,9 +73,9 @@ def pii_notification():
         flash("Export queued & will be sent to your email", 'success')
     else:
         flash('Please try submitting the form again', 'warning')
-    return redirect(url_for("dashboard_settings.legal_compliance"))
+    return redirect(url_for("user_settings.legal_compliance"))
 
-@blueprint.route('/settings/legal/account_deletion', methods=['POST'])
+@settings_blueprint.route('/settings/legal/account_deletion', methods=['POST'])
 @login_required
 def account_deletion():
     form = SimpleForm()
@@ -84,9 +84,9 @@ def account_deletion():
         flash("Please email {0} to delete your account".format(SUPPORT_EMAIL), 'warning')
     else:
         flash('Please try submitting the form again', 'warning')
-    return redirect(url_for("dashboard_settings.legal_compliance"))
+    return redirect(url_for("user_settings.legal_compliance"))
 
-@blueprint.route('/settings/notifications')
+@settings_blueprint.route('/settings/notifications')
 @login_required
 def notifications():
-    return render_template('dashboard/settings/notifications.html')
+    return render_template('/settings/notifications.html')
