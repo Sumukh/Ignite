@@ -23,7 +23,10 @@ migrate = Migrate(app, db)
 
 @app.cli.command()
 def server():
-    """ Run a debug server. """
+    """ Run a debug server. When possible use 
+    ` $ FLASK_APP=manage FLASK_ENV=development flask run `
+    Do not use this for production (since it runs in debug mode)
+    """
     return app.run(debug=True)
 
 @app.cli.command()
@@ -39,7 +42,7 @@ def actually_drop_tables():
         confirm = input("Are you sure you want to run this on {}?".format(env))
         if confirm.lower().strip() != 'yes':
             return
-    click.echo('Resets the db')
+    click.echo('Dropping the db')
     db.drop_all()
 
 @app.cli.command()
@@ -49,6 +52,15 @@ def dropdb():
     """
     actually_drop_tables()
 
+def seed_data():
+    """ Create test users. """
+    default_user = User("user@example.com", "test", admin=False)
+    db.session.add(default_user)
+    click.echo("Added user@example.com")
+    admin = User("admin@example.com", "admin", admin=True, email_confirmed=True)
+    db.session.add(admin)
+    click.echo("Added admin@example.com")
+
 @app.cli.command()
 def resetdb():
     """ Drops the tables & loads seed data
@@ -56,14 +68,8 @@ def resetdb():
     actually_drop_tables()
     db.create_all()
     if env == 'dev':
-        # If you get a bunch of models, it might make sense to specify these as
-        # fixtures or maintain a development DB sqllite file.
-        default_user = User("user@example.com", "test", admin=False)
-        db.session.add(default_user)
-        click.echo("Added user@example.com")
-        admin = User("admin@example.com", "admin", admin=True, email_confirmed=True)
-        db.session.add(admin)
-        click.echo("Added admin@example.com")
+        # If you get a bunch of models, it might make sense to specify these
+        seed_data()
 
 @app.cli.command()
 def clear_cache():
@@ -81,9 +87,8 @@ def generate_session_key():
     click.echo(binascii.hexlify(os.urandom(26)))
 
 @app.cli.command()
-def seed_data():
-    """ Create test users. """
-    print("TODO")
+def create_seeds():
+    seed_data()
 
 @app.cli.command()
 @click.option('--coverage/--no-coverage', default=False, help='Enable code coverage')

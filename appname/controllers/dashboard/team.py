@@ -30,9 +30,14 @@ def add_member(team_id):
     if not team or not team.has_member(current_user):
         abort(404)
     form = InviteMemberForm()
+
     if form.validate_on_submit():
-        TeamMember.invite(team, form.email.data, form.role.data, current_user)
-        flash('Invited {}'.format(form.email.data), 'success')
+        existing_members = [member.user.email for member in team.members]
+        if form.email.data not in existing_members:
+            TeamMember.invite(team, form.email.data, form.role.data, current_user)
+            flash('Invited {}'.format(form.email.data), 'success')
+        else:
+            flash('{} is already a member'.format(form.email.data), 'warning')
         return redirect(url_for('.index'))
     else:
         flash('There was an error', 'warning')

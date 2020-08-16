@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Flask",
+            "name": "Flask (For Debugger)",
             "type": "python",
             "request": "launch",
             "stopOnEntry": false,
@@ -11,18 +11,16 @@
             "cwd": "${workspaceRoot}",
             "env": {
                 "FLASK_APP": "manage",
+                "FLASK_ENV": "development",
+                "FLASK_DEBUG": "0",
                 "LC_ALL": "en_US.utf-8",
                 "LANG": "en_US.utf-8"
             },
             "args": [
                 "run",
-                "--no-debugger",
-                "--no-reload"
+                "--no-debugger"
             ],
             "envFile": "${workspaceRoot}/.env",
-            "debugOptions": [
-                "RedirectOutput"
-            ]
-        }
+        },
     ]
 }

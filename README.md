@@ -28,7 +28,7 @@ Usage of Python 3 is recommended. It can be installed [on Python.org](https://ww
 python3 -m venv env; source env/bin/activate
 
 pip install -r requirements.txt
-./manage.py server
+./manage.py server # or `FLASK_APP=manage FLASK_ENV=development flask run`
 ```
 ## Running
 
@@ -36,8 +36,9 @@ pip install -r requirements.txt
 # Development
 # If using a virtual env: source env/bin/activate
 ./manage.py resetdb # to seed data
-./manage.py server
+FLASK_APP=manage FLASK_ENV=development flask run
 
+# Go to localhost:5000 in a browser and click on Login
 # Login with the following credentials "user@example.com", "test
 
 # Production documentation in the repository.
@@ -53,7 +54,6 @@ A license to premium allows you to use all the features in Ignite Basic in addit
 | License for Commercial Use  | No  |  ✅  |
 | Remove "Powered by Ignite" badge  | Must be included  |  ✅  |
 | Video Tutorials  | No |  🔜 Coming Soon  |
-| Recurring Subscription Support (via Stripe)  | No  | Contact Us (Starting at $799) |
 
 You can purchase a license by emailing the author.
 
@@ -85,7 +85,7 @@ Ignite is not tied to a specific platform for deployment, but it works well on [
 
 It is also designed to work well on other cloud providers such as AWS, Google Cloud, and DigitalOcean.
 
-Documentation is currently provided for installations on Dokku. Documentation for other providers can be provided with a purchase of a license of Ignite Premium.
+Documentation is currently provided for installations on Dokku. 
 
 ## Screenshots
 
