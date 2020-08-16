@@ -17,6 +17,7 @@ class User(Model, UserMixin):
     admin = db.Column(db.Boolean())
     role = db.Column(db.String(), default='user')
     email_confirmed = db.Column(db.Boolean())
+    user_api_key_hash = db.Column(db.String())
 
     # Encrypted Secret (used for Two Factor Authentication)
     encrypted_totp_secret = db.Column(EncryptedType(db.String,
