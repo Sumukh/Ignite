@@ -35,6 +35,8 @@ class GDPRExport:
                 if export_data:
                     # This will produce odd results if two model classes have the same name
                     export[str(item.__class__.__name__)].append(export_data)
+        for provider in self.user.oauth:
+            export['OAuth'].append(self.user.oauth[provider].gdpr_export_pii_data())
 
         export['User'] = self.user.gdpr_export_pii_data()
 

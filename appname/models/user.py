@@ -147,3 +147,9 @@ class OAuth(Model, OAuthConsumerMixin):
             cascade="all, delete-orphan",
         ),
     )
+    GDPR_EXPORT_COLUMNS = {
+        "provider_user_login": "Provider User Login",
+        "provider_user_id": "Provider User ID ",
+        "provider": "The provider",
+        "created_at": "When it was created"
+    }
