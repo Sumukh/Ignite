@@ -48,3 +48,9 @@ class TeamMember(Model):
         db.session.add(member)
         db.session.commit()
         InviteEmail(member).send()
+
+    @property
+    def email(self):
+        if self.user_id:
+            return self.user.email
+        return self.invite_email

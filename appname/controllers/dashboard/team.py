@@ -35,12 +35,11 @@ def add_member(team_id):
     form = InviteMemberForm()
 
     if form.validate_on_submit():
-        existing_members = [member.user.email for member in team.members]
-        if len(existing_members) >= MAX_TEAM_SIZE:
+        if len(team.members) >= MAX_TEAM_SIZE:
             # Here is where you could implement restrictions on team size if you wanted.
             flash('For your plan, teams can only have up to {} members'.format(MAX_TEAM_SIZE), 'warning')
             return redirect(url_for('.index', team_id=team_id))
-
+        existing_members = [member.user.email for member in team.members if member.user]
         if form.email.data not in existing_members:
             TeamMember.invite(team, form.email.data, form.role.data, current_user)
             flash('Invited {}'.format(form.email.data), 'success')
@@ -73,16 +72,18 @@ def remove_member(team_id, invite_id):
 
     form = SimpleForm()
     if form.validate_on_submit():
-        if len(team.active_members) <= 1:
-            flash('Teams must have at least one user. You cannot remove the last user', 'warning')
+        existing_members = [member.user.email for member in team.members if member.user]
+        if len(team.active_members) <= 1 and team_member.email in existing_members:
+            flash('Teams must have at least one active user. You cannot remove the last active user', 'warning')
             return redirect(url_for('.index', team_id=team_id))
         if team.creator == team_member.user:
             flash('You cannot remove the creator of a team from the team', 'warning')
             return redirect(url_for('.index', team_id=team_id))
 
-        removed_user = team_member.user or team_member.invite_email
+        removed_user = team_member.user
+        old_email = team_member.email
         team_member.delete(force=True)  # Actually delete the model
-        flash('Removed {}'.format(removed_user.email), 'success')
+        flash('Removed {}'.format(old_email), 'success')
         if removed_user != current_user:
             return redirect(url_for('.index', team_id=team_id))
         else:
