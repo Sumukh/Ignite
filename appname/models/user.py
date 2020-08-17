@@ -98,6 +98,10 @@ class User(Model, UserMixin):
         return [member for member in self.memberships if member.activated]
 
     @property
+    def admin_memberships(self):
+        return [member for member in self.memberships if member.activated and member.role == 'administrator']
+
+    @property
     def active_teams(self):
         return [member.team for member in self.active_memberships]
 

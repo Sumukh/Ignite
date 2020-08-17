@@ -44,7 +44,7 @@
             <div class="col-9">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Invoices & Payments</h3>
+                        <h3 class="card-title">Upgrade</h3>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -52,7 +52,7 @@
                                 <thead>
                                     <tr>
                                     <th>Team</th>
-                                    <th class="text-center">Role</th>
+                                    <th class="text-center">Plan</th>
                                     <th class="text-center">Upgrade</th>
                                     </tr>
                                 </thead>
@@ -63,15 +63,19 @@
                                             <div>{{ member.team.name }}</div>
                                         </td>
                                         <td class="text-center">
-                                            {{ member.role | title }}
+                                            {{ member.team.plan | title }}
                                         </td>
                                         <td class="text-center">
+                                            {% if member.team.is_paid_plan %}
+                                                Billing managed by {{ member.team.plan_owner.email }}
+                                            {% else %}
                                             <a class="btn btn-primary text-white"  onclick="purchase('{{ plans["monthly"] }}')">
                                                 Upgrade ($10/month)
                                             </a>
                                             <a class="btn btn-primary text-white "  onclick="purchase('{{ plans["annual"] }}')">
                                                 Save 20% ($100/year)
                                             </a>
+                                            {% endif %}
                                         </td>
                                     </tr>
                                 {% endfor %}

@@ -19,9 +19,11 @@ class Team(Model):
 
     name = db.Column(db.String(255))
     # Plan may need to become DB backed when billing is introduced.
-    plan = db.Column(db.String(), default='default')
+    plan = db.Column(db.String(), default='free')
+    plan_owner_id = db.Column(db.ForeignKey("user.id"))
 
-    creator = db.relationship("User")
+    creator = db.relationship("User", foreign_keys=[creator_id])
+    plan_owner = db.relationship("User", foreign_keys=[plan_owner_id])
 
     GDPR_EXPORT_COLUMNS = {
         "name": "Name of the time",
@@ -31,6 +33,10 @@ class Team(Model):
 
     def has_member(self, user):
         return user in [member.user for member in self.active_members]
+
+    @property
+    def is_paid_plan(self):
+        return self.plan != 'free'
 
     @property
     def active_members(self):
