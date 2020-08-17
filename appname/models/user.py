@@ -32,9 +32,11 @@ class User(Model, UserMixin):
                                                     engine=FernetEngine))
 
     GDPR_EXPORT_COLUMNS = {
+        "id": "ID of the user",
         "hashid": "ID of User",
         "email": "User Email",
         "created": "When the user was created",
+        "full_name": "The users full name",
         "email_confirmed": "Whether the email was confirmation"
     }
 

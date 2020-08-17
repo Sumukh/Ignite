@@ -33,6 +33,7 @@ class TeamMember(Model):
         "activated": "Was the invite activated?",
         "created": "When the invite was created",
         "team_id": "What team was the invite for",
+        "inviter_id": "Who sent the invite",
         "role": "Role on team"
     }
 

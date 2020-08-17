@@ -29,8 +29,10 @@ class Team(Model):
     plan_owner = db.relationship("User", foreign_keys=[plan_owner_id])
 
     GDPR_EXPORT_COLUMNS = {
-        "name": "Name of the time",
-        "plan": "What plan was",
+        "id": "ID of the team",
+        "hashid": "ID of User",
+        "name": "Name of the team",
+        "plan": "What plan the team was on",
         "created": "When the team was created"
     }
 
