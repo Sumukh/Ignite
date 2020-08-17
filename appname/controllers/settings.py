@@ -27,7 +27,7 @@ def account():
 def change_password():
     form = ChangePasswordForm()
 
-    if form.validate_on_submit(): 
+    if form.validate_on_submit():
         current_user.password = form.password.data
         db.session.commit()
         flash("Changed password", "success")
@@ -47,7 +47,8 @@ def legal_compliance():
 def api():
     form = SimpleForm()
     if form.validate_on_submit():
-        flash("Your API Key is: '{}'. It will not be displayed again, so make sure you save it.".format('2323'), 'success')
+        flash("Your API Key is: '{}'. It will not be displayed again, so make sure you save it.".format('2323'),
+              'success')
     return render_template('/settings/api.html', form=form)
 
 @settings_blueprint.route('/settings/memberships')

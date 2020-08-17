@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from flask_restful.representations.json import output_json
 import flask_restful as restful
 
-from appname.extensions import login_manager, hashids
+from appname.extensions import login_manager
 from appname.models.user import User
 
 api_blueprint = Blueprint('api', __name__)
@@ -42,7 +42,7 @@ def load_user_from_request(request):
         return None
 
     # first, try to login using the api_key url arg
-    api_key = request.args.get('api_key') 
+    api_key = request.args.get('api_key')
     if not api_key:
         return None
     user_id, provided_key = api_key.split('-')

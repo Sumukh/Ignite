@@ -1,6 +1,5 @@
 from flask_restful import marshal_with
 from flask_login import current_user
-from flask import request 
 from appname.api import Resource, API_VERSION
 from appname.api.schema import APISchema
 
