@@ -1,6 +1,6 @@
+from flask import Blueprint, render_template, flash, redirect, url_for, Response, request
 from flask_login import login_required, current_user
 
-from flask import Blueprint, render_template, flash, redirect, url_for, Response
 
 from appname.constants import SUPPORT_EMAIL
 from appname.models import db
@@ -8,6 +8,9 @@ from appname.forms import SimpleForm
 from appname.forms.login import ChangePasswordForm
 from appname.forms.account import ChangeProfileForm
 from appname.helpers.gdpr import GDPRExport
+from appname.utils.token import generate_api_secret
+
+from appname.extensions import stripe
 
 settings_blueprint = Blueprint('user_settings', __name__)
 
@@ -42,12 +45,34 @@ def legal_compliance():
 
     return render_template('/settings/legal_compliance.html', form=form)
 
+@settings_blueprint.route('/settings/oauth')
+@login_required
+def oauth():
+    return render_template('/settings/oauth.html')
+
+@settings_blueprint.route('/settings/billing', methods=['GET', 'POST'])
+@login_required
+def billing():
+    if request.args.get('success'):
+        flash('Processing your payment', 'success')
+    form = SimpleForm()
+
+    plans = {'monthly': 'price_1HGzFQID8JASalnlgBAX2hjo',
+             'annual': 'price_1HGzFQID8JASalnlBeRxlkno'}
+    if form.validate_on_submit() and current_user.billing_customer_id:
+        return redirect(stripe.customer_portal_link(current_user))
+    return render_template('/settings/billing.html', form=form, plans=plans, stripe_publishable_key=stripe.publishable_key)
+
+
 @settings_blueprint.route('/settings/api', methods=['GET', 'POST'])
 @login_required
 def api():
     form = SimpleForm()
     if form.validate_on_submit():
-        flash("Your API Key is: '{}'. It will not be displayed again, so make sure you save it.".format('2323'),
+        api_key = generate_api_secret(current_user)
+        current_user.hash_api_key(api_key)
+
+        flash("Your API Key is: '{}'. It will not be displayed again, so make sure you save it.".format(api_key),
               'success')
     return render_template('/settings/api.html', form=form)
 
@@ -94,8 +119,3 @@ def account_deletion():
     else:
         flash('Please try submitting the form again', 'warning')
     return redirect(url_for("user_settings.legal_compliance"))
-
-@settings_blueprint.route('/settings/notifications')
-@login_required
-def notifications():
-    return render_template('/settings/notifications.html')

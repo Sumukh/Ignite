@@ -9,6 +9,18 @@
         class="list-group-item list-group-item-action d-flex align-items-center  {{ 'active' if request.endpoint == 'user_settings.change_password' }}">
             <span class="icon mr-3"><i class="fe fe-lock"></i></span>Change Password
         </a>
+        <a href="{{ url_for('user_settings.oauth') }}"
+        class="list-group-item list-group-item-action d-flex align-items-center  {{ 'active' if request.endpoint == 'user_settings.oauth' }}">
+            <span class="icon mr-3"><i class="fa fa-google"></i></span>Linked Accounts
+        </a>
+
+        <div class="dropdown-divider"></div>
+        <a href="{{ url_for('user_settings.billing') }}"
+        class="list-group-item list-group-item-action d-flex align-items-center  {{ 'active' if request.endpoint == 'user_settings.billing' }}">
+            <span class="icon mr-3"><i class="fe fe-credit-card"></i></span>Billing
+        </a>
+
+
         <a href="{{ url_for('user_settings.memberships') }}"
         class="list-group-item list-group-item-action d-flex align-items-center  {{ 'active' if request.endpoint == 'user_settings.memberships' }}">
             <span class="icon mr-3"><i class="fe fe-users"></i></span>Team Memberships
@@ -17,14 +29,6 @@
         <a href="{{ url_for('user_settings.api') }}"
         class="list-group-item list-group-item-action d-flex align-items-center  {{ 'active' if request.endpoint == 'user_settings.api' }}">
             <span class="icon mr-3"><i class="fe fe-zap"></i></span>API Access
-        </a>
-
-
-
-
-        <a href="{{ url_for('user_settings.notifications') }}"
-        class="list-group-item list-group-item-action d-flex align-items-center  {{ 'active' if request.endpoint == 'user_settings.notifications' }}">
-            <span class="icon mr-3"><i class="fe fe-bell"></i></span>Customize Notifications
         </a>
 
 

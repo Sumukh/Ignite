@@ -2,12 +2,18 @@ import logging
 
 from flask_login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+
+from sqlalchemy.orm.collections import attribute_mapped_collection
 from sqlalchemy_utils.types import EncryptedType
 from sqlalchemy_utils.types.encrypted.encrypted_type import FernetEngine
+
+from flask_dance.consumer.storage.sqla import OAuthConsumerMixin
 
 from appname.models import db, Model, ModelProxy, global_encryption_key_iv
 
 logger = logging.getLogger(__name__)
+
+# (Ignite) TODO: Cleanup the methods here
 
 class User(Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True)
@@ -18,6 +24,7 @@ class User(Model, UserMixin):
     role = db.Column(db.String(), default='user')
     email_confirmed = db.Column(db.Boolean())
     user_api_key_hash = db.Column(db.String())
+    billing_customer_id = db.Column(db.String())
 
     # Encrypted Secret (used for Two Factor Authentication)
     encrypted_totp_secret = db.Column(EncryptedType(db.String,
@@ -32,11 +39,12 @@ class User(Model, UserMixin):
     }
 
     def __init__(self, email=None, password=None, admin=False,
-                 email_confirmed=False, team=None):
+                 email_confirmed=False, team=None, name=None):
         if not email:
             raise ValueError('No Email Provided')
 
         self.email = email.lower().strip()
+        self.full_name = name
         self.email_confirmed = email_confirmed
 
         if admin:
@@ -61,6 +69,11 @@ class User(Model, UserMixin):
         if self.user_api_key_hash:
             return check_password_hash(self.user_api_key_hash, api_key)
         return False
+
+    def hash_api_key(self, api_key):
+        self.user_api_key_hash = generate_password_hash(api_key)
+        db.session.add(self)
+        db.session.commit()
 
     @property
     def is_authenticated(self):
@@ -112,3 +125,19 @@ class User(Model, UserMixin):
         db.session.commit()
         return new_user
 
+class OAuth(Model, OAuthConsumerMixin):
+    __table_args__ = (db.UniqueConstraint("provider", "provider_user_id"),)
+    provider_user_id = db.Column(db.String(256), nullable=False)
+    provider_user_login = db.Column(db.String(256), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
+    user = db.relationship(
+        User,
+        # This `backref` thing sets up an `oauth` property on the User model,
+        # which is a dictionary of OAuth models associated with that user,
+        # where the dictionary key is the OAuth provider name.
+        backref=db.backref(
+            "oauth",
+            collection_class=attribute_mapped_collection("provider"),
+            cascade="all, delete-orphan",
+        ),
+    )

@@ -7,8 +7,8 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Oauth config
-    GOOGLE_CONSUMER_KEY = os.getenv('GOOGLE_CONSUMER_KEY', 'bad_key')
-    GOOGLE_CONSUMER_SECRET = os.getenv('GOOGLE_CONSUMER_SECRET', 'bad_secret_replace_me')
+    GOOGLE_OAUTH_CLIENT_ID = os.getenv('GOOGLE_CONSUMER_KEY', 'bad_key')
+    GOOGLE_OAUTH_CLIENT_SECRET = os.getenv('GOOGLE_CONSUMER_SECRET', 'bad_secret_replace_me')
 
     # Email Config
     MAIL_SERVER = os.getenv('MAIL_SERVER', 'smtp.mailgun.org')
@@ -22,6 +22,7 @@ class Config(object):
     SEGMENT_ANALYTICS_KEY = os.getenv('SEGMENT_ANALYTICS_KEY')
     STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
     STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
+    STRIPE_WEBHOOK_KEY = os.getenv('STRIPE_WEBHOOK_KEY')
     SENTRY_DSN = os.getenv('SENTRY_DSN')
     SENTRY_PUBLIC_DSN = os.getenv('SENTRY_PUBLIC_DSN')
 

@@ -55,6 +55,10 @@ def remove_member(team_id, invite_id):
 
     form = SimpleForm()
     if form.validate_on_submit():
+        if len(team.active_members) <= 1:
+            flash('Teams must have at least one user. You cannot remove the last user', 'warning')
+            return redirect(url_for('.index', team_id=team_id))
+
         removed_user = team_member.user or team_member.invite_email
         team_member.delete(force=True)  # Actually delete the model
         flash('Removed {}'.format(removed_user.email), 'success')

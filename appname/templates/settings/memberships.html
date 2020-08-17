@@ -46,7 +46,7 @@
                                             {% if member.activated and member.user != None %}
                                                 <form role="form" action="{{ url_for('dashboard_team.remove_member', team_id=member.team.id, invite_id=member.id) }}" method="post">
                                                     {{ form.hidden_tag() }}
-    
+
                                                     <button type="submit" class="btn btn-secondary btn-sm">Remove</button>
                                                 </form>
                                             {% elif not member.activated %}
@@ -60,7 +60,7 @@
                                 {% endfor %}
                                 </tbody>
                             </table>
-    
+                        </div>
                     </div>
                 </div>
             </div>
