@@ -33,7 +33,7 @@ landing_css = Bundle(
 )
 
 tabler_css = Bundle(
-    'https://ghcdn.rawgit.org/Sumukh/Ignite/70bf953851a356e785528b56ca105042074a3d5a/appname/static/tabler/css/dashboard.css',
+    'https://rawcdn.githack.com/Sumukh/Ignite/70bf953851a356e785528b56ca105042074a3d5a/appname/static/tabler/css/dashboard.css',
     'css/overrides.css',
     filters='cssmin',
     output='public/css/tabler.css'

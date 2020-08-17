@@ -34,7 +34,7 @@ Flask-Mail
 Flask-Limiter
 
 # Admin
-Flask-Admin
+Flask-Admin>=1.5.6
 
 # Database
 pymysql==0.10.0
