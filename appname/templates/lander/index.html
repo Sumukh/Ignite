@@ -224,24 +224,8 @@
 								<li><span class="fa-li"><i class="fa green-check fa-check"></i></span>Video Guides</li>
 							  </ul>
 							  <hr>
-							{% if stripe_publishable_key %}
-								<form action="/store/payment" method="POST" class="stripe-checkout">
-									<script src="https://checkout.stripe.com/checkout.js"
-										class="stripe-button"
-										data-key="{{ stripe_publishable_key }}" data-amount="14900"
-										data-name="Ignite"
-										data-description="Ignite Starter Code"
-										data-image="{{ url_for('static', filename='public/ignite/ignite-icon.png')  }}"
-										data-locale="auto"
-										data-currency="usd"
-										data-zip-code="true">
-									</script>
-									<button type="submit" class="btn btn-block btn-primary text-uppercase"> Purchase </button>
-							{% else %}
-							  <a href="mailto:{{ constants.SUPPORT_EMAIL }}" class="btn btn-block btn-primary text-uppercase">Purchase</a>
 
-							{% endif %}
-
+							  <a href="mailto:{{ 'sumukh1@gmail.com' }}" class="btn btn-block btn-primary text-uppercase">Purchase</a>
 							</form>
 							</div>
 						  </div>
