@@ -1,7 +1,9 @@
 from flask import Blueprint, request
 from flask_restful.representations.json import output_json
-
 import flask_restful as restful
+
+from appname.extensions import login_manager, hashids
+from appname.models.user import User
 
 api_blueprint = Blueprint('api', __name__)
 api_blueprint.config = {}
@@ -32,6 +34,21 @@ def envelope_api(data, code, headers=None):
         'message': message
     }
     return output_json(data, code, headers)
+
+@login_manager.request_loader
+def load_user_from_request(request):
+    # Only functional for API Endpoints
+    if request.endpoint.startswith("api."):
+        return None
+
+    # first, try to login using the api_key url arg
+    api_key = request.args.get('api_key') 
+    if not api_key:
+        return None
+    user_id, provided_key = api_key.split('-')
+    user = User.get_by_hashid(user_id)
+    if user and user.check_api_key_hash(provided_key):
+        return user
 
 class Resource(restful.Resource):
     method_decorators = []

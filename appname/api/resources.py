@@ -1,3 +1,5 @@
+from flask import redirect, url_for
+
 from appname.api import api, api_blueprint, API_VERSION, API_BASE
 from appname.api.info import APIInfo
 
@@ -9,5 +11,8 @@ def record_params(setup_state):
     api_blueprint.config['tz'] = app.config.get('TIMEZONE', 'utc')  # sample config
     api_blueprint.config['debug'] = app.debug
 
+@api_blueprint.route('/')
+def home():
+    return redirect(url_for('api.apiinfo'))
 
-api.add_resource(APIInfo, API_BASE, '/{0}/'.format(API_VERSION))
+api.add_resource(APIInfo, '/{0}/info'.format(API_VERSION))

@@ -21,5 +21,8 @@ class APISchema(APISchema):
     get_fields = {
         'version': fields.String,
         'url': fields.String,
-        'documentation': fields.String
+        'user': fields.String,
+        'documentation': fields.String,
+        'authenticated': fields.Boolean
+
     }

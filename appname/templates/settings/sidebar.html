@@ -14,6 +14,13 @@
             <span class="icon mr-3"><i class="fe fe-users"></i></span>Team Memberships
         </a>
 
+        <a href="{{ url_for('user_settings.api') }}"
+        class="list-group-item list-group-item-action d-flex align-items-center  {{ 'active' if request.endpoint == 'user_settings.api' }}">
+            <span class="icon mr-3"><i class="fe fe-zap"></i></span>API Access
+        </a>
+
+
+
 
         <a href="{{ url_for('user_settings.notifications') }}"
         class="list-group-item list-group-item-action d-flex align-items-center  {{ 'active' if request.endpoint == 'user_settings.notifications' }}">

@@ -1,0 +1,39 @@
+{% extends "tabler/dashboard_base.html" %}
+{% from "helpers/_formhelpers.html" import render_field %}
+
+{% block title %}appname settings (API) {% endblock %}
+
+{% block body %}
+
+<div class="my-3 my-md-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                {% include 'settings/sidebar.html' %}
+            </div>
+            <div class="col-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">API</h3>
+                    </div>
+                    <div class="card-body">
+                        <p> The API allows you to access certain functionality programatically. It grants control of your account. </p>
+                    {% if current_user.user_api_key_hash %}
+                        <p> You account already has an API Key, but it is hidden for security. You can regenerate your key by clicking on 'Generate New API Key'</p>
+                    {% endif %}
+                    </div>
+                    <form role="form" action="{{ url_for('user_settings.api') }}" method="post">
+                            {{ form.hidden_tag() }}
+                        <div class="card-footer text-left">
+                            <div class="d-flex">
+                                <button type="submit" class="btn btn-primary">Generate New API Key</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

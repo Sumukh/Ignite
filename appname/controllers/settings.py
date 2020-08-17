@@ -42,6 +42,14 @@ def legal_compliance():
 
     return render_template('/settings/legal_compliance.html', form=form)
 
+@settings_blueprint.route('/settings/api', methods=['GET', 'POST'])
+@login_required
+def api():
+    form = SimpleForm()
+    if form.validate_on_submit():
+        flash("Your API Key is: '{}'. It will not be displayed again, so make sure you save it.".format('2323'), 'success')
+    return render_template('/settings/api.html', form=form)
+
 @settings_blueprint.route('/settings/memberships')
 @login_required
 def memberships():

@@ -56,6 +56,12 @@ class User(Model, UserMixin):
     def check_password(self, value):
         return check_password_hash(self.password, value)
 
+    def check_api_key_hash(self, api_key):
+        # Potential timing attack here
+        if self.user_api_key_hash:
+            return check_password_hash(self.user_api_key_hash, api_key)
+        return False
+
     @property
     def is_authenticated(self):
         return not isinstance(self, AnonymousUserMixin)
@@ -105,3 +111,4 @@ class User(Model, UserMixin):
         db.session.add(new_user)
         db.session.commit()
         return new_user
+
