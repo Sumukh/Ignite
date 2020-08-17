@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, flash, redirect, url_for, Response
 from flask_login import login_required, current_user
 
 
-from appname.constants import SUPPORT_EMAIL, BILLING_PLANS
+from appname.constants import SUPPORT_EMAIL, PROD_BILLING_PLANS, DEV_BILLING_PLANS
 from appname.models import db
 from appname.forms import SimpleForm
 from appname.forms.login import ChangePasswordForm
@@ -58,7 +58,8 @@ def billing():
     form = SimpleForm()
     if form.validate_on_submit() or current_user.billing_customer_id:
         return redirect(stripe.customer_portal_link(current_user.active_teams[0]))
-    return render_template('/settings/billing.html', form=form, plans=BILLING_PLANS,
+    plans = PROD_BILLING_PLANS if stripe.publishable_key.startswith('pk_live') else DEV_BILLING_PLANS
+    return render_template('/settings/billing.html', form=form, plans=plans,
                             stripe_publishable_key=stripe.publishable_key)
 
 

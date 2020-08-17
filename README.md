@@ -2,24 +2,26 @@
 
 # Ignite for Flask [![CircleCI](https://circleci.com/gh/Sumukh/Ignite.svg?style=svg&circle-token=21024628f8356bc070f27aede670fc676a8e4446)](https://circleci.com/gh/Sumukh/Ignite)
 
-Ignite is a scaffold for starting new Flask applications. It takes care of the boilerplate code (like User Registration), allowing you to focus on building your application. Ignite is built upon best practices for modern Flask applications.
+Ignite is a scaffold for starting new Flask applications. It takes care of the boilerplate code (like User Registration, OAuth, Teams, and Billing), allowing you to focus on building your application. Ignite is built upon best practices for modern Flask applications.
 
 ## Features
 | Features  |   Status | Details
 | ------------- | ------------- | -------- |
 | User Authentication  | ✅  | User Login, Signup, Forgot Password, Email Confirmation|
 | OAuth Login  | ✅ | Login & Signup with Google, Twitter, Facebook, etc.
-| Teams/Groups | ✅  | Multi user teams & groups
-| User Export & Deletion  | ✅ | Allows users to export or delete their data  (for GDPR compliance)
-| API  | ✅  | API for users to access data
+| Teams/Groups | ✅  | Multi user teams & groups (with Invite Emails)
+| User Export & Deletion Request  | ✅ | Allows users to export their data  (for GDPR compliance)
+| API  | ✅  | API (with user tokens) users to access data
 | Stripe Product Checkout  | ✅  | One time item purchases with credit cards and receipts (using Stripe)
 | Heroku/Docker Deployment  | ✅  | Deployment instructions for some platforms. Works on AWS & Google Cloud
 | Send Emails | ✅  | Send email notifications from the application
 | Admin Dashboard | ✅  | Admin dashboard to edit data
 | Basic Test Suite | ✅  | Starting point for you to build out tests
+| VS Code Debugger & Editor | ✅  | Configured to make you productive
+| Tested on Windows, OSX, and Ubuntu | ✅  | (Using WSL)
+| SaaS Recurring Billing  | ✅ | Requires a purchased license (included with a purchase of Ignite Pro) |
 | Commercial Usage  | ❌  | Requires a purchased license (included with a purchase of Ignite Pro)
-| SaaS Recurring billing with Stripe | ❌ | (available in Ignite Pro)
-| Landing Page Design Usage | ❌ | (available in Ignite Pro)
+| Video Content | ❌ | (available in Ignite Pro)
 
 ## Setup
 Usage of Python 3 is recommended. It can be installed [on Python.org](https://www.python.org/downloads/)
@@ -44,18 +46,18 @@ FLASK_APP=manage FLASK_ENV=development flask run
 # Production documentation in the repository.
 ```
 
+### Local Secrets
 
-## Ignite Premium
+To configure OAuth login and Stripe billing in development, you will need to set some environment variables. See `.env.local.sample` for an example.
 
-A license to premium allows you to use all the features in Ignite Basic in addition to:
+```bash
+cp .env.local.sample .env.local
+# Edit .env.local with your Stripe & Google test keys
+source .env.local
+flask run
+```
 
-| Features | Ignite Basic | Ignite Pro |
-| ------------- | ------------- | ---------- |
-| License for Commercial Use  | No  |  ✅  |
-| Remove "Powered by Ignite" badge  | Must be included  |  ✅  |
-| Video Tutorials  | No |  🔜 Coming Soon  |
-
-You can purchase a license by emailing the author.
+You may also want to change some of the constants in `appname.constants`
 
 
 ## License
@@ -71,7 +73,9 @@ Here's a summary:
 | Private Non Commercial Use | ✅ | ✅ |
 | Commercial Use  | No  |  ✅  |
 | Ability to remove "Powered by Ignite" footer | No  |  ✅  |
+| Video Tutorials | No  |  ✅  |
 | Re-license | No  |  Contact us |
+| Support | No  |  No |
 | Warranty  | No  |  No | Provided As-is
 | Refunds  | N/A  |  30 Day |
 
@@ -85,7 +89,7 @@ Ignite is not tied to a specific platform for deployment, but it works well on [
 
 It is also designed to work well on other cloud providers such as AWS, Google Cloud, and DigitalOcean.
 
-Documentation is currently provided for installations on Dokku. 
+Documentation is currently provided for installations on Dokku.
 
 ## Screenshots
 
