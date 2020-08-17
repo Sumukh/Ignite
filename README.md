@@ -21,11 +21,12 @@ Ignite is a scaffold for starting new Flask applications. It takes care of the b
 | Tested on Windows, OSX, and Ubuntu | ✅  | Using Python 3
 | SaaS Recurring Billing  | 💲 | Commercial Usage requires a purchased license  |
 | Commercial Usage  | 💲 |  Commercial Usage requires a purchased license |
-| Video Content | 💲 | (available in Ignite Pro)
+| Video Content | 💲 | Requires a purchased license
 
 
+## [Buy a commercial usage license ($199) »](https://gumroad.com/l/xFvLo)
 
-## [Buy a license »](https://gumroad.com/l/xFvLo)
+Free for non-commercial re-use (see LICENSE.md for full details).
 
 
 ## Setup
