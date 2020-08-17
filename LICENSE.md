@@ -1,6 +1,6 @@
 Copyright (c) Sumukh Sridhara. All rights reserved. No warranty of any form is provided. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimers.
 
-You may use the provided source code in commercial projects only with explicit permission of the creator (Sumukh Sridhara) or with the purchase of a license. You may not relicense the source code of the Ignite source  or documentation.
+You may use the provided source code in commercial projects only with explicit permission of the creator (Sumukh Sridhara) or with the purchase of a license. You may not relicense the source code or documentation unless you have written permission from the creator. You may not resell the source code in part or whole without written permission from the creator.
 
 You may purchase a license to Ignite by contacting the creator (https://github.com/Sumukh)
 

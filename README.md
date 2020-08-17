@@ -7,8 +7,8 @@ Ignite is a scaffold for starting new Flask applications. It takes care of the b
 ## Features
 | Features  |   Status | Details
 | ------------- | ------------- | -------- |
-| User Authentication  | ✅  | User Login, Signup, Forgot Password, Email Confirmation|
-| OAuth Login  | ✅ | Login & Signup with Google, Twitter, Facebook, etc.
+| User Authentication  | ✅  | User Login, Registration, Forgot Password, Email Confirmation|
+| OAuth Login  | ✅ | Login or Register with Google, Twitter, Facebook, etc.
 | Teams/Groups | ✅  | Multi user teams & groups (with Invite Emails)
 | User Export & Deletion Request  | ✅ | Allows users to export their data  (for GDPR compliance)
 | API  | ✅  | API (with user tokens) users to access data
@@ -18,10 +18,15 @@ Ignite is a scaffold for starting new Flask applications. It takes care of the b
 | Admin Dashboard | ✅  | Admin dashboard to edit data
 | Basic Test Suite | ✅  | Starting point for you to build out tests
 | VS Code Debugger & Editor | ✅  | Configured to make you productive
-| Tested on Windows, OSX, and Ubuntu | ✅  | (Using WSL)
-| SaaS Recurring Billing  | ✅ | Requires a purchased license (included with a purchase of Ignite Pro) |
-| Commercial Usage  | ❌  | Requires a purchased license (included with a purchase of Ignite Pro)
-| Video Content | ❌ | (available in Ignite Pro)
+| Tested on Windows, OSX, and Ubuntu | ✅  | Using Python 3
+| SaaS Recurring Billing  | 💲 | Commercial Usage requires a purchased license  |
+| Commercial Usage  | 💲 |  Commercial Usage requires a purchased license |
+| Video Content | 💲 | (available in Ignite Pro)
+
+
+
+## [Buy a license »](https://gumroad.com/l/xFvLo)
+
 
 ## Setup
 Usage of Python 3 is recommended. It can be installed [on Python.org](https://www.python.org/downloads/)
@@ -60,29 +65,6 @@ flask run
 You may also want to change some of the constants in `appname.constants`
 
 
-## License
-
-This is a commercial product. You may purchase a license for commercial use at [Ignite Website](https://ignite.sumukh.me)
-
-Here's a summary:
-
-
-| Features | Ignite | (License) Ignite Premium | Comments |
-| ------------- | ------------- | ---------- | ------- |
-| Cost | Free | $199 per site | Currently on sale  |
-| Private Non Commercial Use | ✅ | ✅ |
-| Commercial Use  | No  |  ✅  |
-| Ability to remove "Powered by Ignite" footer | No  |  ✅  |
-| Video Tutorials | No  |  ✅  |
-| Re-license | No  |  Contact us |
-| Support | No  |  No |
-| Warranty  | No  |  No | Provided As-is
-| Refunds  | N/A  |  30 Day |
-
-You can purchase a license at the [Ignite Website](https://ignite.sumukh.me)
-
-For more detailed license information see LICENSE.md
-
 ## Deployment
 
 Ignite is not tied to a specific platform for deployment, but it works well on [Heroku](http://heroku.com) and [Dokku](http://dokku.viewdocs.io/dokku/) with minimal configuration.
@@ -94,20 +76,43 @@ Documentation is currently provided for installations on Dokku.
 ## Screenshots
 
 
-Login Page:
-![login](documentation/screenshots/login.png)
+| Screenshot | Name |
+----------|-----
+| Login / Signup / OAuth / Password Reset |  ![login](documentation/screenshots/login.png) |
+| Dashboard  |  ![Dashboard](documentation/screenshots/dashboard.png) |
+| Saas Subscription Billing + Console  |  ![Billing](documentation/screenshots/billing.png) |
+| Teams  |  ![Team](documentation/screenshots/team.png) |
+| GDPR/Legal  |  ![GDPR](documentation/screenshots/gdpr.png) |
+| Admin  |  ![Admin](documentation/screenshots/admin.png) |
+| API Tokens |  ![API](documentation/screenshots/api.png) |
+| Delayed Jobs |  ![Jobs](documentation/screenshots/jobs.png) |
+| Emails |  ![Emails](documentation/screenshots/email.png) |
+| Stripe Customer Portal Integration | ![Stripe](documentation/screenshots/stripe-console.png) |
 
-GDPR/Legal:
-![legal](documentation/screenshots/gdpr.png)
 
-Team Management:
-![team](documentation/screenshots/team.png)
+## License
 
-Dashboard:
-![user dashboard](documentation/screenshots/dashboard.png)
+This is a commercial product. You may purchase a license for commercial use at [Ignite Website](https://ignite.sumukh.me)
 
-Admin Console:
-![admin](https://user-images.githubusercontent.com/882381/33539038-326c31cc-d879-11e7-981a-1834f15cf718.png)
+Here's a summary:
+
+
+| Features | Ignite | (License) Ignite Premium |
+| ------------- | ------------- | ---------- |
+| Cost | Free | $199 per site |   |
+| Private Non Commercial Use | ✅ | ✅ |
+| Commercial Use  | No  |  ✅  |
+| Ability to remove "Powered by Ignite" footer | No  |  ✅  |
+| Video Tutorials | No  |  ✅  |
+| Re-license | No  |  Contact us |
+| Support | No  |  No |
+| Warranty  | Provided As-is  |  Provided As-is |
+| Refunds  | N/A  |  30 Day |
+
+
+You can purchase a license at the [Ignite Store](https://gumroad.com/l/xFvLo)
+
+For more detailed license information see LICENSE.md
 
 ## Credits
 
