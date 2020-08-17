@@ -7,11 +7,12 @@ from appname import assets
 from appname import constants
 from appname.models import db
 from appname.api.resources import api_blueprint
+from appname.api import handle_api_error
 from appname.controllers.main import main
 from appname.controllers.auth import auth
+from appname.controllers.oauth import google_blueprint
 from appname.controllers.store import store
 from appname.controllers.settings import settings_blueprint
-from appname.controllers.oauth.client import oauth_client
 from appname.controllers.admin.jobs import jobs
 from appname.controllers.dashboard import dashboard_blueprints
 
@@ -86,13 +87,13 @@ def create_app(object_name):
     @app.errorhandler(404)
     def not_found_error(error):
         if request.path.startswith("/api"):
-            return api_blueprint.handle_error(error)
+            return handle_api_error(error)
         return render_template('errors/404.html'), 404
 
     @app.errorhandler(401)
     def permission_denied_error(error):
         if request.path.startswith("/api"):
-            return api_blueprint.handle_error(error)
+            return handle_api_error(error)
         return render_template('tabler/401.html'), 401
 
     @app.before_request
@@ -123,7 +124,7 @@ def create_app(object_name):
         'constants': constants,
         'simple_form': SimpleForm,
         'features': {
-            'oauth':  app.config["GOOGLE_CONSUMER_KEY"] != 'bad_key',
+            'oauth':  app.config["GOOGLE_OAUTH_CLIENT_ID"] != 'bad_key',
             'segment':  app.config["SEGMENT_ANALYTICS_KEY"],
         },
     })
@@ -131,6 +132,7 @@ def create_app(object_name):
     # register our blueprints
     app.register_blueprint(main)
     app.register_blueprint(auth)
+    app.register_blueprint(google_blueprint, url_prefix='/oauth')
     app.register_blueprint(store)
     app.register_blueprint(settings_blueprint)
 
@@ -140,7 +142,7 @@ def create_app(object_name):
 
     # API
     app.register_blueprint(api_blueprint, url_prefix='/api')
-    app.register_blueprint(oauth_client, url_prefix='/oauth')
+    # app.register_blueprint(oauth_client, url_prefix='/oauth')
 
     # Admin Tools
     app.register_blueprint(jobs, url_prefix='/admin/rq')

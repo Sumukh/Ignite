@@ -1,62 +1,49 @@
-OAuth is backed by oauthlib and Flask-OAuth: https://pythonhosted.org/Flask-OAuth/
+OAuth is backed by Flask-Dance
 
-# Providers
+## Setup
 
-Google
-```
-provider_auth = oauth.remote_app(
-    'google',
-    app_key='GOOGLE',
-    request_token_params={
-        'scope': 'email',
-        'state': lambda: security.gen_salt(10),
-        'prompt': 'select_account'
-    },
-    base_url='https://www.googleapis.com/plus/v1/',
-    request_token_url=None,
-    access_token_method='POST',
-    access_token_url='https://accounts.google.com/o/oauth2/token',
-    authorize_url='https://accounts.google.com/o/oauth2/auth',
-)
+## Providers
 
-def user_from_token(token):
-    # Make a request to base_url/user to get user_info
-    response = provider_auth.get('people/me')
-    if response.status == 200:
-        user_data = response.data
+### Google
 
-        if 'error' not in data and user_data.get('emails'):
-            email = user_data['emails'][0]['value']
-            return  User.lookup_or_create_by_email_by_email_by_email(email, email_confirmed=True)
-    flash("We could not log you in. Try again soon", 'warning')
-    return redirect('/')
+#### Configuration:
+
+* Get API Keys here: https://console.developers.google.com/apis/credentials
+* Add "http://localhost:5000/oauth/google/authorized" and "https://[your production website]/oauth/google/authorized" to the authorized redirects
+
+Make sure you set the following environment variables so that you can try this locally.
 
 ```
-
-OKPY
+export OAUTHLIB_INSECURE_TRANSPORT=1 # To allow local logins without having to use  HTTPs locally
+export GOOGLE_CONSUMER_KEY='your-code.apps.googleusercontent.com'
+export GOOGLE_CONSUMER_SECRET='your-secret'
 ```
-provider_auth = oauth.remote_app(
-    'ok-server',  # Server Name
-    consumer_key='example',
-    consumer_secret='your-secret-here',
-    request_token_params={'scope': 'email',
-                          'state': lambda: security.gen_salt(10)},
-    base_url='https://okpy.org/api/v3/',
-    request_token_url=None,
-    access_token_method='POST',
-    access_token_url='https://okpy.org/oauth/token',
-    authorize_url='https://okpy.org/oauth/authorize'
-)
 
-def user_from_token(token):
-    # Make a request to base_url/user to get user_info
-    response = provider_auth.get('user')
-    if response.status == 200:
-        user_data = response.data
-        email = user_data['data']['email']
-        return User.lookup_or_create_by_email_by_email(email, email_confirmed=True)
-    else:
-        flash("We could not log you in. Try again soon", 'warning')
-        return redirect('/')
+#### Implementation:
 
+See `appname/controllers/google.py`.
+
+
+### Other Providers (Github, Slack, Twitter, etc)
+
+Add similiar blueprints for each one. Reference the [Flask-Dance](https://flask-dance.readthedocs.io/en/latest/) documentation. We use the SQLAlchemy storage backend.
+
+### Custom Provider
 ```
+from flask import Flask
+from flask_dance.consumer import OAuth2ConsumerBlueprint
+
+example_blueprint = OAuth2ConsumerBlueprint(
+    "ok-server", __name__,
+    client_id="my-key-here",
+    client_secret="my-secret-here",
+    base_url="https://okpy.org/api/v3/",
+    token_url="https://okpy.org/oauth/token",
+    authorization_url="https://okpy.org/oauth/authorize,
+    scope='email',
+    # state=lambda: security.gen_salt(10),
+
+# The rest would be similiar to `google.py` but you'd have to update the API endpoints.
+
+
+

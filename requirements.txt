@@ -20,6 +20,10 @@ Flask-Script==2.0.6
 Flask-WTF==0.14.3
 wtforms[email]
 
+# OAuth
+Flask-Dance[sqla]
+
+
 Flask-RESTful==0.3.8
 Flask-Testing>=0.6.2,<1.0
 
@@ -57,10 +61,6 @@ redis==3.5.3
 Flask-RQ2==18.3
 rq==1.5.0
 rq-dashboard==0.6.1
-
-# OAuth
-oauthlib==2.1.0
-Flask-OAuthlib==0.9.5
 
 # Billing
 stripe

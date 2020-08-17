@@ -130,7 +130,7 @@ class Model(db.Model):
     @classmethod
     def get_by_hashid(self, hashid):
         from appname.extensions import hashids
-        return self.get(hashids.decode_id(hashid))
+        return self.query.get(hashids.decode_id(hashid))
 
     @property
     def hashid(self):
