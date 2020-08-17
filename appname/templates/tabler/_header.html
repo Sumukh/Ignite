@@ -2,7 +2,7 @@
     <div class="container">
         <div class="d-flex">
         <a class="header-brand" href="{{ url_for('main.home') }}">
-            <img src="{{ url_for('static', filename='public/ignite/ignite-logo.svg') }}" class="header-brand-img" alt="tabler logo">
+            <img src="{{ url_for('static', filename='public/ignite/ignite-logo@2x.png') }}" class="header-brand-img" alt="tabler logo">
         </a>
         <div class="d-flex order-lg-2 ml-auto">
             <div class="nav-item d-none d-md-flex">
@@ -13,8 +13,12 @@
                     <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
                         <span class="avatar avatar-placeholder"></span>
                         <span class="ml-2 d-none d-lg-block">
-                        <span class="text-default">{{ current_user.email }}</span>
-                        <small class="text-muted d-block mt-1">Administrator</small>
+                        {% if current_user.full_name %}
+                            <span class="text-default">{{ current_user.full_name }}</span>
+                            <small class="text-muted d-block mt-1">{{ current_user.email }}</small>
+                        {% else %}
+                            <span class="text-default">{{ current_user.email }}</span>
+                        {% endif %}
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">

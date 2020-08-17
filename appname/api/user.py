@@ -7,7 +7,8 @@ from appname.api import Resource, BaseAPISchema, API_VERSION
 class CurrentUserInfoSchema(BaseAPISchema):
     get_fields = {
         'id': fields.String,
-        'hashid': fields.String,
+        'email': fields.String,
+        'full_name': fields.String,
     }
 
 class CurrentUserInfo(Resource):

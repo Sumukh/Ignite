@@ -23,6 +23,11 @@ def index():
 @login_required
 def account():
     form = ChangeProfileForm()
+    if form.validate_on_submit():
+        current_user.full_name = form.name.data
+        db.session.add(current_user)
+        db.session.commit()
+
     return render_template('/settings/account.html', form=form)
 
 @settings_blueprint.route('/settings/password', methods=['GET', 'POST'])
