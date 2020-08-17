@@ -14,6 +14,7 @@ from appname.controllers.oauth import google_blueprint
 from appname.controllers.store import store
 from appname.controllers.settings import settings_blueprint
 from appname.controllers.admin.jobs import jobs
+from appname.controllers.webhooks.stripe import stripe_blueprint
 from appname.controllers.dashboard import dashboard_blueprints
 
 from appname import utils
@@ -23,6 +24,7 @@ from appname.extensions import (
     admin,
     assets_env,
     cache,
+    csrf,
     debug_toolbar,
     hashids,
     login_manager,
@@ -63,6 +65,9 @@ def create_app(object_name):
 
     # initialize Flask-RQ2 (job queue)
     rq2.init_app(app)
+
+    # CSRF Protection
+    csrf.init_app(app)
 
     # Special URL converters
     custom_converters.init_app(app)
@@ -142,7 +147,10 @@ def create_app(object_name):
 
     # API
     app.register_blueprint(api_blueprint, url_prefix='/api')
-    # app.register_blueprint(oauth_client, url_prefix='/oauth')
+    csrf.exempt(api_blueprint)
+
+    app.register_blueprint(stripe_blueprint, url_prefix='/webhooks')
+    csrf.exempt(stripe_blueprint)
 
     # Admin Tools
     app.register_blueprint(jobs, url_prefix='/admin/rq')

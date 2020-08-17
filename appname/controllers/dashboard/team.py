@@ -1,7 +1,9 @@
 from flask import Blueprint, render_template, flash, abort, redirect, url_for, session
 from flask_login import login_required, current_user
 
+from appname.constants import MAX_TEAM_SIZE
 from appname.models.teams import Team, TeamMember
+from appname.extensions import stripe
 from appname.forms import SimpleForm
 from appname.forms.teams import InviteMemberForm
 from appname.helpers.session import current_membership
@@ -34,6 +36,11 @@ def add_member(team_id):
 
     if form.validate_on_submit():
         existing_members = [member.user.email for member in team.members]
+        if len(existing_members) >= MAX_TEAM_SIZE:
+            # Here is where you could implement restrictions on team size if you wanted.
+            flash('For your plan, teams can only have up to {} members'.format(MAX_TEAM_SIZE), 'warning')
+            return redirect(url_for('.index', team_id=team_id))
+
         if form.email.data not in existing_members:
             TeamMember.invite(team, form.email.data, form.role.data, current_user)
             flash('Invited {}'.format(form.email.data), 'success')
@@ -43,6 +50,17 @@ def add_member(team_id):
     else:
         flash('There was an error', 'warning')
         return redirect(url_for('.index', team_id=team_id))
+
+@blueprint.route('/<hashid:team_id>/team/billing_portal', methods=['POST'])
+@login_required
+def billing_portal(team_id):
+    team = Team.query.get(team_id)
+    if not team or not team.has_member(current_user):
+        abort(404)
+    form = SimpleForm()
+    if form.validate_on_submit() and team.billing_customer_id:
+        return redirect(stripe.customer_portal_link(team))
+    return redirect(url_for('user_settings.billing'))
 
 @blueprint.route('/<hashid:team_id>/team/<hashid:invite_id>/remove_member', methods=['POST'])
 @login_required
@@ -57,6 +75,9 @@ def remove_member(team_id, invite_id):
     if form.validate_on_submit():
         if len(team.active_members) <= 1:
             flash('Teams must have at least one user. You cannot remove the last user', 'warning')
+            return redirect(url_for('.index', team_id=team_id))
+        if team.creator == team_member.user:
+            flash('You cannot remove the creator of a team from the team', 'warning')
             return redirect(url_for('.index', team_id=team_id))
 
         removed_user = team_member.user or team_member.invite_email

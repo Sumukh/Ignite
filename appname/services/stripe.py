@@ -59,3 +59,4 @@ class Stripe:
         return stripe.Webhook.construct_event(
             payload, received_sig, self.webhook_key
         )
+

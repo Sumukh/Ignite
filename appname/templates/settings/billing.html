@@ -15,9 +15,6 @@
           // Replace with the ID of your price
           {price: planId, quantity: 1}
         ],
-        metadata: {
-            team: teamId,
-        },
         clientReferenceId: teamId,
         mode: 'subscription',
         successUrl: "{{ url_for('user_settings.billing', success=1, _external=True) }}",
@@ -53,7 +50,7 @@
                                     <tr>
                                     <th>Team</th>
                                     <th class="text-center">Plan</th>
-                                    <th class="text-center">Upgrade</th>
+                                    <th class="text-center">Manage</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,15 +63,19 @@
                                             {{ member.team.plan | title }}
                                         </td>
                                         <td class="text-center">
-                                            {% if member.team.is_paid_plan %}
-                                                Billing managed by {{ member.team.plan_owner.email }}
-                                            {% else %}
-                                            <a class="btn btn-primary text-white"  onclick="purchase('{{ plans["monthly"] }}')">
+                                            {% if not member.team.is_paid_plan %}
+                                            <a class="btn btn-primary text-white"  onclick="purchase('{{ plans["monthly"] }}', '{{ member.team.id}}')">
                                                 Upgrade ($10/month)
                                             </a>
-                                            <a class="btn btn-primary text-white "  onclick="purchase('{{ plans["annual"] }}')">
+                                            <a class="btn btn-primary text-white "  onclick="purchase('{{ plans["annual"] }}', '{{ member.team.id}}')">
                                                 Save 20% ($100/year)
                                             </a>
+                                            {% endif %}
+                                            {% if member.team.billing_customer_id %}
+                                                <form role="form" action="{{ url_for('dashboard_team.billing_portal', team_id=member.team.id) }}" method="post">
+                                                    {{ form.hidden_tag() }}
+                                                        <button type="submit" class="btn btn-secondary">Manage Subscription & Payments</button>
+                                                </form>
                                             {% endif %}
                                         </td>
                                     </tr>
@@ -84,27 +85,6 @@
                         </div>
                     </div>
                 </div>
-                {% if current_user.billing_customer_id %}
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Invoices & Payments</h3>
-                    </div>
-                    <div class="card-body">
-                        Manage your billing settings here.
-                    </div>
-                    <div class="card-footer">
-                        <div class="btn-list text-center">
-                            <form role="form" action="{{ url_for('user_settings.billing') }}" method="post">
-                                {{ form.hidden_tag() }}
-                                <div class="d-flex">
-                                    <button type="submit" class="btn btn-primary">Manage Subscription & Payments</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-
 
             </div>
         </div>

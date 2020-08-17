@@ -7,6 +7,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from flask_login import LoginManager
 from flask_assets import Environment
 # from flask_socketio import SocketIO
+from flask_wtf.csrf import CSRFProtect
 from flask_rq2 import RQ
 from flask_mail import Mail
 from flask_limiter import Limiter
@@ -26,6 +27,7 @@ cache = Cache()
 assets_env = Environment()
 
 debug_toolbar = DebugToolbarExtension()
+csrf = CSRFProtect()
 
 login_manager = LoginManager()
 login_manager.login_view = "auth.login"

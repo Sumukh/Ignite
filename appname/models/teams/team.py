@@ -21,6 +21,9 @@ class Team(Model):
     # Plan may need to become DB backed when billing is introduced.
     plan = db.Column(db.String(), default='free')
     plan_owner_id = db.Column(db.ForeignKey("user.id"))
+    subscription_id = db.Column(db.String())
+    billing_customer_id = db.Column(db.String())
+
 
     creator = db.relationship("User", foreign_keys=[creator_id])
     plan_owner = db.relationship("User", foreign_keys=[plan_owner_id])

@@ -10,7 +10,10 @@ EMAIL_CONFIRMATION_SALT = os.getenv('EMAIL_CONFIRMATION_KEY', 'email-confirmatio
 PASSWORD_RESET_SALT = os.getenv('PASSWORD_RESET_KEY', 'pass-reset-key')
 PURCHASE_LICENSE_SALT = os.getenv('PASSWORD_RESET_KEY', 'license-purchase-key')
 
+BILLING_PLANS = {'monthly': 'price_1HGzFQID8JASalnlgBAX2hjo',  'annual': 'price_1HGzFQID8JASalnlBeRxlkno'}
+
 PASSWORD_RESET_VALIDITY_SECONDS = 86400
 
 TEAM_MEMBER_ROLES = ['team member', 'administrator']
 SUPPORT_EMAIL = os.getenv('HELP_EMAIL', 'help@example.com')
+MAX_TEAM_SIZE = 50

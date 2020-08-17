@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, flash, redirect, url_for, Response
 from flask_login import login_required, current_user
 
 
-from appname.constants import SUPPORT_EMAIL
+from appname.constants import SUPPORT_EMAIL, BILLING_PLANS
 from appname.models import db
 from appname.forms import SimpleForm
 from appname.forms.login import ChangePasswordForm
@@ -54,14 +54,12 @@ def oauth():
 @login_required
 def billing():
     if request.args.get('success'):
-        flash('Processing your payment', 'success')
+        flash('Processing your payment. You may need to refresh the page.', 'success')
     form = SimpleForm()
-
-    plans = {'monthly': 'price_1HGzFQID8JASalnlgBAX2hjo',
-             'annual': 'price_1HGzFQID8JASalnlBeRxlkno'}
-    if form.validate_on_submit() and current_user.billing_customer_id:
-        return redirect(stripe.customer_portal_link(current_user))
-    return render_template('/settings/billing.html', form=form, plans=plans, stripe_publishable_key=stripe.publishable_key)
+    if form.validate_on_submit() or current_user.billing_customer_id:
+        return redirect(stripe.customer_portal_link(current_user.active_teams[0]))
+    return render_template('/settings/billing.html', form=form, plans=BILLING_PLANS,
+                            stripe_publishable_key=stripe.publishable_key)
 
 
 @settings_blueprint.route('/settings/api', methods=['GET', 'POST'])

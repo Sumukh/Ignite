@@ -60,6 +60,83 @@
                         </table>
                     </div>
                 </div>
+
+                <div class="card">
+                    <div class="card-header">
+                            <h3 class="card-title">Manage Billing</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-4 col-lg-4">
+                              <div class="card">
+                                <div class="card-body text-center">
+                                  <div class="card-category">Free</div>
+                                  <div class="display-3 my-4">$0</div>
+                                  <ul class="list-unstyled leading-loose">
+                                    <li><strong>3</strong> Users</li>
+                                    <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Sharing Tools</li>
+                                    <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Design Tools</li>
+                                    <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Private Messages</li>
+                                    <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Twitter API</li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-4 col-lg-4">
+                              <div class="card">
+                                <div class="card-status {% if not team.is_paid_plan %} bg-green {% endif %}"></div>
+                                <div class="card-body text-center">
+                                  <div class="card-category">Monthly</div>
+                                  <div class="display-3 my-4">$10</div>
+                                  <ul class="list-unstyled leading-loose">
+                                    <li><strong>$10</strong> / month</li>
+                                    <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Sharing Tools</li>
+                                    <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Design Tools</li>
+                                    <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Private Messages</li>
+                                    <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Twitter API</li>
+                                  </ul>
+                                  <div class="text-center mt-6">
+                                    <a href="{{ url_for('user_settings.billing') }}" class="btn btn-green btn-block">Choose plan</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-4 col-lg-4">
+                                <div class="card">
+                                  <div class="card-status {% if not team.is_paid_plan %} bg-green {% endif %}"></div>
+                                  <div class="card-body text-center">
+                                    <div class="card-category">Yearly</div>
+                                    <div class="display-3 my-4">$100</div>
+                                    <ul class="list-unstyled leading-loose">
+                                      <li><strong>$100</strong> / Year</li>
+                                      <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Sharing Tools</li>
+                                      <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Design Tools</li>
+                                      <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Private Messages</li>
+                                      <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Twitter API</li>
+                                    </ul>
+                                    <div class="text-center mt-6">
+                                      <a href="{{ url_for('user_settings.billing') }}" class="btn btn-green btn-block">Choose plan</a>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                          </div>
+
+                        <p> Your team is on the {{ team.plan | title}} plan.
+                        {% if not team.is_paid_plan %}
+                        <p> To upgrade your team, <a href="{{ url_for('user_settings.billing') }}">go to the billing page</a>
+                        </p>
+                        {% endif %}
+
+                    </div>
+                        <div class="card-footer text-left">
+                            <form role="form" action="{{ url_for('dashboard_team.billing_portal', team_id=team.id) }}" method="post">
+                                {{ form.hidden_tag() }}
+                                    <button type="submit" class="btn btn-primary">Manage Subscription & Payments</button>
+                            </form>
+                        </div>
+                </div>
+
             </div>
             <div class="col-4">
                 <div class="card">
