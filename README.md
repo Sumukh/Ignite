@@ -125,6 +125,10 @@ Built off of [Flask Foundation](https://jackstouffer.github.io/Flask-Foundation/
 
 ### Extra Reading
 
+Only building out an API using Flask?
+
+* Use [create-flask-api](https://github.com/Sumukh/create-flask-api)
+
 Best practices List:
 * [Larger Applications With Flask](http://flask.pocoo.org/docs/patterns/packages/).
 * [Creating Websites With Flask](http://maximebf.com/blog/2012/10/building-websites-in-python-with-flask/)
