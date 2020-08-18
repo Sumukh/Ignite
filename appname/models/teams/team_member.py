@@ -54,3 +54,13 @@ class TeamMember(Model):
         if self.user_id:
             return self.user.email
         return self.invite_email
+
+    def activate(self, user_id):
+        if not self.activated:
+            self.user_id = user_id
+            self.activated = True
+            db.session.add(self)
+            db.session.commit()
+            self.team.billing_plan.record_change_in_usage()
+        else:
+            raise Exception('Already activated')

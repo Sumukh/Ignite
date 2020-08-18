@@ -35,9 +35,8 @@ def add_member(team_id):
     form = InviteMemberForm()
 
     if form.validate_on_submit():
-        if len(team.members) >= MAX_TEAM_SIZE:
-            # Here is where you could implement restrictions on team size if you wanted.
-            flash('For your plan, teams can only have up to {} members'.format(MAX_TEAM_SIZE), 'warning')
+        if not team.billing_plan.can_add_more_users:
+            flash('You have exceeded the number of team members on your billing plan. Upgrade to continue', 'warning')
             return redirect(url_for('.index', team_id=team_id))
         existing_members = [member.user.email for member in team.members if member.user]
         if form.email.data not in existing_members:

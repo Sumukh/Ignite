@@ -1,3 +1,4 @@
+import time
 from urllib.parse import unquote
 
 from flask import url_for
@@ -34,24 +35,33 @@ class Stripe:
         db.session.commit()
         return stripe_customer.id
 
-    def create_session(self, user):
-        session = stripe.checkout.Session.create(
-                    payment_method_types=['card'],
-                    mode='subscription',
-                    )
+    def create_session(self, user, mode='subscription'):
+        session = stripe.checkout.Session.create(payment_method_types=['card'], mode=mode)
         return session
 
-
-
-    def customer_portal_link(self, user, return_url=None):
-        if not user.billing_customer_id:
+    def customer_portal_link(self, owner, return_url=None):
+        # TODO: Just accept customer_id
+        if not owner.billing_customer_id:
             return
 
         data = stripe.billing_portal.Session.create(
-            customer=user.billing_customer_id,
-            return_url=url_for('user_settings.billing', _external=True),
+            customer=owner.billing_customer_id,
+            return_url=return_url or url_for('user_settings.billing', _external=True),
         )
         return data['url']
+
+    def report_usage(self, subscription_item_id, quantity, action='set'):
+        stripe.SubscriptionItem.create_usage_record(
+            subscription_item_id,
+            quantity=quantity,
+            timestamp=int(time.time()),
+            action=action,
+        )
+
+    def all_subscription_items(self, subscription_id):
+        reponse = stripe.SubscriptionItem.list(subscription=subscription_id)
+        # Note: If you have a lot, you might need to paginate using limit etc.
+        return reponse['data']
 
     def parse_webhook(self, payload, headers):
         received_sig = headers.get("Stripe-Signature", None)

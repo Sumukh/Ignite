@@ -19,7 +19,7 @@ Ignite is a scaffold for starting new Flask applications. It takes care of the b
 | Basic Test Suite | ✅  | Starting point for you to build out tests
 | VS Code Debugger & Editor | ✅  | Configured to make you productive
 | Tested on Windows, OSX, and Ubuntu | ✅  | Using Python 3
-| SaaS Recurring Billing  | 💲 | Commercial Usage requires a purchased license  |
+| SaaS Recurring Billing  | 💲 | (Requires a purchased license). Team Billing, Usage Based Billing or Unlimited  |
 | Commercial Usage  | 💲 |  Commercial Usage requires a purchased license |
 | Video Content | 💲 | Requires a purchased license
 

@@ -1,5 +1,6 @@
 import logging
 from appname.models import db, Model, ModelProxy, transaction
+from appname.billing_plans import plans_by_name, FreePlan
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +42,13 @@ class Team(Model):
 
     @property
     def is_paid_plan(self):
-        return self.plan != 'free'
+        return not self.billing_plan.is_free
+
+    @property
+    def billing_plan(self):
+        # TODO: Might benefit from a validation to ensure `plan` is a recognized type in billing_plans
+        billing_plan = plans_by_name.get(self.plan) or FreePlan
+        return billing_plan(self)
 
     @property
     def active_members(self):

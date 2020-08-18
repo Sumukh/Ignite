@@ -17,14 +17,14 @@ Core Functionality:
 - [x] GDPR Export Features
 
 Currently Working On
-- [-] Recurring SaaS Billing
-- [-] Better Documentation
-- [-] Landing Page
+- [x] Recurring SaaS Billing
+- [x] Better Documentation
+- [x] Landing Page
 
 Nice to haves:
 - [x] VSCode Debugger Integration
 - [x] One off payments via Stripe
-- [-] Generate API tokens for user
+- [x] Generate API tokens for user
 - [ ] Two Factor Auth
 - [ ] Example of JS Framework Integration
 

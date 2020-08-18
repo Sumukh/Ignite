@@ -194,10 +194,7 @@ def join_team(invite_id):
     if not invite or invite.user != current_user:
         return abort(404)
 
-    invite.user_id = current_user.id
-    invite.activated = True
-    db.session.add(invite)
-    db.session.commit()
+    invite.activate(current_user.id)
     return redirect(url_for("dashboard_home.index"))
 
 @auth.route('/join/<hashid:invite_id>/<string:secret>')
