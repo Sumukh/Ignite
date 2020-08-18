@@ -64,10 +64,10 @@
                                         </td>
                                         <td class="text-center">
                                             {% if not member.team.is_paid_plan %}
-                                            <a class="btn btn-primary text-white"  onclick="purchase('{{ plans["monthly"] }}', '{{ member.team.id}}')">
+                                            <a class="btn btn-primary text-white"  onclick="purchase('{{ plans["monthly_premium"].stripe_product_id }}', '{{ member.team.id}}')">
                                                 Upgrade ($10/month)
                                             </a>
-                                            <a class="btn btn-primary text-white "  onclick="purchase('{{ plans["annual"] }}', '{{ member.team.id}}')">
+                                            <a class="btn btn-primary text-white "  onclick="purchase('{{ plans["annual_premium"].stripe_product_id }}', '{{ member.team.id}}')">
                                                 Save 20% ($100/year)
                                             </a>
                                             {% endif %}

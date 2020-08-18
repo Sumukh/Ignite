@@ -1,5 +1,5 @@
 import os
-import logger
+import logging
 
 from appname.extensions import stripe
 from appname.models import db, ModelProxy

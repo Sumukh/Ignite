@@ -68,8 +68,8 @@ class AdminDashboard:
                                      index_view=AdminHomeView(template='admin/index.html'))
 
         self.dashboard.add_view(UserView(User, db.session))
-        self.dashboard.add_view(TeamView(ModelProxy.teams.Team, db.session))
-        self.dashboard.add_view(TeamMemberView(ModelProxy.teams.TeamMember, db.session))
+        # self.dashboard.add_view(TeamView(ModelProxy.teams.Team, db.session))
+        # self.dashboard.add_view(TeamMemberView(ModelProxy.teams.TeamMember, db.session))
 
         self.dashboard.init_app(app)
         return self.dashboard

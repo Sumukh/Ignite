@@ -57,7 +57,7 @@ def billing_portal(team_id):
         abort(404)
     form = SimpleForm()
     if form.validate_on_submit() and team.billing_customer_id:
-        return redirect(stripe.customer_portal_link(team))
+        return redirect(stripe.customer_portal_link(team.billing_customer_id))
     return redirect(url_for('user_settings.billing'))
 
 @blueprint.route('/<hashid:team_id>/team/<hashid:invite_id>/remove_member', methods=['POST'])

@@ -10,8 +10,6 @@ EMAIL_CONFIRMATION_SALT = os.getenv('EMAIL_CONFIRMATION_KEY', 'email-confirmatio
 PASSWORD_RESET_SALT = os.getenv('PASSWORD_RESET_KEY', 'pass-reset-key')
 PURCHASE_LICENSE_SALT = os.getenv('PASSWORD_RESET_KEY', 'license-purchase-key')
 
-DEV_BILLING_PLANS = {'monthly': 'price_1HGzFQID8JASalnlgBAX2hjo',  'annual': 'price_1HGzFQID8JASalnlBeRxlkno'}
-PROD_BILLING_PLANS = {'monthly': 'price_1HH2BmID8JASalnl0d5cO3rW', 'yearly': 'price_1HH2BmID8JASalnlKeTWjguI'}
 
 PASSWORD_RESET_VALIDITY_SECONDS = 86400
 

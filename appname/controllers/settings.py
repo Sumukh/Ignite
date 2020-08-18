@@ -2,13 +2,14 @@ from flask import Blueprint, render_template, flash, redirect, url_for, Response
 from flask_login import login_required, current_user
 
 
-from appname.constants import SUPPORT_EMAIL, PROD_BILLING_PLANS, DEV_BILLING_PLANS
+from appname.constants import SUPPORT_EMAIL
 from appname.models import db
 from appname.forms import SimpleForm
 from appname.forms.login import ChangePasswordForm
 from appname.forms.account import ChangeProfileForm
 from appname.helpers.gdpr import GDPRExport
 from appname.utils.token import generate_api_secret
+from appname.billing_plans import plans_by_name
 
 from appname.extensions import stripe
 
@@ -55,17 +56,12 @@ def legal_compliance():
 def oauth():
     return render_template('/settings/oauth.html')
 
-@settings_blueprint.route('/settings/billing', methods=['GET', 'POST'])
+@settings_blueprint.route('/settings/billing')
 @login_required
 def billing():
     if request.args.get('success'):
         flash('Processing your payment. You may need to refresh the page.', 'success')
-    form = SimpleForm()
-    if form.validate_on_submit() or current_user.billing_customer_id:
-        return redirect(stripe.customer_portal_link(current_user.active_teams[0]))
-    plans = PROD_BILLING_PLANS if stripe.publishable_key.startswith('pk_live') else DEV_BILLING_PLANS
-    return render_template('/settings/billing.html', form=form, plans=plans,
-                            stripe_publishable_key=stripe.publishable_key)
+    return render_template('/settings/billing.html', plans=plans_by_name)
 
 
 @settings_blueprint.route('/settings/api', methods=['GET', 'POST'])
