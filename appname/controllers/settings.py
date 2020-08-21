@@ -29,6 +29,7 @@ def account():
         db.session.add(current_user)
         db.session.commit()
 
+
     return render_template('/settings/account.html', form=form)
 
 @settings_blueprint.route('/settings/password', methods=['GET', 'POST'])
@@ -37,7 +38,7 @@ def change_password():
     form = ChangePasswordForm()
 
     if form.validate_on_submit():
-        current_user.password = form.password.data
+        current_user.set_password(form.password.data)
         db.session.commit()
         flash("Changed password", "success")
     else:
