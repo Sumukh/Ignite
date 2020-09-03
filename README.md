@@ -19,14 +19,17 @@ Ignite is a scaffold for starting new Flask applications. It takes care of the b
 | Basic Test Suite | ✅  | Starting point for you to build out tests
 | VS Code Debugger & Editor | ✅  | Configured to make you productive
 | Tested on Windows 10, OSX, and Ubuntu | ✅  | Using Python 3
-| SaaS Recurring Billing  | 💲 | (Requires a purchased license). Team Billing, Usage Based Billing or Unlimited  |
-| Commercial Usage  | 💲 |  Commercial Usage requires a purchased license |
-| Video Content | 💲 | Requires a purchased license
+| SaaS Recurring Billing  | 💲 (Requires purchasing a license to Ignite) | Team Billing, Usage Based Billing or Unlimited Plans  |
+| Commercial Usage  | 💲 (License Required) |  Commercial Usage requires a purchased license |
+| Video Content | 💲 | Available as part of [the Fullstack Flask course](https://www.newline.co/fullstack-flask/) 
+
+## How to Buy 
 
 
-## [Buy a commercial usage license ($199) »](https://gumroad.com/l/xFvLo)
-
-Free for non-commercial re-use (see LICENSE.md for full details).
+| Store | Comes With | Price | 
+| ------ | -------- | ------ | 
+| Fullstack Flask Course | The Fullstack Flask Course & Book, hours of videos explaining how to build a SaaS in Flask, and a single license to Ignite Pro | [On Sale (for ~$199) at Newline  »](https://www.newline.co/fullstack-flask/) | 
+| Commercial License | A license for usage on a single site | [($199) »](https://gumroad.com/l/xFvLo) | 
 
 
 ## Setup
@@ -111,7 +114,7 @@ Here's a summary:
 | Refunds  | N/A  |  30 Day |
 
 
-You can purchase a license at the [Ignite Store](https://gumroad.com/l/xFvLo)
+You can purchase a license at the [Ignite Store](https://gumroad.com/l/xFvLo) or on [Newline as part of the Fullstack Flask course](https://www.newline.co/fullstack-flask/)
 
 For more detailed license information see LICENSE.md
 
@@ -128,6 +131,8 @@ Built off of [Flask Foundation](https://jackstouffer.github.io/Flask-Foundation/
 Only building out an API using Flask?
 
 * Use [create-flask-api](https://github.com/Sumukh/create-flask-api)
+
+**Course: [Fullstack Flask: Build a SaaS using Python and Flask](https://www.newline.co/fullstack-flask/)**
 
 Best practices List:
 * [Larger Applications With Flask](http://flask.pocoo.org/docs/patterns/packages/).
