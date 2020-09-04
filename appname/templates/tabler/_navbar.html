@@ -12,15 +12,20 @@
             <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                     {% if current_user.is_authenticated %}
-                    <li class="nav-item {{ 'active' if request.endpoint == 'dashboard_home.index' }}">
+                    <li class="nav-item {{ 'active' if request.blueprint == 'dashboard_home' }}">
                         <a href="{{ url_for('dashboard_home.index') }}" class="nav-link {{ 'active' if request.endpoint == 'dashboard_home.index' }}">
                             <i class="fe fe-home"></i> Home
                         </a>
                     </li>
                     {% if team %}
-                    <li class="nav-item {{ 'active' if request.endpoint == 'dashboard_team.index' }}">
+                    <li class="nav-item {{ 'active' if request.blueprint == 'dashboard_team' }}">
                         <a href="{{ url_for('dashboard_team.index', team_id=team.id) }}" class="nav-link  {{ 'active' if request.endpoint == 'dashboard_team.index' }}">
                             <i class="fe fe-users"></i> Your Team
+                        </a>
+                    </li>
+                    <li class="nav-item {{ 'active' if request.blueprint == 'dashboard_files' }}">
+                        <a href="{{ url_for('dashboard_files.index', team_id=team.id) }}" class="nav-link  {{ 'active' if request.endpoint == 'dashboard_files.index' }}">
+                            <i class="fe fe-file"></i> Shared Files
                         </a>
                     </li>
                     <li class="nav-item">

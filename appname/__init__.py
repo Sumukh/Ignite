@@ -32,6 +32,7 @@ from appname.extensions import (
     mail,
     rq2,
     sentry,
+    storage,
     stripe,
     token
 )
@@ -68,6 +69,9 @@ def create_app(object_name):
 
     # CSRF Protection
     csrf.init_app(app)
+
+    # File Storage
+    storage.init_app(app)
 
     # Special URL converters
     custom_converters.init_app(app)

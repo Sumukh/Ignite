@@ -15,18 +15,18 @@ Core Functionality:
 - [x] Migrations
 - [x] Team Memberships & Invite Management
 - [x] GDPR Export Features
-
-Currently Working On
 - [x] Recurring SaaS Billing
-- [x] Better Documentation
 - [x] Landing Page
 
 Nice to haves:
 - [x] VSCode Debugger Integration
 - [x] One off payments via Stripe
 - [x] Generate API tokens for user
+- [x] File Storage/Upload
 - [ ] Two Factor Auth
 - [ ] Example of JS Framework Integration
+- [ ] Cleanup auth methods (use a decorator)
+- [ ] Use a custom URL route for team
 
 Maybe:
 - [ ] OAuth Provider Code (easy to add, if there is demand)

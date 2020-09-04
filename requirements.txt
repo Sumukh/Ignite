@@ -49,6 +49,9 @@ arrow
 # Email
 pynliner<1.0
 
+# File Storage
+flask-cloudy
+
 # Flask DB Extensions
 Flask-SQLAlchemy==2.4.4
 Flask-SQLAlchemy-Cache==0.1.5

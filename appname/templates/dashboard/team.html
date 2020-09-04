@@ -131,7 +131,7 @@
                     </div>
                         <div class="card-footer text-left">
                             <form role="form" action="{{ url_for('dashboard_team.billing_portal', team_id=team.id) }}" method="post">
-                                {{ form.hidden_tag() }}
+                                {{ simple_form().hidden_tag() }}
                                     <button type="submit" class="btn btn-primary">Manage Subscription & Payments</button>
                             </form>
                         </div>

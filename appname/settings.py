@@ -3,7 +3,7 @@ import tempfile
 
 class Config(object):
     # run flask generate_secret_key
-    SECRET_KEY = os.getenv('SECRET_KEY', 'REPLACE MEasdaappnamesdas#!3de*o0alas')
+    SECRET_KEY = os.getenv('SECRET_KEY', 'SET-THIS-ENV-VAR-IN-PROD!-esdas#!3de*o0alas')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Oauth config
@@ -33,10 +33,19 @@ class Config(object):
     CACHE_REDIS_URL = RQ_DASHBOARD_REDIS_URL = RQ_REDIS_URL = REDIS_URL = os.getenv(
         'REDIS_URL', 'redis://localhost:6379/0')
 
+    # File Storage
+    STORAGE_PROVIDER = os.getenv('STORAGE_PROVIDER', 'LOCAL')   # Can also be S3, GOOGLE_STORAGE, etc...
+    STORAGE_KEY = os.getenv('STORAGE_KEY', "")
+    STORAGE_SECRET = os.getenv('STORAGE_SECRET', ""),
+    STORAGE_CONTAINER = os.getenv('STORAGE_CONTAINER', os.path.abspath(__file__ + "/../../tmp"))  # bucket name or cloud
+    STORAGE_SERVER = False
+
 class ProdConfig(Config):
     ENV = 'prod'
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL',
-                                        'sqlite:///../database.db')
+    DEBUG = False
+    # Don't forget to set the env var for SECRET_KEY in production
+
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')  # You need to set this for
     CACHE_TYPE = 'redis'
     CACHE_KEY_PREFIX = 'appname-'
 
@@ -58,6 +67,9 @@ class DevConfig(Config):
     # Run jobs instantly, without needing to spin up a worker
     RQ_ASYNC = False
 
+    STORAGE_PROVIDER = "LOCAL"  # Can also be S3, GOOGLE_STORAGE, etc...
+    STORAGE_SERVER = True  # Whether or not to expose the files over an endpoint (LOCAL only)
+    STORAGE_SERVER_URL = "/dev-files"  # The url endpoint to access files on LOCAL provider
 
 class TestConfig(Config):
     ENV = 'test'

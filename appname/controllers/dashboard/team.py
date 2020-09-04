@@ -4,7 +4,6 @@ from flask_login import login_required, current_user
 from appname.constants import MAX_TEAM_SIZE
 from appname.models.teams import Team, TeamMember
 from appname.extensions import stripe
-from appname.forms import SimpleForm
 from appname.forms.teams import InviteMemberForm
 from appname.helpers.session import current_membership
 
@@ -24,7 +23,7 @@ def index(team_id):
     team = Team.query.get(team_id)
     if not team or not team.has_member(current_user):
         abort(404)
-    return render_template('dashboard/team.html', simple_form=SimpleForm(), form=form, team=team)
+    return render_template('dashboard/team.html', form=form, team=team)
 
 @blueprint.route('/<hashid:team_id>/team/add_member', methods=['POST'])
 @login_required

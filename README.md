@@ -16,20 +16,21 @@ Ignite is a scaffold for starting new Flask applications. It takes care of the b
 | Heroku/Docker Deployment  | ✅  | Deployment instructions for some platforms. Works on AWS & Google Cloud
 | Send Emails | ✅  | Send email notifications from the application
 | Admin Dashboard | ✅  | Admin dashboard to edit data
+| File Uploads | ✅  | File uploads to cloud storage providers
 | Basic Test Suite | ✅  | Starting point for you to build out tests
 | VS Code Debugger & Editor | ✅  | Configured to make you productive
 | Tested on Windows 10, OSX, and Ubuntu | ✅  | Using Python 3
 | SaaS Recurring Billing  | 💲 (Requires purchasing a license to Ignite) | Team Billing, Usage Based Billing or Unlimited Plans  |
 | Commercial Usage  | 💲 (License Required) |  Commercial Usage requires a purchased license |
-| Video Content | 💲 | Available as part of [the Fullstack Flask course](https://www.newline.co/fullstack-flask/) 
+| Video Content | 💲 | Available as part of [the Fullstack Flask course](https://www.newline.co/fullstack-flask/)
 
-## How to Buy 
+## How to Buy
 
 
-| Store | Comes With | Price | 
-| ------ | -------- | ------ | 
-| Fullstack Flask Course | The Fullstack Flask Course & Book, hours of videos explaining how to build a SaaS in Flask, and a single license to Ignite Pro | [On Sale (for ~$199) at Newline  »](https://www.newline.co/fullstack-flask/) | 
-| Commercial License | A license for usage on a single site | [($199) »](https://gumroad.com/l/xFvLo) | 
+| Store | Comes With | Price |
+| ------ | -------- | ------ |
+| Fullstack Flask Course | The Fullstack Flask Course & Book, hours of videos explaining how to build a SaaS in Flask, and a single license to Ignite Pro | [On Sale (for ~$199) at Newline  »](https://www.newline.co/fullstack-flask/) |
+| Commercial License | A license for usage on a single site | [($199) »](https://gumroad.com/l/xFvLo) |
 
 
 ## Setup
@@ -91,6 +92,7 @@ Documentation is currently provided for installations on Dokku.
 | API Tokens |  ![API](documentation/screenshots/api.png) |
 | Delayed Jobs |  ![Jobs](documentation/screenshots/jobs.png) |
 | Emails |  ![Emails](documentation/screenshots/email.png) |
+| File Uploads |  ![Files](documentation/screenshots/file-uploads.png) |
 | Stripe Customer Portal Integration | ![Stripe](documentation/screenshots/stripe-console.png) |
 
 

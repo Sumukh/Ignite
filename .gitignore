@@ -45,4 +45,7 @@ env*
 .DS_Store
 *.sublime-*
 
+# Temp/Build files
+tmp/*
+!tmp/.touch
 appname/static/public/*
