@@ -1,4 +1,5 @@
 from appname import create_app
+import os
 
 class TestConfig:
     def test_dev_config(self):
@@ -20,7 +21,6 @@ class TestConfig:
 
     def test_prod_config(self):
         """ Tests if the production config loads correctly """
-
         app = create_app('appname.settings.ProdConfig')
         assert app.config['DEBUG'] is False
 

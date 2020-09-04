@@ -3,7 +3,7 @@ import tempfile
 
 class Config(object):
     # run flask generate_secret_key
-    SECRET_KEY = os.getenv('SECRET_KEY', 'DO NOT USE THE DEFAULT-in-prod-asdaappnamesdas#!3de*o0alas')
+    SECRET_KEY = os.getenv('SECRET_KEY', 'SET-THIS-ENV-VAR-IN-PROD!-esdas#!3de*o0alas')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Oauth config
@@ -42,7 +42,9 @@ class Config(object):
 
 class ProdConfig(Config):
     ENV = 'prod'
-    SECRET_KEY = os.getenv('SECRET_KEY')  # You need to set this in prod
+    DEBUG = False
+    # Don't forget to set the env var for SECRET_KEY in production
+
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')  # You need to set this for
     CACHE_TYPE = 'redis'
     CACHE_KEY_PREFIX = 'appname-'
