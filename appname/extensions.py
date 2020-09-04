@@ -13,7 +13,7 @@ from flask_mail import Mail
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from raven.contrib.flask import Sentry
-
+from flask_cloudy import Storage
 
 from appname.admin import AdminDashboard
 from appname.services.security import Token
@@ -52,3 +52,4 @@ limiter = Limiter(key_func=get_remote_address)
 stripe = Stripe()
 sentry = Sentry()
 hashids = HashIds()
+storage = Storage()
