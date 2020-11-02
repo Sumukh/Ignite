@@ -5,7 +5,7 @@ Werkzeug~=1.0.1
 requests==2.24.0
 gunicorn
 
-cryptography==3.2
+cryptography==3.2.1
 
 # Flask Extensions
 Flask-Assets>=0.12,<2.1.0
