@@ -51,6 +51,7 @@ pynliner<1.0
 
 # File Storage
 flask-cloudy
+fasteners
 
 # Flask DB Extensions
 Flask-SQLAlchemy==2.4.4
