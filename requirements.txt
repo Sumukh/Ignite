@@ -83,5 +83,5 @@ humanize==3.2.0
 pytest==6.2.2
 pytest-cov==2.11.1
 mccabe==0.6.1
-flake8==3.8.4
+flake8==3.9.2
 
