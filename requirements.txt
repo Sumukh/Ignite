@@ -56,7 +56,7 @@ fasteners
 # Flask DB Extensions
 Flask-SQLAlchemy==2.4.4
 Flask-SQLAlchemy-Cache==0.1.5
-Flask-Migrate==2.7.0
+Flask-Migrate==3.0.1
 
 # Caching
 redis==3.5.3
