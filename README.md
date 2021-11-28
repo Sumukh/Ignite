@@ -34,7 +34,7 @@ Ignite is a scaffold for starting new Flask applications. It takes care of the b
 
 
 ## Setup
-Usage of Python 3 is recommended. It can be installed [on Python.org](https://www.python.org/downloads/)
+Usage of Python 3 is required. It can be installed [on Python.org](https://www.python.org/downloads/)
 ```
 # Optional but recommended:
 python3 -m venv env; source env/bin/activate
@@ -54,6 +54,15 @@ FLASK_APP=manage FLASK_ENV=development flask run
 # Login with the following credentials "user@example.com", "test
 
 # Production documentation in the repository.
+```
+
+
+## Testing 
+
+CircleCI is configured to run tests:
+
+```
+APPNAME_ENV=test ./manage.py test --coverage
 ```
 
 ### Local Secrets
