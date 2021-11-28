@@ -31,7 +31,7 @@ Flask-SocketIO>=3.1.0 # Realtime Websockets
 python-engineio>=3.0.0 # Needed to fix startup error
 
 Flask-Mail
-Flask-Limiter==1.5
+Flask-Limiter==2.0.0
 
 # Admin
 Flask-Admin>=1.5.6
