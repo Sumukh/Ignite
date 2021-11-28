@@ -1,6 +1,6 @@
 [![Ignite](https://user-images.githubusercontent.com/882381/45938197-49cfb880-bf7c-11e8-91ea-94fffd9d054a.png)](https://github.com/sumukh/ignite)
 
-# Ignite for Flask [![CircleCI](https://circleci.com/gh/Sumukh/Ignite.svg?style=svg&circle-token=21024628f8356bc070f27aede670fc676a8e4446)](https://circleci.com/gh/Sumukh/Ignite)
+# Ignite for Flask [![Flask PyTest CI](https://github.com/Sumukh/Ignite/actions/workflows/flask-pytest.yml/badge.svg)](https://github.com/Sumukh/Ignite/actions/workflows/flask-pytest.yml)
 
 Ignite is a scaffold for starting new Flask applications. It takes care of the boilerplate code (like User Registration, OAuth, Teams, and Billing), allowing you to focus on building your application. Ignite is built upon best practices for modern Flask applications.
 
