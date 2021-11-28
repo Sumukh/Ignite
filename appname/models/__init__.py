@@ -51,7 +51,7 @@ class QueryWithSoftDelete(BaseQuery):
         pass
 
     def with_deleted(self):
-        return self.__class__(db.class_mapper(self._mapper_zero().class_),
+        return self.__class__(self._only_full_mapper_zero('get'),
                               session=db.session(), _with_deleted=True)
 
     def _get(self, *args, **kwargs):

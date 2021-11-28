@@ -40,8 +40,11 @@ class User(Model, UserMixin):
         "email_confirmed": "Whether the email was confirmation"
     }
 
+    # TODO: Refactor out our override of __init__. It should either be a 
+    # seperate function or a class method. 
     def __init__(self, email=None, password=None, admin=False,
-                 email_confirmed=False, team=None, name=None):
+                 email_confirmed=False, team=None, name=None, 
+                 deleted=False, role='user'):
         if not email:
             raise ValueError('No Email Provided')
 
