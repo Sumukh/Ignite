@@ -4,8 +4,8 @@ from appname.forms import BaseForm
 from appname.models.user import User
 
 class LoginForm(BaseForm):
-    email = StringField('Email', validators=[validators.email(), validators.required()])
-    password = PasswordField('Password', validators=[validators.required()])
+    email = StringField('Email', validators=[validators.email(), validators.InputRequired()])
+    password = PasswordField('Password', validators=[validators.InputRequired()])
 
     def validate(self):
         check_validate = super(LoginForm, self).validate()
@@ -28,11 +28,11 @@ class LoginForm(BaseForm):
         return True
 
 class SignupForm(BaseForm):
-    email = StringField('Email', validators=[validators.email(), validators.required()])
-    password = PasswordField('Password', validators=[validators.required(), validators.length(min=4),
+    email = StringField('Email', validators=[validators.email(), validators.InputRequired()])
+    password = PasswordField('Password', validators=[validators.InputRequired(), validators.length(min=4),
                                                      validators.EqualTo('confirm', message='Passwords must match')])
-    confirm = PasswordField('Confirm Password', validators=[validators.required()])
-    email = StringField('Email', validators=[validators.email(), validators.required()])
+    confirm = PasswordField('Confirm Password', validators=[validators.InputRequired()])
+    email = StringField('Email', validators=[validators.email(), validators.InputRequired()])
     invite_secret = HiddenField('Invite ID')
 
     def validate(self):
@@ -52,12 +52,12 @@ class SignupForm(BaseForm):
         return True
 
 class ChangePasswordForm(BaseForm):
-    password = PasswordField('Password', validators=[validators.required(),
+    password = PasswordField('Password', validators=[validators.InputRequired(),
                                                      validators.length(min=4),
                                                      validators.EqualTo('confirm',
                                                                         message='Passwords must match')])
     confirm = PasswordField('Repeat Password')
 
 class RequestPasswordResetForm(BaseForm):
-    email = StringField('Email', validators=[validators.email(), validators.required()],
+    email = StringField('Email', validators=[validators.email(), validators.InputRequired()],
                         description="Enter the email you used")
