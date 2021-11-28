@@ -59,8 +59,9 @@ FLASK_APP=manage FLASK_ENV=development flask run
 
 ## Testing 
 
-CircleCI is configured to run tests:
+Github Actions is configured to run tests and produce code coverage metrics. 
 
+To run tests locally, try this command:
 ```
 APPNAME_ENV=test ./manage.py test --coverage
 ```
