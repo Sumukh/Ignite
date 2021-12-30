@@ -25,7 +25,6 @@ dokku redis:link ignite ignite
 
 Lets setup the tables & secret key
 ```
-dokku config:set ignite APPNAME_ENV=prod FLASK_APP=manage.py
 dokku run ignite ./manage.py initdb
 dokku run ignite ./manage.py generate_session_key
 dokku config:set ignite SECRET_KEY=<value-from-above>
@@ -45,7 +44,7 @@ dokku config:set ignite GOOGLE_CONSUMER_KEY='' GOOGLE_CONSUMER_SECRET=''  STRIPE
 Now lets add you as an admin user
 
 ```
-dokku run flask shell
+dokku run ignite flask shell
 
 > user = User(email="youremail@gmail.com", password="", admin=True, role='admin')
 > db.session.add(user)

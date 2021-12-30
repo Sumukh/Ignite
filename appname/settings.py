@@ -45,7 +45,9 @@ class ProdConfig(Config):
     DEBUG = False
     # Don't forget to set the env var for SECRET_KEY in production
 
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')  # You need to set this for
+    # You need to set this for the DB
+    # The replace call is required for newer versions of python
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://", 1)
     CACHE_TYPE = 'redis'
     CACHE_KEY_PREFIX = 'appname-'
 
