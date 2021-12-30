@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 
 
 from appname.constants import SUPPORT_EMAIL
+from appname.extensions import stripe
 from appname.models import db
 from appname.forms import SimpleForm
 from appname.forms.login import ChangePasswordForm
@@ -62,7 +63,8 @@ def oauth():
 def billing():
     if request.args.get('success'):
         flash('Processing your payment. You may need to refresh the page.', 'success')
-    return render_template('/settings/billing.html', plans=plans_by_name)
+    return render_template('/settings/billing.html', plans=plans_by_name,
+                           stripe_publishable_key=stripe.stripe_publishable_key)
 
 
 @settings_blueprint.route('/settings/api', methods=['GET', 'POST'])
