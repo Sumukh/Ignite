@@ -49,3 +49,6 @@ env*
 tmp/*
 !tmp/.touch
 appname/static/public/*
+!appname/static/public/images/*
+!appname/static/public/ignite/*
+!appname/static/public/fonts/*
