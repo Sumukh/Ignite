@@ -26,8 +26,8 @@ dokku redis:link ignite ignite
 Lets setup the tables & secret key
 ```
 dokku run ignite ./manage.py initdb
-dokku run ignite ./manage.py generate_session_key
-dokku config:set ignite SECRET_KEY=<value-from-above>
+dokku run ignite ./manage.py generate-session-key
+dokku config:set ignite SECRET_KEY=<value-from-above> --no-restart
 ```
 
 Next we'll set some basic environment variables

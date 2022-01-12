@@ -47,7 +47,7 @@ class ProdConfig(Config):
 
     # You need to set this for the DB
     # The replace call is required for newer versions of python
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://", 1)
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', '').replace("postgres://", "postgresql://", 1)
     CACHE_TYPE = 'redis'
     CACHE_KEY_PREFIX = 'appname-'
 
