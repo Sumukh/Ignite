@@ -1,9 +1,4 @@
-{% extends "tabler/dashboard_base.html" %}
-{% from "helpers/_formhelpers.html" import render_field %}
-
-{% block title %}appname team settings{% endblock %}
-
-{% block body %}
+{% extends "tabler/dashboard_base.html" %} {% from "helpers/_formhelpers.html" import render_field %} {% block title %}appname team settings{% endblock %} {% block body %}
 <div class="my-3 my-md-5">
     <div class="container">
         <div class="page-header">
@@ -18,15 +13,15 @@
                         <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
                             <thead>
                                 <tr>
-                                <th class="text-center w-1"><i class="icon-people"></i></th>
-                                <th>Email</th>
-                                <th class="text-center">Role</th>
-                                <th class="text-center">Active</th>
-                                <th class="text-center">Actions</th>
+                                    <th class="text-center w-1"><i class="icon-people"></i></th>
+                                    <th>Email</th>
+                                    <th class="text-center">Role</th>
+                                    <th class="text-center">Active</th>
+                                    <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            {% for member in team.members %}
+                                {% for member in team.members %}
                                 <tr>
                                     <td class="text-center">
                                         <div class="avatar avatar-placeholder d-block"></div>
@@ -45,17 +40,15 @@
                                     </td>
                                     <td class="text-center">
                                         {% if member.user != current_user %}
-                                            <form role="form" action="{{ url_for('dashboard_team.remove_member', team_id=team.id, invite_id=member.id) }}" method="post">
-                                                {{ simple_form.hidden_tag() }}
+                                        <form role="form" action="{{ url_for('dashboard_team.remove_member', team_id=team.id, invite_id=member.id) }}" method="post">
+                                            {{ simple_form.hidden_tag() }}
 
-                                                <button type="submit" class="btn btn-secondary btn-sm">Remove</button>
-                                            </form>
-                                        {% else %}
-                                        —
-                                        {% endif %}
+                                            <button type="submit" class="btn btn-secondary btn-sm">Remove</button>
+                                        </form>
+                                        {% else %} — {% endif %}
                                     </td>
                                 </tr>
-                            {% endfor %}
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -63,91 +56,88 @@
 
                 <div class="card">
                     <div class="card-header">
-                            <h3 class="card-title">Manage Billing</h3>
+                        <h3 class="card-title">Manage Billing</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-4 col-lg-4">
-                              <div class="card">
-                                <div class="card-body text-center">
-                                  <div class="card-category">Free</div>
-                                  <div class="display-3 my-4">$0</div>
-                                  <ul class="list-unstyled leading-loose">
-                                    <li><strong>5</strong> Users</li>
-                                    <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Sharing Tools</li>
-                                    <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Design Tools</li>
-                                    <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Private Messages</li>
-                                    <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Twitter API</li>
-                                  </ul>
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <div class="card-category">Free</div>
+                                        <div class="display-3 my-4">$0</div>
+                                        <ul class="list-unstyled leading-loose">
+                                            <li><strong>5</strong> Users</li>
+                                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Sharing Tools</li>
+                                            <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Design Tools</li>
+                                            <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Private Messages</li>
+                                            <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Twitter API</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                              </div>
-                            </div>
-                            <div class="col-sm-4 col-lg-4">
-                              <div class="card">
-                                <div class="card-status {% if not team.is_paid_plan %} bg-green {% endif %}"></div>
-                                <div class="card-body text-center">
-                                  <div class="card-category">Monthly</div>
-                                  <div class="display-3 my-4">$10</div>
-                                  <ul class="list-unstyled leading-loose">
-                                    <li><strong>Unlimited</strong> users</li>
-                                    <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Sharing Tools</li>
-                                    <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Design Tools</li>
-                                    <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Private Messages</li>
-                                    <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Twitter API</li>
-                                  </ul>
-                                  <div class="text-center mt-6">
-                                    <a href="{{ url_for('user_settings.billing') }}" class="btn btn-green btn-block">Choose plan</a>
-                                  </div>
-                                </div>
-                              </div>
                             </div>
                             <div class="col-sm-4 col-lg-4">
                                 <div class="card">
-                                  <div class="card-status {% if not team.is_paid_plan %} bg-green {% endif %}"></div>
-                                  <div class="card-body text-center">
-                                    <div class="card-category">Yearly</div>
-                                    <div class="display-3 my-4">$100</div>
-                                    <ul class="list-unstyled leading-loose">
-                                      <li><strong>Unlimited</strong> users</li>
-                                      <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Sharing Tools</li>
-                                      <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Design Tools</li>
-                                      <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Private Messages</li>
-                                      <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Twitter API</li>
-                                    </ul>
-                                    <div class="text-center mt-6">
-                                      <a href="{{ url_for('user_settings.billing') }}" class="btn btn-green btn-block">Choose plan</a>
+                                    <div class="card-status {% if not team.is_paid_plan %} bg-green {% endif %}"></div>
+                                    <div class="card-body text-center">
+                                        <div class="card-category">Monthly</div>
+                                        <div class="display-3 my-4">$10</div>
+                                        <ul class="list-unstyled leading-loose">
+                                            <li><strong>Unlimited</strong> users</li>
+                                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Sharing Tools</li>
+                                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Design Tools</li>
+                                            <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Private Messages</li>
+                                            <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Twitter API</li>
+                                        </ul>
+                                        <div class="text-center mt-6">
+                                            <a href="{{ url_for('user_settings.billing') }}" class="btn btn-green btn-block">Choose plan</a>
+                                        </div>
                                     </div>
-                                  </div>
                                 </div>
                             </div>
-                          </div>
+                            <div class="col-sm-4 col-lg-4">
+                                <div class="card">
+                                    <div class="card-status {% if not team.is_paid_plan %} bg-green {% endif %}"></div>
+                                    <div class="card-body text-center">
+                                        <div class="card-category">Yearly</div>
+                                        <div class="display-3 my-4">$100</div>
+                                        <ul class="list-unstyled leading-loose">
+                                            <li><strong>Unlimited</strong> users</li>
+                                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Sharing Tools</li>
+                                            <li><i class="fe fe-check text-success mr-2" aria-hidden="true"></i> Design Tools</li>
+                                            <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Private Messages</li>
+                                            <li><i class="fe fe-x text-danger mr-2" aria-hidden="true"></i> Twitter API</li>
+                                        </ul>
+                                        <div class="text-center mt-6">
+                                            <a href="{{ url_for('user_settings.billing') }}" class="btn btn-green btn-block">Choose plan</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                        <p> Your team is on the {{ team.plan | title}} plan.
-                        {% if not team.is_paid_plan %}
-                        <p> To upgrade your team, <a href="{{ url_for('user_settings.billing') }}">go to the billing page</a>
-                        </p>
-                        {% endif %}
+                        <p> Your team is on the {{ team.plan | title}} plan. {% if not team.is_paid_plan %}
+                            <p> To upgrade your team, <a href="{{ url_for('user_settings.billing') }}">go to the billing page</a>
+                            </p>
+                            {% endif %}
 
                     </div>
-                        <div class="card-footer text-left">
-                            <form role="form" action="{{ url_for('dashboard_team.billing_portal', team_id=team.id) }}" method="post">
-                                {{ simple_form().hidden_tag() }}
-                                    <button type="submit" class="btn btn-primary">Manage Subscription & Payments</button>
-                            </form>
-                        </div>
+                    <div class="card-footer text-left">
+                        <form role="form" action="{{ url_for('dashboard_team.billing_portal', team_id=team.id) }}" method="post">
+                            {{ simple_form().hidden_tag() }}
+                            <button type="submit" class="btn btn-primary">Manage Subscription & Payments</button>
+                        </form>
+                    </div>
                 </div>
 
             </div>
             <div class="col-4">
                 <div class="card">
                     <div class="card-header">
-                            <h3 class="card-title">Invite New Member</h3>
+                        <h3 class="card-title">Invite New Member</h3>
                     </div>
                     <form role="form" action="{{ url_for('dashboard_team.add_member', team_id=team.id) }}" method="post">
                         <div class="card-body">
-                            {{ form.hidden_tag() }}
-                            {{ render_field(form.email) }}
-                            {{ render_field(form.role) }}
+                            {{ form.hidden_tag() }} {{ render_field(form.email) }} {{ render_field(form.role) }}
                         </div>
                         <div class="card-footer text-left">
                             <div class="d-flex">

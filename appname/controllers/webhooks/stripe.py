@@ -1,3 +1,4 @@
+from itertools import product
 import logging
 from flask import Blueprint, request, url_for, abort
 
@@ -5,6 +6,7 @@ from appname.models import db
 from appname.models.user import User
 from appname.models.teams import Team
 from appname.extensions import csrf, stripe
+from appname.billing_plans import plans_by_price_id, MonthlyPremium
 
 stripe_blueprint = Blueprint('checkout', __name__)
 
@@ -27,13 +29,16 @@ def stripe_webhook():
         db.session.commit()
     elif event.type == 'customer.subscription.created':
         subscription = event['data']['object']
+        plan = subscription['plan']
         status = subscription['status']
         team = Team.query.filter_by(subscription_id=subscription['id']).first()
         team.billing_customer_id = subscription["customer"]
-        team.plan = 'premium' # Customize to whatever you want (or lookup the plan name)
+        # TODO: Confusing ID / Lookup
+        price_id = plan["id"]
+        # Customize to however you do your billing plan logic (or lookup the plan name)
+        team.plan = plans_by_price_id.get(price_id) or MonthlyPremium.name
         db.session.add(team)
         db.session.commit()
-
     elif event.type == 'customer.subscription.updated':
         # Upgrades and downgrades.
         subscription = event['data']['object']

@@ -42,7 +42,7 @@ class Team(Model):
 
     @property
     def is_paid_plan(self):
-        return not self.billing_plan.is_free
+        return not self.billing_plan.is_free()
 
     @property
     def billing_plan(self):
