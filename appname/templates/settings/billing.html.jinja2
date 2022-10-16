@@ -1,0 +1,91 @@
+{% extends "tabler/dashboard_base.html" %} {% from "helpers/_formhelpers.html" import render_field %} {% block title %}appname settings{% endblock %} {% block body %} {% if stripe_publishable_key %}
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    var stripe = Stripe('{{ stripe_publishable_key }}');
+
+    function purchase(planId, teamId) {
+        stripe.redirectToCheckout({
+            lineItems: [
+                // Replace with the ID of your price
+                {
+                    price: planId,
+                    quantity: 1
+                }
+            ],
+            clientReferenceId: teamId,
+            mode: 'subscription',
+            successUrl: "{{ url_for('user_settings.billing', success=1, _external=True) }}",
+            cancelUrl: "{{ url_for('user_settings.billing', cancel=1, _external=True) }}",
+            customerEmail: '{{ current_user.email }}',
+        }).then(function(result) {
+            // If `redirectToCheckout` fails due to a browser or network
+            // error, display the localized error message to your customer
+            // using `result.error.message`.
+            alert(result.error.message);
+        });
+    }
+</script>
+{% endif %}
+
+
+<div class="my-3 my-md-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                {% include 'settings/sidebar.html' %}
+            </div>
+            <div class="col-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Upgrade</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+                                <thead>
+                                    <tr>
+                                        <th>Team</th>
+                                        <th class="text-center">Plan</th>
+                                        <th class="text-center">Manage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for member in current_user.active_memberships %}
+                                    <tr>
+                                        <td>
+                                            <div>{{ member.team.name }}</div>
+                                        </td>
+                                        <td class="text-center">
+                                            {{ member.team.billing_plan.friendly_name }}
+                                        </td>
+                                        <td class="text-center">
+                                            {% if not member.team.is_paid_plan %}
+                                            <a class="btn btn-primary text-white" onclick="purchase('{{ plans["monthly_premium"].stripe_product_id }}', '{{ member.team.id}}')">
+                                                    Upgrade ($10/month)
+                                            </a>
+                                            <a class="btn btn-primary text-white " onclick="purchase('{{ plans["annual_premium"].stripe_product_id }}', '{{ member.team.id}}')">
+                                                    Save 20% ($100/year)
+                                            </a>
+                                            {% endif %}
+
+                                            {% if member.team.billing_customer_id %}
+                                            <form role="form" action="{{ url_for('dashboard_team.billing_portal', team_id=member.team.id) }}" method="post">
+                                                {{ form.hidden_tag() }}
+                                                <button type="submit" class="btn btn-secondary">Manage Subscription & Payments</button>
+                                            </form>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

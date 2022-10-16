@@ -61,10 +61,11 @@ def oauth():
 @settings_blueprint.route('/settings/billing')
 @login_required
 def billing():
+    form = SimpleForm()
     if request.args.get('success'):
         flash('Processing your payment. You may need to refresh the page.', 'success')
-    return render_template('/settings/billing.html', plans=plans_by_name,
-                           stripe_publishable_key=stripe.stripe_publishable_key)
+    return render_template('/settings/billing.html.jinja2', plans=plans_by_name,
+                           stripe_publishable_key=stripe.publishable_key, form=form)
 
 
 @settings_blueprint.route('/settings/api', methods=['GET', 'POST'])

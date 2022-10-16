@@ -13,6 +13,7 @@ class BasePlan:
     name = None
     billing_type = UNLIMITED
     description = 'A plan for appname'
+    friendly_name = "Default Plan"
 
     def __init__(self, team):
         self.team = team
@@ -60,6 +61,7 @@ class BasePlan:
 class FreePlan(BasePlan):
     stripe_product_id = None
     name = 'free'
+    friendly_name = "Free Plan"
     description = 'The free plan'
     billing_type = METERED
 
@@ -75,6 +77,7 @@ class MonthlyPremium(BasePlan):
     stripe_product_id = os.getenv('STRIPE_MONTHLY_PREMIUM_ID', 'price_1HGzFQID8JASalnlgBAX2hjo')
     name = 'monthly_premium'
     billing_type = UNLIMITED
+    friendly_name = "Premium (Monthly)"
 
     @classmethod
     def is_free(cls):
@@ -87,11 +90,13 @@ class MonthlyPremium(BasePlan):
 class AnnualPremium(MonthlyPremium):
     stripe_product_id = os.getenv('STRIPE_ANNUAL_PREMIUM_ID', 'price_1HGzFQID8JASalnlBeRxlkno')
     name = 'annual_premium'
+    friendly_name = "Premium (Annual)"
 
 class MeteredPlan(BasePlan):
     stripe_product_id = os.getenv('STRIPE_METERED_PLAN_ID', 'price_1HGzFQID8JASalnlBeRxlkno')
     billing_type = METERED
     name = 'pay_as_you_go'
+    friendly_name = "Pay as you Go"
 
     @classmethod
     def is_free(cls):
@@ -104,3 +109,7 @@ class MeteredPlan(BasePlan):
 free_plans = [FreePlan]
 all_plans = [FreePlan, MonthlyPremium, AnnualPremium]
 plans_by_name = {plan.name: plan for plan in all_plans}
+
+# TODO: `stripe_product_id` is a confusing name, because this is actually a a price, for the same product
+# We do this so we can distinguish between annual and monthly pricing
+plans_by_price_id = {plan.stripe_product_id: plan for plan in all_plans}

@@ -57,9 +57,9 @@ FLASK_APP=manage FLASK_ENV=development flask run
 ```
 
 
-## Testing 
+## Testing
 
-Github Actions is configured to run tests and produce code coverage metrics. 
+Github Actions is configured to run tests and produce code coverage metrics.
 
 To run tests locally, try this command:
 ```
@@ -87,6 +87,16 @@ Ignite is not tied to a specific platform for deployment, but it works well on [
 It is also designed to work well on other cloud providers such as AWS, Google Cloud, and DigitalOcean.
 
 Documentation is currently provided for installations on Dokku.
+
+
+## Stripe Webhooks Locally
+
+
+- Install the [Stripe CLI](https://stripe.com/docs/stripe-cli)
+- Login to the Stripe CLI (`stripe login`)
+- Run `stripe listen --forward-to localhost:5000/webhooks/stripe`
+- Use the webhook secret and configure your app to use it (`export STRIPE_WEBHOOK_SECRET=whsec_...`)
+- To replay an event in a seperate console: `stripe events resend evt_XYZ`
 
 ## Screenshots
 

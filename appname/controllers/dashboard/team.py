@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from appname.constants import MAX_TEAM_SIZE
 from appname.models.teams import Team, TeamMember
 from appname.extensions import stripe
+from appname.forms import SimpleForm
 from appname.forms.teams import InviteMemberForm
 from appname.helpers.session import current_membership
 
