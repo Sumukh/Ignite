@@ -82,6 +82,6 @@ humanize==4.4.0
 # Testing
 pytest==6.2.5
 pytest-cov==3.0.0
-mccabe==0.6.1
+mccabe==0.7.0
 flake8==4.0.1
 
