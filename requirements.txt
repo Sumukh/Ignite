@@ -67,7 +67,7 @@ rq==1.11.1
 rq-dashboard==0.6.1
 
 # Billing
-stripe==2.76.0
+stripe==5.1.1
 
 # Error Tracking
 raven[flask]
