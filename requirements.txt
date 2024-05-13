@@ -37,7 +37,7 @@ Flask-Limiter==2.6.3
 Flask-Admin>=1.5.6
 
 # Database
-pymysql==1.0.2
+pymysql==1.1.0
 psycopg2-binary
 sqlalchemy==1.4.42
 sqlalchemy-utils==0.38.3 # Provides extra datatypes
