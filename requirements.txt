@@ -24,7 +24,7 @@ wtforms[email]
 Flask-Dance[sqla]
 
 
-Flask-RESTful==0.3.9
+Flask-RESTful==0.3.10
 Flask-Testing>=0.6.2,<1.0
 
 Flask-SocketIO>=3.1.0 # Realtime Websockets
