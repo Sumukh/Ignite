@@ -2,7 +2,7 @@ Flask==2.2.5
 jinja2==3.1.4
 Werkzeug~=2.2.3
 
-requests==2.31.0
+requests==2.32.0
 gunicorn
 
 cryptography==39.0.2
