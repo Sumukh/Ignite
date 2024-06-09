@@ -15,25 +15,44 @@
                 </div>
                 <div class="card">
                     <div class="text-center mt-4 mb-4">
-                        {% if features.oauth %}
-                            <a href="{{ url_for('google.login') }}" class="btn btn-primary btn-block">
-                                <i class="fa fa-google"></i> Login with Google
-                            </a>
-                        {% else %}
-                            It is not possible to login to appname right now because OAuth Login has not been configured.
-                        {% endif %}
                     </div>
                 </div>
-                {% if constants.ALLOW_SIGNUPS %}
-                    <div class="text-center text-muted mt-3">
-                        Don't have an account yet? <a href="{{ url_for('auth.signup') }}" class="btn btn-primary btn-block">Sign Up</a>
-                    </div>
-                {% endif %}
 
             </div>
         </div>
     </div>
 </div>
+
+<div class="page page-center">
+    <div class="container container-tight py-4">
+      <div class="text-center mb-4">
+        <a href="." class="navbar-brand navbar-brand-autodark">
+            {{ render_flashes() }}
+            <img src="{{ url_for('static', filename='public/ignite/ignite-logo@2x.png') }}" class="h-6" >
+        </a>
+      </div>
+      <div class="card card-md">
+        <div class="card-body">
+          <h2 class="h2 text-center mb-4">Log in to appname</h2>
+
+          {% if features.oauth %}
+          <a href="{{ url_for('google.login') }}" class="btn btn-primary w-100">
+              <i class="fa fa-google"></i> Login with Google
+          </a>
+            {% else %}
+                It is not possible to login to appname right now because OAuth Login has not been configured.
+            {% endif %}
+            {% if constants.ALLOW_SIGNUPS %}
+            <div class="text-center text-muted mt-3">
+                Don't have an account yet? <a href="{{ url_for('auth.signup') }}" class="btn btn-primary w-100">Sign Up</a>
+            </div>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% include 'tabler/_footer.html' with context %}
 
 {% endblock %}

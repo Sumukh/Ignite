@@ -1,7 +1,7 @@
 {% macro render_field(field, class="form-control", label_hidden=false) %}
-    <div class="form-group">
+    <div class="mb-2">
         {% if not label_hidden %}
-            {{ field.label }}
+        <label class="form-label">{{ field.label }}</label>
             {% if field.errors %}
                 {% for e in field.errors %}
                     <p class="help-block text-danger">{{ e }}</p>

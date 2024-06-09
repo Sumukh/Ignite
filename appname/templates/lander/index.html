@@ -13,20 +13,20 @@
 	<div class="hero-bg {{bg_color_class}}"></div>
 	<header class="header">
 		<div class="container nav-header">
-			<a href="https://github.com/sumukh/ignite" target="_blank" class="logo">
+			<a href="https://github.com/sumukh/ignite" target="_blank" class="text-decoration-none link logo">
 				<img src="{{ url_for('static', filename='public/ignite/ignite-icon.svg') }}" class="logo-icon h-6" alt="Ignite">
 				ignite
 			</a>
 			<div class="links">
-				<a href="#pricing">Pricing</a>
-				<a href="{{ url_for('auth.signup') }}">Demo</a>
+				<a href="#pricing" class="text-decoration-none">Pricing</a>
+				<a href="{{ url_for('auth.signup') }}" class="text-decoration-none">Demo</a>
 			</div>
 		</div>
 	</header>
 
 
 	<div class="container">
-		<div class="row hero-content">
+		<div class="row position-relative">
 			<div class="col-sm">
 				<div class="hero-header">
 					<h1 class="hero-title">Batteries Included</h1>
@@ -35,8 +35,8 @@
 					</p>
 
 					<div class="hero-cta">
-						<a href="{{ url_for('auth.signup') }}" class="btn btn-outline-light btn-outline hero-cta-btn">Demo</a>
-						<a href="#pricing" class="btn btn-light hero-cta-btn">Download</a>
+						<a href="{{ url_for('auth.signup') }}" class="btn btn-outline-light btn-outline hero-cta-btn" class="text-decoration-none">Demo</a>
+						<a href="#pricing" class="btn btn-light hero-cta-btn" class="text-decoration-none">Download</a>
 					</div>
 				</div>
 			</div>

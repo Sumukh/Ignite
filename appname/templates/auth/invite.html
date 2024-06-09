@@ -4,34 +4,36 @@
 {% block title %}appname Signup{% endblock %}
 
 {% block body %}
-<div class="page-single">
-    <div class="container">
-        <div class="row">
-            <div class="col col-login mx-auto">
-                <div class="text-center mb-6">
-                    <img src="{{ url_for('static', filename='public/ignite/ignite-logo@2x.png') }}" class="h-6" alt="Tabler">
-                    <h2> appname </h2>
-                </div>
-                <form role="form" class="card" action="{{ url_for('auth.signup', invite_secret=invite.invite_secret) }}" method="post">
+<div class="page page-center">
+    <div class="container container-tight py-4">
+      <div class="text-center mb-4">
+        <a href="." class="navbar-brand navbar-brand-autodark">
+            {{ render_flashes() }}
+            <img src="{{ url_for('static', filename='public/ignite/ignite-logo@2x.png') }}" class="h-6" >
+        </a>
+      </div>
+      <div class="card card-md">
+        <div class="card-body">
+          <h2 class="h2 text-center mb-4">Join {{ invite.team.name }} on appname</h2>
+          <form role="form"  action="{{ url_for('auth.signup', invite_secret=invite.invite_secret) }}" method="post">
+                <p>You've been invited to appname. Complete the signup below to join {{ invite.team.name }}.</p>
 
-                    <div class="card-body p-6">
-                        <div class="card-title">Join {{ invite.team.name }} on appname </div>
-                        <p>You've been invited to appname. Complete the signup below to join {{ invite.team.name }}.</p>
-                        {{ form.hidden_tag() }}
-                        {{ render_field(form.email, value=invite.invite_email) }}
-                        {{ render_field(form.password) }}
-                        {{ render_field(form.confirm) }}
-                        {{ render_field(form.invite_secret, value=invite.invite_secret, label_hidden=true) }}
-
-                        <div class="form-footer">
-                            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
-                        </div>
-                    </form>
+                {{ form.hidden_tag() }}
+                {{ render_field(form.email, value=invite.invite_email) }}
+                {{ render_field(form.password) }}
+                {{ render_field(form.confirm) }}
+                {{ render_field(form.invite_secret, value=invite.invite_secret, label_hidden=true) }}
+                <div class="form-footer">
+                    <button type="submit" class="btn btn-primary w-100">Sign up</button>
                 </div>
-            </div>
+            </form>
         </div>
+      </div>
     </div>
+  </div>
 </div>
+
+
 {% include 'tabler/_footer.html' with context %}
 
 {% endblock %}

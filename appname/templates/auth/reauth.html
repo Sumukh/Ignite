@@ -4,17 +4,25 @@
 {% block title %}appname Login Example{% endblock %}
 
 {% block body %}
-<div class="page-single">
-    <div class="container">
-      <div class="row">
-        <div class="col col-login mx-auto">
-          <div class="card-body p-6">
-            <div class="card-title">Confirm your login in order to procceed</div>
-            <form role="form" action="{{ url_for('auth.login') }}" method="post">
-                {{ form.hidden_tag() }} {{ render_field(form.email) }} {{ render_field(form.password) }}
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-          </div>
+<div class="page page-center">
+  <div class="container container-tight py-4">
+    <div class="text-center mb-4">
+      <a href="." class="navbar-brand navbar-brand-autodark">
+          {{ render_flashes() }}
+          <img src="{{ url_for('static', filename='public/ignite/ignite-logo@2x.png') }}" class="h-6" >
+      </a>
+    </div>
+    <div class="card card-md">
+      <div class="card-body">
+        <h2 class="h2 text-center mb-4">Login to your account</h2>
+        <form role="form"  action="{{ url_for('auth.login') }}" method="post">
+          {{ form.hidden_tag() }}
+          {{ render_field(form.email) }}
+          {{ render_field(form.password) }}
+              <div class="form-footer">
+                  <button type="submit" class="btn btn-primary w-100">Submit</button>
+              </div>
+          </form>
       </div>
     </div>
   </div>
