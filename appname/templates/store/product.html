@@ -23,7 +23,7 @@
     <div class="col-md-5">
         <div class="card" style="width: 20rem;">
             <div class="card-header">
-                Appname Product
+                {{branding.name}} Product
             </div>
             <div class="card-body">
                 <h4 class="card-title">
@@ -50,7 +50,7 @@
 
 
     <div class="col-md-7">
-        <h2> Appname </h2>
+        <h2> {{branding.name}} </h2>
 
         <p> Purchase our incredible product ($149). </p>
         <form action="/store/payment" method="POST" class="stripe-checkout">

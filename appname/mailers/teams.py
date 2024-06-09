@@ -1,7 +1,7 @@
 from flask import render_template, url_for
 
 from appname.mailers import Mailer
-
+from appname.extensions import branding
 class InviteEmail(Mailer):
     TEMPLATE = 'email/teams/invite.html'
 
@@ -12,8 +12,7 @@ class InviteEmail(Mailer):
 
     @property
     def subject(self):
-        return ("{0} invited you to join their team on appname"
-                .format(self.invite.inviter.email))
+        return ("{0} invited you to join their team on {1}".format(self.invite.inviter.email, branding.name))
 
     def send(self):
         link = url_for('auth.invite_page', invite_id=self.invite.id,

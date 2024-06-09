@@ -1,4 +1,4 @@
-{% extends "tabler/dashboard_base.html" %} {% from "helpers/_formhelpers.html" import render_field %} {% block title %}appname settings{% endblock %} {% block body %} {% if stripe_publishable_key %}
+{% extends "tabler/dashboard_base.html" %} {% from "helpers/_formhelpers.html" import render_field %} {% block title %}{{branding.name}} settings{% endblock %} {% block body %} {% if stripe_publishable_key %}
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     var stripe = Stripe('{{ stripe_publishable_key }}');

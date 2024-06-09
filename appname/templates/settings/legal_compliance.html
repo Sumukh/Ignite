@@ -1,7 +1,7 @@
 {% extends "tabler/dashboard_base.html" %}
 {% from "helpers/_formhelpers.html" import render_field %}
 
-{% block title %}appname settings{% endblock %}
+{% block title %}{{branding.name}} settings{% endblock %}
 
 {% block body %}
 
@@ -35,7 +35,7 @@
                         <h3 class="card-title">User Data Export</h3>
                     </div>
                     <div class="card-body">
-                        appname provides a way for users to export their personal data. The fields below will provide
+                        {{branding.name}} provides a way for users to export their personal data. The fields below will provide
                         a way to access the data.
                     </div>
                     <div class="card-footer">
@@ -64,7 +64,7 @@
                         <h3 class="card-title">Data Deletion</h3>
                     </div>
                     <div class="card-body">
-                        appname provides a way for users to delete their personal data. Teams will only be deleted when you are the only member
+                        {{branding.name}} provides a way for users to delete their personal data. Teams will only be deleted when you are the only member
                         of the team.
                     </div>
                     <div class="card-footer">

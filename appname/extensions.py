@@ -19,6 +19,7 @@ from appname.admin import AdminDashboard
 from appname.services.security import Token
 from appname.services.stripe import Stripe
 from appname.services.hash_ids import HashIds
+from appname.services.branding import Branding
 
 # Setup flask cache
 cache = Cache()
@@ -53,3 +54,4 @@ stripe = Stripe()
 sentry = Sentry()
 hashids = HashIds()
 storage = Storage()
+branding = Branding()

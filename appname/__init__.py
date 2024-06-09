@@ -34,7 +34,8 @@ from appname.extensions import (
     sentry,
     storage,
     stripe,
-    token
+    token,
+    branding
 )
 from appname.forms import SimpleForm
 
@@ -76,6 +77,7 @@ def create_app(object_name):
     # Special URL converters
     custom_converters.init_app(app)
 
+    branding.init_app(app)
     token.init_app(app)
     mail.init_app(app)
     limiter.init_app(app)
@@ -132,6 +134,7 @@ def create_app(object_name):
         'debug': app.debug,
         'constants': constants,
         'simple_form': SimpleForm,
+        'branding': branding,
         'features': {
             'oauth':  app.config["GOOGLE_OAUTH_CLIENT_ID"] != 'bad_key',
             'segment':  app.config["SEGMENT_ANALYTICS_KEY"],

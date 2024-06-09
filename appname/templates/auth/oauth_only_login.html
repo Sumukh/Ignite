@@ -2,7 +2,7 @@
 {% from "helpers/_flashes.html" import render_flashes %}
 {% from "helpers/_formhelpers.html" import render_field %}
 
-{% block title %}appname Login Example{% endblock %}
+{% block title %}{{branding.name}} Login Example{% endblock %}
 
 {% block body %}
 <div class="page-single">
@@ -11,7 +11,7 @@
             <div class="col col-login mx-auto">
                 <div class="text-center mb-6">
                     {{ render_flashes() }}
-                    <img src="{{ url_for('static', filename='public/ignite/ignite-logo@2x.png') }}" class="h-6" alt="Tabler">
+                    <img src="{{ url_for('static', filename=branding.full_logo_path) }}" class="h-6" alt="Tabler">
                 </div>
                 <div class="card">
                     <div class="text-center mt-4 mb-4">
@@ -20,7 +20,7 @@
                                 <i class="fa fa-google"></i> Login with Google
                             </a>
                         {% else %}
-                            It is not possible to login to appname right now because OAuth Login has not been configured.
+                            It is not possible to login to {{branding.name}} right now because OAuth Login has not been configured.
                         {% endif %}
                     </div>
                 </div>
