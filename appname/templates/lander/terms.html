@@ -1,0 +1,449 @@
+{% extends "lander/base.html" %}
+
+{% block title %}Ignite{% endblock %}
+
+{% block js %}
+    <script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+
+
+{% block body %}
+{% set bg_color_class = ['', 'bg-blue', 'bg-dark-purple', 'bg-grey', 'bg-dark-blue']|random %}
+<section class="hero">
+	<div class="{{bg_color_class}}"></div>
+	<header class="header text-primary">
+		<div class="container nav-header ">
+			<a href="https://github.com/sumukh/ignite" target="_blank" class="logo">
+				<img src="{{ url_for('static', filename='public/ignite/ignite-icon.svg') }}" class="logo-icon h-6" alt="Ignite">
+				ignite
+			</a>
+			<div class="links">
+				<a href="#pricing" class="text-black">Pricing</a>
+				<a href="{{ url_for('auth.signup') }}" class="text-black">Demo</a>
+			</div>
+		</div>
+	</header>
+</section>
+
+<section class="section ">
+	<div class="container">
+		<ol>
+
+		<p><strong>TERMS OF SERVICE</strong></p>
+		<p>Last updated: 06/09/2024</p>
+		<li><strong>Introduction</strong></li>
+		<p>Welcome to <strong>{{branding.legal_name}}</strong> (&quot;<strong>Company</strong>&quot;, &quot;<strong>we</strong>&quot;, &quot;<strong>our</strong>&quot;, &quot;<strong>us</strong>&quot;)! Please carefully read the following information. It will take you approximately 20 minutes.</p>
+		<p>These Terms of Service (&quot;<strong>Terms</strong>&quot;, &quot;<strong>Terms of Service</strong>&quot;) govern your use of our web pages located at {{branding.name}} operated by {{branding.legal_name}}</p>
+		<p>Our Privacy Policy also governs your use of our Service and explains how we collect, safeguard and disclose information that results from your use of our web pages. Please read it here {{branding.name}}/terms.</p>
+		<p>Your agreement with us includes these Terms and our Privacy Policy (&quot;<strong>Agreements</strong>&quot;). You acknowledge that you have read and understood Agreements, and agree to be bound of them.</p>
+		<p>If you do not agree with (or cannot comply with) Agreements, then you may not use the Service, but please let us know by emailing at {{branding.support_email}} so we can try to find a solution. These Terms apply to all visitors, users and others who wish to access or use Service.</p>
+		<p>Thank you for being responsible.</p>
+		<li><strong>Communications</strong></li>
+		<p>By creating an Account on our Service, you agree to subscribe to newsletters, marketing or promotional materials and other information we may send. However, you may opt out of receiving any, or all, of these communications from us by following the unsubscribe link or by emailing at.</p>
+		<li><strong>Purchases</strong></li>
+		<p>If you wish to purchase any product or service made available through Service (&quot;<strong>Purchase</strong>&quot;), you may be asked to supply certain information relevant to your Purchase including, without limitation, your credit card number, the expiration date of your credit card, your billing address, and your shipping information.</p>
+		<p>You represent and warrant that: (i) you have the legal right to use any credit card(s) or other payment method(s) in connection with any Purchase; and that (ii) the information you supply to us is true, correct and complete.</p>
+		<p>We may employ the use of third party services for the purpose of facilitating payment and the completion of Purchases. By submitting your information, you grant us the right to provide the information to these third parties subject to our Privacy Policy.</p>
+		<p>We reserve the right to refuse or cancel your order at any time for reasons including but not limited to: product or service availability, errors in the description or price of the product or service, error in your order or other reasons.</p>
+		<p>We reserve the right to refuse or cancel your order if fraud or an unauthorized or illegal transaction is suspected.</p>
+		<li><strong>Contests, Sweepstakes and Promotions</strong></li>
+		<p>Any contests, sweepstakes or other promotions (collectively, &quot;<strong>Promotions</strong>&quot;) made available through Service may be governed by rules that are separate from these Terms of Service. If you participate in any Promotions, please review the applicable rules as well as our Privacy Policy. If the rules for a Promotion conflict with these Terms of Service, Promotion rules will apply.</p>
+		<li><strong>Subscriptions</strong></li>
+		<p>Some parts of Service are billed on a subscription basis (&quot;<strong>Subscription(s)</strong>&quot;). You will be billed in advance on a recurring and periodic basis (&quot;<strong>Billing Cycle</strong>&quot;). Billing cycles are set either on a monthly or annual basis, depending on the type of subscription plan you select when purchasing a Subscription.</p>
+		<p>At the end of each Billing Cycle, your Subscription will automatically renew under the exact same conditions unless you cancel it or {{branding.legal_name}} cancels it. You may cancel your Subscription renewal either through your online account management page or by contacting {{branding.legal_name}} customer support team.</p>
+		<p>A valid payment method, including credit card, is required to process the payment for your subscription. You shall provide {{branding.legal_name}} with accurate and complete billing information including full name, address, state, zip code, telephone number, and a valid payment method information. By submitting such payment information, you automatically authorize {{branding.legal_name}} to charge all Subscription fees incurred through your account to any such payment instruments.</p>
+		<p>Should automatic billing fail to occur for any reason, {{branding.legal_name}} will issue an electronic invoice indicating that you must proceed manually, within a certain deadline date, with the full payment corresponding to the billing period as indicated on the invoice.</p>
+		<li><strong>Free Trial</strong></li>
+		<p>{{branding.legal_name}} may, at its sole discretion, offer a Subscription with a free trial for a limited period of time (&quot;<strong>Free Trial</strong>&quot;).</p>
+		<p>You may be required to enter your billing information in order to sign up for Free Trial.</p>
+		<p>If you do enter your billing information when signing up for Free Trial, you will not be charged by {{branding.legal_name}} until Free Trial has expired. On the last day of Free Trial period, unless you cancelled your Subscription, you will be automatically charged the applicable Subscription fees for the type of Subscription you have selected.</p>
+		<p>At any time and without notice, {{branding.legal_name}} reserves the right to (i) modify Terms of Service of Free Trial offer, or (ii) cancel such Free Trial offer.</p>
+		<li><strong>Fee Changes</strong></li>
+		<p>{{branding.legal_name}}, in its sole discretion and at any time, may modify Subscription fees for the Subscriptions. Any Subscription fee change will become effective at the end of the then-current Billing Cycle.</p>
+		<p>{{branding.legal_name}} will provide you with a reasonable prior notice of any change in Subscription fees to give you an opportunity to terminate your Subscription before such change becomes effective.</p>
+		<p>Your continued use of Service after Subscription fee change comes into effect constitutes your agreement to pay the modified Subscription fee amount.</p>
+		<li><strong>Refunds</strong></li>
+		<p>Except when required by law, paid Subscription fees are non-refundable.</p>
+		<li><strong>Content</strong></li>
+		<p>Our Service allows you to post, link, store, share and otherwise make available certain information, text, graphics, videos, or other material (&quot;<strong>Content</strong>&quot;). You are responsible for Content that you post on or through Service, including its legality, reliability, and appropriateness.</p>
+		<p>By posting Content on or through Service, You represent and warrant that: (i) Content is yours (you own it) and/or you have the right to use it and the right to grant us the rights and license as provided in these Terms, and (ii) that the posting of your Content on or through Service does not violate the privacy rights, publicity rights, copyrights, contract rights or any other rights of any person or entity. We reserve the right to terminate the account of anyone found to be infringing on a copyright.</p>
+		<p>You retain any and all of your rights to any Content you submit, post or display on or through Service and you are responsible for protecting those rights. We take no responsibility and assume no liability for Content you or any third party posts on or through Service. However, by posting Content using Service you grant us the right and license to use, modify, publicly perform, publicly display, reproduce, and distribute such Content on and through Service. You agree that this license includes the right for us to make your Content available to other users of Service, who may also use your Content subject to these Terms.</p>
+		<p>{{branding.legal_name}} has the right but not the obligation to monitor and edit all Content provided by users.</p>
+		<p>In addition, Content found on or through this Service are the property of {{branding.legal_name}} or used with permission. You may not distribute, modify, transmit, reuse, download, repost, copy, or use said Content, whether in whole or in part, for commercial purposes or for personal gain, without express advance written permission from us.</p>
+		<li><strong>Prohibited Uses</strong></li>
+		<p>You may use Service only for lawful purposes and in accordance with Terms. You agree not to use Service:</p>
+		<ol>
+		<p>In any way that violates any applicable national or international law or regulation.</p>
+		</li>
+		<p>For the purpose of exploiting, harming, or attempting to exploit or harm minors in any way by exposing them to inappropriate content or otherwise.</p>
+		</li>
+		<p>To transmit, or procure the sending of, any advertising or promotional material, including any &quot;junk mail&quot;, &quot;chain letter,&quot; &quot;spam,&quot; or any other similar solicitation.</p>
+		</li>
+		<p>To impersonate or attempt to impersonate Company, a Company employee, another user, or any other person or entity.</p>
+		</li>
+		<p>In any way that infringes upon the rights of others, or in any way is illegal, threatening, fraudulent, or harmful, or in connection with any unlawful, illegal, fraudulent, or harmful purpose or activity.</p>
+		</li>
+		</li>
+		<p>Additionally, you agree not to:</p>
+		<ol>
+			<p>Use Service in any manner that could disable, overburden, damage, or impair Service or interfere with any other party’s use of Service, including their ability to engage in real time activities through Service.</p>
+			</li>
+			<p>Use any robot, spider, or other automatic device, process, or means to access Service for any purpose, including monitoring or copying any of the material on Service.</p>
+			</li>
+			<p>Use any manual process to monitor or copy any of the material on Service or for any other unauthorized purpose without our prior written consent.</p>
+			</li>
+			<p>Use any device, software, or routine that interferes with the proper working of Service.</p>
+			</li>
+			<p>Introduce any viruses, trojan horses, worms, logic bombs, or other material which is malicious or technologically harmful.</p>
+			</li>
+			<p>Attempt to gain unauthorized access to, interfere with, damage, or disrupt any parts of Service, the server on which Service is stored, or any server, computer, or database connected to Service.</p>
+			</li>
+			<p>Attack Service via a denial-of-service attack or a distributed denial-of-service attack.</p>
+			</li>
+			<p>Take any action that may damage or falsify Company rating.</p>
+			</li>
+			<p>Otherwise attempt to interfere with the proper working of Service.</p>
+			</li>
+		</ol>
+		<p>We may use third-party Service Providers to monitor and analyze the use of our Service.</p>
+		<p><strong>Google Analytics</strong></p>
+		<p>Google Analytics is a web analytics service offered by Google that tracks and reports website traffic. Google uses the data collected to track and monitor the use of our Service. This data is shared with other Google services. Google may use the collected data to contextualise and personalise the ads of its own advertising network.</p>
+		<p>For more information on the privacy practices of Google, please visit the Google Privacy Terms web page: <a href="https://policies.google.com/privacy?hl=en">https://policies.google.com/privacy?hl=en</a></p>
+		<p>We also encourage you to review the Google&#39;s policy for safeguarding your data: <a href="https://support.google.com/analytics/answer/6004245">https://support.google.com/analytics/answer/6004245</a>.</p>
+		<p><strong>Cloudflare analytics</strong></p>
+		<p>Cloudflare analytics is a web analytics service operated by Cloudflare Inc. Read the Privacy Policy here: <a href="https://www.cloudflare.com/privacypolicy/">https://www.cloudflare.com/privacypolicy/</a></p>
+		<li><strong>No Use By Minors</strong></li>
+		<p>Service is intended only for access and use by individuals at least eighteen (18) years old. By accessing or using any of Company, you warrant and represent that you are at least eighteen (18) years of age and with the full authority, right, and capacity to enter into this agreement and abide by all of the terms and conditions of Terms. If you are not at least eighteen (18) years old, you are prohibited from both the access and usage of Service.</p>
+		<li><strong>Accounts</strong></li>
+		<p>When you create an account with us, you guarantee that you are above the age of 18, and that the information you provide us is accurate, complete, and current at all times. Inaccurate, incomplete, or obsolete information may result in the immediate termination of your account on Service.</p>
+		<p>You are responsible for maintaining the confidentiality of your account and password, including but not limited to the restriction of access to your computer and/or account. You agree to accept responsibility for any and all activities or actions that occur under your account and/or password, whether your password is with our Service or a third-party service. You must notify us immediately upon becoming aware of any breach of security or unauthorized use of your account.</p>
+		<p>You may not use as a username the name of another person or entity or that is not lawfully available for use, a name or trademark that is subject to any rights of another person or entity other than you, without appropriate authorization. You may not use as a username any name that is offensive, vulgar or obscene.</p>
+		<p>We reserve the right to refuse service, terminate accounts, remove or edit content, or cancel orders in our sole discretion.</p>
+		<li><strong>Intellectual Property</strong></li>
+		<p>Service and its original content (excluding Content provided by users), features and functionality are and will remain the exclusive property of {{branding.legal_name}} and its licensors. Service is protected by copyright, trademark, and other laws of the United States. Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of {{branding.legal_name}}.</p>
+		<li><strong>Copyright Policy</strong></li>
+		<p>We respect the intellectual property rights of others. It is our policy to respond to any claim that Content posted on Service infringes on the copyright or other intellectual property rights (&quot;<strong>Infringement</strong>&quot;) of any person or entity.</p>
+		<p>If you are a copyright owner, or authorized on behalf of one, and you believe that the copyrighted work has been copied in a way that constitutes copyright infringement, please submit your claim via email to support@{{branding.name}}, with the subject line: &quot;Copyright Infringement&quot; and include in your claim a detailed description of the alleged Infringement as detailed below, under &quot;DMCA Notice and Procedure for Copyright Infringement Claims&quot;</p>
+		<p>You may be held accountable for damages (including costs and attorneys&#39; fees) for misrepresentation or bad-faith claims on the infringement of any Content found on and/or through Service on your copyright.</p>
+		<li><strong>DMCA Notice and Procedure for Copyright Infringement Claims</strong></li>
+		<p>You may submit a notification pursuant to the Digital Millennium Copyright Act (DMCA) by providing our Copyright Agent with the following information in writing (see 17 U.S.C 512(c)(3) for further detail):</p>
+		<ol>
+		<p>an electronic or physical signature of the person authorized to act on behalf of the owner of the copyright&#39;s interest;</p>
+		</li>
+		<p>a description of the copyrighted work that you claim has been infringed, including the URL (i.e., web page address) of the location where the copyrighted work exists or a copy of the copyrighted work;</p>
+		</li>
+		<p>identification of the URL or other specific location on Service where the material that you claim is infringing is located;</p>
+		</li>
+		<p>your address, telephone number, and email address;</p>
+		</li>
+		<p>a statement by you that you have a good faith belief that the disputed use is not authorized by the copyright owner, its agent, or the law;</p>
+		</li>
+		</li>
+		</ol>
+		<p>You can contact our Copyright Agent via email at support@{{branding.name}}</p>
+		<li><strong>Error Reporting and Feedback</strong></li>
+		<p>You may provide us either directly at support@{{branding.name}} or via third party sites and tools with information and feedback concerning errors, suggestions for improvements, ideas, problems, complaints, and other matters related to our Service (&quot;<strong>Feedback</strong>&quot;). You acknowledge and agree that: (i) you shall not retain, acquire or assert any intellectual property right or other right, title or interest in or to the Feedback; (ii) Company may have development ideas similar to the Feedback; (iii) Feedback does not contain confidential information or proprietary information from you or any third party; and (iv) Company is not under any obligation of confidentiality with respect to the Feedback. In the event the transfer of the ownership to the Feedback is not possible due to applicable mandatory laws, you grant Company and its affiliates an exclusive, transferable, irrevocable, free-of-charge, sub-licensable, unlimited and perpetual right to use (including copy, modify, create derivative works, publish, distribute and commercialize) Feedback in any manner and for any purpose.</p>
+		<p>The third party sites and tools mentioned above include the following:</p>
+		<p><strong>Sentry</strong></p>
+		<p>Sentry is open-source error tracking solution provided by Functional Software Inc. More information is available here: <a href="https://sentry.io/privacy/">https://sentry.io/privacy/</a></p>
+		<li><strong>Links To Other Web Sites</strong></li>
+		<p>Our Service may contain links to third party web sites or services that are not owned or controlled by {{branding.legal_name}}</p>
+		<p>{{branding.legal_name}} has no control over, and assumes no responsibility for the content, privacy policies, or practices of any third party web sites or services. We do not warrant the offerings of any of these entities/individuals or their websites.</p>
+		<p>YOU ACKNOWLEDGE AND AGREE THAT {{branding.legal_name}} SHALL NOT BE RESPONSIBLE OR LIABLE, DIRECTLY OR INDIRECTLY, FOR ANY DAMAGE OR LOSS CAUSED OR ALLEGED TO BE CAUSED BY OR IN CONNECTION WITH USE OF OR RELIANCE ON ANY SUCH CONTENT, GOODS OR SERVICES AVAILABLE ON OR THROUGH ANY SUCH THIRD PARTY WEB SITES OR SERVICES.</p>
+		<p>WE STRONGLY ADVISE YOU TO READ THE TERMS OF SERVICE AND PRIVACY POLICIES OF ANY THIRD PARTY WEB SITES OR SERVICES THAT YOU VISIT.</p>
+		<li><strong>Disclaimer Of Warranty</strong></li>
+		<p>THESE SERVICES ARE PROVIDED BY COMPANY ON AN &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; BASIS. COMPANY MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, AS TO THE OPERATION OF THEIR SERVICES, OR THE INFORMATION, CONTENT OR MATERIALS INCLUDED THEREIN. YOU EXPRESSLY AGREE THAT YOUR USE OF THESE SERVICES, THEIR CONTENT, AND ANY SERVICES OR ITEMS OBTAINED FROM US IS AT YOUR SOLE RISK.</p>
+		<p>NEITHER COMPANY NOR ANY PERSON ASSOCIATED WITH COMPANY MAKES ANY WARRANTY OR REPRESENTATION WITH RESPECT TO THE COMPLETENESS, SECURITY, RELIABILITY, QUALITY, ACCURACY, OR AVAILABILITY OF THE SERVICES. WITHOUT LIMITING THE FOREGOING, NEITHER COMPANY NOR ANYONE ASSOCIATED WITH COMPANY REPRESENTS OR WARRANTS THAT THE SERVICES, THEIR CONTENT, OR ANY SERVICES OR ITEMS OBTAINED THROUGH THE SERVICES WILL BE ACCURATE, RELIABLE, ERROR-FREE, OR UNINTERRUPTED, THAT DEFECTS WILL BE CORRECTED, THAT THE SERVICES OR THE SERVER THAT MAKES IT AVAILABLE ARE FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS OR THAT THE SERVICES OR ANY SERVICES OR ITEMS OBTAINED THROUGH THE SERVICES WILL OTHERWISE MEET YOUR NEEDS OR EXPECTATIONS.</p>
+		<p>COMPANY HEREBY DISCLAIMS ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, NON-INFRINGEMENT, AND FITNESS FOR PARTICULAR PURPOSE.</p>
+		<p>THE FOREGOING DOES NOT AFFECT ANY WARRANTIES WHICH CANNOT BE EXCLUDED OR LIMITED UNDER APPLICABLE LAW.</p>
+		<li><strong>Limitation Of Liability</strong></li>
+		<p>EXCEPT AS PROHIBITED BY LAW, YOU WILL HOLD US AND OUR OFFICERS, DIRECTORS, EMPLOYEES, AND AGENTS HARMLESS FOR ANY INDIRECT, PUNITIVE, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGE, HOWEVER IT ARISES (INCLUDING ATTORNEYS&#39; FEES AND ALL RELATED COSTS AND EXPENSES OF LITIGATION AND ARBITRATION, OR AT TRIAL OR ON APPEAL, IF ANY, WHETHER OR NOT LITIGATION OR ARBITRATION IS INSTITUTED), WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE, OR OTHER TORTIOUS ACTION, OR ARISING OUT OF OR IN CONNECTION WITH THIS AGREEMENT, INCLUDING WITHOUT LIMITATION ANY CLAIM FOR PERSONAL INJURY OR PROPERTY DAMAGE, ARISING FROM THIS AGREEMENT AND ANY VIOLATION BY YOU OF ANY FEDERAL, STATE, OR LOCAL LAWS, STATUTES, RULES, OR REGULATIONS, EVEN IF COMPANY HAS BEEN PREVIOUSLY ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. EXCEPT AS PROHIBITED BY LAW, IF THERE IS LIABILITY FOUND ON THE PART OF COMPANY, IT WILL BE LIMITED TO THE AMOUNT PAID FOR THE PRODUCTS AND/OR SERVICES, AND UNDER NO CIRCUMSTANCES WILL THERE BE CONSEQUENTIAL OR PUNITIVE DAMAGES. SOME STATES DO NOT ALLOW THE EXCLUSION OR LIMITATION OF PUNITIVE, INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE PRIOR LIMITATION OR EXCLUSION MAY NOT APPLY TO YOU.</p>
+		<li><strong>Termination</strong></li>
+		<p>We may terminate or suspend your account and bar access to Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever and without limitation, including but not limited to a breach of Terms.</p>
+		<p>If you wish to terminate your account, you may simply discontinue using Service.</p>
+		<p>All provisions of Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and limitations of liability.</p>
+		<li><strong>Governing Law</strong></li>
+		<p>These Terms shall be governed and construed in accordance with the laws of State of Delaware without regard to its conflict of law provisions.</p>
+		<p>Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect. These Terms constitute the entire agreement between us regarding our Service and supersede and replace any prior agreements we might have had between us regarding Service.</p>
+		<li><strong>Changes To Service</strong></li>
+		<p>We reserve the right to withdraw or amend our Service, and any service or material we provide via Service, in our sole discretion without notice. We will not be liable if for any reason all or any part of Service is unavailable at any time or for any period. From time to time, we may restrict access to some parts of Service, or the entire Service, to users, including registered users.</p>
+		<li><strong>Amendments To Terms</strong></li>
+		<p>We may amend Terms at any time by posting the amended terms on this site. It is your responsibility to review these Terms periodically.</p>
+		<p>Your continued use of the Platform following the posting of revised Terms means that you accept and agree to the changes. You are expected to check this page frequently so you are aware of any changes, as they are binding on you.</p>
+		<p>By continuing to access or use our Service after any revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, you are no longer authorized to use Service.</p>
+		<li><strong>Waiver And Severability</strong></li>
+		<p>No waiver by Company of any term or condition set forth in Terms shall be deemed a further or continuing waiver of such term or condition or a waiver of any other term or condition, and any failure of Company to assert a right or provision under Terms shall not constitute a waiver of such right or provision.</p>
+		<p>If any provision of Terms is held by a court or other tribunal of competent jurisdiction to be invalid, illegal or unenforceable for any reason, such provision shall be eliminated or limited to the minimum extent such that the remaining provisions of Terms will continue in full force and effect.</p>
+		<li><strong>Acknowledgement</strong></li>
+		<p>BY USING SERVICE OR OTHER SERVICES PROVIDED BY US, YOU ACKNOWLEDGE THAT YOU HAVE READ THESE TERMS OF SERVICE AND AGREE TO BE BOUND BY THEM.</p>
+		<li><strong>Contact Us</strong></li>
+		<p>Please send your feedback, comments, requests for technical support:</p>
+		<p>By visiting this page on our website: {{branding.name}}.</p>
+
+	</ol>
+
+</div>
+</section>
+
+<section class="section ">
+	<div class="container">
+		<h1 id="privacy-policy">PRIVACY POLICY</h1>
+<p>Effective date: 06/09/2024</p>
+<ol>
+<li><strong>Introduction</strong></li>
+<p>Welcome to <strong>{{branding.name}}</strong></p>
+<p>{{branding.legal_name}} (“us”, “we”, or “our”) operates {{branding.name}} (hereinafter referred to as “<strong>Service</strong>”).</p>
+<p>Our Privacy Policy governs your visit to {{branding.name}}, and explains how we collect, safeguard and disclose information that results from your use of our Service.</p>
+<p>We use your data to provide and improve Service. By using Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, the terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.</p>
+<p>Our Terms and Conditions (“<strong>Terms</strong>”) govern all use of our Service and together with the Privacy Policy constitutes your agreement with us (“<strong>agreement</strong>”).</p>
+<p><strong>Definitions</strong></p>
+<p><strong>SERVICE</strong> means the {{branding.name}} website operated by {{branding.legal_name}}</p>
+<p><strong>PERSONAL DATA</strong> means data about a living individual who can be identified from those data (or from those and other information either in our possession or likely to come into our possession).</p>
+<p><strong>USAGE DATA</strong> is data collected automatically either generated by the use of Service or from Service infrastructure itself (for example, the duration of a page visit).</p>
+<p><strong>COOKIES</strong> are small files stored on your device (computer or mobile device).</p>
+<p><strong>DATA CONTROLLER</strong> means a natural or legal person who (either alone or jointly or in common with other persons) determines the purposes for which and the manner in which any personal data are, or are to be, processed. For the purpose of this Privacy Policy, we are a Data Controller of your data.</p>
+<p><strong>DATA PROCESSORS (OR SERVICE PROVIDERS)</strong> means any natural or legal person who processes the data on behalf of the Data Controller. We may use the services of various Service Providers in order to process your data more effectively.</p>
+<p><strong>DATA SUBJECT</strong> is any living individual who is the subject of Personal Data.</p>
+<p><strong>THE USER</strong> is the individual using our Service. The User corresponds to the Data Subject, who is the subject of Personal Data.</p>
+
+<p><strong>Information Collection and Use</strong></p>
+<p>We collect several different types of information for various purposes to provide and improve our Service to you.</p>
+</li>
+<ol>
+<p><strong>Types of Data Collected</strong></p>
+<p><strong>Personal Data</strong></p>
+<p>While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you (“<strong>Personal Data</strong>”). Personally identifiable information may include, but is not limited to:</p>
+<li>Email address</li>
+<li>First name and last name</li>
+<li>Phone number</li>
+<li>Address, State, Province, ZIP/Postal code, City</li>
+<li>Cookies and Usage Data</li>
+</ol>
+<p>We may use your Personal Data to contact you with newsletters, marketing or promotional materials and other information that may be of interest to you. You may opt out of receiving any, or all, of these communications from us by emailing at support@app.</p>
+<p><strong>Usage Data</strong></p>
+<p>We may also collect information that your browser sends whenever you visit our Service or when you access Service by or through a mobile device (“<strong>Usage Data</strong>”).</p>
+<p>This Usage Data may include information such as your computer&#39;s Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
+<p>When you access Service with a mobile device, this Usage Data may include information such as the type of mobile device you use, your mobile device unique ID, the IP address of your mobile device, your mobile operating system, the type of mobile Internet browser you use, unique device identifiers and other diagnostic data.</p>
+<p><strong>Tracking Cookies Data</strong></p>
+<p>We use cookies and similar tracking technologies to track the activity on our Service and we hold certain information.</p>
+<p>Cookies are files with a small amount of data which may include an anonymous unique identifier. Cookies are sent to your browser from a website and stored on your device. Other tracking technologies are also used such as beacons, tags and scripts to collect and track information and to improve and analyze our Service.</p>
+<p>You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Service.</p>
+<p>Examples of Cookies we use:</p>
+<ol>
+<li><strong>Session Cookies:</strong> We use Session Cookies to operate our Service.</li>
+<li><strong>Preference Cookies:</strong> We use Preference Cookies to remember your preferences and various settings.</li>
+<li><strong>Security Cookies:</strong> We use Security Cookies for security purposes.</li>
+<li><strong>Advertising Cookies:</strong> Advertising Cookies are used to serve you with advertisements that may be relevant to you and your interests.</li>
+</ol>
+<p><strong>Other Data</strong></p>
+<p>While using our Service, we may also collect the following information: sex, age, date of birth, place of birth, passport details, citizenship, registration at place of residence and actual address, telephone number (work, mobile), details of documents on education, qualification, professional training, employment agreements, non-disclosure agreements, information on bonuses and compensation, information on marital status, family members, social security (or other taxpayer identification) number, office location and other data.</p>
+<li><strong>Use of Data</strong></li>
+</ol>
+<p>{{branding.legal_name}} uses the collected data for various purposes:</p>
+<ol>
+<li>to provide and maintain our Service;</li>
+<li>to notify you about changes to our Service;</li>
+<li>to allow you to participate in interactive features of our Service when you choose to do so;</li>
+<li>to provide customer support;</li>
+<li>to gather analysis or valuable information so that we can improve our Service;</li>
+<li>to monitor the usage of our Service;</li>
+<li>to detect, prevent and address technical issues;</li>
+<li>to fulfill any other purpose for which you provide it;</li>
+<li>to carry out our obligations and enforce our rights arising from any contracts entered into between you and us, including for billing and collection;</li>
+<li>to provide you with notices about your account and/or subscription, including expiration and renewal notices, email-instructions, etc.;</li>
+<li>to provide you with news, special offers and general information about other goods, services and events which we offer that are similar to those that you have already purchased or enquired about unless you have opted not to receive such information;</li>
+<li>in any other way we may describe when you provide the information;</li>
+<li>for any other purpose with your consent.</li>
+<li><strong>Retention of Data</strong></li>
+</ol>
+<p>We will retain your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use your Personal Data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.</p>
+<p>We will also retain Usage Data for internal analysis purposes. Usage Data is generally retained for a shorter period, except when this data is used to strengthen the security or to improve the functionality of our Service, or we are legally obligated to retain this data for longer time periods.</p>
+<p><strong>Transfer of Data</strong></p>
+<p>Your information, including Personal Data, may be transferred to – and maintained on – computers located outside of your state, province, country or other governmental jurisdiction where the data protection laws may differ from those of your jurisdiction.</p>
+</li>
+<p>If you are located outside United States and choose to provide information to us, please note that we transfer the data, including Personal Data, to United States and process it there.</p>
+<p>Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.</p>
+<p>{{branding.legal_name}} will take all the steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Personal Data will take place to an organisation or a country unless there are adequate controls in place including the security of your data and other personal information.</p>
+<p><strong>Disclosure of Data</strong></p>
+<p>We may disclose personal information that we collect, or you provide:</p>
+</li>
+<p><strong>Disclosure for Law Enforcement.</strong></p>
+<p>Under certain circumstances, we may be required to disclose your Personal Data if required to do so by law or in response to valid requests by public authorities.</p>
+</li>
+<p><strong>Business Transaction.</strong></p>
+<p>If we or our subsidiaries are involved in a merger, acquisition or asset sale, your Personal Data may be transferred.</p>
+</li>
+<p><strong>Other cases. We may disclose your information also:</strong></p>
+<ol>
+<p>to our subsidiaries and affiliates;</p>
+<p>to contractors, service providers, and other third parties we use to support our business;</p>
+</li>
+<p>to fulfill the purpose for which you provide it;</p>
+</li>
+<p>for the purpose of including your company’s logo on our website;</p>
+</li>
+<p>for any other purpose disclosed by us when you provide the information;</p>
+</li>
+<p>if we believe disclosure is necessary or appropriate to protect the rights, property, or safety of the Company, our customers, or others.</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><strong>Security of Data</strong></li>
+</ol>
+<p>The security of your data is important to us but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.</p>
+<p><strong>Your Data Protection Rights Under General Data Protection Regulation (GDPR)</strong></p>
+<p>If you are a resident of the European Union (EU) and European Economic Area (EEA), you have certain data protection rights, covered by GDPR. – See more at <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">https://eur-lex.europa.eu/eli/reg/2016/679/oj</a></p>
+</li>
+<p>We aim to take reasonable steps to allow you to correct, amend, delete, or limit the use of your Personal Data.</p>
+<p>If you wish to be informed what Personal Data we hold about you and if you want it to be removed from our systems, please email us at support@app.</p>
+<p>In certain circumstances, you have the following data protection rights:</p>
+<ol>
+<p>the right to access, update or to delete the information we have on you;</p>
+<ol>
+<li>the right of rectification. You have the right to have your information rectified if that information is inaccurate or incomplete;</li>
+</ol>
+</li>
+<p>the right to object. You have the right to object to our processing of your Personal Data;</p>
+<ol>
+<p>the right of restriction. You have the right to request that we restrict the processing of your personal information;</p>
+</li>
+<p>the right to data portability. You have the right to be provided with a copy of your Personal Data in a structured, machine-readable and commonly used format;</p>
+</li>
+</ol>
+</li>
+<li>the right to withdraw consent. You also have the right to withdraw your consent at any time where we rely on your consent to process your personal information;</li>
+</ol>
+<p>Please note that we may ask you to verify your identity before responding to such requests. Please note, we may not able to provide Service without some necessary data.</p>
+<p>You have the right to complain to a Data Protection Authority about our collection and use of your Personal Data. For more information, please contact your local data protection authority in the European Economic Area (EEA).</p>
+<p><strong>Your Data Protection Rights under the California Privacy Protection Act (CalOPPA)</strong></p>
+<p>CalOPPA is the first state law in the nation to require commercial websites and online services to post a privacy policy. The law’s reach stretches well beyond California to require a person or company in the United States (and conceivable the world) that operates websites collecting personally identifiable information from California consumers to post a conspicuous privacy policy on its website stating exactly the information being collected and those individuals with whom it is being shared, and to comply with this policy. – See more at: <a href="https://consumercal.org/about-cfc/cfc-education-foundation/california-online-privacy-protection-act-caloppa-3/">https://consumercal.org/about-cfc/cfc-education-foundation/california-online-privacy-protection-act-caloppa-3/</a></p>
+<p>According to CalOPPA we agree to the following:</p>
+<p>users can visit our site anonymously;</p>
+<ol>
+<li>our Privacy Policy link includes the word “Privacy”, and can easily be found on the page specified above on the home page of our website;</li>
+</ol>
+</li>
+<li>users will be notified of any privacy policy changes on our Privacy Policy Page;</li>
+<li>users are able to change their personal information by emailing us at support@app.</li>
+</ol>
+<p>Our Policy on “Do Not Track” Signals:</p>
+<p>We honor Do Not Track signals and do not track, plant cookies, or use advertising when a Do Not Track browser mechanism is in place. Do Not Track is a preference you can set in your web browser to inform websites that you do not want to be tracked.</p>
+<p>You can enable or disable Do Not Track by visiting the Preferences or Settings page of your web browser.</p>
+<p><strong>Your Data Protection Rights under the California Consumer Privacy Act (CCPA)</strong></p>
+<p>If you are a California resident, you are entitled to learn what data we collect about you, ask to delete your data and not to sell (share) it. To exercise your data protection rights, you can make certain requests and ask us:</p>
+<p><strong>What personal information we have about you</strong>. If you make this request, we will return to you:</p>
+<p>The categories of personal information we have collected about you.</p>
+<p>The categories of sources from which we collect your personal information.</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>The business or commercial purpose for collecting or selling your personal information.</li>
+<li>The categories of third parties with whom we share personal information.</li>
+<li>The specific pieces of personal information we have collected about you.</li>
+<li>A list of categories of personal information that we have sold, along with the category of any other company we sold it to. If we have not sold your personal information, we will inform you of that fact.</li>
+<li>A list of categories of personal information that we have disclosed for a business purpose, along with the category of any other company we shared it with.</li>
+</ol>
+<p>Please note, you are entitled to ask us to provide you with this information up to two times in a rolling twelve-month period. When you make this request, the information provided may be limited to the personal information we collected about you in the previous 12 months.</p>
+<p><strong>To delete your personal information</strong>. If you make this request, we will delete the personal information we hold about you as of the date of your request from our records and direct any service providers to do the same. In some cases, deletion may be accomplished through de-identification of the information. If you choose to delete your personal information, you may not be able to use certain functions that require your personal information to operate.</p>
+<ol>
+<li><strong>To stop selling your personal information</strong>. We do not sell your personal information for monetary consideration. However, under some circumstances, a transfer of personal information to a third party, or within our family of companies, without monetary consideration may be considered a “sale” under California law.</li>
+</li>
+</ol>
+<p>If you submit a request to stop selling your personal information, we will stop making such transfers. If you are a California resident, to opt-out of the sale of your personal information, click “Do Not Sell My Personal Information” at the bottom of our home page to submit your request.</p>
+<p>Please note, if you ask us to delete or stop selling your data, it may impact your experience with us, and you may not be able to participate in certain programs or membership services which require the usage of your personal information to function. But in no circumstances, we will discriminate against you for exercising your rights.</p>
+<p>To exercise your California data protection rights described above, please send your request(s) by one of the following means:</p>
+<p>By email: support@app</p>
+<p>Your data protection rights, described above, are covered by the CCPA, short for the California Consumer Privacy Act. To find out more, visit the official <a href="http://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=201720180AB375">California Legislative Information website</a>. The CCPA took effect on 01/01/2020.</p>
+<p><strong>Service Providers</strong></p>
+<p>We may employ third party companies and individuals to facilitate our Service (“<strong>Service Providers</strong>”), provide Service on our behalf, perform Service-related services or assist us in analysing how our Service is used.</p>
+</li>
+<p>These third parties have access to your Personal Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.</p>
+<p><strong>Analytics</strong></p>
+<p>We may use third-party Service Providers to monitor and analyze the use of our Service.</p>
+</li>
+<p><strong>Google Analytics</strong></p>
+<p>Google Analytics is a web analytics service offered by Google that tracks and reports website traffic. Google uses the data collected to track and monitor the use of our Service. This data is shared with other Google services. Google may use the collected data to contextualise and personalise the ads of its own advertising network.</p>
+<p>For more information on the privacy practices of Google, please visit the Google Privacy Terms web page: <a href="https://policies.google.com/privacy?hl=en">https://policies.google.com/privacy?hl=en</a></p>
+<p>We also encourage you to review the Google&#39;s policy for safeguarding your data: <a href="https://support.google.com/analytics/answer/6004245">https://support.google.com/analytics/answer/6004245</a>.</p>
+<p><strong>Cloudflare analytics</strong></p>
+<p>Cloudflare analytics is a web analytics service operated by Cloudflare Inc. Read the Privacy Policy here: <a href="https://www.cloudflare.com/privacypolicy/">https://www.cloudflare.com/privacypolicy/</a></p>
+<p><strong>Segment.io</strong></p>
+<p>Segment.io is a web traffic analysis tool. You can read the Privacy Policy for Segment.io here: <a href="https://segment.com/legal/privacy/">https://segment.com/legal/privacy/</a>.</p>
+<p><strong>PostHog</strong></p>
+<p>PostHog is a product analytics platform built for the modern enterprise, with the differentiators of being open source and having a broader view of the tools needed to make a product successful.</p>
+<p>For more information about PostHog, please visit their Privacy Policy: <a href="https://posthog.com/privacy">https://posthog.com/privacy</a></p>
+<p><strong>CI/CD tools</strong></p>
+<p>We may use third-party Service Providers to automate the development process of our Service.</p>
+<p><strong>GitHub</strong></p>
+<p>GitHub is a development platform to host and review code, manage projects, and build software.</p>
+<p>For more information on what data GitHub collects for what purpose and how the protection of the data is ensured, please visit GitHub Privacy Policy page:  <a href="https://help.github.com/en/articles/github-privacy-statement">https://help.github.com/en/articles/github-privacy-statement</a>.</p>
+</li>
+<li><strong>Behavioral Remarketing</strong></li>
+</ol>
+<p>{{branding.legal_name}} uses remarketing services to advertise on third party websites to you after you visited our Service. We and our third-party vendors use cookies to inform, optimise and serve ads based on your past visits to our Service.</p>
+<p><strong>Google Ads (AdWords)</strong></p>
+<p>Google Ads (AdWords) remarketing service is provided by Google Inc.</p>
+<p>You can opt-out of Google Analytics for Display Advertising and customize the Google Display Network ads by visiting the Google Ads Settings page: <a href="https://www.google.com/settings/ads">http://www.google.com/settings/ads</a></p>
+<p>Google also recommends installing the Google Analytics Opt-out Browser Add-on – <a href="https://tools.google.com/dlpage/gaoptout">https://tools.google.com/dlpage/gaoptout</a> – for your web browser. Google Analytics Opt-out Browser Add-on provides visitors with the ability to prevent their data from being collected and used by Google Analytics.</p>
+<p>For more information on the privacy practices of Google, please visit the Google Privacy Terms web page: <a href="https://policies.google.com/privacy?hl=en">https://policies.google.com/privacy?hl=en</a></p>
+<p><strong>Twitter</strong></p>
+<p>Twitter remarketing service is provided by Twitter Inc.</p>
+<p>You can opt-out from Twitter&#39;s interest-based ads by following their instructions: <a href="https://support.twitter.com/articles/20170405">https://support.twitter.com/articles/20170405</a></p>
+<p>You can learn more about the privacy practices and policies of Twitter by visiting their Privacy Policy page: <a href="https://twitter.com/privacy">https://twitter.com/privacy</a></p>
+<p><strong>Facebook</strong></p>
+<p>Facebook remarketing service is provided by Facebook Inc.</p>
+<p>You can learn more about interest-based advertising from Facebook by visiting this page: <a href="https://www.facebook.com/help/164968693837950">https://www.facebook.com/help/164968693837950</a></p>
+<p>To opt-out from Facebook&#39;s interest-based ads, follow these instructions from Facebook: <a href="https://www.facebook.com/help/568137493302217">https://www.facebook.com/help/568137493302217</a></p>
+<p>Facebook adheres to the Self-Regulatory Principles for Online Behavioural Advertising established by the Digital Advertising Alliance. You can also opt-out from Facebook and other participating companies through the Digital Advertising Alliance in the USA <a href="http://www.aboutads.info/choices/">http://www.aboutads.info/choices/</a>, the Digital Advertising Alliance of Canada in Canada <a href="http://youradchoices.ca/">http://youradchoices.ca/</a> or the European Interactive Digital Advertising Alliance in Europe <a href="http://www.youronlinechoices.eu/">http://www.youronlinechoices.eu/</a>, or opt-out using your mobile device settings.</p>
+<p>For more information on the privacy practices of Facebook, please visit Facebook&#39;s Data Policy: <a href="https://www.facebook.com/privacy/explanation">https://www.facebook.com/privacy/explanation</a></p>
+<p><strong>Payments</strong></p>
+<p>We may provide paid products and/or services within Service. In that case, we use third-party services for payment processing (e.g. payment processors).</p>
+<p>We will not store or collect your payment card details. That information is provided directly to our third-party payment processors whose use of your personal information is governed by their Privacy Policy. These payment processors adhere to the standards set by PCI-DSS as managed by the PCI Security Standards Council, which is a joint effort of brands like Visa, Mastercard, American Express and Discover. PCI-DSS requirements help ensure the secure handling of payment information.</p>
+<p><strong>Stripe:</strong></p>
+<p>Their Privacy Policy can be viewed at: <a href="https://stripe.com/us/privacy">https://stripe.com/us/privacy</a></p>
+</li>
+<p><strong>Links to Other Sites</strong></p>
+<p>Our Service may contain links to other sites that are not operated by us. If you click a third party link, you will be directed to that third party&#39;s site. We strongly advise you to review the Privacy Policy of every site you visit.</p>
+</li>
+</ol>
+<p>We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.</p>
+<ol>
+<li><strong>Children&#39;s Privacy</strong></li>
+</ol>
+<p>Our Services are not intended for use by children under the age of 13 (“<strong>Children</strong>”).</p>
+<p>We do not knowingly collect personally identifiable information from Children under 13. If you become aware that a Child has provided us with Personal Data, please contact us. If we become aware that we have collected Personal Data from Children without verification of parental consent, we take steps to remove that information from our servers.</p>
+<p><strong>Changes to This Privacy Policy</strong></p>
+<p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+</li>
+<p>We will let you know via email and/or a prominent notice on our Service, prior to the change becoming effective and update “effective date” at the top of this Privacy Policy.</p>
+<p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+<p><strong>Contact Us</strong></p>
+<p>If you have any questions about this Privacy Policy, please contact us:</p>
+<p>By email: {{branding.support_email}}</p>
+</li>
+</ol>
+
+	</div>
+</section>
+
+<footer class="footer">
+	<div class="container">
+		<div class="row align-items-center text-center">
+			<div class="col-md-auto">
+				<a href="https://github.com/sumukh/ignite">License & Credits</a>
+				・
+				<a href="https://github.com/sumukh/ignite">Privacy</a>
+			</div>
+			<div class="col-md-auto mt-2 mt-sm-0 ml-sm-auto">
+				Powered by <a href="https://github.com/sumukh/ignite">Ignite</a> for Flask
+				<!-- You must purchase a license of Ignite to remove the above disclaimer -->
+			</div>
+		</div>
+	</div>
+</footer>
+
+{% endblock %}

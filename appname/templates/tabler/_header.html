@@ -6,7 +6,7 @@
         </a>
         <div class="d-flex order-lg-2 ml-auto">
             <div class="nav-item d-none d-md-flex">
-                <a href="mailto://{{ constants.SUPPORT_EMAIL }}" class="btn btn-sm btn-outline-primary" target="_blank">Get help</a>
+                <a href="mailto:{{ branding.support_email }}" class="btn btn-sm btn-outline-primary" target="_blank">Get help</a>
             </div>
             {% if current_user.is_authenticated %}
                 <div class="dropdown">
@@ -32,7 +32,7 @@
                             <i class="dropdown-icon fe fe-settings"></i> Account Settings
                         </a>
 
-                        <a class="dropdown-item" href="mailto://{{ constants.SUPPORT_EMAIL }}">
+                        <a class="dropdown-item" href="mailto:{{ branding.support_email }}">
                             <i class="dropdown-icon fe fe-help-circle"></i> Need help?
                         </a>
                         <a class="dropdown-item" href="{{ url_for('auth.logout') }}">

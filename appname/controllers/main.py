@@ -13,6 +13,14 @@ def home():
         return redirect(url_for('dashboard_home.index'))
     return render_template('lander/index.html', stripe_publishable_key=stripe.publishable_key)
 
+@main.route('/terms')
+def terms():
+    return render_template('lander/terms.html')
+
+@main.route('/privacy')
+def privacy():
+    return render_template('lander/terms.html')
+
 @main.route('/beta')
 @cache.cached(timeout=1000, unless=lambda: current_user.is_authenticated)
 def beta():

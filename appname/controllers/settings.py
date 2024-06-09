@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, flash, redirect, url_for, Response
 from flask_login import login_required, current_user
 
 
-from appname.constants import SUPPORT_EMAIL
 from appname.extensions import stripe
 from appname.models import db
 from appname.forms import SimpleForm
@@ -12,7 +11,7 @@ from appname.helpers.gdpr import GDPRExport
 from appname.utils.token import generate_api_secret
 from appname.billing_plans import plans_by_name
 
-from appname.extensions import stripe
+from appname.extensions import stripe, branding
 
 settings_blueprint = Blueprint('user_settings', __name__)
 
@@ -119,7 +118,7 @@ def account_deletion():
     form = SimpleForm()
     if form.validate_on_submit():
         # TODO: Actual deletion scheduling
-        flash("Please email {0} to delete your account".format(SUPPORT_EMAIL), 'warning')
+        flash("Please email {0} to delete your account".format(branding.support_email), 'warning')
     else:
         flash('Please try submitting the form again', 'warning')
     return redirect(url_for("user_settings.legal_compliance"))

@@ -14,6 +14,4 @@ PURCHASE_LICENSE_SALT = os.getenv('PASSWORD_RESET_KEY', 'license-purchase-key')
 PASSWORD_RESET_VALIDITY_SECONDS = 86400
 
 TEAM_MEMBER_ROLES = ['team member', 'administrator']
-# Actually, look at services/branding.py wherever possible.
-SUPPORT_EMAIL = os.getenv('HELP_EMAIL', 'help@example.com')
 MAX_TEAM_SIZE = 50
