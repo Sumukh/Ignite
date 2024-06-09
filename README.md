@@ -79,7 +79,7 @@ source .env.local
 flask run
 ```
 
-You may also want to change some of the constants in `appname.constants` and the `helpers/branding.py` to change the name of the application in the UI.
+You may also want to change some of the constants in `appname.constants` and the `services/branding.py` file to change the name of the application in the UI.
 
 ## Deployment
 
