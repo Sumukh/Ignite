@@ -46,7 +46,7 @@
                                     <td class="text-center">
                                         {% if member.user != current_user %}
                                             <form role="form" action="{{ url_for('dashboard_team.remove_member', team_id=team.id, invite_id=member.id) }}" method="post">
-                                                {{ simple_form.hidden_tag() }}
+                                                {{ simple_form().hidden_tag() }}
 
                                                 <button type="submit" class="btn btn-secondary btn-sm">Remove</button>
                                             </form>
