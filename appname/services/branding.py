@@ -24,6 +24,10 @@ class Branding:
         return "public/ignite/ignite-logo@2x.png"
 
     @property
+    def svg_icon(self):
+        return "public/ignite/ignite-icon.svg"
+
+    @property
     def website_domain(self):
         return "appname.com"
 
