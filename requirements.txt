@@ -8,7 +8,7 @@ gunicorn
 cryptography==42.0.4
 
 # Flask Extensions
-Flask-Assets>=0.12,<2.1.0
+Flask-Assets>=0.12,<2.2.0
 
 # Branch that contains a Unicode bug fix - use until https://github.com/miracle2k/webassets/pull/482 is published
 webassets==2.0
