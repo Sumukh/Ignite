@@ -21,7 +21,16 @@
         {% endassets %}
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <style>
+            @import url('https://rsms.me/inter/inter.css');
+            :root {
+                --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+            }
+            body {
+                font-feature-settings: "cv03", "cv04", "cv11";
+            }
+          </style>
+
         <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='public/ignite/ignite-icon.png') }}">
         <link rel="icon" type="image/png" href="{{ url_for('static', filename='public/ignite/ignite-icon.png') }}">
         {% block css %}
@@ -32,11 +41,9 @@
         {% endblock %}
     </head>
 
-    <body>
-        <div class="page">
-            {% block body %}
-            {% endblock %}
-        </div>
+    <body class="d-flex flex-column">
+        {% block body %}
+        {% endblock %}
     </body>
     {% assets "tabler_js" %}
         <script type="text/javascript" src="{{ ASSET_URL }}"></script>

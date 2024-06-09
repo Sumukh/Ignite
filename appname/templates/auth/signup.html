@@ -4,53 +4,51 @@
 {% block title %}appname Signup{% endblock %}
 
 {% block body %}
-<div class="page-single">
-    <div class="container">
-        <div class="row">
-            <div class="col col-login mx-auto">
-                <div class="text-center mb-6">
-                    <img src="{{ url_for('static', filename='public/ignite/ignite-logo@2x.png') }}" class="h-6" alt="Tabler">
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        {% if constants.ALLOW_PASSWORD_LOGIN %}
-                            <form role="form" action="{{ url_for('auth.signup', invite_secret=invite_secret) }}" method="post">
-                                <div class="card-title">Sign up for appname</div>
-                                {{ form.hidden_tag() }}
-                                {{ render_field(form.email) }}
-                                {{ render_field(form.password) }}
-                                {{ render_field(form.confirm) }}
 
-                                <div class="form-footer">
-                                    <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
-                                </div>
-                            </form>
-                            <div class="text-center text-muted">
-                                <hr class="thin" />
-                            </div>
-                        {% endif %}
+<div class="page page-center">
+    <div class="container container-tight py-4">
+      <div class="text-center mb-4">
+        <a href="." class="navbar-brand navbar-brand-autodark">
+            {{ render_flashes() }}
+            <img src="{{ url_for('static', filename='public/ignite/ignite-logo@2x.png') }}" class="h-6" >
+        </a>
+      </div>
+      <div class="card card-md">
+        <div class="card-body">
+          <h2 class="h2 text-center mb-4">Sign up for appname</h2>
+          {% if constants.ALLOW_PASSWORD_LOGIN %}
+          <form role="form" action="{{ url_for('auth.signup', invite_secret=invite_secret) }}" method="post">
+              {{ form.hidden_tag() }}
+              {{ render_field(form.email, placeholder="yourname@example.com") }}
+              {{ render_field(form.password, placeholder="at least six digits") }}
+              {{ render_field(form.confirm) }}
 
-                        {% if features.oauth %}
-                            <div class="text-center mt-4 mb-4">
-                                <a href="{{ url_for('google.login') }}" class="btn btn-primary btn-block">
-                                    <i class="fa fa-google"></i> Signup with Google
-                                </a>
-                            </div>
-                        {% elif not features.oauth and not constants.ALLOW_PASSWORD_LOGIN %}
-                            <div class="text-center mt-2 mb-4">
-                                OAuth Signup is not configured
-                            </div>
-                        {% endif %}
-
-                        <div class="text-center text-muted">
-                            <a href="{{ url_for('auth.login') }}">Already have an account? </a>
-                        </div>
-                    </div>
-                </div>
+              <div class="form-footer">
+                  <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+              </div>
+          </form>
+        {% endif %}
+        {% if features.oauth %}
+            <div class="text-center mt-4 mb-4">
+                <a href="{{ url_for('google.login') }}" class="btn btn-primary w-100">
+                    <i class="fa fa-google"></i> Signup with Google
+                </a>
             </div>
+        {% elif not features.oauth and not constants.ALLOW_PASSWORD_LOGIN %}
+            <div class="text-center mt-2 mb-4">
+                OAuth Signup is not configured
+            </div>
+        {% endif %}
+
         </div>
     </div>
+    <div class="text-center text-secondary mt-3">
+        Already have account? <a href="{{ url_for('auth.login') }}" tabindex="-1">Sign in</a>
+      </div>
+
+  </div>
 </div>
+
 {% include 'tabler/_footer.html' with context %}
 
 {% endblock %}
