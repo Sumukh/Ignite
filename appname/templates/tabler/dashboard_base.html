@@ -22,6 +22,7 @@
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
         <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='public/ignite/ignite-icon.png') }}">
         <link rel="icon" type="image/png" href="{{ url_for('static', filename='public/ignite/ignite-icon.png') }}">
 
@@ -38,14 +39,13 @@
 
     <body>
         <div class="page">
-            <div class="page-main">
-                {% include 'tabler/_header.html' with context %}
-                {% include 'tabler/_navbar.html' with context %}
+            {% include 'tabler/_navbar_overlap.html' with context %}
 
+            <div class="page-wrapper">
                 {% block body %}
                 {% endblock %}
-
             </div>
+
             {% include 'tabler/_footer.html' with context %}
         </div>
     </body>

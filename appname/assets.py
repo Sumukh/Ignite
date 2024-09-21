@@ -1,7 +1,7 @@
 from flask_assets import Bundle
 
 common_css = Bundle(
-    'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css',
+    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
     'css/vendor/helper.css',
     'css/main.css',
     'css/overrides.css',
@@ -11,7 +11,7 @@ common_css = Bundle(
 
 common_js = Bundle(
     'https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js',
-    'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js',
+    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js',
     Bundle(
         'js/main.js',
         filters='jsmin'
@@ -33,14 +33,14 @@ landing_css = Bundle(
 
 tabler_css = Bundle(
     'https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css',
-    'https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-vendors.min.css',
+    'https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta21/dist/css/tabler-vendors.min.css',
     'css/overrides.css',
     filters='cssmin',
     output='public/css/tabler.css'
 )
 
 tabler_js = Bundle(
-    'https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js',
+    'https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta21/dist/js/tabler.min.js',
     output='public/js/tabler.js'
 )
 

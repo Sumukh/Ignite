@@ -1,0 +1,71 @@
+<header class="navbar navbar-expand-md navbar-overlap d-print-none" data-bs-theme="dark">
+    <div class="container-xl">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+        <a href="{{ url_for('main.home') }}">
+          <img src="{{ url_for('static', filename='public/ignite/ignite-logo-cutout.svg') }}" class="navbar-brand-image" style="max-height: 40px" alt="ignite logo">
+
+        </a>
+      </div>
+      <div class="navbar-nav flex-row order-md-last">
+        <div class="d-none d-md-flex">
+          <!-- Add theme toggle buttons here if needed -->
+        </div>
+        <div class="nav-item dropdown">
+          <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+            <!-- <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span> -->
+            <div class="d-none d-xl-block ps-2">
+              <div>{{ current_user.email }}</div>
+              {% if team %}
+              <div class="mt-1 small text-secondary">{{ team.name }}</div>
+              {% endif %}
+            </div>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" data-bs-theme="light">
+            <a href="{{ url_for('user_settings.index') }}" class="dropdown-item">Settings</a>
+            <a href="{{ url_for('auth.logout') }}" class="dropdown-item">Logout</a>
+          </div>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-menu">
+        <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
+          <ul class="navbar-nav">
+            {% if current_user.is_authenticated %}
+              <li class="nav-item {{ 'active' if request.blueprint == 'dashboard_home' }}">
+                <a class="nav-link" href="{{ url_for('dashboard_home.index') }}">
+                  <span class="nav-link-title">Home</span>
+                </a>
+              </li>
+              {% if team %}
+                <li class="nav-item {{ 'active' if request.blueprint == 'dashboard_team' }}">
+                  <a class="nav-link" href="{{ url_for('dashboard_team.index', team_id=team.id) }}">
+                    <span class="nav-link-title">Your Team</span>
+                  </a>
+                </li>
+                <li class="nav-item {{ 'active' if request.blueprint == 'dashboard_files' }}">
+                  <a class="nav-link" href="{{ url_for('dashboard_files.index', team_id=team.id) }}">
+                    <span class="nav-link-title">Shared Files</span>
+                  </a>
+                </li>
+              {% endif %}
+              <li class="nav-item {{ 'active' if request.endpoint.startswith('user_settings') }}">
+                <a class="nav-link" href="{{ url_for('user_settings.index') }}">
+                  <span class="nav-link-title">User Settings</span>
+                </a>
+              </li>
+            {% else %}
+              <li class="nav-item {{ 'active' if request.endpoint == 'main.home' }}">
+                <a class="nav-link" href="{{ url_for('main.home') }}">
+                  <span class="nav-link-title">Home</span>
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {{ render_flashes() }}
