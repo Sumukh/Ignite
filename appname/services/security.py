@@ -12,5 +12,17 @@ class Token:
         return self.ts.dumps(key, salt + self.unique_salt)
 
     def decode(self, token, salt='default-salt', max_age=86400):
-        """ Either converts a token into the original value or raises an Exception. """
-        return self.ts.loads(token, salt=salt + self.unique_salt, max_age=86400)
+        """Decode a token and return the original value or raise an Exception.
+
+        Parameters
+        ----------
+        token : str
+            Token to decode.
+        salt : str, optional
+            Salt used when generating the token. ``'default-salt'`` by default.
+        max_age : int, optional
+            Maximum age in seconds before the token expires. ``86400`` by
+            default.
+        """
+
+        return self.ts.loads(token, salt=salt + self.unique_salt, max_age=max_age)
