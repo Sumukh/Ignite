@@ -35,8 +35,13 @@ class Stripe:
         db.session.commit()
         return stripe_customer.id
 
-    def create_session(self, user, mode='subscription'):
-        session = stripe.checkout.Session.create(payment_method_types=['card'], mode=mode)
+    def create_session(self, user, mode='subscription', price_id=None, success_url=None, cancel_url=None):
+        session = stripe.checkout.Session.create(
+            mode=mode,
+            line_items=[{"price": price_id, "quantity": 1}],
+            success_url=success_url,
+            cancel_url=cancel_url,
+        )
         return session
 
     def customer_portal_link(self, owner, return_url=None):
