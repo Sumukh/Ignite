@@ -44,6 +44,14 @@ pip install -r requirements.txt
 ./manage.py server # or `FLASK_APP=manage FLASK_ENV=development flask run`
 ```
 
+## AI Agent Guide
+
+If you are using an AI coding agent, start with:
+
+- `AGENTS.md` for repo-specific workflow and architecture guidance
+- `documentation/AGENT_QUICKSTART.md` for copy-paste setup/test commands
+- `make agent-setup`, `make agent-smoke`, and `make agent-test` for standard agent checks
+
 ## Development
 
 ```

@@ -34,7 +34,7 @@ Flask-Mail
 Flask-Limiter==2.6.3
 
 # Admin
-Flask-Admin>=1.5.6
+Flask-Admin==1.6.1
 
 # Database
 pymysql==1.1.1
@@ -87,4 +87,3 @@ pytest==8.2.0
 pytest-cov==4.0.0
 mccabe==0.7.0
 flake8==6.0.0
-
