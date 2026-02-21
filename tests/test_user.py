@@ -1,6 +1,6 @@
 import pytest
 
-from appname.models import db, get_or_none
+from appname.models import db, get_or_none, transaction
 from appname.models.user import User
 
 create_user = True
@@ -66,4 +66,46 @@ class TestModels:
         db.session.commit()
 
         assert get_or_none(User, user.id) is None
-        assert User.query.with_deleted()._get(user.id) is not None
+
+        active_query = User.query
+        with_deleted_query = User.query.with_deleted()
+        assert active_query.get(user.id) is None
+        assert with_deleted_query.get(user.id) is not None
+
+    def test_query_with_deleted_requires_identifier(self, testapp):
+        with pytest.raises(TypeError):
+            User.query.with_deleted()._get()
+
+    def test_model_serialization_and_delete_paths(self, testapp, monkeypatch):
+        user = User('modelhelpers@example.com', 'supersafepassword')
+        db.session.add(user)
+        db.session.commit()
+
+        as_dict = user.as_dict()
+        assert as_dict["email"] == "modelhelpers@example.com"
+
+        user.from_dict({"full_name": "Model Helper"})
+        assert user.full_name == "Model Helper"
+
+        user.delete(force=False)
+        assert user.deleted is True
+
+        monkeypatch.setattr(User, "can_be_destroyed", property(lambda _self: False))
+        with pytest.raises(Exception):
+            user.delete(force=True)
+
+    def test_transaction_rolls_back_on_exception(self, testapp):
+        user = User.lookup("user@example.com")
+        original_name = user.full_name
+
+        @transaction
+        def update_and_fail():
+            user.full_name = "Rollback Name"
+            db.session.add(user)
+            raise RuntimeError("fail")
+
+        with pytest.raises(RuntimeError):
+            update_and_fail()
+
+        db.session.expire_all()
+        assert User.lookup("user@example.com").full_name == original_name
