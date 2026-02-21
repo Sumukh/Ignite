@@ -1,6 +1,6 @@
 import pytest
 
-from appname.models import db
+from appname.models import db, get_or_none
 from appname.models.user import User
 
 create_user = True
@@ -43,3 +43,27 @@ class TestModels:
         db.session.commit()
         assert len(user.memberships) == 1
         assert User.query.all()[-1].encrypted_totp_secret == secret
+
+    def test_get_or_none_respects_soft_delete(self, testapp):
+        user = User('softdelete@example.com', 'supersafepassword')
+        db.session.add(user)
+        db.session.commit()
+
+        user.deleted = True
+        db.session.add(user)
+        db.session.commit()
+
+        assert get_or_none(User, user.id) is None
+        assert get_or_none(User, user.id, with_deleted=True) is not None
+
+    def test_query_with_deleted_can_fetch_deleted_rows(self, testapp):
+        user = User('withdeleted@example.com', 'supersafepassword')
+        db.session.add(user)
+        db.session.commit()
+
+        user.deleted = True
+        db.session.add(user)
+        db.session.commit()
+
+        assert User.query.get(user.id) is None
+        assert User.query.with_deleted().get(user.id) is not None

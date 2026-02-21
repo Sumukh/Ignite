@@ -2,7 +2,7 @@ from itertools import product
 import logging
 from flask import Blueprint, request, url_for, abort
 
-from appname.models import db
+from appname.models import db, get_or_none
 from appname.models.user import User
 from appname.models.teams import Team
 from appname.extensions import csrf, stripe
@@ -55,7 +55,7 @@ def stripe_webhook():
         checkout = event['data']['object']
         if checkout["subscription"]:
             team_id = checkout["client_reference_id"]
-            team = Team.query.get(team_id)
+            team = get_or_none(Team, team_id)
             if not team:
                 # Log and error
                 logger.info("Unknown reference id")

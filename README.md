@@ -2,7 +2,7 @@
 
 # Ignite for Flask [![Flask PyTest CI](https://github.com/Sumukh/Ignite/actions/workflows/flask-pytest.yml/badge.svg)](https://github.com/Sumukh/Ignite/actions/workflows/flask-pytest.yml)
 
-Ignite is a scaffold for starting new Flask applications. It takes care of the boilerplate code (like User Registration, OAuth, Teams, and Billing), allowing you to focus on building your application. Ignite is built upon best practices for modern Flask applications.
+Ignite is a scaffold for starting new SaaS applications built using Python and Flask. It takes care of the boilerplate code (like User Registration, OAuth, Teams, and Billing), allowing you to focus on building your application. Ignite is built upon best practices for modern Flask applications.
 
 ## Features
 
@@ -41,7 +41,7 @@ Usage of Python 3 is required. It can be installed [on Python.org](https://www.p
 python3 -m venv env; source env/bin/activate
 
 pip install -r requirements.txt
-./manage.py server # or `FLASK_APP=manage FLASK_ENV=development flask run`
+./manage.py server # or `FLASK_APP=manage flask --debug run`
 ```
 
 ## AI Agent Guide
@@ -58,7 +58,7 @@ If you are using an AI coding agent, start with:
 # Development
 # If using a virtual env: source env/bin/activate
 ./manage.py resetdb # to seed data
-FLASK_APP=manage FLASK_ENV=development flask run
+FLASK_APP=manage flask --debug run
 
 # Go to localhost:5000 in a browser and click on Login
 # Login with the following credentials "user@example.com", "test
@@ -84,7 +84,7 @@ To configure OAuth login and Stripe billing in development, you will need to set
 cp .env.local.sample .env.local
 # Edit .env.local with your Stripe & Google test keys
 source .env.local
-flask run
+FLASK_APP=manage flask --debug run
 ```
 
 You may also want to change some of the constants in `appname.constants` and the `services/branding.py` file to change the name of the application in the UI.
@@ -128,8 +128,8 @@ This is a commercial product. You may purchase a license for commercial use at [
 Here's a summary:
 
 | Features                                     | Ignite         | (License) Ignite Premium |
-| -------------------------------------------- | -------------- | ------------------------ | --- |
-| Cost                                         | Free           | $199 per site            |     |
+| -------------------------------------------- | -------------- | ------------------------ |
+| Cost                                         | Free           | $199 per site            |
 | Private Non Commercial Use                   | ✅             | ✅                       |
 | Commercial Use                               | No             | ✅                       |
 | Ability to remove "Powered by Ignite" footer | No             | ✅                       |

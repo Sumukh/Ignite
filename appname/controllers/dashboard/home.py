@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, abort, redirect, url_for, flash
 from flask_login import login_required, current_user
 
+from appname.models import get_or_none
 from appname.models.teams import Team
 
 blueprint = Blueprint('dashboard_home', __name__)
@@ -17,7 +18,7 @@ def index():
 @blueprint.route('/<hashid:team_id>')
 @login_required
 def home(team_id):
-    team = Team.query.get(team_id)
+    team = get_or_none(Team, team_id)
     if not team or not team.has_member(current_user):
         abort(404)
     return render_template('dashboard/home.html', team=team)

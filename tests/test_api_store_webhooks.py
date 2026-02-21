@@ -111,7 +111,7 @@ class TestStripeWebhooks:
         response = testapp.post("/webhooks/stripe", data="{}", headers={"Stripe-Signature": "sig"})
 
         assert response.status_code == 200
-        assert Team.query.get(team_id).plan == "free"
+        assert db.session.get(Team, team_id).plan == "free"
 
     def test_subscription_created_sets_plan_and_customer(self, testapp, monkeypatch):
         team = default_team()
@@ -136,7 +136,7 @@ class TestStripeWebhooks:
         response = testapp.post("/webhooks/stripe", data="{}", headers={"Stripe-Signature": "sig"})
 
         assert response.status_code == 200
-        refreshed = Team.query.get(team_id)
+        refreshed = db.session.get(Team, team_id)
         assert refreshed.billing_customer_id == "cus_created_1"
         assert refreshed.plan == "monthly_premium"
 
@@ -157,7 +157,7 @@ class TestStripeWebhooks:
         response = testapp.post("/webhooks/stripe", data="{}", headers={"Stripe-Signature": "sig"})
 
         assert response.status_code == 200
-        assert Team.query.get(team_id).plan == "free"
+        assert db.session.get(Team, team_id).plan == "free"
 
     def test_checkout_completed_sets_subscription_on_team(self, testapp, monkeypatch):
         team = default_team()
@@ -180,7 +180,7 @@ class TestStripeWebhooks:
         response = testapp.post("/webhooks/stripe", data="{}", headers={"Stripe-Signature": "sig"})
 
         assert response.status_code == 200
-        refreshed = Team.query.get(team_id)
+        refreshed = db.session.get(Team, team_id)
         assert refreshed.subscription_id == "sub_checkout_1"
         assert refreshed.billing_customer_id == "cus_checkout_1"
 

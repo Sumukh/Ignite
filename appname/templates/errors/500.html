@@ -251,7 +251,7 @@
 
     </div>
 	<div class="buttons-container">
-       {% if event_id %}
+       {% if event_id and public_dsn %}
         <a class="border-button" onclick="showReport()">Report an Issue</a>
       {% else %}
         <a class="border-button" href="javascript:history.back()">Go Back</a>
@@ -260,13 +260,13 @@
 </div>
 
 
-{% if event_id %}
+{% if event_id and public_dsn %}
 
-<script src="https://cdn.ravenjs.com/3.12.0/raven.min.js"></script>
+<script src="https://browser.sentry-cdn.com/8.29.0/bundle.min.js" crossorigin="anonymous"></script>
 
   <script>
   function showReport() {
-    Raven.showReportDialog({
+    Sentry.showReportDialog({
       eventId: '{{ event_id }}',
       dsn: '{{ public_dsn }}',
       {% if current_user and current_user.is_authenticated %}

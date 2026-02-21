@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, flash, abort, redirect, request, u
 from flask_login import login_required, current_user
 
 from appname.extensions import storage
-from appname.models import db
+from appname.models import db, get_or_none
 from appname.models.teams import Team, TeamMember
 from appname.models.team_file import TeamFile
 from appname.forms import SimpleForm
@@ -22,7 +22,7 @@ def check_for_membership(*args, **kwargs):
 @login_required
 def index(team_id):
     form = FileForm()
-    team = Team.query.get(team_id)
+    team = get_or_none(Team, team_id)
     if not team or not team.has_member(current_user):
         abort(404)
     return render_template('dashboard/files.html', form=form, files=team.files, team=team)
@@ -30,7 +30,7 @@ def index(team_id):
 @blueprint.route('/<hashid:team_id>/files/add_file', methods=['POST'])
 @login_required
 def add_file(team_id):
-    team = Team.query.get(team_id)
+    team = get_or_none(Team, team_id)
     if not team or not team.has_member(current_user):
         abort(404)
     form = FileForm()
@@ -50,7 +50,7 @@ def add_file(team_id):
 @blueprint.route('/<hashid:team_id>/files/<hashid:file_id>')
 @login_required
 def download_file(team_id, file_id):
-    team = Team.query.get(team_id)
+    team = get_or_none(Team, team_id)
     if not team or not team.has_member(current_user):
         abort(404)
     team_file = TeamFile.query.filter_by(team=team, id=file_id).one()
@@ -64,7 +64,7 @@ def download_file(team_id, file_id):
 @blueprint.route('/<hashid:team_id>/files/<hashid:file_id>/destroy', methods=['POST'])
 @login_required
 def destroy_file(team_id, file_id):
-    team = Team.query.get(team_id)
+    team = get_or_none(Team, team_id)
     if not team or not team.has_member(current_user):
         abort(404)
     team_file = TeamFile.query.filter_by(team=team, id=file_id).one()

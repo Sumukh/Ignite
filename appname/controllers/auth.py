@@ -5,7 +5,7 @@ import appname.constants as constants
 
 from appname.forms import SimpleForm
 from appname.forms.login import LoginForm, SignupForm, RequestPasswordResetForm, ChangePasswordForm
-from appname.models import db
+from appname.models import db, get_or_none
 from appname.models.user import User
 from appname.models.teams import TeamMember
 from appname.mailers.auth import ConfirmEmail, ResetPassword
@@ -15,7 +15,11 @@ auth = Blueprint('auth', __name__)
 
 @login_manager.user_loader
 def load_user(userid):
-    return User.query.get(userid)
+    try:
+        user_id = int(userid)
+    except (TypeError, ValueError):
+        return None
+    return get_or_none(User, user_id)
 
 @login_manager.unauthorized_handler
 def unauthorized():
@@ -190,7 +194,7 @@ def reauth():
 @auth.route('/invite/<hashid:invite_id>/join')
 @login_required
 def join_team(invite_id):
-    invite = TeamMember.query.get(invite_id)
+    invite = get_or_none(TeamMember, invite_id)
     if not invite or invite.user != current_user:
         return abort(404)
 
@@ -200,7 +204,7 @@ def join_team(invite_id):
 @auth.route('/join/<hashid:invite_id>/<string:secret>')
 @limiter.limit("20/minute")
 def invite_page(invite_id, secret):
-    invite = TeamMember.query.get(invite_id)
+    invite = get_or_none(TeamMember, invite_id)
     if not invite.invite_secret or invite.invite_secret != secret or invite.activated:
         return abort(404)
 
@@ -209,4 +213,3 @@ def invite_page(invite_id, secret):
 
     form = SignupForm(invite_secret=invite.invite_secret)
     return render_template("auth/invite.html", form=form, invite=invite)
-

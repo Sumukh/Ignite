@@ -164,7 +164,7 @@ class TestAuthAdditionalFlows:
 
         assert response.status_code == 302
         assert "/dashboard/" in response.location
-        assert TeamMember.query.get(invite.id).activated
+        assert db.session.get(TeamMember, invite.id).activated
 
     def test_invite_page_renders_for_guest_user(self, testapp):
         user = User.lookup("user@example.com")

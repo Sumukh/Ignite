@@ -30,10 +30,10 @@ class Config(object):
     DB_SECRET_KEY = os.getenv('DB_ENCRYTPION_SECRET_KEY', SECRET_KEY)
 
     # Make libraries that use redis use the same url (probably uneccesary)
-    REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
-    CACHE_REDIS_URL = RQ_REDIS_URL = REDIS_URL
+    _redis_url = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
+    CACHE_REDIS_URL = RQ_REDIS_URL = _redis_url
     # rq-dashboard>=0.8 expects a sequence of redis urls
-    RQ_DASHBOARD_REDIS_URL = [REDIS_URL]
+    RQ_DASHBOARD_REDIS_URL = [_redis_url]
 
     # File Storage
     STORAGE_PROVIDER = os.getenv('STORAGE_PROVIDER', 'LOCAL')   # Can also be S3, GOOGLE_STORAGE, etc...

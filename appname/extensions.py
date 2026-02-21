@@ -12,7 +12,6 @@ from flask_rq2 import RQ
 from flask_mail import Mail
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-from raven.contrib.flask import Sentry
 from flask_cloudy import Storage
 
 from appname.admin import AdminDashboard
@@ -51,7 +50,6 @@ admin = AdminDashboard()
 mail = Mail()
 limiter = Limiter(key_func=get_remote_address)
 stripe = Stripe()
-sentry = Sentry()
 hashids = HashIds()
 storage = Storage()
 branding = Branding()

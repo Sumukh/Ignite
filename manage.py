@@ -24,7 +24,7 @@ migrate = Migrate(app, db)
 @app.cli.command()
 def server():
     """ Run a debug server. When possible use 
-    ` $ FLASK_APP=manage FLASK_ENV=development flask run `
+    ` $ FLASK_APP=manage flask --debug run `
     Do not use this for production (since it runs in debug mode)
     """
     return app.run(debug=True)

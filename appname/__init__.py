@@ -1,6 +1,9 @@
 #! ../env/bin/python
 
-from flask import Flask, render_template, request, g
+from flask import Flask, render_template, request
+import sentry_sdk
+from sentry_sdk import last_event_id
+from sentry_sdk.integrations.flask import FlaskIntegration
 from webassets.loaders import PythonLoader as PythonAssetsLoader
 
 from appname import assets
@@ -31,7 +34,6 @@ from appname.extensions import (
     limiter,
     mail,
     rq2,
-    sentry,
     storage,
     stripe,
     token,
@@ -85,14 +87,17 @@ def create_app(object_name):
     hashids.init_app(app)
 
     if app.config.get('SENTRY_DSN') and not app.debug:
-        sentry.init_app(app, dsn=app.config.get('SENTRY_DSN'))
+        sentry_sdk.init(
+            dsn=app.config.get('SENTRY_DSN'),
+            integrations=[FlaskIntegration()],
+            send_default_pii=True,
+        )
 
         @app.errorhandler(500)
         def internal_server_error(error):
             return render_template('errors/500.html',
-                                   event_id=g.sentry_event_id,
-                                   public_dsn=sentry.client.get_public_dsn(
-                                       'https')
+                                   event_id=last_event_id(),
+                                   public_dsn=app.config.get('SENTRY_PUBLIC_DSN')
                                    ), 500
 
     @app.errorhandler(404)

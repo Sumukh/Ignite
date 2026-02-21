@@ -25,7 +25,7 @@ This seeds:
 ## 3) Run App
 
 ```bash
-FLASK_APP=manage FLASK_ENV=development flask run
+FLASK_APP=manage flask --debug run
 ```
 
 Open [http://localhost:5000](http://localhost:5000)

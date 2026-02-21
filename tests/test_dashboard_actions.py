@@ -245,7 +245,7 @@ class TestDashboardActions:
         )
 
         assert response.status_code == 302
-        assert TeamMember.query.get(creator_membership_id) is not None
+        assert db.session.get(TeamMember, creator_membership_id) is not None
 
     def test_remove_member_invalid_form_redirects(self, testapp, monkeypatch):
         login_as_user(testapp)
@@ -262,7 +262,7 @@ class TestDashboardActions:
             follow_redirects=False,
         )
         assert response.status_code == 302
-        assert TeamMember.query.get(pending.id) is not None
+        assert db.session.get(TeamMember, pending.id) is not None
 
     def test_remove_pending_member_deletes_membership(self, testapp):
         login_as_user(testapp)
@@ -279,7 +279,7 @@ class TestDashboardActions:
         )
 
         assert response.status_code == 302
-        assert TeamMember.query.get(pending.id) is None
+        assert db.session.get(TeamMember, pending.id) is None
 
     def test_remove_last_active_user_is_blocked(self, testapp):
         login_as_user(testapp)
@@ -293,7 +293,7 @@ class TestDashboardActions:
         )
 
         assert response.status_code == 302
-        assert TeamMember.query.get(user.active_memberships[0].id) is not None
+        assert db.session.get(TeamMember, user.active_memberships[0].id) is not None
 
     def test_add_file_creates_team_file_record(self, testapp, monkeypatch):
         login_as_user(testapp)
@@ -425,7 +425,7 @@ class TestDashboardActions:
         )
 
         assert response.status_code == 302
-        assert TeamFile.query.get(team_file.id) is None
+        assert db.session.get(TeamFile, team_file.id) is None
         assert stored.deleted
 
     def test_destroy_file_removes_db_record_when_storage_object_missing(self, testapp, monkeypatch):
@@ -443,4 +443,4 @@ class TestDashboardActions:
         )
 
         assert response.status_code == 302
-        assert TeamFile.query.get(team_file.id) is None
+        assert db.session.get(TeamFile, team_file.id) is None

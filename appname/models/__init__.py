@@ -24,6 +24,16 @@ logger = logging.getLogger(__name__)
 force_auto_coercion()
 force_instant_defaults()
 
+
+def get_or_none(model_class, ident, with_deleted=False):
+    """Fetch by primary key via Session.get while preserving soft-delete behavior."""
+    obj = db.session.get(model_class, ident)
+    if obj is None:
+        return None
+    if not with_deleted and getattr(obj, "deleted", False):
+        return None
+    return obj
+
 def global_encryption_key_iv():
     """ Must be a URL-safe base64-encoded 32-byte key.
     NEVER reveal the value of this.
@@ -43,6 +53,7 @@ class QueryWithSoftDelete(BaseQuery):
     def __new__(cls, *args, **kwargs):
         obj = super(QueryWithSoftDelete, cls).__new__(cls)
         with_deleted = kwargs.pop('_with_deleted', False)
+        obj._with_deleted = with_deleted
         if len(args) > 0:
             super(QueryWithSoftDelete, obj).__init__(*args, **kwargs)
             return obj.filter_by(deleted=False) if not with_deleted else obj
@@ -56,13 +67,16 @@ class QueryWithSoftDelete(BaseQuery):
                               session=db.session(), _with_deleted=True)
 
     def _get(self, *args, **kwargs):
-        # this calls the original query.get function from the base class
-        return super(QueryWithSoftDelete, self).get(*args, **kwargs)
+        ident = args[0] if args else kwargs.get("ident")
+        if ident is None:
+            raise TypeError("QueryWithSoftDelete.get() missing required ident argument")
+        model_class = self._only_full_mapper_zero('get').class_
+        return get_or_none(model_class, ident, with_deleted=True)
 
     def get(self, *args, **kwargs):
-        # the query.get method does not like it if there is a filter clause
-        # pre-loaded, so we need to implement it using a workaround
-        obj = self.with_deleted()._get(*args, **kwargs)
+        obj = self._get(*args, **kwargs)
+        if getattr(self, "_with_deleted", False):
+            return obj
         return obj if obj is not None and not obj.deleted else None
 
 class Model(db.Model):
@@ -131,7 +145,7 @@ class Model(db.Model):
     @classmethod
     def get_by_hashid(self, hashid):
         from appname.extensions import hashids
-        return self.query.get(hashids.decode_id(hashid))
+        return get_or_none(self, hashids.decode_id(hashid))
 
     @property
     def hashid(self):

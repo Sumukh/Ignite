@@ -25,7 +25,7 @@ pip install -r requirements.txt
 APPNAME_ENV=dev ./manage.py resetdb
 
 # Run app
-FLASK_APP=manage FLASK_ENV=development flask run
+FLASK_APP=manage flask --debug run
 ```
 
 Open: `http://localhost:5000`
@@ -75,7 +75,7 @@ Minimum local env:
 - `APPNAME_ENV=dev` for local app
 - `APPNAME_ENV=test` for tests
 - `FLASK_APP=manage`
-- `FLASK_ENV=development` for local debug run
+- `FLASK_DEBUG=1` for local debug run (or use `flask --debug run`)
 
 Optional integrations (see `.env.local.sample`):
 - Google OAuth: `GOOGLE_CONSUMER_KEY`, `GOOGLE_CONSUMER_SECRET`

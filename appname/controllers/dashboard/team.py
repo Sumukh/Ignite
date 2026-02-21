@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, flash, abort, redirect, url_for, s
 from flask_login import login_required, current_user
 
 from appname.constants import MAX_TEAM_SIZE
+from appname.models import get_or_none
 from appname.models.teams import Team, TeamMember
 from appname.extensions import stripe
 from appname.forms import SimpleForm
@@ -21,7 +22,7 @@ def check_for_membership(*args, **kwargs):
 @login_required
 def index(team_id):
     form = InviteMemberForm()
-    team = Team.query.get(team_id)
+    team = get_or_none(Team, team_id)
     if not team or not team.has_member(current_user):
         abort(404)
     return render_template('dashboard/team.html', form=form, team=team)
@@ -29,7 +30,7 @@ def index(team_id):
 @blueprint.route('/<hashid:team_id>/team/add_member', methods=['POST'])
 @login_required
 def add_member(team_id):
-    team = Team.query.get(team_id)
+    team = get_or_none(Team, team_id)
     if not team or not team.has_member(current_user):
         abort(404)
     form = InviteMemberForm()
@@ -52,7 +53,7 @@ def add_member(team_id):
 @blueprint.route('/<hashid:team_id>/team/billing_portal', methods=['POST'])
 @login_required
 def billing_portal(team_id):
-    team = Team.query.get(team_id)
+    team = get_or_none(Team, team_id)
     if not team or not team.has_member(current_user):
         abort(404)
     form = SimpleForm()
@@ -63,7 +64,7 @@ def billing_portal(team_id):
 @blueprint.route('/<hashid:team_id>/team/<hashid:invite_id>/remove_member', methods=['POST'])
 @login_required
 def remove_member(team_id, invite_id):
-    team = Team.query.get(team_id)
+    team = get_or_none(Team, team_id)
     team_member = TeamMember.query.filter_by(team=team, id=invite_id).first()
     # TODO: Better permissions (can_delete?)
     if not team or not team.has_member(current_user) or not team_member:

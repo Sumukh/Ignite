@@ -73,7 +73,7 @@ stripe==6.0.0
 setuptools>=65,<81
 
 # Error Tracking
-raven[flask]
+sentry-sdk[flask]>=2.0,<3
 
 # Other
 itsdangerous==2.2.0
