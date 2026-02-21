@@ -7,8 +7,8 @@ class LoginForm(BaseForm):
     email = StringField('Email', validators=[validators.email(), validators.InputRequired()])
     password = PasswordField('Password', validators=[validators.InputRequired()])
 
-    def validate(self):
-        check_validate = super(LoginForm, self).validate()
+    def validate(self, extra_validators=None):
+        check_validate = super(LoginForm, self).validate(extra_validators=extra_validators)
 
         # if our field validators do not pass
         if not check_validate:
@@ -35,8 +35,8 @@ class SignupForm(BaseForm):
     email = StringField('Email', validators=[validators.email(), validators.InputRequired()])
     invite_secret = HiddenField('Invite ID')
 
-    def validate(self):
-        check_validate = super(SignupForm, self).validate()
+    def validate(self, extra_validators=None):
+        check_validate = super(SignupForm, self).validate(extra_validators=extra_validators)
 
         # if our field validators do not pass
         if not check_validate:
