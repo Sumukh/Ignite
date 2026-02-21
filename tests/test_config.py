@@ -1,5 +1,4 @@
 from appname import create_app
-import os
 
 class TestConfig:
     def test_dev_config(self):

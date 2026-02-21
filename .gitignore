@@ -11,6 +11,10 @@ build/
 eggs
 bin
 sdist
+.venv
+.venv*
+py39env/*
+
 
 #Sphinx builds
 _build
