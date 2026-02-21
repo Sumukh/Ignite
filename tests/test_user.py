@@ -65,5 +65,5 @@ class TestModels:
         db.session.add(user)
         db.session.commit()
 
-        assert User.query.get(user.id) is None
-        assert User.query.with_deleted().get(user.id) is not None
+        assert get_or_none(User, user.id) is None
+        assert User.query.with_deleted()._get(user.id) is not None
