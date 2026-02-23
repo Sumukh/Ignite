@@ -67,7 +67,7 @@ rq==1.11.1
 rq-dashboard==0.8.6
 
 # Billing
-stripe==6.0.0
+stripe==14.3.0
 
 # For 3.11 and higher, setuptools is required to not get import errors on RQ2
 setuptools>=65,<81
