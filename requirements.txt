@@ -34,7 +34,7 @@ Flask-Mail
 Flask-Limiter==3.11.0
 
 # Admin
-Flask-Admin==1.6.1
+Flask-Admin==2.0.2
 
 # Database
 pymysql==1.1.1
